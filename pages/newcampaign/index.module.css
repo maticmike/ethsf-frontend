@@ -1,0 +1,14 @@
+.NewCampaign_box_positioning {
+    display: flex;
+    justify-content: center;
+    margin-top:15%;
+}
+
+.NewCampaign_layout { 
+    width: 350px;
+    height: 500px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+
+}    

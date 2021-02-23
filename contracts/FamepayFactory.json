@@ -1,0 +1,3476 @@
+{
+  "contractName": "FamepayFactory",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_date",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_campaignAddress",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_influencer",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_business",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_campaignId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_deadline",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_jackpotPayment",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_incrementalPayment",
+          "type": "uint256"
+        }
+      ],
+      "name": "NewFamepayCampaignCreated",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address payable",
+          "name": "_platform",
+          "type": "address"
+        },
+        {
+          "internalType": "address payable",
+          "name": "_influencer",
+          "type": "address"
+        },
+        {
+          "internalType": "address payable",
+          "name": "_business",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_campaignId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_deadline",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_jackpotPayment",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_incrementalPayment",
+          "type": "uint256"
+        }
+      ],
+      "name": "newFamepayCampaign",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_campaignId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getCampaign",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_date\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_campaignAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_influencer\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_business\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_campaignId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_deadline\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_jackpotPayment\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_incrementalPayment\",\"type\":\"uint256\"}],\"name\":\"NewFamepayCampaignCreated\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_campaignId\",\"type\":\"uint256\"}],\"name\":\"getCampaign\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address payable\",\"name\":\"_platform\",\"type\":\"address\"},{\"internalType\":\"address payable\",\"name\":\"_influencer\",\"type\":\"address\"},{\"internalType\":\"address payable\",\"name\":\"_business\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_campaignId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_jackpotPayment\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_incrementalPayment\",\"type\":\"uint256\"}],\"name\":\"newFamepayCampaign\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/benweinberg/Desktop/Work/FamePay/FamePayCode/contracts/FamepayFactory.sol\":\"FamepayFactory\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":1000},\"remappings\":[]},\"sources\":{\"/Users/benweinberg/Desktop/Work/FamePay/FamePayCode/contracts/Famepay.sol\":{\"keccak256\":\"0x03558d24aef56d60ef1efaa0281e4ab4d7357a31baf38d6b3f6da9c1ebc5f6a9\",\"urls\":[\"bzz-raw://be1dc76e3b7383116d1fe720e160c29964e0663c81b2dd7aa3df1ae6b60e21d9\",\"dweb:/ipfs/Qmecie8XbVaNkboQPSemtg3hSkUcMa8XMQ3ed63nYkXxCF\"]},\"/Users/benweinberg/Desktop/Work/FamePay/FamePayCode/contracts/FamepayFactory.sol\":{\"keccak256\":\"0x1fad2afa65b095cb5a4273ec9813e4a9701d80e8e154827b864c21c9bfe8e2d4\",\"urls\":[\"bzz-raw://f38d2d5b449d864121885bf9b52ffd3b61251ef174c73df3f3a5f063ae3b7845\",\"dweb:/ipfs/QmNRHQbHdnsto1a21GYhPqBVDsqFb6DtvcQz9FehThm4Y4\"]},\"@openzeppelin/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x3b21f2c8d626de3b9925ae33e972d8bf5c8b1bffb3f4ee94daeed7d0679036e6\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7f8d45329fecbf0836ad7543330c3ecd0f8d0ffa42d4016278c3eb2215fdcdfe\",\"dweb:/ipfs/QmXWLT7GcnHtA5NiD6MFi2CV3EWJY4wv5mLNnypqYDrxL3\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50600080546001600160a01b031916331790556112a1806100326000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c80635598f8cc1461003b578063a6d8484014610074575b600080fd5b6100586004803603602081101561005157600080fd5b50356100c4565b604080516001600160a01b039092168252519081900360200190f35b6100c2600480360360e081101561008a57600080fd5b506001600160a01b03813581169160208101358216916040820135169060608101359060808101359060a08101359060c001356100df565b005b6000908152600260205260409020546001600160a01b031690565b6000878787878787876040516100f490610206565b6001600160a01b0397881681529587166020870152939095166040808601919091526060850192909252608084015260a083019390935260c082015290519081900360e001906000f08015801561014f573d6000803e3d6000fd5b5060008681526002602090815260409182902080546001600160a01b038086167fffffffffffffffffffffffff000000000000000000000000000000000000000090921682179092558351428152928301528a811682840152891660608201526080810188905260a0810187905260c0810186905260e0810185905290519192507fb6473cc179e0c27c46683dfcacbdb51a027b8a71d173658d9747c621ca3ac45191908190036101000190a15050505050505050565b611058806102148339019056fe60806040526007805463ffff00001916905534801561001d57600080fd5b50604051611058380380611058833981810160405260e081101561004057600080fd5b508051602082015160408301516060840151608085015160a086015160c090960151600280546001600160a01b03199081166001600160a01b0398891617909155600080548216968816969096178655600180549091169690941695909517909255600355600655600592909255600455610f979081906100c190396000f3fe60806040526004361061018b5760003560e01c8063b65412b5116100d6578063df2d88ca1161007f578063e74dc11c11610059578063e74dc11c14610426578063f41662ed1461043b578063fac3fd59146103c85761018b565b8063df2d88ca146103c8578063e3668632146103fc578063e53abae9146104115761018b565b8063c7a6c454116100b0578063c7a6c45414610371578063da85a11f14610386578063dc5b13311461039b5761018b565b8063b65412b51461033f578063b69ef8a814610347578063b801ed851461035c5761018b565b80638d0449d611610138578063a87588e711610112578063a87588e7146102dd578063aa5e21531461030e578063ac35e160146103165761018b565b80638d0449d61461026b5780638ed5b0fc14610295578063a4b870c4146102aa5761018b565b80633621905f116101695780633621905f146101f6578063389b75331461020b5780637005a865146102375761018b565b80630496336914610190578063188ec356146101cc57806329dcb0cf146101e1575b600080fd5b34801561019c57600080fd5b506101ba600480360360208110156101b357600080fd5b5035610450565b60408051918252519081900360200190f35b3480156101d857600080fd5b506101ba61046e565b3480156101ed57600080fd5b506101ba610472565b34801561020257600080fd5b506101ba610478565b34801561021757600080fd5b506102356004803603602081101561022e57600080fd5b503561047e565b005b34801561024357600080fd5b506102356004803603604081101561025a57600080fd5b508035151590602001351515610491565b34801561027757600080fd5b506102356004803603602081101561028e57600080fd5b503561050b565b3480156102a157600080fd5b506101ba6106ac565b3480156102b657600080fd5b506101ba600480360360208110156102cd57600080fd5b50356001600160a01b03166106b2565b3480156102e957600080fd5b506102f26106c4565b604080516001600160a01b039092168252519081900360200190f35b6102356106d3565b34801561032257600080fd5b5061032b6107d3565b604080519115158252519081900360200190f35b6102356107e1565b34801561035357600080fd5b506101ba6108e9565b34801561036857600080fd5b5061032b610905565b34801561037d57600080fd5b50610235610915565b34801561039257600080fd5b506101ba610917565b610235600480360360608110156103b157600080fd5b50803515159060208101351515906040013561091d565b3480156103d457600080fd5b50610235600480360360408110156103eb57600080fd5b508035151590602001351515610d78565b34801561040857600080fd5b506101ba610da8565b34801561041d57600080fd5b5061032b610dae565b34801561043257600080fd5b506102f2610dbd565b34801561044757600080fd5b5061032b610dcc565b6009818154811061045d57fe5b600091825260209091200154905081565b4290565b60065481565b60045481565b806006541061048c57600080fd5b600655565b6007805460ff191683151517905580156104f3576007805461ff00191661010083151502179055600454600980546001810182556000919091527f6e1540171b6c0c960b71a7020d9f60077f6af931a8bbf590da0223dacf75c7af0155610507565b6007805461ff001916610100831515021790555b5050565b42600654111580610538575060075462010000900460ff16801561053857506007546301000000900460ff165b61054157600080fd5b600754610100900460ff16156105d3576007546105719060ff62010000820481169163010000009004168361091d565b600154604080516001600160a01b039092168083526020830182815260449284018390527f0d107b46cc87df81d8b07b84c9779b936476d0dcec3bc847f9426ff6ab7cafde9391926060830190610f1e82396060019250505060405180910390a15b60075460ff161561065e576007546105fe9060ff62010000820481169163010000009004168361091d565b600154604080516001600160a01b03909216808352602083018281528383018390527f190aa6da3303246decb4e8c5ad0aa1d9ca05213f67cc5f0435601021f1962c519391926060830190610e9b82396040019250505060405180910390a15b7faa3cf383fa3c023b6d5f60a405dba45b1e3c35cf5d87931c5ec2780846af11f6604051808060200182810382526022815260200180610efc6022913960400191505060405180910390a150565b60035481565b60086020526000908152604090205481565b6000546001600160a01b031681565b6001546001600160a01b031633146106ea57600080fd5b4260065411610740576040805162461bcd60e51b815260206004820181905260248201527f5468652063616d706169676e20646561646c696e652068617320706173736564604482015290519081900360640190fd5b600080546001600160a01b031681526008602090815260409182902080543490810190915582513381528084019190915260608183018190528101919091527f686173206d61646520746865207265717569726564206465706f736974206f66608082015290517fe70f65e6d145e604d88d569d432577752fc4194b4030037c10b7411ebf46f36f9181900360a00190a1565b600754610100900460ff1681565b4260065411158061080e575060075462010000900460ff16801561080e57506007546301000000900460ff165b61081757600080fd5b600080546001600160a01b0390811682526008602052604080832080549084905560015491519093919092169183156108fc0291849190818181858888f1935050505015801561086b573d6000803e3d6000fd5b50600154604080516001600160a01b039092168252818101839052606060208301819052600c908301527f77617320726566756e64656400000000000000000000000000000000000000006080830152517fc345da4fedaebfd42068502a8ebda0f2138f5b32f72494fc1e53a77c7f53c0dc9181900360a00190a150565b600080546001600160a01b031681526008602052604090205490565b6007546301000000900460ff1681565b565b60095490565b60075460ff16806109355750600754610100900460ff165b8061094557508280156109455750815b61094e57600080fd5b42600654101561095d57600080fd5b60075460ff1615610a6f57600554600080546001600160a01b0316815260086020526040902054101561098f57600080fd5b60058054600080546001600160a01b0390811682526008602052604080832080549490940390935581549354925193169282156108fc029291818181858888f193505050501580156109e5573d6000803e3d6000fd5b506007805460ff19169055600054600554604080516001600160a01b03909316835282810191909152606060208301819052601d908301527f686173206d6164652061206a61636b706f74207769746864726177616c0000006080830152517f209d29239e210d3bbcc9570c9096b966765614e7da0402446dbeee7af6b900da9181900360a00190a15b600754610100900460ff1615610c8e57600454600080546001600160a01b03168152600860205260409020541015610aa657600080fd5b600954600111610bad57600454600954600091610ac39190610dd5565b600080546001600160a01b039081168252600860205260408083208054859003905582549051939450169183156108fc0291849190818181858888f19350505050158015610b15573d6000803e3d6000fd5b50610b2260096000610e37565b6007805461ff0019169055600054604080516001600160a01b039092168252818101839052606060208301819052601f908301527f686173206d61646520616e20696e74657276616c207769746864726177616c006080830152517f81117671d30e3822689c5b5b34dfb4f996907d0a0758463e514a7e81a347c3a79181900360a00190a150610c8e565b60048054600080546001600160a01b0390811682526008602052604080832080549490940390935581549354925193169282156108fc029291818181858888f19350505050158015610c03573d6000803e3d6000fd5b506007805461ff0019169055600054600454604080516001600160a01b03909316835282810191909152606060208301819052601f908301527f686173206d61646520616e20696e74657276616c207769746864726177616c006080830152517f81117671d30e3822689c5b5b34dfb4f996907d0a0758463e514a7e81a347c3a79181900360a00190a15b828015610c985750815b15610d7357600080546001600160a01b03168152600860205260409020548110610cc157600080fd5b600080546040516001600160a01b039091169183156108fc02918491818181858888f19350505050158015610cfa573d6000803e3d6000fd5b507fb9e9851c7b478aea3d46f271f06d92c7728357aee4a4a6d88b165bbe1ede19a960008054906101000a90046001600160a01b03168260405180836001600160a01b031681526020018060200183815260200182810382526029815260200180610e7260299139604001935050505060405180910390a15b505050565b6007805491151563010000000263ff00000019931515620100000262ff0000199093169290921792909216179055565b60055481565b60075462010000900460ff1681565b6001546001600160a01b031681565b60075460ff1681565b600082610de457506000610e31565b82820282848281610df157fe5b0414610e2e5760405162461bcd60e51b8152600401808060200182810382526021815260200180610edb6021913960400191505060405180910390fd5b90505b92915050565b5080546000825590600052602060002090810190610e559190610e58565b50565b5b80821115610e6d5760008155600101610e59565b509056fe686173206d61646520616e206167726565642075706f6e20616d6f756e74207769746864726177616c6d616b696e67207468652072656d61696e696e67206a61636b706f74207061796d656e74206265666f72652063616d706167696e207465726d696e6174696f6e536166654d6174683a206d756c7469706c69636174696f6e206f766572666c6f7763616d706169676e2069732061626f757420746f206265207465726d696e617465646d616b696e67207468652072656d61696e696e6720696e6372656d656e74616c207061796d656e74206265666f72652063616d706167696e207465726d696e6174696f6ea26469706673582212200ec812f7f2c450f2426a174f92b917e1c8bc06a7d646f8843a55be493dbc3ac064736f6c634300060c0033a2646970667358221220456e822813ed51b6d0fc56d3d66a3bb150d3a85feed02b6b49a07de08aa60e6864736f6c634300060c0033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100365760003560e01c80635598f8cc1461003b578063a6d8484014610074575b600080fd5b6100586004803603602081101561005157600080fd5b50356100c4565b604080516001600160a01b039092168252519081900360200190f35b6100c2600480360360e081101561008a57600080fd5b506001600160a01b03813581169160208101358216916040820135169060608101359060808101359060a08101359060c001356100df565b005b6000908152600260205260409020546001600160a01b031690565b6000878787878787876040516100f490610206565b6001600160a01b0397881681529587166020870152939095166040808601919091526060850192909252608084015260a083019390935260c082015290519081900360e001906000f08015801561014f573d6000803e3d6000fd5b5060008681526002602090815260409182902080546001600160a01b038086167fffffffffffffffffffffffff000000000000000000000000000000000000000090921682179092558351428152928301528a811682840152891660608201526080810188905260a0810187905260c0810186905260e0810185905290519192507fb6473cc179e0c27c46683dfcacbdb51a027b8a71d173658d9747c621ca3ac45191908190036101000190a15050505050505050565b611058806102148339019056fe60806040526007805463ffff00001916905534801561001d57600080fd5b50604051611058380380611058833981810160405260e081101561004057600080fd5b508051602082015160408301516060840151608085015160a086015160c090960151600280546001600160a01b03199081166001600160a01b0398891617909155600080548216968816969096178655600180549091169690941695909517909255600355600655600592909255600455610f979081906100c190396000f3fe60806040526004361061018b5760003560e01c8063b65412b5116100d6578063df2d88ca1161007f578063e74dc11c11610059578063e74dc11c14610426578063f41662ed1461043b578063fac3fd59146103c85761018b565b8063df2d88ca146103c8578063e3668632146103fc578063e53abae9146104115761018b565b8063c7a6c454116100b0578063c7a6c45414610371578063da85a11f14610386578063dc5b13311461039b5761018b565b8063b65412b51461033f578063b69ef8a814610347578063b801ed851461035c5761018b565b80638d0449d611610138578063a87588e711610112578063a87588e7146102dd578063aa5e21531461030e578063ac35e160146103165761018b565b80638d0449d61461026b5780638ed5b0fc14610295578063a4b870c4146102aa5761018b565b80633621905f116101695780633621905f146101f6578063389b75331461020b5780637005a865146102375761018b565b80630496336914610190578063188ec356146101cc57806329dcb0cf146101e1575b600080fd5b34801561019c57600080fd5b506101ba600480360360208110156101b357600080fd5b5035610450565b60408051918252519081900360200190f35b3480156101d857600080fd5b506101ba61046e565b3480156101ed57600080fd5b506101ba610472565b34801561020257600080fd5b506101ba610478565b34801561021757600080fd5b506102356004803603602081101561022e57600080fd5b503561047e565b005b34801561024357600080fd5b506102356004803603604081101561025a57600080fd5b508035151590602001351515610491565b34801561027757600080fd5b506102356004803603602081101561028e57600080fd5b503561050b565b3480156102a157600080fd5b506101ba6106ac565b3480156102b657600080fd5b506101ba600480360360208110156102cd57600080fd5b50356001600160a01b03166106b2565b3480156102e957600080fd5b506102f26106c4565b604080516001600160a01b039092168252519081900360200190f35b6102356106d3565b34801561032257600080fd5b5061032b6107d3565b604080519115158252519081900360200190f35b6102356107e1565b34801561035357600080fd5b506101ba6108e9565b34801561036857600080fd5b5061032b610905565b34801561037d57600080fd5b50610235610915565b34801561039257600080fd5b506101ba610917565b610235600480360360608110156103b157600080fd5b50803515159060208101351515906040013561091d565b3480156103d457600080fd5b50610235600480360360408110156103eb57600080fd5b508035151590602001351515610d78565b34801561040857600080fd5b506101ba610da8565b34801561041d57600080fd5b5061032b610dae565b34801561043257600080fd5b506102f2610dbd565b34801561044757600080fd5b5061032b610dcc565b6009818154811061045d57fe5b600091825260209091200154905081565b4290565b60065481565b60045481565b806006541061048c57600080fd5b600655565b6007805460ff191683151517905580156104f3576007805461ff00191661010083151502179055600454600980546001810182556000919091527f6e1540171b6c0c960b71a7020d9f60077f6af931a8bbf590da0223dacf75c7af0155610507565b6007805461ff001916610100831515021790555b5050565b42600654111580610538575060075462010000900460ff16801561053857506007546301000000900460ff165b61054157600080fd5b600754610100900460ff16156105d3576007546105719060ff62010000820481169163010000009004168361091d565b600154604080516001600160a01b039092168083526020830182815260449284018390527f0d107b46cc87df81d8b07b84c9779b936476d0dcec3bc847f9426ff6ab7cafde9391926060830190610f1e82396060019250505060405180910390a15b60075460ff161561065e576007546105fe9060ff62010000820481169163010000009004168361091d565b600154604080516001600160a01b03909216808352602083018281528383018390527f190aa6da3303246decb4e8c5ad0aa1d9ca05213f67cc5f0435601021f1962c519391926060830190610e9b82396040019250505060405180910390a15b7faa3cf383fa3c023b6d5f60a405dba45b1e3c35cf5d87931c5ec2780846af11f6604051808060200182810382526022815260200180610efc6022913960400191505060405180910390a150565b60035481565b60086020526000908152604090205481565b6000546001600160a01b031681565b6001546001600160a01b031633146106ea57600080fd5b4260065411610740576040805162461bcd60e51b815260206004820181905260248201527f5468652063616d706169676e20646561646c696e652068617320706173736564604482015290519081900360640190fd5b600080546001600160a01b031681526008602090815260409182902080543490810190915582513381528084019190915260608183018190528101919091527f686173206d61646520746865207265717569726564206465706f736974206f66608082015290517fe70f65e6d145e604d88d569d432577752fc4194b4030037c10b7411ebf46f36f9181900360a00190a1565b600754610100900460ff1681565b4260065411158061080e575060075462010000900460ff16801561080e57506007546301000000900460ff165b61081757600080fd5b600080546001600160a01b0390811682526008602052604080832080549084905560015491519093919092169183156108fc0291849190818181858888f1935050505015801561086b573d6000803e3d6000fd5b50600154604080516001600160a01b039092168252818101839052606060208301819052600c908301527f77617320726566756e64656400000000000000000000000000000000000000006080830152517fc345da4fedaebfd42068502a8ebda0f2138f5b32f72494fc1e53a77c7f53c0dc9181900360a00190a150565b600080546001600160a01b031681526008602052604090205490565b6007546301000000900460ff1681565b565b60095490565b60075460ff16806109355750600754610100900460ff165b8061094557508280156109455750815b61094e57600080fd5b42600654101561095d57600080fd5b60075460ff1615610a6f57600554600080546001600160a01b0316815260086020526040902054101561098f57600080fd5b60058054600080546001600160a01b0390811682526008602052604080832080549490940390935581549354925193169282156108fc029291818181858888f193505050501580156109e5573d6000803e3d6000fd5b506007805460ff19169055600054600554604080516001600160a01b03909316835282810191909152606060208301819052601d908301527f686173206d6164652061206a61636b706f74207769746864726177616c0000006080830152517f209d29239e210d3bbcc9570c9096b966765614e7da0402446dbeee7af6b900da9181900360a00190a15b600754610100900460ff1615610c8e57600454600080546001600160a01b03168152600860205260409020541015610aa657600080fd5b600954600111610bad57600454600954600091610ac39190610dd5565b600080546001600160a01b039081168252600860205260408083208054859003905582549051939450169183156108fc0291849190818181858888f19350505050158015610b15573d6000803e3d6000fd5b50610b2260096000610e37565b6007805461ff0019169055600054604080516001600160a01b039092168252818101839052606060208301819052601f908301527f686173206d61646520616e20696e74657276616c207769746864726177616c006080830152517f81117671d30e3822689c5b5b34dfb4f996907d0a0758463e514a7e81a347c3a79181900360a00190a150610c8e565b60048054600080546001600160a01b0390811682526008602052604080832080549490940390935581549354925193169282156108fc029291818181858888f19350505050158015610c03573d6000803e3d6000fd5b506007805461ff0019169055600054600454604080516001600160a01b03909316835282810191909152606060208301819052601f908301527f686173206d61646520616e20696e74657276616c207769746864726177616c006080830152517f81117671d30e3822689c5b5b34dfb4f996907d0a0758463e514a7e81a347c3a79181900360a00190a15b828015610c985750815b15610d7357600080546001600160a01b03168152600860205260409020548110610cc157600080fd5b600080546040516001600160a01b039091169183156108fc02918491818181858888f19350505050158015610cfa573d6000803e3d6000fd5b507fb9e9851c7b478aea3d46f271f06d92c7728357aee4a4a6d88b165bbe1ede19a960008054906101000a90046001600160a01b03168260405180836001600160a01b031681526020018060200183815260200182810382526029815260200180610e7260299139604001935050505060405180910390a15b505050565b6007805491151563010000000263ff00000019931515620100000262ff0000199093169290921792909216179055565b60055481565b60075462010000900460ff1681565b6001546001600160a01b031681565b60075460ff1681565b600082610de457506000610e31565b82820282848281610df157fe5b0414610e2e5760405162461bcd60e51b8152600401808060200182810382526021815260200180610edb6021913960400191505060405180910390fd5b90505b92915050565b5080546000825590600052602060002090810190610e559190610e58565b50565b5b80821115610e6d5760008155600101610e59565b509056fe686173206d61646520616e206167726565642075706f6e20616d6f756e74207769746864726177616c6d616b696e67207468652072656d61696e696e67206a61636b706f74207061796d656e74206265666f72652063616d706167696e207465726d696e6174696f6e536166654d6174683a206d756c7469706c69636174696f6e206f766572666c6f7763616d706169676e2069732061626f757420746f206265207465726d696e617465646d616b696e67207468652072656d61696e696e6720696e6372656d656e74616c207061796d656e74206265666f72652063616d706167696e207465726d696e6174696f6ea26469706673582212200ec812f7f2c450f2426a174f92b917e1c8bc06a7d646f8843a55be493dbc3ac064736f6c634300060c0033a2646970667358221220456e822813ed51b6d0fc56d3d66a3bb150d3a85feed02b6b49a07de08aa60e6864736f6c634300060c0033",
+  "immutableReferences": {},
+  "sourceMap": "58:1371:1:-:0;;;598:56;;;;;;;;;-1:-1:-1;629:5:1;:18;;-1:-1:-1;;;;;;629:18:1;637:10;629:18;;;58:1371;;;;;;",
+  "deployedSourceMap": "58:1371:1:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1302:125;;;;;;;;;;;;;;;;-1:-1:-1;1302:125:1;;:::i;:::-;;;;-1:-1:-1;;;;;1302:125:1;;;;;;;;;;;;;;660:636;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;660:636:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;1302:125;1365:7;1391:29;;;:16;:29;;;;;;-1:-1:-1;;;;;1391:29:1;;1302:125::o;660:636::-;944:15;974:9;985:11;998:9;1009:11;1022:9;1033:15;1050:19;962:108;;;;;:::i;:::-;-1:-1:-1;;;;;962:108:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;962:108:1;;;;;;;;;;;;;;;-1:-1:-1;1080:29:1;;;;:16;:29;;;;;;;;;:48;;-1:-1:-1;;;;;1080:48:1;;;;;;;;;;;;1143:146;;1169:15;1143:146;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;944:126;;-1:-1:-1;1143:146:1;;;;;;1080:48;1143:146;;;660:636;;;;;;;;:::o;-1:-1:-1:-;;;;;;;;:::o",
+  "source": "pragma solidity >=0.4.22 <0.8.0;\nimport './Famepay.sol';\n\ncontract FamepayFactory {\n    // Famepay[] private famepayCampaigns;\n    address private admin;\n    address payable private platform;\n    mapping(uint256 => address) private famepayCampaigns;\n    // mapping(uint256 => Famepay) private famepayCampaigns;\n    event NewFamepayCampaignCreated(\n        uint256 _date,\n        address _campaignAddress,\n        address _influencer,\n        address _business,\n        uint256 _campaignId,\n        uint256 _deadline,\n        uint256 _jackpotPayment,\n        uint256 _incrementalPayment\n    );\n\n    constructor() public {\n        admin = msg.sender;\n    }\n\n    function newFamepayCampaign(\n        address payable _platform,\n        address payable _influencer,\n        address payable _business,\n        uint256 _campaignId,\n        uint256 _deadline,\n        uint256 _jackpotPayment,\n        uint256 _incrementalPayment\n    ) public {\n        Famepay famepay = new Famepay(_platform, _influencer, _business, _campaignId, _deadline, _jackpotPayment, _incrementalPayment);\n        famepayCampaigns[_campaignId] = address(famepay);\n        emit NewFamepayCampaignCreated(block.timestamp, address(famepay), _influencer, _business, _campaignId, _deadline, _jackpotPayment, _incrementalPayment);\n    }\n\n    function getCampaign(uint256 _campaignId) public view returns (address) {\n        return famepayCampaigns[_campaignId];\n    }\n}\n",
+  "sourcePath": "/Users/benweinberg/Desktop/Work/FamePay/FamePayCode/contracts/FamepayFactory.sol",
+  "ast": {
+    "absolutePath": "/Users/benweinberg/Desktop/Work/FamePay/FamePayCode/contracts/FamepayFactory.sol",
+    "exportedSymbols": {
+      "FamepayFactory": [
+        663
+      ]
+    },
+    "id": 664,
+    "license": null,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 559,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".22",
+          "<",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:1"
+      },
+      {
+        "absolutePath": "/Users/benweinberg/Desktop/Work/FamePay/FamePayCode/contracts/Famepay.sol",
+        "file": "./Famepay.sol",
+        "id": 560,
+        "nodeType": "ImportDirective",
+        "scope": 664,
+        "sourceUnit": 558,
+        "src": "33:23:1",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [
+          557
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 663,
+        "linearizedBaseContracts": [
+          663
+        ],
+        "name": "FamepayFactory",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 562,
+            "mutability": "mutable",
+            "name": "admin",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 663,
+            "src": "131:21:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 561,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "131:7:1",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "private"
+          },
+          {
+            "constant": false,
+            "id": 564,
+            "mutability": "mutable",
+            "name": "platform",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 663,
+            "src": "158:32:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address_payable",
+              "typeString": "address payable"
+            },
+            "typeName": {
+              "id": 563,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "158:15:1",
+              "stateMutability": "payable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address_payable",
+                "typeString": "address payable"
+              }
+            },
+            "value": null,
+            "visibility": "private"
+          },
+          {
+            "constant": false,
+            "id": 568,
+            "mutability": "mutable",
+            "name": "famepayCampaigns",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 663,
+            "src": "196:52:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_address_$",
+              "typeString": "mapping(uint256 => address)"
+            },
+            "typeName": {
+              "id": 567,
+              "keyType": {
+                "id": 565,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "204:7:1",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "196:27:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_address_$",
+                "typeString": "mapping(uint256 => address)"
+              },
+              "valueType": {
+                "id": 566,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "215:7:1",
+                "stateMutability": "nonpayable",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "private"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 586,
+            "name": "NewFamepayCampaignCreated",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 585,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 570,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_date",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 586,
+                  "src": "356:13:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 569,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "356:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 572,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_campaignAddress",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 586,
+                  "src": "379:24:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 571,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "379:7:1",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 574,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_influencer",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 586,
+                  "src": "413:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 573,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "413:7:1",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 576,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_business",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 586,
+                  "src": "442:17:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 575,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "442:7:1",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 578,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_campaignId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 586,
+                  "src": "469:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 577,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "469:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 580,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_deadline",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 586,
+                  "src": "498:17:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 579,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "498:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 582,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_jackpotPayment",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 586,
+                  "src": "525:23:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 581,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "525:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 584,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_incrementalPayment",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 586,
+                  "src": "558:27:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 583,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "558:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "346:245:1"
+            },
+            "src": "315:277:1"
+          },
+          {
+            "body": {
+              "id": 594,
+              "nodeType": "Block",
+              "src": "619:35:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 592,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 589,
+                      "name": "admin",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 562,
+                      "src": "629:5:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 590,
+                        "name": "msg",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": -15,
+                        "src": "637:3:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_message",
+                          "typeString": "msg"
+                        }
+                      },
+                      "id": 591,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "sender",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "637:10:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      }
+                    },
+                    "src": "629:18:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 593,
+                  "nodeType": "ExpressionStatement",
+                  "src": "629:18:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 595,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 587,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "609:2:1"
+            },
+            "returnParameters": {
+              "id": 588,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "619:0:1"
+            },
+            "scope": 663,
+            "src": "598:56:1",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 649,
+              "nodeType": "Block",
+              "src": "934:362:1",
+              "statements": [
+                {
+                  "assignments": [
+                    613
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 613,
+                      "mutability": "mutable",
+                      "name": "famepay",
+                      "nodeType": "VariableDeclaration",
+                      "overrides": null,
+                      "scope": 649,
+                      "src": "944:15:1",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Famepay_$557",
+                        "typeString": "contract Famepay"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 612,
+                        "name": "Famepay",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 557,
+                        "src": "944:7:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Famepay_$557",
+                          "typeString": "contract Famepay"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 624,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 616,
+                        "name": "_platform",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 597,
+                        "src": "974:9:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 617,
+                        "name": "_influencer",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 599,
+                        "src": "985:11:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 618,
+                        "name": "_business",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 601,
+                        "src": "998:9:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 619,
+                        "name": "_campaignId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 603,
+                        "src": "1009:11:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 620,
+                        "name": "_deadline",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 605,
+                        "src": "1022:9:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 621,
+                        "name": "_jackpotPayment",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 607,
+                        "src": "1033:15:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 622,
+                        "name": "_incrementalPayment",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 609,
+                        "src": "1050:19:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        },
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        },
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 615,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "NewExpression",
+                      "src": "962:11:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_creation_nonpayable$_t_address_payable_$_t_address_payable_$_t_address_payable_$_t_uint256_$_t_uint256_$_t_uint256_$_t_uint256_$returns$_t_contract$_Famepay_$557_$",
+                        "typeString": "function (address payable,address payable,address payable,uint256,uint256,uint256,uint256) returns (contract Famepay)"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 614,
+                        "name": "Famepay",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 557,
+                        "src": "966:7:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Famepay_$557",
+                          "typeString": "contract Famepay"
+                        }
+                      }
+                    },
+                    "id": 623,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "962:108:1",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Famepay_$557",
+                      "typeString": "contract Famepay"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "944:126:1"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 632,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 625,
+                        "name": "famepayCampaigns",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 568,
+                        "src": "1080:16:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_uint256_$_t_address_$",
+                          "typeString": "mapping(uint256 => address)"
+                        }
+                      },
+                      "id": 627,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 626,
+                        "name": "_campaignId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 603,
+                        "src": "1097:11:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "1080:29:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 630,
+                          "name": "famepay",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 613,
+                          "src": "1120:7:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_Famepay_$557",
+                            "typeString": "contract Famepay"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_contract$_Famepay_$557",
+                            "typeString": "contract Famepay"
+                          }
+                        ],
+                        "id": 629,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "nodeType": "ElementaryTypeNameExpression",
+                        "src": "1112:7:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_address_$",
+                          "typeString": "type(address)"
+                        },
+                        "typeName": {
+                          "id": 628,
+                          "name": "address",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "1112:7:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": null,
+                            "typeString": null
+                          }
+                        }
+                      },
+                      "id": 631,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1112:16:1",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "1080:48:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 633,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1080:48:1"
+                },
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 635,
+                          "name": "block",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": -4,
+                          "src": "1169:5:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_block",
+                            "typeString": "block"
+                          }
+                        },
+                        "id": 636,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "timestamp",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "1169:15:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 639,
+                            "name": "famepay",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 613,
+                            "src": "1194:7:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_Famepay_$557",
+                              "typeString": "contract Famepay"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_contract$_Famepay_$557",
+                              "typeString": "contract Famepay"
+                            }
+                          ],
+                          "id": 638,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "1186:7:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_address_$",
+                            "typeString": "type(address)"
+                          },
+                          "typeName": {
+                            "id": 637,
+                            "name": "address",
+                            "nodeType": "ElementaryTypeName",
+                            "src": "1186:7:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": null,
+                              "typeString": null
+                            }
+                          }
+                        },
+                        "id": 640,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1186:16:1",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 641,
+                        "name": "_influencer",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 599,
+                        "src": "1204:11:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 642,
+                        "name": "_business",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 601,
+                        "src": "1217:9:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 643,
+                        "name": "_campaignId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 603,
+                        "src": "1228:11:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 644,
+                        "name": "_deadline",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 605,
+                        "src": "1241:9:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 645,
+                        "name": "_jackpotPayment",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 607,
+                        "src": "1252:15:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 646,
+                        "name": "_incrementalPayment",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 609,
+                        "src": "1269:19:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        },
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 634,
+                      "name": "NewFamepayCampaignCreated",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 586,
+                      "src": "1143:25:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$_t_address_$_t_address_$_t_address_$_t_uint256_$_t_uint256_$_t_uint256_$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256,address,address,address,uint256,uint256,uint256,uint256)"
+                      }
+                    },
+                    "id": 647,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1143:146:1",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 648,
+                  "nodeType": "EmitStatement",
+                  "src": "1138:151:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "a6d84840",
+            "id": 650,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "newFamepayCampaign",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 610,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 597,
+                  "mutability": "mutable",
+                  "name": "_platform",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 650,
+                  "src": "697:25:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  },
+                  "typeName": {
+                    "id": 596,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "697:15:1",
+                    "stateMutability": "payable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 599,
+                  "mutability": "mutable",
+                  "name": "_influencer",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 650,
+                  "src": "732:27:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  },
+                  "typeName": {
+                    "id": 598,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "732:15:1",
+                    "stateMutability": "payable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 601,
+                  "mutability": "mutable",
+                  "name": "_business",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 650,
+                  "src": "769:25:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  },
+                  "typeName": {
+                    "id": 600,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "769:15:1",
+                    "stateMutability": "payable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 603,
+                  "mutability": "mutable",
+                  "name": "_campaignId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 650,
+                  "src": "804:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 602,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "804:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 605,
+                  "mutability": "mutable",
+                  "name": "_deadline",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 650,
+                  "src": "833:17:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 604,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "833:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 607,
+                  "mutability": "mutable",
+                  "name": "_jackpotPayment",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 650,
+                  "src": "860:23:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 606,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "860:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 609,
+                  "mutability": "mutable",
+                  "name": "_incrementalPayment",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 650,
+                  "src": "893:27:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 608,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "893:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "687:239:1"
+            },
+            "returnParameters": {
+              "id": 611,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "934:0:1"
+            },
+            "scope": 663,
+            "src": "660:636:1",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 661,
+              "nodeType": "Block",
+              "src": "1374:53:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "baseExpression": {
+                      "argumentTypes": null,
+                      "id": 657,
+                      "name": "famepayCampaigns",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 568,
+                      "src": "1391:16:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_mapping$_t_uint256_$_t_address_$",
+                        "typeString": "mapping(uint256 => address)"
+                      }
+                    },
+                    "id": 659,
+                    "indexExpression": {
+                      "argumentTypes": null,
+                      "id": 658,
+                      "name": "_campaignId",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 652,
+                      "src": "1408:11:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "1391:29:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "functionReturnParameters": 656,
+                  "id": 660,
+                  "nodeType": "Return",
+                  "src": "1384:36:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "5598f8cc",
+            "id": 662,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getCampaign",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 653,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 652,
+                  "mutability": "mutable",
+                  "name": "_campaignId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 662,
+                  "src": "1323:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 651,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1323:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1322:21:1"
+            },
+            "returnParameters": {
+              "id": 656,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 655,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 662,
+                  "src": "1365:7:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 654,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1365:7:1",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1364:9:1"
+            },
+            "scope": 663,
+            "src": "1302:125:1",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 664,
+        "src": "58:1371:1"
+      }
+    ],
+    "src": "0:1430:1"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/benweinberg/Desktop/Work/FamePay/FamePayCode/contracts/FamepayFactory.sol",
+    "exportedSymbols": {
+      "FamepayFactory": [
+        663
+      ]
+    },
+    "id": 664,
+    "license": null,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 559,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".22",
+          "<",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:1"
+      },
+      {
+        "absolutePath": "/Users/benweinberg/Desktop/Work/FamePay/FamePayCode/contracts/Famepay.sol",
+        "file": "./Famepay.sol",
+        "id": 560,
+        "nodeType": "ImportDirective",
+        "scope": 664,
+        "sourceUnit": 558,
+        "src": "33:23:1",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [
+          557
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 663,
+        "linearizedBaseContracts": [
+          663
+        ],
+        "name": "FamepayFactory",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 562,
+            "mutability": "mutable",
+            "name": "admin",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 663,
+            "src": "131:21:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 561,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "131:7:1",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "private"
+          },
+          {
+            "constant": false,
+            "id": 564,
+            "mutability": "mutable",
+            "name": "platform",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 663,
+            "src": "158:32:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address_payable",
+              "typeString": "address payable"
+            },
+            "typeName": {
+              "id": 563,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "158:15:1",
+              "stateMutability": "payable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address_payable",
+                "typeString": "address payable"
+              }
+            },
+            "value": null,
+            "visibility": "private"
+          },
+          {
+            "constant": false,
+            "id": 568,
+            "mutability": "mutable",
+            "name": "famepayCampaigns",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 663,
+            "src": "196:52:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_address_$",
+              "typeString": "mapping(uint256 => address)"
+            },
+            "typeName": {
+              "id": 567,
+              "keyType": {
+                "id": 565,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "204:7:1",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "196:27:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_address_$",
+                "typeString": "mapping(uint256 => address)"
+              },
+              "valueType": {
+                "id": 566,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "215:7:1",
+                "stateMutability": "nonpayable",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "private"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 586,
+            "name": "NewFamepayCampaignCreated",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 585,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 570,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_date",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 586,
+                  "src": "356:13:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 569,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "356:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 572,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_campaignAddress",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 586,
+                  "src": "379:24:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 571,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "379:7:1",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 574,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_influencer",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 586,
+                  "src": "413:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 573,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "413:7:1",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 576,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_business",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 586,
+                  "src": "442:17:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 575,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "442:7:1",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 578,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_campaignId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 586,
+                  "src": "469:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 577,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "469:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 580,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_deadline",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 586,
+                  "src": "498:17:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 579,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "498:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 582,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_jackpotPayment",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 586,
+                  "src": "525:23:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 581,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "525:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 584,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_incrementalPayment",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 586,
+                  "src": "558:27:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 583,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "558:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "346:245:1"
+            },
+            "src": "315:277:1"
+          },
+          {
+            "body": {
+              "id": 594,
+              "nodeType": "Block",
+              "src": "619:35:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 592,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 589,
+                      "name": "admin",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 562,
+                      "src": "629:5:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 590,
+                        "name": "msg",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": -15,
+                        "src": "637:3:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_message",
+                          "typeString": "msg"
+                        }
+                      },
+                      "id": 591,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "sender",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "637:10:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      }
+                    },
+                    "src": "629:18:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 593,
+                  "nodeType": "ExpressionStatement",
+                  "src": "629:18:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 595,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 587,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "609:2:1"
+            },
+            "returnParameters": {
+              "id": 588,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "619:0:1"
+            },
+            "scope": 663,
+            "src": "598:56:1",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 649,
+              "nodeType": "Block",
+              "src": "934:362:1",
+              "statements": [
+                {
+                  "assignments": [
+                    613
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 613,
+                      "mutability": "mutable",
+                      "name": "famepay",
+                      "nodeType": "VariableDeclaration",
+                      "overrides": null,
+                      "scope": 649,
+                      "src": "944:15:1",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Famepay_$557",
+                        "typeString": "contract Famepay"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 612,
+                        "name": "Famepay",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 557,
+                        "src": "944:7:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Famepay_$557",
+                          "typeString": "contract Famepay"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 624,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 616,
+                        "name": "_platform",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 597,
+                        "src": "974:9:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 617,
+                        "name": "_influencer",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 599,
+                        "src": "985:11:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 618,
+                        "name": "_business",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 601,
+                        "src": "998:9:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 619,
+                        "name": "_campaignId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 603,
+                        "src": "1009:11:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 620,
+                        "name": "_deadline",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 605,
+                        "src": "1022:9:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 621,
+                        "name": "_jackpotPayment",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 607,
+                        "src": "1033:15:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 622,
+                        "name": "_incrementalPayment",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 609,
+                        "src": "1050:19:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        },
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        },
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 615,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "NewExpression",
+                      "src": "962:11:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_creation_nonpayable$_t_address_payable_$_t_address_payable_$_t_address_payable_$_t_uint256_$_t_uint256_$_t_uint256_$_t_uint256_$returns$_t_contract$_Famepay_$557_$",
+                        "typeString": "function (address payable,address payable,address payable,uint256,uint256,uint256,uint256) returns (contract Famepay)"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 614,
+                        "name": "Famepay",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 557,
+                        "src": "966:7:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Famepay_$557",
+                          "typeString": "contract Famepay"
+                        }
+                      }
+                    },
+                    "id": 623,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "962:108:1",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Famepay_$557",
+                      "typeString": "contract Famepay"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "944:126:1"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 632,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 625,
+                        "name": "famepayCampaigns",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 568,
+                        "src": "1080:16:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_uint256_$_t_address_$",
+                          "typeString": "mapping(uint256 => address)"
+                        }
+                      },
+                      "id": 627,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 626,
+                        "name": "_campaignId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 603,
+                        "src": "1097:11:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "1080:29:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 630,
+                          "name": "famepay",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 613,
+                          "src": "1120:7:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_Famepay_$557",
+                            "typeString": "contract Famepay"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_contract$_Famepay_$557",
+                            "typeString": "contract Famepay"
+                          }
+                        ],
+                        "id": 629,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "nodeType": "ElementaryTypeNameExpression",
+                        "src": "1112:7:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_address_$",
+                          "typeString": "type(address)"
+                        },
+                        "typeName": {
+                          "id": 628,
+                          "name": "address",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "1112:7:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": null,
+                            "typeString": null
+                          }
+                        }
+                      },
+                      "id": 631,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1112:16:1",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "1080:48:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 633,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1080:48:1"
+                },
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 635,
+                          "name": "block",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": -4,
+                          "src": "1169:5:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_block",
+                            "typeString": "block"
+                          }
+                        },
+                        "id": 636,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "timestamp",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "1169:15:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 639,
+                            "name": "famepay",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 613,
+                            "src": "1194:7:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_Famepay_$557",
+                              "typeString": "contract Famepay"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_contract$_Famepay_$557",
+                              "typeString": "contract Famepay"
+                            }
+                          ],
+                          "id": 638,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "1186:7:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_address_$",
+                            "typeString": "type(address)"
+                          },
+                          "typeName": {
+                            "id": 637,
+                            "name": "address",
+                            "nodeType": "ElementaryTypeName",
+                            "src": "1186:7:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": null,
+                              "typeString": null
+                            }
+                          }
+                        },
+                        "id": 640,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1186:16:1",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 641,
+                        "name": "_influencer",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 599,
+                        "src": "1204:11:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 642,
+                        "name": "_business",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 601,
+                        "src": "1217:9:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 643,
+                        "name": "_campaignId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 603,
+                        "src": "1228:11:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 644,
+                        "name": "_deadline",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 605,
+                        "src": "1241:9:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 645,
+                        "name": "_jackpotPayment",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 607,
+                        "src": "1252:15:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 646,
+                        "name": "_incrementalPayment",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 609,
+                        "src": "1269:19:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        },
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 634,
+                      "name": "NewFamepayCampaignCreated",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 586,
+                      "src": "1143:25:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$_t_address_$_t_address_$_t_address_$_t_uint256_$_t_uint256_$_t_uint256_$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256,address,address,address,uint256,uint256,uint256,uint256)"
+                      }
+                    },
+                    "id": 647,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1143:146:1",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 648,
+                  "nodeType": "EmitStatement",
+                  "src": "1138:151:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "a6d84840",
+            "id": 650,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "newFamepayCampaign",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 610,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 597,
+                  "mutability": "mutable",
+                  "name": "_platform",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 650,
+                  "src": "697:25:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  },
+                  "typeName": {
+                    "id": 596,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "697:15:1",
+                    "stateMutability": "payable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 599,
+                  "mutability": "mutable",
+                  "name": "_influencer",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 650,
+                  "src": "732:27:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  },
+                  "typeName": {
+                    "id": 598,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "732:15:1",
+                    "stateMutability": "payable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 601,
+                  "mutability": "mutable",
+                  "name": "_business",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 650,
+                  "src": "769:25:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  },
+                  "typeName": {
+                    "id": 600,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "769:15:1",
+                    "stateMutability": "payable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 603,
+                  "mutability": "mutable",
+                  "name": "_campaignId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 650,
+                  "src": "804:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 602,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "804:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 605,
+                  "mutability": "mutable",
+                  "name": "_deadline",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 650,
+                  "src": "833:17:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 604,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "833:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 607,
+                  "mutability": "mutable",
+                  "name": "_jackpotPayment",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 650,
+                  "src": "860:23:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 606,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "860:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 609,
+                  "mutability": "mutable",
+                  "name": "_incrementalPayment",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 650,
+                  "src": "893:27:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 608,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "893:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "687:239:1"
+            },
+            "returnParameters": {
+              "id": 611,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "934:0:1"
+            },
+            "scope": 663,
+            "src": "660:636:1",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 661,
+              "nodeType": "Block",
+              "src": "1374:53:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "baseExpression": {
+                      "argumentTypes": null,
+                      "id": 657,
+                      "name": "famepayCampaigns",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 568,
+                      "src": "1391:16:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_mapping$_t_uint256_$_t_address_$",
+                        "typeString": "mapping(uint256 => address)"
+                      }
+                    },
+                    "id": 659,
+                    "indexExpression": {
+                      "argumentTypes": null,
+                      "id": 658,
+                      "name": "_campaignId",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 652,
+                      "src": "1408:11:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "1391:29:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "functionReturnParameters": 656,
+                  "id": 660,
+                  "nodeType": "Return",
+                  "src": "1384:36:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "5598f8cc",
+            "id": 662,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getCampaign",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 653,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 652,
+                  "mutability": "mutable",
+                  "name": "_campaignId",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 662,
+                  "src": "1323:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 651,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1323:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1322:21:1"
+            },
+            "returnParameters": {
+              "id": 656,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 655,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 662,
+                  "src": "1365:7:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 654,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1365:7:1",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1364:9:1"
+            },
+            "scope": 663,
+            "src": "1302:125:1",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 664,
+        "src": "58:1371:1"
+      }
+    ],
+    "src": "0:1430:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
+  },
+  "networks": {
+    "1607912683259": {
+      "events": {
+        "0xce90a9b053ef8fff849e74439682a7f78aaf1326c7089a3cd53e97b417567bc0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_date",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_campaignAddress",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_influencer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_business",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_deadline",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_jackpotPayment",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_incrementalPayment",
+              "type": "uint256"
+            }
+          ],
+          "name": "NewFamepayCampaignCreated",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xBE632A8052d9978B2be093F094Db0e5f1530705B",
+      "transactionHash": "0x83c0c2c9d1a99960efd1f8acc190ca5c2d86d37bc5d0619be458bd324bb449f7"
+    },
+    "1607986958270": {
+      "events": {
+        "0xb6473cc179e0c27c46683dfcacbdb51a027b8a71d173658d9747c621ca3ac451": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_date",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_campaignAddress",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_influencer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_business",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_campaignId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_deadline",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_jackpotPayment",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_incrementalPayment",
+              "type": "uint256"
+            }
+          ],
+          "name": "NewFamepayCampaignCreated",
+          "type": "event"
+        },
+        "0x0bc52f660e0047e69514102e1d775487a170c83be44afc52c5606a9afb5bd848": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_date",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_campaignAddress",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_influencer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_business",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "_campaignId",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_deadline",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_jackpotPayment",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_incrementalPayment",
+              "type": "uint256"
+            }
+          ],
+          "name": "NewFamepayCampaignCreated",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x2f99AF5C48974a37A4bA36A58a723c99c6Cd640a",
+      "transactionHash": "0xcfc7fd9735c38b577bb238995cf8bf741c6482264e032f010f5d6bde8c993853"
+    },
+    "1608002667343": {
+      "events": {
+        "0xb6473cc179e0c27c46683dfcacbdb51a027b8a71d173658d9747c621ca3ac451": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_date",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_campaignAddress",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_influencer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_business",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_campaignId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_deadline",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_jackpotPayment",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_incrementalPayment",
+              "type": "uint256"
+            }
+          ],
+          "name": "NewFamepayCampaignCreated",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x9478F7172A7d69d3C8dcF50Fe47b41d8736233C8",
+      "transactionHash": "0xea24290a650c58d87917b88d4a0fed1835f54701f26487142c074fa8612a77af"
+    },
+    "1608070947335": {
+      "events": {
+        "0xb6473cc179e0c27c46683dfcacbdb51a027b8a71d173658d9747c621ca3ac451": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_date",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_campaignAddress",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_influencer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_business",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_campaignId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_deadline",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_jackpotPayment",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_incrementalPayment",
+              "type": "uint256"
+            }
+          ],
+          "name": "NewFamepayCampaignCreated",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x97D9d46be70cF72d032b5F5bB438abb2F41DdFb1",
+      "transactionHash": "0x19533960e074af9439e63434b8f20839785f02716ecfaab8f5485f4fd88eecae"
+    },
+    "1608256334145": {
+      "events": {
+        "0xb6473cc179e0c27c46683dfcacbdb51a027b8a71d173658d9747c621ca3ac451": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_date",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_campaignAddress",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_influencer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_business",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_campaignId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_deadline",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_jackpotPayment",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_incrementalPayment",
+              "type": "uint256"
+            }
+          ],
+          "name": "NewFamepayCampaignCreated",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xC803Fd1FFD11475c5F9Cc0b35661622787E2Da7b",
+      "transactionHash": "0x7e4d359d6417ac54b60a9fa490d2f743a0e7e24ffe6956f4fccc50668d37c819"
+    },
+    "1608342415195": {
+      "events": {
+        "0xb6473cc179e0c27c46683dfcacbdb51a027b8a71d173658d9747c621ca3ac451": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_date",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_campaignAddress",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_influencer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "_business",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_campaignId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_deadline",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_jackpotPayment",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_incrementalPayment",
+              "type": "uint256"
+            }
+          ],
+          "name": "NewFamepayCampaignCreated",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x88Ba68fe918E5079aa9C6D3c0d6fdAB622eed908",
+      "transactionHash": "0x702a5d623ab499856779a65bb46c5737287e292c6084ec52981a0c85eea10c48"
+    }
+  },
+  "schemaVersion": "3.3.0",
+  "updatedAt": "2020-12-20T16:37:05.684Z",
+  "networkType": "ethereum",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
