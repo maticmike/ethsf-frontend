@@ -12,3 +12,13 @@
     display: flex;
     padding-top:10%;
 }
+
+.NewCampaign_search {
+    width:280px;
+    border-radius:25px !important;
+}
+
+.NewCampaign_error_text {
+    color: red;
+    font-family: Arial, Helvetica, sans-serif
+}
