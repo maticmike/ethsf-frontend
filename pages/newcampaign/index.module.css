@@ -6,7 +6,7 @@
 
 .NewCampaign_layout { 
     width: 450px;
-    height: 400px;
+    height: 300px;
     border-radius:25px !important;
     justify-content: center;
     display: flex;
@@ -15,4 +15,9 @@
 
 .NewCampaign_search_width {
     width:280px;
+}
+
+.NewCampaign_error_text {
+    color: red;
+    font-family: Arial, Helvetica, sans-serif
 }

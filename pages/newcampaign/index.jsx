@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Paper, OutlinedInput, Grid } from '@material-ui/core';
+import { Paper, OutlinedInput, Grid, Button } from '@material-ui/core';
 import CheckCircle from '@material-ui/icons/Done';
 import styles from './index.module.css';
 import Image from 'next/image';
 const NewCampaign = () => {
   const [Influencer, setInfluencer] = useState('');
+  const [foundInfluencer, setFoundInfluencer] = useState(false);
+  const [attemptedSearch, setAttemptedSearch] = useState(false);
   const findInfluencer = e => {
     setInfluencer(e.target.value);
   };
@@ -12,7 +14,7 @@ const NewCampaign = () => {
   return (
     <div className={styles.NewCampaign_box_positioning}>
       <Paper className={styles.NewCampaign_layout} elevation={3}>
-        <Grid container column="column" align="center">
+        <Grid container column="column" align="center" spacing={1}>
           <Grid item sm={12}>
             <OutlinedInput
               id="time"
@@ -22,15 +24,34 @@ const NewCampaign = () => {
               className={styles.NewCampaign_search_width}
             />
           </Grid>
-          <Grid item sm={5} align="right">
-            <Image src="/Instagram.png" alt={`${Influencer} Instagram Profile`} width="32" height="32" />
+          <Grid item sm={12}>
+            <Button variant="contained" size="large" color="primary">
+              Search
+            </Button>
           </Grid>
-          <Grid item sm={7} align="left">
-            <strong>@instagramProfile</strong>
-            <span>
-              <CheckCircle color="primary" />
-            </span>
-          </Grid>
+          {foundInfluencer ? (
+            <>
+              <Grid item sm={12} align="center">
+                <Image src="/Instagram.png" alt={`${Influencer} Instagram Profile`} width="32" height="32" />
+                <strong>@instagramProfile&nbsp;</strong>
+                <CheckCircle color="primary" />
+              </Grid>
+              <Grid item sm={12} align="center">
+                <Image src="/Twitter.png" alt={`${Influencer} Youtube Profile`} width="32" height="32" />
+                <strong>@twitterProfile&nbsp;</strong>
+                <CheckCircle color="primary" />
+              </Grid>
+              <Grid item sm={12} align="center">
+                <Image src="/Youtube.png" alt={`${Influencer} Youtube Profile`} width="32" height="32" />
+                <strong>@youtubeProfile&nbsp;</strong>
+                <CheckCircle color="primary" />
+              </Grid>
+            </>
+          ) : attemptedSearch ? (
+            <Grid item sm={12} align="center">
+              <strong className={styles.NewCampaign_error_text}>No influencer found please try again</strong>
+            </Grid>
+          ) : null}
         </Grid>
       </Paper>
     </div>
