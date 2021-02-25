@@ -5,7 +5,7 @@ import styles from './index.module.css';
 import Image from 'next/image';
 const NewCampaign = () => {
   const [Influencer, setInfluencer] = useState('');
-  const [foundInfluencer, setFoundInfluencer] = useState(false);
+  const [foundInfluencer, setFoundInfluencer] = useState(true);
   const [attemptedSearch, setAttemptedSearch] = useState(false);
   const findInfluencer = e => {
     setInfluencer(e.target.value);
@@ -21,14 +21,14 @@ const NewCampaign = () => {
               type="text"
               placeholder="Find Influencer"
               onChange={findInfluencer}
-              className={styles.NewCampaign_search_width}
+              className={styles.NewCampaign_search}
             />
           </Grid>
-          <Grid item sm={12}>
+          {/* <Grid item sm={12}>
             <Button variant="contained" size="large" color="primary">
               Search
             </Button>
-          </Grid>
+          </Grid> */}
           {foundInfluencer ? (
             <>
               <Grid item sm={12} align="center">
@@ -46,12 +46,23 @@ const NewCampaign = () => {
                 <strong>@youtubeProfile&nbsp;</strong>
                 <CheckCircle color="primary" />
               </Grid>
+              <Grid item sm={12}>
+                <Button variant="contained" size="large" color="primary">
+                  Start
+                </Button>
+              </Grid>
             </>
           ) : attemptedSearch ? (
             <Grid item sm={12} align="center">
               <strong className={styles.NewCampaign_error_text}>No influencer found please try again</strong>
             </Grid>
-          ) : null}
+          ) : (
+            <Grid item sm={12}>
+              <Button variant="contained" size="large" color="primary">
+                Search
+              </Button>
+            </Grid>
+          )}
         </Grid>
       </Paper>
     </div>

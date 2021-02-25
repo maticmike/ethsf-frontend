@@ -13,8 +13,9 @@
     padding-top:10%;
 }
 
-.NewCampaign_search_width {
+.NewCampaign_search {
     width:280px;
+    border-radius:25px !important;
 }
 
 .NewCampaign_error_text {
