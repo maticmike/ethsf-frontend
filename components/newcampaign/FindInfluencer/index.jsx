@@ -22,7 +22,7 @@ const FindInfluencer = props => {
             type="text"
             placeholder="Find Influencer"
             onChange={e => setTypedInfluencer(e.target.value)}
-            className={styles.NewCampaign_search}
+            className={styles.FindInfluencer_search}
           />
         </Grid>
         {influencerWasFound ? (
@@ -50,7 +50,7 @@ const FindInfluencer = props => {
           </>
         ) : searchAttemptMade ? (
           <Grid item sm={12} align="center">
-            <strong className={styles.NewCampaign_error_text}>No influencer found please try again</strong>
+            <strong className={styles.FindInfluencer_error_text}>No influencer found please try again</strong>
           </Grid>
         ) : (
           <Grid item sm={12}>

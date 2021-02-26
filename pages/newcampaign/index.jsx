@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { Paper, OutlinedInput, Grid, Button } from '@material-ui/core';
 import CheckCircle from '@material-ui/icons/Done';
 import Image from 'next/image';
 import styles from './index.module.css';
-import FindInfluencer from '../../components/newcampaign/FindInfluencer';
+// import FindInfluencer from '@/components/newcampaign/FindInfluencer';
+const FindInfluencer = dynamic(() => import('../../components/newcampaign/FindInfluencer'), {
+  loading: () => <p>Find Influencer Loading....</p>,
+});
+
+// import CampaignType from
 const NewCampaign = () => {
   const [influencer, setInfluencer] = useState('');
 
