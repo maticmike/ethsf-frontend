@@ -22,3 +22,13 @@
     color: red;
     font-family: Arial, Helvetica, sans-serif
 }
+
+
+.FindInfluencer_layout { 
+    width: 450px;
+    height: 350px;
+    border-radius:25px !important;
+    justify-content: center;
+    display: flex;
+    padding-top:15%;
+}

@@ -1,30 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import { Paper, OutlinedInput, Grid, Button } from '@material-ui/core';
-import CheckCircle from '@material-ui/icons/Done';
-import Image from 'next/image';
+import { Paper } from '@material-ui/core';
 import styles from './index.module.css';
-// import FindInfluencer from '@/components/newcampaign/FindInfluencer';
 const FindInfluencer = dynamic(() => import('../../components/newcampaign/FindInfluencer'), {
   loading: () => <p>Find Influencer Loading....</p>,
+});
+const CampaignObjective = dynamic(() => import('../../components/newcampaign/CampaignObjective'), {
+  loading: () => <p>Select Campaign Objective Loading....</p>,
 });
 
 // import CampaignType from
 const NewCampaign = () => {
   const [influencer, setInfluencer] = useState('');
+  const [registrationStep, setRegistrationStep] = useState(0);
 
-  const findInfluencer = influencer => setInfluencer(influencer);
+  const findInfluencer = influencer => {
+    try {
+      //search for influencer from api or db
+      setInfluencer(influencer);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  useEffect(() => {
-    console.log(influencer, 'was hit');
-  }, [influencer]);
-  return (
-    <div className={styles.NewCampaign_box_positioning}>
-      <Paper className={styles.NewCampaign_layout} elevation={3}>
-        <FindInfluencer influencer={influencer} findInfluencer={findInfluencer} />
-      </Paper>
-    </div>
-  );
+  const incrementCampaignSetup = registrationStep => setRegistrationStep(registrationStep);
+
+  const renderSingleRegistrationComponent = () => {
+    switch (registrationStep) {
+      case 0:
+        return (
+          <FindInfluencer
+            influencer={influencer}
+            findInfluencer={findInfluencer}
+            incrementCampaignSetup={incrementCampaignSetup}
+          />
+        );
+      case 1:
+        return <CampaignObjective />;
+    }
+  };
+
+  return <div className={styles.NewCampaign_box_positioning}>{renderSingleRegistrationComponent()}</div>;
 };
 
 export default NewCampaign;
