@@ -9,3 +9,11 @@
 .CampaignObjective_align_right {
     text-align: right;
 }
+
+.CampaignObjective_custom_font_faq {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #5252cf;
+    font-size: small;
+    text-decoration: underline;
+
+}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, FormControl, FormControlLabel, RadioGroup, Radio, Tooltip, Button } from '@material-ui/core';
+import { Grid, FormControl, FormControlLabel, RadioGroup, Radio, Button } from '@material-ui/core';
 import styles from './index.module.css';
 
 const CampaignObjective = () => {
@@ -21,10 +21,13 @@ const CampaignObjective = () => {
       <p className={styles.CampaignObjective_custom_font}>
         <strong>Choose Campaign Objective</strong>
       </p>
+      <p className={styles.CampaignObjective_custom_font_faq}>
+        <strong>FAQ</strong>
+      </p>
       <Grid container direction="row" spacing={1}>
         <Grid item xs={4}>
           <p>
-            <strong className={styles.CampaignObjective_custom_font_colour}>Awareness</strong>
+            <strong className={styles.CampaignObjective_custom_font_colour_heading}>Awareness</strong>
           </p>
           <form onSubmit={handleSubmit}>
             <FormControl component="awareness-objective-root" error={error}>
@@ -42,7 +45,7 @@ const CampaignObjective = () => {
         </Grid>
         <Grid item xs={4}>
           <p>
-            <strong className={styles.CampaignObjective_custom_font_colour}>Engagement</strong>
+            <strong className={styles.CampaignObjective_custom_font_colour_heading}>Engagement</strong>
           </p>
           <form onSubmit={handleSubmit}>
             <FormControl component="engagement-objective-root" error={error}>
@@ -62,7 +65,7 @@ const CampaignObjective = () => {
         </Grid>
         <Grid item xs={4}>
           <p>
-            <strong className={styles.CampaignObjective_custom_font_colour}>Conversion</strong>
+            <strong className={styles.CampaignObjective_custom_font_colour_heading}>Conversion</strong>
           </p>
           <form onSubmit={handleSubmit}>
             <FormControl component="campaign-objective-root" error={error}>
