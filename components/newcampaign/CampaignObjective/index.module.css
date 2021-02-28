@@ -1,0 +1,11 @@
+.CampaignObjective_custom_font{
+    font-family: Arial, Helvetica, sans-serif
+}
+.CampaignObjective_custom_font_colour{
+    font-family: Arial, Helvetica, sans-serif;
+    color: grey;
+}
+
+.CampaignObjective_align_right {
+    text-align: right;
+}

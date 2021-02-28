@@ -4,3 +4,22 @@
     margin-top:15%;
 }
 
+.NewCampaign_layout_find { 
+    width: 450px;
+    height: 350px;
+    border-radius:25px !important;
+    justify-content: center;
+    display: flex;
+    padding-top:15%;
+}
+
+.NewCampaign_layout_objective { 
+    width: 450px;
+    height: 350px;
+    border-radius:25px !important;
+    justify-content: center;
+    display: flex;
+    padding-top:3%;
+    padding-left:3%;
+    padding-right:3%;
+}
