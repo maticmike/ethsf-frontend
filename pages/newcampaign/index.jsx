@@ -8,11 +8,14 @@ const FindInfluencer = dynamic(() => import('../../components/newcampaign/FindIn
 const CampaignObjective = dynamic(() => import('../../components/newcampaign/CampaignObjective'), {
   loading: () => <p>Select Campaign Objective Loading....</p>,
 });
+const CampaignDates = dynamic(() => import('../../components/newcampaign/CampaignDates'), {
+  loading: () => <p>Set Campaign Dates Loading....</p>,
+});
 
 const NewCampaign = () => {
+  const [registrationStep, setRegistrationStep] = useState(2);
   const [influencer, setInfluencer] = useState('');
   const [objective, setObjective] = useState('');
-  const [registrationStep, setRegistrationStep] = useState(1);
 
   const findInfluencer = influencer => {
     try {
@@ -44,6 +47,12 @@ const NewCampaign = () => {
               objective={objective => setObjective(objective)}
               setCampaignSetupStep={setCampaignSetupStep}
             />
+          </Paper>
+        );
+      case 2:
+        return (
+          <Paper className={styles.NewCampaign_layout_dates} elevation={3}>
+            <CampaignDates objective={objective} />
           </Paper>
         );
     }
