@@ -9,9 +9,9 @@ const CampaignObjective = dynamic(() => import('../../components/newcampaign/Cam
   loading: () => <p>Select Campaign Objective Loading....</p>,
 });
 
-// import CampaignType from
 const NewCampaign = () => {
   const [influencer, setInfluencer] = useState('');
+  const [objective, setObjective] = useState('');
   const [registrationStep, setRegistrationStep] = useState(1);
 
   const findInfluencer = influencer => {
@@ -23,7 +23,7 @@ const NewCampaign = () => {
     }
   };
 
-  const incrementCampaignSetup = registrationStep => setRegistrationStep(registrationStep);
+  const setCampaignSetupStep = registrationStep => setRegistrationStep(registrationStep);
 
   const renderSingleRegistrationComponent = () => {
     switch (registrationStep) {
@@ -33,14 +33,17 @@ const NewCampaign = () => {
             <FindInfluencer
               influencer={influencer}
               findInfluencer={findInfluencer}
-              incrementCampaignSetup={incrementCampaignSetup}
+              incrementCampaignSetup={setCampaignSetupStep}
             />
           </Paper>
         );
       case 1:
         return (
           <Paper className={styles.NewCampaign_layout_objective} elevation={3}>
-            <CampaignObjective />
+            <CampaignObjective
+              objective={objective => setObjective(objective)}
+              setCampaignSetupStep={setCampaignSetupStep}
+            />
           </Paper>
         );
     }

@@ -13,7 +13,7 @@ const FindInfluencer = props => {
     setSearchAttemptMade(true);
   };
 
-  const incrementCampaignSetup = () => props.incrementCampaignSetup(1);
+  const incrementCampaignSetup = () => props.setCampaignSetupStep(1);
 
   return (
     <div>

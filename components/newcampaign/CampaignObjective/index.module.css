@@ -1,9 +1,10 @@
 .CampaignObjective_custom_font{
     font-family: Arial, Helvetica, sans-serif
 }
-.CampaignObjective_custom_font_colour{
+.CampaignObjective_custom_font_heading{
     font-family: Arial, Helvetica, sans-serif;
     color: grey;
+    font-size: 16px;
 }
 
 .CampaignObjective_align_right {
