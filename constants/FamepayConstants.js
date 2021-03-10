@@ -5,7 +5,7 @@ module.exports = {
   LIKES: 'Likes',
   COMMENTS: 'Comments',
   SHARES: 'Shares',
-  WEB_VISTS: 'Website Visits',
+  WEB_VISITS: 'Website Visits',
   ADD_TO_CART: 'Add To Cart',
   SALES: 'Sales',
 };

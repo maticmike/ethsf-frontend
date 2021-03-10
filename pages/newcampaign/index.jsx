@@ -13,7 +13,7 @@ const CampaignDates = dynamic(() => import('../../components/newcampaign/Campaig
 });
 
 const NewCampaign = () => {
-  const [registrationStep, setRegistrationStep] = useState(2);
+  const [registrationStep, setRegistrationStep] = useState(1);
   const [influencer, setInfluencer] = useState('');
   const [objective, setObjective] = useState('');
 
