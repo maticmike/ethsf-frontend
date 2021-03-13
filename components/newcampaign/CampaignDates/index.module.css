@@ -19,6 +19,8 @@
 }
 
 .CampaignDates_calendar_right {
-  display: flex;
+  display: flex; 
   justify-content: flex-end;
 }
+
+

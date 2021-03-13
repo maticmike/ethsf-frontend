@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import styles from './index.module.css';
 import { setObjectiveName } from '../../../utils/objectiveNames';
 import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
+import Datetime from 'react-datetime';
+import 'react-datetime/css/react-datetime.css';
 import { Grid } from '@material-ui/core';
 const CampaignDates = props => {
   const [date, setDate] = useState(new Date());
   const getHeading = () => (props.objective === 'singlePost' ? 'Post Date And Time' : 'Campaign Length');
-
+  const handleDateChange = e => console.log(e.target.value);
   return (
     <div className={styles.CampaignDates_layout}>
       <Grid container direction="row">
@@ -19,21 +20,18 @@ const CampaignDates = props => {
           </p>
         </Grid>
         <Grid item xs={6} className={styles.CampaignDates_calendar_right}>
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <Datetime open />
+          {/* <MuiPickersUtilsProvider utils={DateFnsUtils} className={styles.CampaignDates_calendar_right}>
             <KeyboardDatePicker
               disableToolbar
               variant="inline"
               format="MM/dd/yyyy"
               margin="normal"
               id="date-picker-inline"
-              label="Date picker inline"
               value={date}
-              // onChange={handleDateChange}
-              KeyboardButtonProps={{
-                'aria-label': 'change date',
-              }}
+              onChange={handleDateChange}
             />
-          </MuiPickersUtilsProvider>
+          </MuiPickersUtilsProvider> */}
         </Grid>
       </Grid>
     </div>
