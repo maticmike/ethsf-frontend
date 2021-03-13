@@ -11,9 +11,12 @@ const CampaignObjective = dynamic(() => import('../../components/newcampaign/Cam
 const CampaignDates = dynamic(() => import('../../components/newcampaign/CampaignDates'), {
   loading: () => <p>Set Campaign Dates Loading....</p>,
 });
+const SimplePostDuration = dynamic(() => import('../../components/newcampaign/SimplePostDuration'), {
+  loading: () => <p>Post Duration Loading....</p>,
+});
 
 const NewCampaign = () => {
-  const [registrationStep, setRegistrationStep] = useState(2);
+  const [registrationStep, setRegistrationStep] = useState(3);
   const [influencer, setInfluencer] = useState('');
   const [objective, setObjective] = useState('');
 
@@ -53,6 +56,12 @@ const NewCampaign = () => {
         return (
           <Paper className={styles.NewCampaign_layout_dates} elevation={3}>
             <CampaignDates objective={objective} />
+          </Paper>
+        );
+      case 3:
+        return (
+          <Paper className={styles.NewCampaign_layout_dates} elevation={3}>
+            <SimplePostDuration objective={objective} />
           </Paper>
         );
     }

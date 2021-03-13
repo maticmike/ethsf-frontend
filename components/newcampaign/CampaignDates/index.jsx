@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
-import styles from './index.module.css';
-import { setObjectiveName } from '../../../utils/objectiveNames';
-import DateFnsUtils from '@date-io/date-fns';
-import Datetime from 'react-datetime';
-import 'react-datetime/css/react-datetime.css';
+import React, { useState, useEffect } from 'react';
+import MomentUtils from '@date-io/moment';
+import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { Grid } from '@material-ui/core';
+import { setObjectiveName } from '../../../utils/objectiveNames';
+import styles from './index.module.css';
 const CampaignDates = props => {
   const [date, setDate] = useState(new Date());
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    setOpen(true);
+  }, []);
   const getHeading = () => (props.objective === 'singlePost' ? 'Post Date And Time' : 'Campaign Length');
-  const handleDateChange = e => console.log(e.target.value);
+  const handleDateChange = date => setDate(date);
   return (
     <div className={styles.CampaignDates_layout}>
       <Grid container direction="row">
@@ -20,18 +23,21 @@ const CampaignDates = props => {
           </p>
         </Grid>
         <Grid item xs={6} className={styles.CampaignDates_calendar_right}>
-          <Datetime open />
-          {/* <MuiPickersUtilsProvider utils={DateFnsUtils} className={styles.CampaignDates_calendar_right}>
+          <MuiPickersUtilsProvider utils={MomentUtils} className={styles.CampaignDates_calendar_right}>
             <KeyboardDatePicker
+              open={open}
               disableToolbar
               variant="inline"
-              format="MM/dd/yyyy"
               margin="normal"
               id="date-picker-inline"
               value={date}
               onChange={handleDateChange}
+              onClose={() => setOpen(false)}
+              onOpen={() => setOpen(true)}
             />
-          </MuiPickersUtilsProvider> */}
+          </MuiPickersUtilsProvider>
+
+          {/* TODO: Get Range Calendar For Campaign Registrations */}
         </Grid>
       </Grid>
     </div>
