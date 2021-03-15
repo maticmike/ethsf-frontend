@@ -1,35 +1,45 @@
 import React, { useState } from 'react';
-import Slider from '@material-ui/core/Slider';
+import { Grid, FormControl, FormLabel, FormControlLabel, FormHelperText, Radio, RadioGroup } from '@material-ui/core';
 import { setObjectiveName } from '../../../utils/objectiveNames';
-
 import styles from './index.module.css';
 
 const SimplePostDuration = props => {
   const getHeading = () => (props.objective === 'singlePost' ? 'Post Date And Time' : 'Campaign Length');
-  const handleDateChange = date => setDate(date);
+
+  const [selectedDuration, setSelectedDuration] = useState('');
+
   return (
     <>
-      <div className={styles.CampaignDuration_custom_font}>
-        <h2>{setObjectiveName(props.objective)} Objective</h2>
-        <p className={styles.CampaignObjective_custom_font_heading}>1. {getHeading()}</p>
-        <p className={styles.CampaignDuration_helper_font}>
-          Select the range of dates which you want the campaign to last for
-        </p>
-        <br />
-        <br />
-      </div>
-      <div className={styles.CampaignDuration_slider}>
-        <Slider
-          defaultValue={30}
-          // getAriaValueText="cassidy!"
-          aria-labelledby="discrete-slider"
-          valueLabelDisplay="auto"
-          step={10}
-          marks
-          min={10}
-          max={110}
-        />
-      </div>
+      <Grid container direction="row" className={styles.CampaignDuration_custom_font}>
+        <Grid item xs={6}>
+          <h2>{setObjectiveName(props.objective)} Objective</h2>
+          <p>2. {getHeading()}</p>
+          <FormHelperText className={styles.CampaignDuration_helper_font}>
+            Select the range of dates which you want the campaign to last for
+          </FormHelperText>
+        </Grid>
+        <Grid item xs={6}>
+          <FormControl component="fieldset">
+            <FormLabel className={styles.CampaignDuration_label_center}>Post Duration</FormLabel>
+            <RadioGroup
+              component="select-campaign-checkboxes"
+              className={styles.CampaignDuration_checkbox_center}
+              name="gender1"
+              value={selectedDuration}
+              onChange={e => setSelectedDuration(e.target.value)}
+            >
+              <FormControlLabel value="twelve" control={<Radio color="primary" />} label="Twelve Hours" />
+              <FormControlLabel value="oneDay" control={<Radio color="primary" />} label="One Day" />
+              <FormControlLabel value="twoDays" control={<Radio color="primary" />} label="Two Days" />
+              <FormControlLabel value="permanent" control={<Radio color="primary" />} label="Permanent" />
+              <FormControlLabel value="other" control={<Radio color="primary" />} label="Other" />
+            </RadioGroup>
+            <FormHelperText className={styles.CampaignDuration_text_center}>
+              Payment will be made after the selected time period has passed
+            </FormHelperText>
+          </FormControl>
+        </Grid>
+      </Grid>
     </>
   );
 };

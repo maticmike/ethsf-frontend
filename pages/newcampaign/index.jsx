@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
-import { Paper } from '@material-ui/core';
+import { Paper, FormControl, RadioGroup, Radio, FormLabel, FormControlLabel } from '@material-ui/core';
 import styles from './index.module.css';
+
 const FindInfluencer = dynamic(() => import('../../components/newcampaign/FindInfluencer'), {
   loading: () => <p>Find Influencer Loading....</p>,
 });
@@ -60,13 +61,12 @@ const NewCampaign = () => {
         );
       case 3:
         return (
-          <Paper className={styles.NewCampaign_layout_dates} elevation={3}>
+          <Paper className={styles.NewCampaign_layout_duration} elevation={3}>
             <SimplePostDuration objective={objective} />
           </Paper>
         );
     }
   };
-
   return <div className={styles.NewCampaign_box_positioning}>{renderSingleRegistrationComponent()}</div>;
 };
 
