@@ -11,12 +11,12 @@ import {
   MenuItem,
 } from '@material-ui/core';
 import { setObjectiveName } from '../../../utils/objectiveNames';
-import styles from './index.module.css';
 import { CalendarViewDaySharp } from '@material-ui/icons';
+// import styles from './index.module.css';
+import { useStyles } from './styles';
 
 const SimplePostDuration = props => {
-  const getHeading = () => (props.objective === 'singlePost' ? 'Post Date And Time' : 'Campaign Length');
-
+  const classes = useStyles();
   const [selectedDuration, setSelectedDuration] = useState('');
   const [showOtherOptions, setShowOtherOptions] = useState(false);
   const [alternativeDuration, setAlternativeDuration] = useState('');
@@ -25,17 +25,17 @@ const SimplePostDuration = props => {
   const alternativeDurationOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   return (
     <>
-      <Grid container direction="row" className={styles.CampaignDuration_custom_font}>
+      <Grid container direction="row" className={stclassesyles.CampaignDuration_custom_font}>
         <Grid item xs={6}>
           <h2>{setObjectiveName(props.objective)} Objective</h2>
-          <p>2. {getHeading()}</p>
-          <FormHelperText className={styles.CampaignDuration_helper_font}>
+          <p>2. Post Duration</p>
+          <FormHelperText className={classes.CampaignDuration_helper_font}>
             Select the range of dates which you want the campaign to last for
           </FormHelperText>
         </Grid>
         <Grid item xs={6}>
           <FormControl component="fieldset">
-            <FormLabel className={styles.CampaignDuration_label_center}>Post Duration</FormLabel>
+            <FormLabel className={classes.CampaignDuration_label_center}>Post Duration</FormLabel>
             <RadioGroup
               component="select-campaign-checkboxes"
               //   className={styles.CampaignDuration_checkbox_center}
@@ -60,7 +60,7 @@ const SimplePostDuration = props => {
                 id="alternative-duration-options"
                 value={alternativeDuration}
                 onChange={e => setAlternativeDuration(e.target.value)}
-                className={styles.CampaignDuration_custom_selector}
+                className={classes.CampaignDuration_custom_selector}
               >
                 {alternativeDurationOptions.map((durationOption, index) => {
                   return (
@@ -76,7 +76,7 @@ const SimplePostDuration = props => {
                 id="alternative-duration-units"
                 value={alternativeDurationUnit}
                 onChange={e => setAlternativeDurationUnit(e.target.value)}
-                className={styles.CampaignDuration_custom_selector}
+                className={classes.CampaignDuration_custom_selector}
               >
                 <MenuItem key="hours" value={'hours'}>
                   Hours

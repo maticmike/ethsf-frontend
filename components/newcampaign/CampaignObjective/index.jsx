@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Grid, FormControl, FormControlLabel, RadioGroup, Radio, Button } from '@material-ui/core';
-import styles from './index.module.css';
+// import styles from './index.module.css';
+import { useStyles } from './styles.js';
 
 const CampaignObjective = props => {
+  const classes = useStyles();
+
   const [selectedObjective, setSelectedObjective] = useState('');
   const [error, setError] = useState(false);
 
@@ -20,17 +23,17 @@ const CampaignObjective = props => {
 
   return (
     <div>
-      <p className={styles.CampaignObjective_custom_font}>
+      <p className={classes.CampaignObjective_custom_font}>
         <strong>Choose Campaign Objective</strong>
       </p>
-      <p className={styles.CampaignObjective_custom_font_faq}>
+      <p className={classes.CampaignObjective_custom_font_faq}>
         <strong>FAQ</strong>
       </p>
       <form onSubmit={handleSubmit}>
         <Grid container direction="row" spacing={1}>
           <Grid item xs={4}>
             <p>
-              <strong className={styles.CampaignObjective_custom_font_heading}>Awareness</strong>
+              <strong className={classes.CampaignObjective_custom_font_heading}>Awareness</strong>
             </p>
             <FormControl component="awareness-objective-root" error={error}>
               <RadioGroup
@@ -46,7 +49,7 @@ const CampaignObjective = props => {
           </Grid>
           <Grid item xs={4}>
             <p>
-              <strong className={styles.CampaignObjective_custom_font_heading}>Engagement</strong>
+              <strong className={classes.CampaignObjective_custom_font_heading}>Engagement</strong>
             </p>
             <FormControl component="engagement-objective-root" error={error}>
               <RadioGroup
@@ -64,7 +67,7 @@ const CampaignObjective = props => {
           </Grid>
           <Grid item xs={4}>
             <p>
-              <strong className={styles.CampaignObjective_custom_font_heading}>Conversion</strong>
+              <strong className={classes.CampaignObjective_custom_font_heading}>Conversion</strong>
             </p>
             <FormControl component="campaign-objective-root" error={error}>
               <RadioGroup
@@ -86,7 +89,7 @@ const CampaignObjective = props => {
               Previous
             </Button>
           </Grid>
-          <Grid item xs={6} className={styles.CampaignObjective_align_right}>
+          <Grid item xs={6} className={classes.CampaignObjective_align_right}>
             <Button type="submit" variant="contained" color="primary" size="small">
               Next
             </Button>

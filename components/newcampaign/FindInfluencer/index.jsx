@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { OutlinedInput, Grid, Button } from '@material-ui/core';
 import CheckCircle from '@material-ui/icons/Done';
-import styles from './index.module.css';
 import Image from 'next/image';
+// import styles from './index.module.css';
+import { useStyles } from './styles';
 const FindInfluencer = props => {
+  const classes = useStyles();
+
   const [influencerWasFound, setInfluencerWasFound] = useState(false);
   const [searchAttemptMade, setSearchAttemptMade] = useState(false);
   const [typedInfluencer, setTypedInfluencer] = useState('');
@@ -24,7 +27,7 @@ const FindInfluencer = props => {
             type="text"
             placeholder="Find Influencer"
             onChange={e => setTypedInfluencer(e.target.value)}
-            className={styles.FindInfluencer_search}
+            className={classes.FindInfluencer_search}
           />
         </Grid>
         {searchAttemptMade ? (
@@ -56,7 +59,7 @@ const FindInfluencer = props => {
           ) : (
             <Grid item sm={12} align="center">
               <br />
-              <strong className={styles.FindInfluencer_error_text}>
+              <strong className={classes.FindInfluencer_error_text}>
                 No influencer found with that username please try again
               </strong>
             </Grid>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Paper, FormControl, RadioGroup, Radio, FormLabel, FormControlLabel } from '@material-ui/core';
 import styles from './index.module.css';
-
+import { useStyles } from './styles';
 const FindInfluencer = dynamic(() => import('../../components/newcampaign/FindInfluencer'), {
   loading: () => <p>Find Influencer Loading....</p>,
 });
@@ -15,9 +15,13 @@ const CampaignDates = dynamic(() => import('../../components/newcampaign/Campaig
 const SimplePostDuration = dynamic(() => import('../../components/newcampaign/SimplePostDuration'), {
   loading: () => <p>Post Duration Loading....</p>,
 });
+const CampaignStaking = dynamic(() => import('../../components/newcampaign/CampaignStaking'), {
+  loading: () => <p>Campaign Staking Loading...</p>,
+});
 
 const NewCampaign = () => {
-  const [registrationStep, setRegistrationStep] = useState(3);
+  const classes = useStyles();
+  const [registrationStep, setRegistrationStep] = useState(4);
   const [influencer, setInfluencer] = useState('');
   const [objective, setObjective] = useState('');
 
@@ -36,7 +40,7 @@ const NewCampaign = () => {
     switch (registrationStep) {
       case 0:
         return (
-          <Paper className={styles.NewCampaign_layout_find} elevation={3}>
+          <Paper className={classes.NewCampaign_layout_find} elevation={3}>
             <FindInfluencer
               influencer={influencer}
               findInfluencer={findInfluencer}
@@ -46,7 +50,7 @@ const NewCampaign = () => {
         );
       case 1:
         return (
-          <Paper className={styles.NewCampaign_layout_objective} elevation={3}>
+          <Paper className={classes.NewCampaign_layout_objective} elevation={3}>
             <CampaignObjective
               objective={objective => setObjective(objective)}
               setCampaignSetupStep={setCampaignSetupStep}
@@ -55,19 +59,25 @@ const NewCampaign = () => {
         );
       case 2:
         return (
-          <Paper className={styles.NewCampaign_layout_dates} elevation={3}>
+          <Paper className={classes.NewCampaign_layout_dates} elevation={3}>
             <CampaignDates objective={objective} />
           </Paper>
         );
       case 3:
         return (
-          <Paper className={styles.NewCampaign_layout_duration} elevation={3}>
+          <Paper className={classes.NewCampaign_layout_duration} elevation={3}>
             <SimplePostDuration objective={objective} />
+          </Paper>
+        );
+      case 4:
+        return (
+          <Paper className={classes.NewCampaign_layout_dates} elevation={3}>
+            <CampaignStaking objective={objective} />
           </Paper>
         );
     }
   };
-  return <div className={styles.NewCampaign_box_positioning}>{renderSingleRegistrationComponent()}</div>;
+  return <div className={classes.NewCampaign_box_positioning}>{renderSingleRegistrationComponent()}</div>;
 };
 
 export default NewCampaign;
