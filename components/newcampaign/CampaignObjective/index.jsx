@@ -24,7 +24,7 @@ const CampaignObjective = props => {
   return (
     <div>
       <p className={classes.CampaignObjective_custom_font}>
-        <strong>Choose Campaign Objective</strong>
+        <h2>Choose Campaign Objective</h2>
       </p>
       <p className={classes.CampaignObjective_custom_font_faq}>
         <strong>FAQ</strong>

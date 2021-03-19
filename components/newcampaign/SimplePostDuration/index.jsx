@@ -25,7 +25,7 @@ const SimplePostDuration = props => {
   const alternativeDurationOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   return (
     <>
-      <Grid container direction="row" className={stclassesyles.CampaignDuration_custom_font}>
+      <Grid container direction="row" className={classes.CampaignDuration_custom_font}>
         <Grid item xs={6}>
           <h2>{setObjectiveName(props.objective)} Objective</h2>
           <p>2. Post Duration</p>
