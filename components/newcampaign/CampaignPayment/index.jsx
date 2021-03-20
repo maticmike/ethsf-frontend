@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { FormHelperText, InputBase } from '@material-ui/core';
+import NumberFormat from 'react-number-format';
+import { FormHelperText } from '@material-ui/core';
 import { setObjectiveName } from '../../../utils/objectiveNames';
 import { useStyles } from './styles.js';
 
@@ -16,15 +17,17 @@ const CampaignPayment = ({ objective, objectiveAmount }) => {
       <FormHelperText>Enter the amount of money you want to be available for the influencer to earn</FormHelperText>
       <div className={classes.align_inputs}>
         <div>
-          {jackpot ? <p>{objective} Jackpot Objective:</p> : <p> Incremental Objective:</p>}
-          <InputBase
-            className={classes.input}
-            placeholder={objective.charAt(0).toUpperCase() + objective.slice(1)}
-          ></InputBase>
+          {jackpot ? (
+            <p>{objective.charAt(0).toUpperCase() + objective.slice(1)} Jackpot Objective:</p>
+          ) : (
+            <p>{objective.charAt(0).toUpperCase() + objective.slice(1)} Incremental Objective:</p>
+          )}
+
+          <NumberFormat className={classes.input} thousandSeparator={true} />
         </div>
         <div>
           {jackpot ? <p>Jackpot Payment:</p> : <p>Incremental Payment: </p>}
-          <InputBase className={classes.input} startAdornment="$" placeholder=" Enter Reward"></InputBase>
+          <NumberFormat className={classes.input} thousandSeparator={true} prefix={'$'} />
         </div>
       </div>
     </div>
