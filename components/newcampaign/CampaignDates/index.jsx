@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import MomentUtils from '@date-io/moment';
-// import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { Grid, Button } from '@material-ui/core';
 import { setObjectiveName } from '../../../utils/objectiveNames';
 import { useStyles } from './styles';
@@ -8,15 +7,16 @@ import Calendar from 'react-calendar';
 import moment from 'moment';
 import 'react-calendar/dist/Calendar.css';
 
-const CampaignDates = ({ objective }) => {
+const CampaignDates = ({ objective, setRootSimpleDate, setCampaignSetupStep }) => {
   const classes = useStyles();
-  const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
-  useEffect(() => {
-    setOpen(true);
-  }, []);
+  const [simpleDate, setSimpleDate] = useState(new Date());
+
   const getHeading = () => (objective === 'singlePost' ? 'Post Date And Time' : 'Campaign Length');
-  const handleDateChange = date => setDate(date);
+  const handleDateChange = date => setSimpleDate(date);
+  const selectDate = () => {
+    setRootSimpleDate(date);
+    setCampaignSetupStep(2);
+  };
   return (
     <div className={classes.CampaignDates_layout}>
       <Grid container direction="row">
@@ -28,34 +28,20 @@ const CampaignDates = ({ objective }) => {
           </p>
         </Grid>
         <Grid item xs={6} className={classes.CampaignDates_calendar_right}>
-          {/* <MuiPickersUtilsProvider utils={MomentUtils} className={classes.CampaignDates_calendar_right}>
-            <KeyboardDatePicker
-              open={open}
-              disableToolbar
-              variant="inline"
-              margin="normal"
-              id="date-picker-inline"
-              value={date}
-              onChange={handleDateChange}
-              onClose={() => setOpen(false)}
-              onOpen={() => setOpen(true)}
-            />
-          </MuiPickersUtilsProvider> */}
           <Calendar
-            // className={classes.CampaignDates_font_size}
             onChange={handleDateChange}
             minDate={new Date()}
             selectRange={objective != 'ppp' ? true : false}
-            value={date}
+            value={simpleDate}
           />
         </Grid>
       </Grid>
       <br />
       <div className={classes.CampaignDates_align_buttons}>
-        <Button onClick={() => setCampaignSetupStep(0)} variant="outlined" color="primary" size="small">
+        <Button onClick={() => setCampaignSetupStep(1)} variant="outlined" color="primary" size="small">
           Previous
         </Button>
-        <Button type="submit" variant="contained" color="primary" size="small" onClick>
+        <Button type="submit" variant="contained" color="primary" size="small" onClick={selectDate}>
           Next
         </Button>
       </div>

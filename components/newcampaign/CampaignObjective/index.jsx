@@ -3,7 +3,7 @@ import { Grid, FormControl, FormControlLabel, RadioGroup, Radio, Button } from '
 // import styles from './index.module.css';
 import { useStyles } from './styles.js';
 
-const CampaignObjective = ({ objective, setCampaignSetupStep, incrementCampaignSetup }) => {
+const CampaignObjective = ({ objective, setCampaignSetupStep }) => {
   const classes = useStyles();
 
   const [selectedObjective, setSelectedObjective] = useState('');
@@ -88,7 +88,7 @@ const CampaignObjective = ({ objective, setCampaignSetupStep, incrementCampaignS
             </Button>
           </Grid>
           <Grid item xs={6} className={classes.CampaignObjective_align_right}>
-            <Button type="submit" variant="contained" color="primary" size="small" onCli>
+            <Button type="submit" variant="contained" color="primary" size="small">
               Next
             </Button>
           </Grid>
