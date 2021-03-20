@@ -81,7 +81,7 @@ const NewCampaign = () => {
       case 5:
         return (
           <Paper className={styles.NewCampaign_layout_staking} elevation={3}>
-            <CampaignPayment objective={objective} objectiveAmount={objectiveAmount}></CampaignPayment>
+            <CampaignPayment objective="views" objectiveAmount={objectiveAmount}></CampaignPayment>
           </Paper>
         );
     }

@@ -16,12 +16,15 @@ const CampaignPayment = ({ objective, objectiveAmount }) => {
       <FormHelperText>Enter the amount of money you want to be available for the influencer to earn</FormHelperText>
       <div className={classes.align_inputs}>
         <div>
-          {jackpot ? <p>{objective} For Jackpot</p> : <p>Payment Condition:</p>}
-          <InputBase className={classes.input} startAdornment="$" placeholder=" Enter Target" size="large"></InputBase>
+          {jackpot ? <p>{objective} Jackpot Objective:</p> : <p> Incremental Objective:</p>}
+          <InputBase
+            className={classes.input}
+            placeholder={objective.charAt(0).toUpperCase() + objective.slice(1)}
+          ></InputBase>
         </div>
         <div>
-          {jackpot ? null : <p>Incremental Payment: </p>}
-          <InputBase className={classes.input} startAdornment="$" placeholder=" Enter Reward" size="large"></InputBase>
+          {jackpot ? <p>Jackpot Payment:</p> : <p>Incremental Payment: </p>}
+          <InputBase className={classes.input} startAdornment="$" placeholder=" Enter Reward"></InputBase>
         </div>
       </div>
     </div>
