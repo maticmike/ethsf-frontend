@@ -4,7 +4,7 @@ import CheckCircle from '@material-ui/icons/Done';
 import Image from 'next/image';
 // import styles from './index.module.css';
 import { useStyles } from './styles';
-const FindInfluencer = props => {
+const FindInfluencer = ({ findInfluencer, setCampaignSetupStep, influencer }) => {
   const classes = useStyles();
 
   const [influencerWasFound, setInfluencerWasFound] = useState(false);
@@ -12,11 +12,11 @@ const FindInfluencer = props => {
   const [typedInfluencer, setTypedInfluencer] = useState('');
 
   const handleFindInfluencer = () => {
-    props.findInfluencer(typedInfluencer);
+    findInfluencer(typedInfluencer);
     setSearchAttemptMade(true);
   };
 
-  const incrementCampaignSetup = () => props.setCampaignSetupStep(1);
+  const incrementCampaignSetup = () => setCampaignSetupStep(1);
 
   return (
     <div>
@@ -35,17 +35,17 @@ const FindInfluencer = props => {
             <>
               <br />
               <Grid item sm={12} align="center">
-                <Image src="/Instagram.png" alt={`${props.influencer} Instagram Profile`} width="32" height="32" />
+                <Image src="/Instagram.png" alt={`${influencer} Instagram Profile`} width="32" height="32" />
                 <strong>@instagramProfile&nbsp;</strong>
                 <CheckCircle color="primary" />
               </Grid>
               <Grid item sm={12} align="center">
-                <Image src="/Twitter.png" alt={`${props.influencer} Youtube Profile`} width="32" height="32" />
+                <Image src="/Twitter.png" alt={`${influencer} Youtube Profile`} width="32" height="32" />
                 <strong>@twitterProfile&nbsp;</strong>
                 <CheckCircle color="primary" />
               </Grid>
               <Grid item sm={12} align="center">
-                <Image src="/Youtube.png" alt={`${props.influencer} Youtube Profile`} width="32" height="32" />
+                <Image src="/Youtube.png" alt={`${influencer} Youtube Profile`} width="32" height="32" />
                 <strong>@youtubeProfile&nbsp;</strong>
                 <CheckCircle color="primary" />
               </Grid>

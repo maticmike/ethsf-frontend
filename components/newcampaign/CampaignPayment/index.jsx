@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import NumberFormat from 'react-number-format';
-import { FormHelperText } from '@material-ui/core';
+import { FormHelperText, Button } from '@material-ui/core';
 import { setObjectiveName } from '../../../utils/objectiveNames';
 import { useStyles } from './styles.js';
 
@@ -29,6 +29,15 @@ const CampaignPayment = ({ objective, objectiveAmount }) => {
           {jackpot ? <p>Jackpot Payment:</p> : <p>Incremental Payment: </p>}
           <NumberFormat className={classes.input} thousandSeparator={true} prefix={'$'} />
         </div>
+      </div>
+      <br />
+      <div className={classes.CampaignPayment_button_alignment}>
+        <Button variant="outlined" color="primary" size="small">
+          Previous
+        </Button>
+        <Button variant="contained" color="primary" size="small">
+          Next
+        </Button>
       </div>
     </div>
   );

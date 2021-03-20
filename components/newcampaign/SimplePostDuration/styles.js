@@ -18,6 +18,13 @@ const useStyles = makeStyles({
   CampaignDuration_custom_selector: {
     width: '40%',
   },
+
+  CampaignDuration_button_alignment: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginRight: '10px',
+    marginTop: '6px',
+  },
 });
 
 export { useStyles };

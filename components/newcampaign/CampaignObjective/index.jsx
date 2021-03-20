@@ -3,7 +3,7 @@ import { Grid, FormControl, FormControlLabel, RadioGroup, Radio, Button } from '
 // import styles from './index.module.css';
 import { useStyles } from './styles.js';
 
-const CampaignObjective = props => {
+const CampaignObjective = ({ objective, setCampaignSetupStep, incrementCampaignSetup }) => {
   const classes = useStyles();
 
   const [selectedObjective, setSelectedObjective] = useState('');
@@ -15,11 +15,9 @@ const CampaignObjective = props => {
   };
 
   const handleSubmit = () => {
-    props.objective(selectedObjective);
-    props.setCampaignSetupStep(2);
+    objective(selectedObjective);
+    setCampaignSetupStep(2);
   };
-
-  const handleSelectPreviousStep = () => props.setCampaignSetupStep(0);
 
   return (
     <div>
@@ -83,14 +81,14 @@ const CampaignObjective = props => {
             </FormControl>
           </Grid>
         </Grid>
-        <Grid container direction="row" spacing={1} justify="flex-end">
+        <Grid container direction="row" spacing={1}>
           <Grid item xs={6}>
-            <Button onClick={handleSelectPreviousStep} variant="outlined" color="primary" size="small">
+            <Button onClick={() => setCampaignSetupStep(0)} variant="outlined" color="primary" size="small">
               Previous
             </Button>
           </Grid>
           <Grid item xs={6} className={classes.CampaignObjective_align_right}>
-            <Button type="submit" variant="contained" color="primary" size="small">
+            <Button type="submit" variant="contained" color="primary" size="small" onCli>
               Next
             </Button>
           </Grid>

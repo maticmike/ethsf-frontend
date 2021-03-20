@@ -10,6 +10,11 @@ const useStyles = makeStyles({
   pHeading: {
     fontSize: '20px',
   },
+  CampaignStaking_button_alignment: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginRight: '10px',
+  },
 });
 
 export { useStyles };

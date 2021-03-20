@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormHelperText, InputBase } from '@material-ui/core';
+import { FormHelperText, InputBase, Button } from '@material-ui/core';
 import { setObjectiveName } from '../../../utils/objectiveNames';
 import { useStyles } from './styles.js';
 
@@ -17,10 +17,19 @@ const CampaignStaking = ({ objective }) => {
       <InputBase
         className={classes.input}
         startAdornment="$"
-        placeholder="Payment"
+        placeholder="Total Staked"
         size="large"
         inputProps={{ 'aria-label': 'naked' }}
       />
+      <br />
+      <div className={classes.CampaignStaking_button_alignment}>
+        <Button variant="outlined" color="primary" size="small">
+          Previous
+        </Button>
+        <Button variant="contained" color="primary" size="small">
+          Next
+        </Button>
+      </div>
     </div>
   );
 };

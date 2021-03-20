@@ -25,6 +25,15 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'flex-end',
   },
+
+  CampaignDates_font_size: {
+    fontSize: '18px',
+  },
+
+  CampaignDates_align_buttons: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
 });
 
 export { useStyles };

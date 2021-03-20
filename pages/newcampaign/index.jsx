@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Paper, FormControl, RadioGroup, Radio, FormLabel, FormControlLabel } from '@material-ui/core';
 import styles from './index.module.css';
+import Calendar from 'react-calendar';
 // import { useStyles } from './styles';
 const FindInfluencer = dynamic(() => import('../../components/newcampaign/FindInfluencer'), {
   loading: () => <p>Find Influencer Loading....</p>,
@@ -24,7 +25,7 @@ const CampaignPayment = dynamic(() => import('../../components/newcampaign/Campa
 
 const NewCampaign = () => {
   // const classes = useStyles();
-  const [registrationStep, setRegistrationStep] = useState(5);
+  const [registrationStep, setRegistrationStep] = useState(2);
   const [influencer, setInfluencer] = useState('');
   const [objective, setObjective] = useState('');
   const [objectiveAmount, setObjectiveAmount] = useState(null);
@@ -57,31 +58,36 @@ const NewCampaign = () => {
             <CampaignObjective
               objective={objective => setObjective(objective)}
               setCampaignSetupStep={setCampaignSetupStep}
+              incrementCampaignSetup={setCampaignSetupStep}
             />
           </Paper>
         );
       case 2:
         return (
           <Paper className={styles.NewCampaign_layout_dates} elevation={3}>
-            <CampaignDates objective={objective} />
+            <CampaignDates objective={objective} incrementCampaignSetup={setCampaignSetupStep} />
           </Paper>
         );
       case 3:
         return (
           <Paper className={styles.NewCampaign_layout_duration} elevation={3}>
-            <SimplePostDuration objective={objective} />
+            <SimplePostDuration objective={objective} incrementCampaignSetup={setCampaignSetupStep} />
           </Paper>
         );
       case 4:
         return (
           <Paper className={styles.NewCampaign_layout_staking} elevation={3}>
-            <CampaignStaking objective={objective} />
+            <CampaignStaking objective={objective} incrementCampaignSetup={setCampaignSetupStep} />
           </Paper>
         );
       case 5:
         return (
           <Paper className={styles.NewCampaign_layout_staking} elevation={3}>
-            <CampaignPayment objective="views" objectiveAmount={objectiveAmount}></CampaignPayment>
+            <CampaignPayment
+              objective="views"
+              objectiveAmount={objectiveAmount}
+              incrementCampaignSetup={setCampaignSetupStep}
+            ></CampaignPayment>
           </Paper>
         );
     }

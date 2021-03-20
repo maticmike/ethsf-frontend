@@ -21,6 +21,11 @@ const useStyles = makeStyles({
     fontSize: 'small',
     textDecoration: 'underline',
   },
+
+  CampaignObjective_button_alignment: {
+    display: 'flex',
+    justifyCcontent: 'space-between',
+  },
 });
 
 export { useStyles };

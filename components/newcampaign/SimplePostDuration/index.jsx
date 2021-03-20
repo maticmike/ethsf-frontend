@@ -8,6 +8,7 @@ import {
   Radio,
   RadioGroup,
   Select,
+  Button,
   MenuItem,
 } from '@material-ui/core';
 import { setObjectiveName } from '../../../utils/objectiveNames';
@@ -15,7 +16,7 @@ import { CalendarViewDaySharp } from '@material-ui/icons';
 // import styles from './index.module.css';
 import { useStyles } from './styles';
 
-const SimplePostDuration = props => {
+const SimplePostDuration = ({ objective }) => {
   const classes = useStyles();
   const [selectedDuration, setSelectedDuration] = useState('');
   const [showOtherOptions, setShowOtherOptions] = useState(false);
@@ -27,7 +28,7 @@ const SimplePostDuration = props => {
     <>
       <Grid container direction="row" className={classes.CampaignDuration_custom_font}>
         <Grid item xs={6}>
-          <h2>{setObjectiveName(props.objective)} Objective</h2>
+          <h2>{setObjectiveName(objective)} Objective</h2>
           <p>2. Post Duration</p>
           <FormHelperText className={classes.CampaignDuration_helper_font}>
             Select the range of dates which you want the campaign to last for
@@ -93,6 +94,14 @@ const SimplePostDuration = props => {
           <FormHelperText>Payment will be made after the selected time period has passed</FormHelperText>
         </Grid>
       </Grid>
+      <div className={classes.CampaignDuration_button_alignment}>
+        <Button variant="outlined" color="primary" size="small">
+          Previous
+        </Button>
+        <Button variant="contained" color="primary" size="small">
+          Next
+        </Button>
+      </div>
     </>
   );
 };
