@@ -16,7 +16,7 @@ const CampaignDates = dynamic(() => import('../../components/newcampaign/Campaig
 const SimplePostDuration = dynamic(() => import('../../components/newcampaign/SimplePostDuration'), {
   loading: () => <p>Post Duration Loading....</p>,
 });
-const CampaignStaking = dynamic(() => import('../../components/newcampaign/CampaignStaking'), {
+const SimplePostStaking = dynamic(() => import('../../components/newcampaign/CampaignStaking'), {
   loading: () => <p>Campaign Staking Loading...</p>,
 });
 const CampaignPayment = dynamic(() => import('../../components/newcampaign/CampaignPayment'), {
@@ -30,6 +30,8 @@ const NewCampaign = () => {
   const [objective, setObjective] = useState('');
   const [date, setDate] = useState(null);
   const [objectiveAmount, setObjectiveAmount] = useState(null);
+  const [simplePostDuration, setSimplePostDuration] = useState(null);
+  const [stakedMoney, setStakedMoney] = useState(null);
   const findInfluencer = influencer => {
     try {
       //search for influencer from api or db
@@ -39,8 +41,9 @@ const NewCampaign = () => {
     }
   };
 
-  const setCampaignSetupStep = registrationStep => setRegistrationStep(registrationStep);
-  const setCampaignSimpleDate = date => setDate(date);
+  const campaignSetupStep = registrationStep => setRegistrationStep(registrationStep);
+  const campaignSimpleDate = date => setDate(date);
+  const depositToEscrow = deposit => setStakedMoney(deposit);
   //TODO setCampaignRangeDate = () => {}
 
   const renderSingleRegistrationComponent = () => {
@@ -51,7 +54,7 @@ const NewCampaign = () => {
             <FindInfluencer
               influencer={influencer}
               findInfluencer={findInfluencer}
-              incrementCampaignSetup={setCampaignSetupStep}
+              incrementCampaignSetup={campaignSetupStep}
             />
           </Paper>
         );
@@ -60,7 +63,7 @@ const NewCampaign = () => {
           <Paper className={styles.NewCampaign_layout_objective} elevation={3}>
             <CampaignObjective
               objective={objective => setObjective(objective)}
-              setCampaignSetupStep={setCampaignSetupStep}
+              setCampaignSetupStep={campaignSetupStep}
             />
           </Paper>
         );
@@ -69,21 +72,30 @@ const NewCampaign = () => {
           <Paper className={styles.NewCampaign_layout_dates} elevation={3}>
             <CampaignDates
               objective={objective}
-              setRootSimpleDate={setCampaignSimpleDate}
-              setCampaignSetupStep={setCampaignSetupStep}
+              setRootSimpleDate={campaignSimpleDate}
+              setCampaignSetupStep={campaignSetupStep}
             />
           </Paper>
         );
+      //Duration of post on page only for simple posts
       case 3:
         return (
           <Paper className={styles.NewCampaign_layout_duration} elevation={3}>
-            <SimplePostDuration objective={objective} dsetCampaignSetupStep={setCampaignSetupStep} />
+            <SimplePostDuration
+              objective={objective}
+              setPostDuration={duration => setSimplePostDuration(duration)}
+              setCampaignSetupStep={campaignSetupStep}
+            />
           </Paper>
         );
       case 4:
         return (
           <Paper className={styles.NewCampaign_layout_staking} elevation={3}>
-            <CampaignStaking objective={objective} setCampaignSetupStep={setCampaignSetupStep} />
+            <SimplePostStaking
+              objective={objective}
+              setCampaignSetupStep={campaignSetupStep}
+              depositToEscrow={depositToEscrow}
+            />
           </Paper>
         );
       case 5:
@@ -92,7 +104,7 @@ const NewCampaign = () => {
             <CampaignPayment
               objective="views"
               objectiveAmount={objectiveAmount}
-              setCampaignSetupStep={setCampaignSetupStep}
+              setCampaignSetupStep={campaignSetupStep}
             ></CampaignPayment>
           </Paper>
         );

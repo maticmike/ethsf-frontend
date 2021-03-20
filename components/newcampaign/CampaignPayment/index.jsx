@@ -6,9 +6,10 @@ import { useStyles } from './styles.js';
 
 const CampaignPayment = ({ objective, objectiveAmount }) => {
   const classes = useStyles();
-  const [jackpot, setJackpot] = useState(false);
 
   const getHeading = () => (objective === 'jackpot' ? 'Jackpot' : 'Incremental');
+
+  const handleDeposit = deposit => console.log(deposit);
 
   return (
     <div className={classes.font}>
@@ -35,7 +36,7 @@ const CampaignPayment = ({ objective, objectiveAmount }) => {
         <Button variant="outlined" color="primary" size="small">
           Previous
         </Button>
-        <Button variant="contained" color="primary" size="small">
+        <Button variant="contained" color="primary" size="small" onClick={handleDeposit}>
           Next
         </Button>
       </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, FormControl, FormControlLabel, RadioGroup, Radio, Button } from '@material-ui/core';
+import { Grid, FormControl, FormControlLabel, FormHelperText, RadioGroup, Radio, Button } from '@material-ui/core';
 // import styles from './index.module.css';
 import { useStyles } from './styles.js';
 
@@ -20,13 +20,11 @@ const CampaignObjective = ({ objective, setCampaignSetupStep }) => {
   };
 
   return (
-    <div>
-      <p className={classes.CampaignObjective_custom_font}>
+    <div className={classes.CampaignObjective_custom_font}>
+      <p>
         <h2>Choose Campaign Objective</h2>
       </p>
-      <p className={classes.CampaignObjective_custom_font_faq}>
-        <strong>FAQ</strong>
-      </p>
+      <p>1. Campaign Objective</p>
       <form onSubmit={handleSubmit}>
         <Grid container direction="row" spacing={1}>
           <Grid item xs={4}>

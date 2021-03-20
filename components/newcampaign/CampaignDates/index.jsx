@@ -15,14 +15,14 @@ const CampaignDates = ({ objective, setRootSimpleDate, setCampaignSetupStep }) =
   const handleDateChange = date => setSimpleDate(date);
   const selectDate = () => {
     setRootSimpleDate(simpleDate);
-    setCampaignSetupStep(3);
+    objective === 'singlePost' ? setCampaignSetupStep(3) : setCampaignSetupStep(4);
   };
   return (
     <div className={classes.CampaignDates_layout}>
       <Grid container direction="row">
         <Grid item xs={6}>
           <h2 className={classes.CampaignDates_custom_font}>{setObjectiveName(objective)} Objective</h2>
-          <p className={classes.CampaignDates_heading_font_size}>1. {getHeading()}</p>
+          <p className={classes.CampaignDates_heading_font_size}>2. {getHeading()}</p>
           <p className={classes.CampaignDates_helper_font}>
             Select the range of dates which you want the campaign to last for
           </p>

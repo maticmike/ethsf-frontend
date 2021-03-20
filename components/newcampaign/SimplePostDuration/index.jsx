@@ -16,7 +16,7 @@ import { CalendarViewDaySharp } from '@material-ui/icons';
 // import styles from './index.module.css';
 import { useStyles } from './styles';
 
-const SimplePostDuration = ({ objective }) => {
+const SimplePostDuration = ({ objective, setCampaignSetupStep, setPostDuration }) => {
   const classes = useStyles();
   const [selectedDuration, setSelectedDuration] = useState('');
   const [showOtherOptions, setShowOtherOptions] = useState(false);
@@ -24,12 +24,18 @@ const SimplePostDuration = ({ objective }) => {
   const [alternativeDurationUnit, setAlternativeDurationUnit] = useState('');
 
   const alternativeDurationOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+  const handlePostDuration = () => {
+    setPostDuration(selectedDuration === '' ? alternativeDuration : selectedDuration);
+    objective === 'singlePost' ? setCampaignSetupStep(4) : setCampaignSetupStep(5);
+  };
+
   return (
     <>
       <Grid container direction="row" className={classes.CampaignDuration_custom_font}>
         <Grid item xs={6}>
           <h2>{setObjectiveName(objective)} Objective</h2>
-          <p>2. Post Duration</p>
+          <p>3. Post Duration</p>
           <FormHelperText className={classes.CampaignDuration_helper_font}>
             Select the range of dates which you want the campaign to last for
           </FormHelperText>
@@ -39,7 +45,6 @@ const SimplePostDuration = ({ objective }) => {
             <FormLabel className={classes.CampaignDuration_label_center}>Post Duration</FormLabel>
             <RadioGroup
               component="select-campaign-checkboxes"
-              //   className={styles.CampaignDuration_checkbox_center}
               value={selectedDuration}
               onChange={e => setSelectedDuration(e.target.value)}
             >
@@ -95,10 +100,10 @@ const SimplePostDuration = ({ objective }) => {
         </Grid>
       </Grid>
       <div className={classes.CampaignDuration_button_alignment}>
-        <Button variant="outlined" color="primary" size="small">
+        <Button variant="outlined" color="primary" size="small" onClick={() => setCampaignSetupStep(2)}>
           Previous
         </Button>
-        <Button variant="contained" color="primary" size="small">
+        <Button variant="contained" color="primary" size="small" onClick={handlePostDuration}>
           Next
         </Button>
       </div>

@@ -1,13 +1,13 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
-  FindInfluencer_box_positioning: {
+  SimplePost_box_positioning: {
     display: 'flex',
     justifyContent: 'center',
     marginTop: '15%',
   },
 
-  FindInfluencer_layout: {
+  SimplePost_layout: {
     width: '450px',
     height: '300px',
     borderRadius: '25px',
@@ -16,17 +16,17 @@ const useStyles = makeStyles({
     paddingTop: '10%',
   },
 
-  FindInfluencer_search: {
+  SimplePost_search: {
     width: '280px',
     borderRadius: '25px',
   },
 
-  FindInfluencer_error_text: {
+  SimplePost_error_text: {
     color: 'red',
     fontFamily: 'Arial, Helvetica, sans-serif',
   },
 
-  FindInfluencer_layout: {
+  SimplePost_layout: {
     width: '450px',
     height: '350px',
     borderRadius: '25px',
