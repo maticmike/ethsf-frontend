@@ -7,8 +7,11 @@ const useStyles = makeStyles({
   font: {
     fontFamily: 'Arial, Helvetica, sans-serif',
   },
-  pHeading: {
+  p_heading: {
     fontSize: '20px',
+  },
+  align_inputs: {
+    display: 'flex',
   },
 });
 

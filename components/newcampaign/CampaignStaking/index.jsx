@@ -13,7 +13,7 @@ const CampaignStaking = ({ objective }) => {
       <h1>{setObjectiveName(objective)} Objective</h1>
       <p className={classes.pHeading}>2. {getHeading()}</p>
       <FormHelperText>Enter the amount of money you want to be available for the influencer to earn.</FormHelperText>
-      <p>Amount to deposit for influencer</p>
+      <p>Amount to deposit for Influencer</p>
       <InputBase
         className={classes.input}
         startAdornment="$"

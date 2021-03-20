@@ -27,7 +27,7 @@ const NewCampaign = () => {
   const [registrationStep, setRegistrationStep] = useState(5);
   const [influencer, setInfluencer] = useState('');
   const [objective, setObjective] = useState('');
-
+  const [objectiveAmount, setObjectiveAmount] = useState(null);
   const findInfluencer = influencer => {
     try {
       //search for influencer from api or db
@@ -81,7 +81,7 @@ const NewCampaign = () => {
       case 5:
         return (
           <Paper className={styles.NewCampaign_layout_staking} elevation={3}>
-            <CampaignPayment objective={objective}></CampaignPayment>
+            <CampaignPayment objective={objective} objectiveAmount={objectiveAmount}></CampaignPayment>
           </Paper>
         );
     }
