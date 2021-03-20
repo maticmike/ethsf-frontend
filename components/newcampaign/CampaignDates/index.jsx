@@ -9,13 +9,13 @@ import 'react-calendar/dist/Calendar.css';
 
 const CampaignDates = ({ objective, setRootSimpleDate, setCampaignSetupStep }) => {
   const classes = useStyles();
-  const [simpleDate, setSimpleDate] = useState(new Date());
+  const [simpleDate, setSimpleDate] = useState(null);
 
   const getHeading = () => (objective === 'singlePost' ? 'Post Date And Time' : 'Campaign Length');
   const handleDateChange = date => setSimpleDate(date);
   const selectDate = () => {
-    setRootSimpleDate(date);
-    setCampaignSetupStep(2);
+    setRootSimpleDate(simpleDate);
+    setCampaignSetupStep(3);
   };
   return (
     <div className={classes.CampaignDates_layout}>
@@ -31,7 +31,7 @@ const CampaignDates = ({ objective, setRootSimpleDate, setCampaignSetupStep }) =
           <Calendar
             onChange={handleDateChange}
             minDate={new Date()}
-            selectRange={objective != 'ppp' ? true : false}
+            selectRange={objective != 'singlePost' ? true : false}
             value={simpleDate}
           />
         </Grid>
@@ -41,9 +41,11 @@ const CampaignDates = ({ objective, setRootSimpleDate, setCampaignSetupStep }) =
         <Button onClick={() => setCampaignSetupStep(1)} variant="outlined" color="primary" size="small">
           Previous
         </Button>
-        <Button type="submit" variant="contained" color="primary" size="small" onClick={selectDate}>
-          Next
-        </Button>
+        {simpleDate ? (
+          <Button type="submit" variant="contained" color="primary" size="small" onClick={selectDate}>
+            Next
+          </Button>
+        ) : null}
       </div>
     </div>
   );
