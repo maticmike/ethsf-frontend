@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
   input: {
     fontSize: '34px',
+    width: '80%',
   },
   font: {
     fontFamily: 'Arial, Helvetica, sans-serif',
