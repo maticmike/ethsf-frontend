@@ -27,16 +27,14 @@ const CampaignStaking = ({ objective, setCampaignSetupStep, depositToEscrow }) =
       <p className={classes.pHeading}>3. {getHeading()}</p>
       <FormHelperText>Enter the amount of money you want to be available for the influencer to earn.</FormHelperText>
       <p>Amount to deposit for Influencer</p>
-      {/* <InputBase
+      <NumberFormat
         className={classes.input}
-        startAdornment="$"
         placeholder="Total Staked"
-        size="large"
-        inputProps={{ 'aria-label': 'naked' }}
+        thousandSeparator={true}
+        prefix={'$'}
         onChange={e => setStakedAmount(e.target.value)}
-      /> */}
-      <NumberFormat className={classes.input} thousandSeparator={true} prefix={'$'} 8/>
-
+      />
+      <br />
       <br />
       <div className={classes.CampaignStaking_button_alignment}>
         <Button

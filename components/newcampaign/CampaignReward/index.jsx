@@ -25,6 +25,11 @@ const CampaignReward = ({ objective, objectiveAmount, setCampaignSetupStep }) =>
       </FormHelperText>
       <div className={classes.align_inputs}>
         <div>
+          {jackpot ? <p>Jackpot Payment:</p> : <p>Incremental Payment: </p>}
+          <NumberFormat className={classes.input} thousandSeparator={true} prefix={'$'} />
+          &nbsp;&nbsp;&nbsp;&nbsp;For Each
+        </div>
+        <div className={classes.CampaignReward_shift_objective_input}>
           {objective === 'jackpot' ? (
             <p>{objective.charAt(0).toUpperCase() + objective.slice(1)} Jackpot Objective:</p>
           ) : (
@@ -32,10 +37,6 @@ const CampaignReward = ({ objective, objectiveAmount, setCampaignSetupStep }) =>
           )}
 
           <NumberFormat className={classes.input} thousandSeparator={true} />
-        </div>
-        <div>
-          {jackpot ? <p>Jackpot Payment:</p> : <p>Incremental Payment: </p>}
-          <NumberFormat className={classes.input} thousandSeparator={true} prefix={'$'} />
         </div>
       </div>
       <br />

@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
   input: {
     fontSize: '34px',
-    width: '80%',
+    width: '75%',
   },
   font: {
     fontFamily: 'Arial, Helvetica, sans-serif',
@@ -18,6 +18,9 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
     marginRight: '10px',
+  },
+  CampaignReward_shift_objective_input: {
+    textAlign: 'center',
   },
 });
 
