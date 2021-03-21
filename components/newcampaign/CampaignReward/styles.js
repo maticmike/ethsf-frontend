@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   align_inputs: {
     display: 'flex',
   },
-  CampaignPayment_button_alignment: {
+  CampaignReward_button_alignment: {
     display: 'flex',
     justifyContent: 'space-between',
     marginRight: '10px',

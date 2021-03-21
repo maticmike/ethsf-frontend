@@ -38,9 +38,11 @@ const CampaignStaking = ({ objective, setCampaignSetupStep, depositToEscrow }) =
         >
           Previous
         </Button>
-        <Button variant="contained" color="primary" size="small" onClick={stakeDeposit}>
-          Next
-        </Button>
+        {stakedAmount ? (
+          <Button variant="contained" color="primary" size="small" onClick={stakeDeposit}>
+            Next
+          </Button>
+        ) : null}
       </div>
     </div>
   );

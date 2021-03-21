@@ -4,7 +4,7 @@ import { FormHelperText, Button } from '@material-ui/core';
 import { setObjectiveName } from '../../../utils/objectiveNames';
 import { useStyles } from './styles.js';
 
-const CampaignPayment = ({ objective, objectiveAmount }) => {
+const CampaignReward = ({ objective, objectiveAmount }) => {
   const classes = useStyles();
 
   const getHeading = () => (objective === 'jackpot' ? 'Jackpot' : 'Incremental');
@@ -32,7 +32,7 @@ const CampaignPayment = ({ objective, objectiveAmount }) => {
         </div>
       </div>
       <br />
-      <div className={classes.CampaignPayment_button_alignment}>
+      <div className={classes.CampaignReward_button_alignment}>
         <Button variant="outlined" color="primary" size="small">
           Previous
         </Button>
@@ -44,4 +44,4 @@ const CampaignPayment = ({ objective, objectiveAmount }) => {
   );
 };
 
-export default CampaignPayment;
+export default CampaignReward;

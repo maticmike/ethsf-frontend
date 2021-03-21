@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { OutlinedInput, Grid, Button } from '@material-ui/core';
 import CheckCircle from '@material-ui/icons/Done';
 import Image from 'next/image';
-// import styles from './index.module.css';
 import { useStyles } from './styles';
 const FindInfluencer = ({ findInfluencer, setCampaignSetupStep, influencer }) => {
   const classes = useStyles();

@@ -14,7 +14,7 @@ const CampaignObjective = ({ objective, setCampaignSetupStep }) => {
     setError(false);
   };
 
-  const handleSubmit = () => {
+  const submitCampaignObjective = () => {
     objective(selectedObjective);
     setCampaignSetupStep(2);
   };
@@ -25,7 +25,7 @@ const CampaignObjective = ({ objective, setCampaignSetupStep }) => {
         <h2>Choose Campaign Objective</h2>
       </p>
       <p>1. Campaign Objective</p>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={submitCampaignObjective}>
         <Grid container direction="row" spacing={1}>
           <Grid item xs={4}>
             <p>
@@ -86,9 +86,11 @@ const CampaignObjective = ({ objective, setCampaignSetupStep }) => {
             </Button>
           </Grid>
           <Grid item xs={6} className={classes.CampaignObjective_align_right}>
-            <Button type="submit" variant="contained" color="primary" size="small">
-              Next
-            </Button>
+            {selectedObjective ? (
+              <Button type="submit" variant="contained" color="primary" size="small">
+                Next
+              </Button>
+            ) : null}
           </Grid>
         </Grid>
       </form>

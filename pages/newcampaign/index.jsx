@@ -19,7 +19,7 @@ const SimplePostDuration = dynamic(() => import('../../components/newcampaign/Si
 const SimplePostStaking = dynamic(() => import('../../components/newcampaign/CampaignStaking'), {
   loading: () => <p>Campaign Staking Loading...</p>,
 });
-const CampaignPayment = dynamic(() => import('../../components/newcampaign/CampaignPayment'), {
+const CampaignReward = dynamic(() => import('../../components/newcampaign/CampaignReward'), {
   loading: () => <p>Campaign Payment Loading...</p>,
 });
 
@@ -101,11 +101,11 @@ const NewCampaign = () => {
       case 5:
         return (
           <Paper className={styles.NewCampaign_layout_staking} elevation={3}>
-            <CampaignPayment
+            <CampaignReward
               objective="views"
               objectiveAmount={objectiveAmount}
               setCampaignSetupStep={campaignSetupStep}
-            ></CampaignPayment>
+            ></CampaignReward>
           </Paper>
         );
     }

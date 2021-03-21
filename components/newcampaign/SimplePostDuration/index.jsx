@@ -12,8 +12,6 @@ import {
   MenuItem,
 } from '@material-ui/core';
 import { setObjectiveName } from '../../../utils/objectiveNames';
-import { CalendarViewDaySharp } from '@material-ui/icons';
-// import styles from './index.module.css';
 import { useStyles } from './styles';
 
 const SimplePostDuration = ({ objective, setCampaignSetupStep, setPostDuration }) => {
@@ -26,8 +24,12 @@ const SimplePostDuration = ({ objective, setCampaignSetupStep, setPostDuration }
   const alternativeDurationOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
   const handlePostDuration = () => {
-    setPostDuration(selectedDuration === '' ? alternativeDuration : selectedDuration);
-    objective === 'singlePost' ? setCampaignSetupStep(4) : setCampaignSetupStep(5);
+    if (selectedDuration === 'other' && alternativeDuration === '') {
+      alert('Please select post duration from dropdown');
+    } else {
+      setPostDuration(selectedDuration === '' ? alternativeDuration : selectedDuration);
+      objective === 'singlePost' ? setCampaignSetupStep(4) : setCampaignSetupStep(5);
+    }
   };
 
   return (
@@ -103,9 +105,11 @@ const SimplePostDuration = ({ objective, setCampaignSetupStep, setPostDuration }
         <Button variant="outlined" color="primary" size="small" onClick={() => setCampaignSetupStep(2)}>
           Previous
         </Button>
-        <Button variant="contained" color="primary" size="small" onClick={handlePostDuration}>
-          Next
-        </Button>
+        {selectedDuration ? (
+          <Button variant="contained" color="primary" size="small" onClick={handlePostDuration}>
+            Next
+          </Button>
+        ) : null}
       </div>
     </>
   );

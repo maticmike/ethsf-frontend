@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import MomentUtils from '@date-io/moment';
 import { Grid, Button } from '@material-ui/core';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 import { setObjectiveName } from '../../../utils/objectiveNames';
 import { useStyles } from './styles';
-import Calendar from 'react-calendar';
-import moment from 'moment';
-import 'react-calendar/dist/Calendar.css';
 
 const CampaignDates = ({ objective, setRootSimpleDate, setCampaignSetupStep }) => {
   const classes = useStyles();
