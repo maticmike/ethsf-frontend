@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import NumberFormat from 'react-number-format';
 import { FormHelperText, Button } from '@material-ui/core';
 import { setObjectiveName } from '../../../utils/objectiveNames';
@@ -6,14 +6,27 @@ import { useStyles } from './styles.js';
 
 const CampaignReward = ({ objective, objectiveAmount, setCampaignSetupStep }) => {
   const classes = useStyles();
-  const [jackpot, setJackpot] = useState(false);
-  useEffect(() => {
-    setJackpot(objective === 'jackpot' ? true : false);
-  }, []);
+  const [jackpot, setJackpot] = useState(true);
 
   const getHeading = () => (jackpot ? 'Jackpot' : 'Incremental');
 
-  const handleDeposit = deposit => console.log(deposit);
+  const handlePrevious = () => {
+    if (!jackpot) {
+      setJackpot(true);
+    } else {
+      setCampaignSetupStep(4);
+    }
+  };
+
+  const handleDeposit = deposit => {
+    console.log(deposit);
+    if (!jackpot) {
+      console.log('incremental value');
+    } else {
+      console.log('jackpot value');
+      setJackpot(false);
+    }
+  };
 
   return (
     <div className={classes.font}>
@@ -30,7 +43,7 @@ const CampaignReward = ({ objective, objectiveAmount, setCampaignSetupStep }) =>
           &nbsp;&nbsp;&nbsp;&nbsp;For Each
         </div>
         <div className={classes.CampaignReward_shift_objective_input}>
-          {objective === 'jackpot' ? (
+          {jackpot ? (
             <p>{objective.charAt(0).toUpperCase() + objective.slice(1)} Jackpot Objective:</p>
           ) : (
             <p>{objective.charAt(0).toUpperCase() + objective.slice(1)} Incremental Objective:</p>
@@ -41,11 +54,11 @@ const CampaignReward = ({ objective, objectiveAmount, setCampaignSetupStep }) =>
       </div>
       <br />
       <div className={classes.CampaignReward_button_alignment}>
-        <Button variant="outlined" color="primary" size="small" onClick={() => setCampaignSetupStep(4)}>
+        <Button variant="outlined" color="primary" size="small" onClick={handlePrevious}>
           Previous
         </Button>
         <Button variant="contained" color="primary" size="small" onClick={handleDeposit}>
-          Next
+          {jackpot ? 'Next' : 'Finish'}
         </Button>
       </div>
     </div>
