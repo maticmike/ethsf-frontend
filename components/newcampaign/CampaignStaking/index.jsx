@@ -22,13 +22,13 @@ const CampaignStaking = ({ objective, setCampaignSetupStep, depositToEscrow }) =
   };
 
   return (
-    <div className={classes.font}>
+    <div className={classes.CampaignStaking_font}>
       <h1>{setObjectiveName(objective)} Objective</h1>
-      <p className={classes.pHeading}>3. {getHeading()}</p>
+      <p className={classes.CampaignStaking_heading}>3. {getHeading()}</p>
       <FormHelperText>Enter the amount of money you want to be available for the influencer to earn.</FormHelperText>
       <p>Amount to deposit for Influencer</p>
       <NumberFormat
-        className={classes.input}
+        className={classes.CampaignStaking_input}
         placeholder="Total Staked"
         thousandSeparator={true}
         prefix={'$'}

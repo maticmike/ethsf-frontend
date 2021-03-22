@@ -29,17 +29,17 @@ const CampaignReward = ({ objective, objectiveAmount, setCampaignSetupStep }) =>
   };
 
   return (
-    <div className={classes.font}>
+    <div className={classes.CampaignReward_font}>
       <h1>{setObjectiveName(objective)} Objective</h1>
-      <p className={classes.p_heading}>5. {getHeading()} Payment</p>
+      <p className={classes.CampaignReward_p_heading}>5. {getHeading()} Payment</p>
       <FormHelperText>
         Enter the conditions for influencer to earn an incremental payment as well as the reward for completing the
         objective
       </FormHelperText>
-      <div className={classes.align_inputs}>
+      <div className={classes.CampaignReward_align_inputs}>
         <div>
           {jackpot ? <p>Jackpot Payment:</p> : <p>Incremental Payment: </p>}
-          <NumberFormat className={classes.input} thousandSeparator={true} prefix={'$'} />
+          <NumberFormat className={classes.CampaignReward_input} thousandSeparator={true} prefix={'$'} />
           &nbsp;&nbsp;&nbsp;&nbsp;For Each
         </div>
         <div className={classes.CampaignReward_shift_objective_input}>
@@ -49,7 +49,7 @@ const CampaignReward = ({ objective, objectiveAmount, setCampaignSetupStep }) =>
             <p>{objective.charAt(0).toUpperCase() + objective.slice(1)} Incremental Objective:</p>
           )}
 
-          <NumberFormat className={classes.input} thousandSeparator={true} />
+          <NumberFormat className={classes.CampaignReward_input} thousandSeparator={true} />
         </div>
       </div>
       <br />

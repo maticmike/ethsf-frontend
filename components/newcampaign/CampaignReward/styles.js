@@ -1,17 +1,17 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
-  input: {
+  CampaignReward_input: {
     fontSize: '34px',
     width: '75%',
   },
-  font: {
+  CampaignReward_font: {
     fontFamily: 'Arial, Helvetica, sans-serif',
   },
-  p_heading: {
+  CampaignReward_p_heading: {
     fontSize: '20px',
   },
-  align_inputs: {
+  CampaignReward_align_inputs: {
     display: 'flex',
   },
   CampaignReward_button_alignment: {

@@ -1,14 +1,14 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
-  input: {
+  CampaignStaking_input: {
     fontSize: '34px',
     width: '80%',
   },
-  font: {
+  CampaignStaking_font: {
     fontFamily: 'Arial, Helvetica, sans-serif',
   },
-  pHeading: {
+  CampaignStaking_heading: {
     fontSize: '20px',
   },
   CampaignStaking_button_alignment: {

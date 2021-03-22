@@ -34,17 +34,17 @@ const SimplePostDuration = ({ objective, setCampaignSetupStep, setPostDuration }
 
   return (
     <>
-      <Grid container direction="row" className={classes.CampaignDuration_custom_font}>
+      <Grid container direction="row" className={classes.SimplePostDuration_custom_font}>
         <Grid item xs={6}>
           <h2>{setObjectiveName(objective)} Objective</h2>
           <p>3. Post Duration</p>
-          <FormHelperText className={classes.CampaignDuration_helper_font}>
+          <FormHelperText className={classes.SimplePostDuration_helper_font}>
             Select the range of dates which you want the campaign to last for
           </FormHelperText>
         </Grid>
         <Grid item xs={6}>
           <FormControl component="fieldset">
-            <FormLabel className={classes.CampaignDuration_label_center}>Post Duration</FormLabel>
+            <FormLabel className={classes.SimplePostDuration_label_center}>Post Duration</FormLabel>
             <RadioGroup
               component="select-campaign-checkboxes"
               value={selectedDuration}
@@ -68,7 +68,7 @@ const SimplePostDuration = ({ objective, setCampaignSetupStep, setPostDuration }
                 id="alternative-duration-options"
                 value={alternativeDuration}
                 onChange={e => setAlternativeDuration(e.target.value)}
-                className={classes.CampaignDuration_custom_selector}
+                className={classes.SimplePostDuration_custom_selector}
               >
                 {alternativeDurationOptions.map((durationOption, index) => {
                   return (
@@ -84,7 +84,7 @@ const SimplePostDuration = ({ objective, setCampaignSetupStep, setPostDuration }
                 id="alternative-duration-units"
                 value={alternativeDurationUnit}
                 onChange={e => setAlternativeDurationUnit(e.target.value)}
-                className={classes.CampaignDuration_custom_selector}
+                className={classes.SimplePostDuration_custom_selector}
               >
                 <MenuItem key="hours" value={'hours'}>
                   Hours
@@ -101,7 +101,7 @@ const SimplePostDuration = ({ objective, setCampaignSetupStep, setPostDuration }
           <FormHelperText>Payment will be made after the selected time period has passed</FormHelperText>
         </Grid>
       </Grid>
-      <div className={classes.CampaignDuration_button_alignment}>
+      <div className={classes.SimplePostDuration_button_alignment}>
         <Button variant="outlined" color="primary" size="small" onClick={() => setCampaignSetupStep(2)}>
           Previous
         </Button>
