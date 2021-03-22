@@ -52,7 +52,7 @@ const CampaignStaking = ({ objective, setCampaignSetupStep, depositToEscrow }) =
         ) : null}
         {stakedAmount && objective === 'singlePost' ? (
           <Button variant="contained" color="primary" size="small" onClick={finishAndDeposit}>
-            Review Post Terms
+            Finish
           </Button>
         ) : null}
       </div>

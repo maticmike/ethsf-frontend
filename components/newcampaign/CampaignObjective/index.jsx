@@ -21,9 +21,7 @@ const CampaignObjective = ({ objective, setCampaignSetupStep }) => {
 
   return (
     <div className={classes.CampaignObjective_custom_font}>
-      <p>
-        <h2>Choose Campaign Objective</h2>
-      </p>
+      <h2>Choose Campaign Objective</h2>
       <p>1. Campaign Objective</p>
       <form onSubmit={submitCampaignObjective}>
         <Grid container direction="row" spacing={1}>
