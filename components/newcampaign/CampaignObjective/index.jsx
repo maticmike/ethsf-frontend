@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, FormControl, FormControlLabel, FormHelperText, RadioGroup, Radio, Button } from '@material-ui/core';
+import { Grid, FormControl, FormControlLabel, RadioGroup, Radio, Button } from '@material-ui/core';
 import { useStyles } from './styles.js';
 
 const CampaignObjective = ({ objective, setCampaignSetupStep }) => {

@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
-import { Paper, FormControl, RadioGroup, Radio, FormLabel, FormControlLabel } from '@material-ui/core';
-import styles from './index.module.css';
-import Calendar from 'react-calendar';
-// import { useStyles } from './styles';
+import { Paper } from '@material-ui/core';
+import { useStyles } from '../../styles/stylesNewCampaign';
 const FindInfluencer = dynamic(() => import('../../components/newcampaign/FindInfluencer'), {
   loading: () => <p>Find Influencer Loading....</p>,
 });
@@ -24,12 +22,12 @@ const CampaignReward = dynamic(() => import('../../components/newcampaign/Campai
 });
 
 const NewCampaign = () => {
-  // const classes = useStyles();
+  const classes = useStyles();
   const [registrationStep, setRegistrationStep] = useState(0);
   const [influencer, setInfluencer] = useState('');
-  const [objective, setObjective] = useState('');
+  const [objective, setObjective] = useState(''); //views
   const [date, setDate] = useState(null);
-  const [objectiveAmount, setObjectiveAmount] = useState(null);
+  const [objectiveAmount, setObjectiveAmount] = useState(null); //5000 views
   const [simplePostDuration, setSimplePostDuration] = useState(null);
   const [stakedMoney, setStakedMoney] = useState(null);
   const findInfluencer = influencer => {
@@ -44,13 +42,12 @@ const NewCampaign = () => {
   const campaignSetupStep = registrationStep => setRegistrationStep(registrationStep);
   const campaignSimpleDate = date => setDate(date);
   const depositToEscrow = deposit => setStakedMoney(deposit);
-  //TODO setCampaignRangeDate = () => {}
 
   const renderSingleRegistrationComponent = () => {
     switch (registrationStep) {
       case 0:
         return (
-          <Paper className={styles.NewCampaign_layout_find} elevation={3}>
+          <Paper className={classes.NewCampaign_layout_find} elevation={3}>
             <FindInfluencer
               influencer={influencer}
               findInfluencer={findInfluencer}
@@ -60,7 +57,7 @@ const NewCampaign = () => {
         );
       case 1:
         return (
-          <Paper className={styles.NewCampaign_layout_objective} elevation={3}>
+          <Paper className={classes.NewCampaign_layout_objective} elevation={3}>
             <CampaignObjective
               objective={objective => setObjective(objective)}
               setCampaignSetupStep={campaignSetupStep}
@@ -69,7 +66,7 @@ const NewCampaign = () => {
         );
       case 2:
         return (
-          <Paper className={styles.NewCampaign_layout_dates} elevation={3}>
+          <Paper className={classes.NewCampaign_layout_dates} elevation={3}>
             <CampaignDates
               objective={objective}
               setRootSimpleDate={campaignSimpleDate}
@@ -80,7 +77,7 @@ const NewCampaign = () => {
       //Duration of post on page only for simple posts
       case 3:
         return (
-          <Paper className={styles.NewCampaign_layout_duration} elevation={3}>
+          <Paper className={classes.NewCampaign_layout_duration} elevation={3}>
             <SimplePostDuration
               objective={objective}
               setPostDuration={duration => setSimplePostDuration(duration)}
@@ -90,7 +87,7 @@ const NewCampaign = () => {
         );
       case 4:
         return (
-          <Paper className={styles.NewCampaign_layout_staking} elevation={3}>
+          <Paper className={classes.NewCampaign_layout_staking} elevation={3}>
             <CampaignStaking
               objective={objective}
               setCampaignSetupStep={campaignSetupStep}
@@ -100,7 +97,7 @@ const NewCampaign = () => {
         );
       case 5:
         return (
-          <Paper className={styles.NewCampaign_layout_staking} elevation={3}>
+          <Paper className={classes.NewCampaign_layout_staking} elevation={3}>
             <CampaignReward
               objective="views"
               objectiveAmount={objectiveAmount}
@@ -110,7 +107,7 @@ const NewCampaign = () => {
         );
     }
   };
-  return <div className={styles.NewCampaign_box_positioning}>{renderSingleRegistrationComponent()}</div>;
+  return <div className={classes.NewCampaign_box_positioning}>{renderSingleRegistrationComponent()}</div>;
 };
 
 export default NewCampaign;
