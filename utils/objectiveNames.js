@@ -8,7 +8,7 @@ import {
   WEB_VISITS,
   ADD_TO_CART,
   SALES,
-} from '../constants/FamepayConstants';
+} from '../constants/CampaignObjectives';
 
 export const setObjectiveName = name => {
   switch (name) {
