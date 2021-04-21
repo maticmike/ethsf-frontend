@@ -11,7 +11,7 @@ import {
   Button,
   MenuItem,
 } from '@material-ui/core';
-import { setObjectiveName } from '../../../utils/objectiveNames';
+import { setObjectiveName } from '../../../utils/ObjectiveNames';
 import { useStyles } from './styles';
 
 const SimplePostDuration = ({ objective, setCampaignSetupStep, setPostDuration }) => {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Grid, Button } from '@material-ui/core';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { setObjectiveName } from '../../../utils/objectiveNames';
+import { setObjectiveName } from '../../../utils/ObjectiveNames';
 import { useStyles } from './styles';
 
 const CampaignDates = ({ objective, setRootSimpleDate, setCampaignSetupStep }) => {

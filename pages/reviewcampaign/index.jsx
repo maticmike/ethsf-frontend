@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
-import { Button } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { useStyles } from '../../styles/stylesReviewCampaign';
-
+import { useStyles } from './stylesReviewCampaign';
+import { getPostData } from '../../utils/SocialMediaData';
 const BusinessReviewHeader = dynamic(() => import('../../components/reviewcampaign/BusinessReviewHeader'), {
   loading: () => <p>Business Header Loading...</p>,
 });
@@ -14,6 +14,11 @@ const InfluencerReviewHeader = dynamic(() => import('../../components/reviewcamp
 
 const ReviewCampaign = () => {
   const classes = useStyles();
+  const [isConfirmed, setIsConfirmed] = useState(true);
+  const [postUrl, setPostUrl] = useState('');
+
+  const handleNewPostUrl = () => getPostData(postUrl);
+
   return (
     <div className={classes.ReviewCampaign_root_center}>
       <div className={classes.ReviewCampaign_headers_side_by_side}>
@@ -37,15 +42,35 @@ const ReviewCampaign = () => {
       <br />
       <br />
       <div>
-        <Button className={classes.ReviewCampaign_reject} variant="contained" color="secondary" size="large">
-          Reject
-        </Button>
-        <Button className={classes.ReviewCampaign_amber} variant="contained" color="secondary" size="large">
-          Counter
-        </Button>
-        <Button className={classes.ReviewCampaign_accept} variant="contained" size="large" color="secondary">
-          Accept
-        </Button>
+        {!isConfirmed ? (
+          <>
+            <Button className={classes.ReviewCampaign_reject} variant="contained" color="secondary" size="large">
+              Reject
+            </Button>
+            <Button className={classes.ReviewCampaign_amber} variant="contained" size="large">
+              Counter
+            </Button>
+            <Button className={classes.ReviewCampaign_accept} variant="contained" size="large" color="secondary">
+              Accept
+            </Button>
+          </>
+        ) : (
+          <>
+            <TextField
+              className={classes.ReviewCampaign_post_url}
+              id="outlined-basic"
+              label="Post URL"
+              variant="outlined"
+              onChange={e => setPostUrl(e.target.value)}
+            />
+            <br />
+            <br />
+            <br />
+            <Button variant="contained" type="submit" size="large" color="primary" onClick={handleNewPostUrl}>
+              Register Post
+            </Button>
+          </>
+        )}
       </div>
     </div>
   );

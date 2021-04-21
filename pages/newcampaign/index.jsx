@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Paper } from '@material-ui/core';
-import { useStyles } from '../../styles/stylesNewCampaign';
+import { useStyles } from './stylesNewCampaign';
 const FindInfluencer = dynamic(() => import('../../components/newcampaign/FindInfluencer'), {
   loading: () => <p>Find Influencer Loading....</p>,
 });

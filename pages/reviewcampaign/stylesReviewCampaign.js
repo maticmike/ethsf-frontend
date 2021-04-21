@@ -31,10 +31,19 @@ const useStyles = makeStyles({
   },
   ReviewCampaign_amber: {
     background: '#ffbf00',
+    '&:hover': {
+      backgroundColor: '#bf9e09',
+    },
   },
   ReviewCampaign_accept: {
     margin: '30px',
     background: '#17bf17',
+    '&:hover': {
+      backgroundColor: '#0ca40c',
+    },
+  },
+  ReviewCampaign_post_url: {
+    width: '300px',
   },
 });
 export { useStyles };

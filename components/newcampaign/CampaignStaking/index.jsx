@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FormHelperText, Button } from '@material-ui/core';
 import NumberFormat from 'react-number-format';
-import { setObjectiveName } from '../../../utils/objectiveNames';
+import { setObjectiveName } from '../../../utils/ObjectiveNames';
 import { useStyles } from './styles.js';
 
 const CampaignStaking = ({ objective, setCampaignSetupStep, depositToEscrow }) => {
