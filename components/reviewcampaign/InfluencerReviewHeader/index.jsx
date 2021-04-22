@@ -9,7 +9,10 @@ const InfluencerReviewHeader = () => {
     <div className={classes.InfluencerReview_component_outline}>
       <div>
         <h1 className={classes.InfluencerReview_margin_bottom_h1}>TrackTracy</h1>
-        <Link href="https://google.com">tracktracy@gmail.com</Link>
+        <Link href="https://google.com" target="_blank">
+          tracktracy@gmail.com
+        </Link>
+
         <p>
           <strong>1.2M Followers</strong>
         </p>

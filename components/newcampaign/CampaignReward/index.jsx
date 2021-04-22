@@ -7,6 +7,8 @@ import { useStyles } from './styles.js';
 const CampaignReward = ({ objective, objectiveAmount, setCampaignSetupStep, stakedAmount }) => {
   const classes = useStyles();
   const [jackpot, setJackpot] = useState(true);
+  const [jackpotAmount, setJackpotAmount] = useState(0);
+  const [incrementalAmount, setIncrementalAmount] = useState(0);
 
   const getHeading = () => (jackpot ? 'Jackpot' : 'Incremental');
 
@@ -18,8 +20,9 @@ const CampaignReward = ({ objective, objectiveAmount, setCampaignSetupStep, stak
     }
   };
 
-  const handleDeposit = deposit => {
-    console.log(deposit);
+  const handleDeposit = () => {
+    console.log(jackpotAmount, 'jAmount');
+    console.log(incrementalAmount, 'iAmount');
     if (!jackpot) {
       console.log('incremental value');
     } else {
@@ -27,8 +30,6 @@ const CampaignReward = ({ objective, objectiveAmount, setCampaignSetupStep, stak
       setJackpot(false);
     }
   };
-
-  const multiplierAmount = jackpot ? 0.65 : 0.35;
 
   return (
     <div className={classes.CampaignReward_font}>
@@ -43,9 +44,11 @@ const CampaignReward = ({ objective, objectiveAmount, setCampaignSetupStep, stak
           {jackpot ? <p>Jackpot Payment:</p> : <p>Incremental Payment: </p>}
           <NumberFormat
             className={classes.CampaignReward_input}
-            placeholder={`$${parseInt(stakedAmount) * multiplierAmount}`}
+            placeholder={`$${jackpot ? parseInt(stakedAmount) * 0.8 : parseInt(stakedAmount) * 0.2}`}
             thousandSeparator={true}
+            value={jackpot ? jackpotAmount : incrementalAmount}
             prefix={'$'}
+            onChange={e => (jackpot ? setJackpotAmount(e.target.value) : setIncrementalAmount(e.target.value))}
           />
           &nbsp;&nbsp;&nbsp;&nbsp;For Each
         </div>
@@ -58,7 +61,7 @@ const CampaignReward = ({ objective, objectiveAmount, setCampaignSetupStep, stak
 
           <NumberFormat
             className={classes.CampaignReward_input}
-            placeholder={`100,000 ${objective.charAt(0).toUpperCase() + objective.slice(1)}`}
+            placeholder={`${jackpot ? '800,000' : '50,000'} ${objective.charAt(0).toUpperCase() + objective.slice(1)}`}
             thousandSeparator={true}
           />
         </div>
