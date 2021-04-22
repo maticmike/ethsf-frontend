@@ -23,7 +23,7 @@ const CampaignReward = dynamic(() => import('../../components/newcampaign/Campai
 
 const NewCampaign = () => {
   const classes = useStyles();
-  const [registrationStep, setRegistrationStep] = useState(0);
+  const [registrationStep, setRegistrationStep] = useState(1);
   const [influencer, setInfluencer] = useState('');
   const [objective, setObjective] = useState(''); //views
   const [date, setDate] = useState(null);
@@ -102,6 +102,7 @@ const NewCampaign = () => {
               objective="views"
               objectiveAmount={objectiveAmount}
               setCampaignSetupStep={campaignSetupStep}
+              stakedAmount={stakedMoney}
             ></CampaignReward>
           </Paper>
         );

@@ -12,7 +12,7 @@ const CampaignStaking = ({ objective, setCampaignSetupStep, depositToEscrow }) =
   const getHeading = () => (objective === 'singlePost' ? 'Post Staking' : 'Campaign Staking');
 
   const stakeDeposit = () => {
-    depositToEscrow(stakedAmount);
+    depositToEscrow(stakedAmount.slice(1));
     setCampaignSetupStep(5);
   };
 
@@ -29,7 +29,7 @@ const CampaignStaking = ({ objective, setCampaignSetupStep, depositToEscrow }) =
       <p>Amount to deposit for Influencer</p>
       <NumberFormat
         className={classes.CampaignStaking_input}
-        placeholder="Total Staked"
+        placeholder="$1000"
         thousandSeparator={true}
         prefix={'$'}
         onChange={e => setStakedAmount(e.target.value)}

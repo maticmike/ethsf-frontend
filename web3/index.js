@@ -1,9 +1,9 @@
 import { ethers } from 'ethers';
 import axios from 'axios';
 import consola from 'consola';
-import FamepayFactoryAbi from '../../contracts/FamepayFactory.json';
-import FamepayAbi from '../../contracts/Famepay.json';
-import { CONTRACT_RESPONSE_STATUS } from '../../constants/ContractResponse';
+import FamepayFactoryAbi from '../contracts/FamepayFactory.json';
+import FamepayAbi from '../contracts/Famepay.json';
+import { CONTRACT_RESPONSE_STATUS } from '../constants/ContractResponse';
 
 /**
  * Response handler for successful contract interactions

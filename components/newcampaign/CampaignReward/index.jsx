@@ -4,7 +4,7 @@ import { FormHelperText, Button } from '@material-ui/core';
 import { setObjectiveName } from '../../../utils/ObjectiveNames';
 import { useStyles } from './styles.js';
 
-const CampaignReward = ({ objective, objectiveAmount, setCampaignSetupStep }) => {
+const CampaignReward = ({ objective, objectiveAmount, setCampaignSetupStep, stakedAmount }) => {
   const classes = useStyles();
   const [jackpot, setJackpot] = useState(true);
 
@@ -28,6 +28,8 @@ const CampaignReward = ({ objective, objectiveAmount, setCampaignSetupStep }) =>
     }
   };
 
+  const multiplierAmount = jackpot ? 0.65 : 0.35;
+
   return (
     <div className={classes.CampaignReward_font}>
       <h1>{setObjectiveName(objective)} Objective</h1>
@@ -39,7 +41,12 @@ const CampaignReward = ({ objective, objectiveAmount, setCampaignSetupStep }) =>
       <div className={classes.CampaignReward_align_inputs}>
         <div>
           {jackpot ? <p>Jackpot Payment:</p> : <p>Incremental Payment: </p>}
-          <NumberFormat className={classes.CampaignReward_input} thousandSeparator={true} prefix={'$'} />
+          <NumberFormat
+            className={classes.CampaignReward_input}
+            placeholder={`$${parseInt(stakedAmount) * multiplierAmount}`}
+            thousandSeparator={true}
+            prefix={'$'}
+          />
           &nbsp;&nbsp;&nbsp;&nbsp;For Each
         </div>
         <div className={classes.CampaignReward_shift_objective_input}>
@@ -49,7 +56,11 @@ const CampaignReward = ({ objective, objectiveAmount, setCampaignSetupStep }) =>
             <p>{objective.charAt(0).toUpperCase() + objective.slice(1)} Incremental Objective:</p>
           )}
 
-          <NumberFormat className={classes.CampaignReward_input} thousandSeparator={true} />
+          <NumberFormat
+            className={classes.CampaignReward_input}
+            placeholder={`100,000 ${objective.charAt(0).toUpperCase() + objective.slice(1)}`}
+            thousandSeparator={true}
+          />
         </div>
       </div>
       <br />
