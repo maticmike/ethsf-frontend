@@ -17,6 +17,7 @@
     "@material-ui/lab": "^5.0.0-alpha.27",
     "axios": "^0.21.1",
     "babel-plugin-import": "^1.13.3",
+    "bnc-onboard": "^1.23.0",
     "consola": "^2.15.3",
     "cross-env": "^7.0.3",
     "customize-cra": "^1.0.0",
