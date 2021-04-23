@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Grid, FormControl, FormControlLabel, RadioGroup, Radio, Button } from '@material-ui/core';
 import { useStyles } from './styles.js';
 
-const CampaignObjective = ({ objective, setCampaignSetupStep }) => {
+const CampaignObjective = ({ objective, setParentCampaignSetupStep }) => {
   const classes = useStyles();
 
   const [selectedObjective, setSelectedObjective] = useState('');
@@ -15,7 +15,7 @@ const CampaignObjective = ({ objective, setCampaignSetupStep }) => {
 
   const submitCampaignObjective = () => {
     objective(selectedObjective);
-    setCampaignSetupStep(2);
+    setParentCampaignSetupStep(2);
   };
 
   return (
@@ -78,7 +78,7 @@ const CampaignObjective = ({ objective, setCampaignSetupStep }) => {
         </Grid>
         <Grid container direction="row" spacing={1}>
           <Grid item xs={6}>
-            <Button onClick={() => setCampaignSetupStep(0)} variant="outlined" color="primary" size="small">
+            <Button onClick={() => setParentCampaignSetupStep(0)} variant="outlined" color="primary" size="small">
               Previous
             </Button>
           </Grid>

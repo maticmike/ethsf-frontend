@@ -4,30 +4,36 @@ import { FormHelperText, Button } from '@material-ui/core';
 import { setObjectiveName } from '../../../utils/ObjectiveNames';
 import { useStyles } from './styles.js';
 
-const CampaignReward = ({ objective, objectiveAmount, setCampaignSetupStep, stakedAmount }) => {
+const CampaignReward = ({
+  objective,
+  stakedAmount,
+  setParentJackpotReward,
+  setParentIncrementalReward,
+  setParentCampaignSetupStep,
+}) => {
   const classes = useStyles();
-  const [jackpot, setJackpot] = useState(true);
-  const [jackpotAmount, setJackpotAmount] = useState(0);
-  const [incrementalAmount, setIncrementalAmount] = useState(0);
+  const [isJackpot, setIsJackpot] = useState(true);
+  const [jackpotReward, setJackpotReward] = useState(0);
+  const [incrementalReward, setIncrementalReward] = useState(0);
+  const [jackpotTarget, setJackpotTarget] = useState(0);
+  const [incrementalTarget, setIncrementalTarget] = useState(0);
 
-  const getHeading = () => (jackpot ? 'Jackpot' : 'Incremental');
+  const getHeading = () => (isJackpot ? 'Jackpot' : 'Incremental');
 
   const handlePrevious = () => {
-    if (!jackpot) {
-      setJackpot(true);
+    if (!isJackpot) {
+      setIsJackpot(true);
     } else {
-      setCampaignSetupStep(4);
+      setParentCampaignSetupStep(4);
     }
   };
 
-  const handleDeposit = () => {
-    console.log(jackpotAmount, 'jAmount');
-    console.log(incrementalAmount, 'iAmount');
-    if (!jackpot) {
-      console.log('incremental value');
+  const handleNewReward = () => {
+    if (!isJackpot) {
+      setParentJackpotReward(jackpotReward);
+      setParentIncrementalReward(incrementalReward);
     } else {
-      console.log('jackpot value');
-      setJackpot(false);
+      setIsJackpot(false);
     }
   };
 
@@ -41,28 +47,29 @@ const CampaignReward = ({ objective, objectiveAmount, setCampaignSetupStep, stak
       </FormHelperText>
       <div className={classes.CampaignReward_align_inputs}>
         <div>
-          {jackpot ? <p>Jackpot Payment:</p> : <p>Incremental Payment: </p>}
+          {isJackpot ? <p>Jackpot Payment:</p> : <p>Incremental Payment: </p>}
           <NumberFormat
             className={classes.CampaignReward_input}
-            placeholder={`$${jackpot ? parseInt(stakedAmount) * 0.8 : parseInt(stakedAmount) * 0.2}`}
+            placeholder={`$${isJackpot ? parseInt(stakedAmount) * 0.8 : parseInt(stakedAmount) * 0.2}`}
             thousandSeparator={true}
-            value={jackpot ? jackpotAmount : incrementalAmount}
+            value={isJackpot ? jackpotReward : incrementalReward}
             prefix={'$'}
-            onChange={e => (jackpot ? setJackpotAmount(e.target.value) : setIncrementalAmount(e.target.value))}
+            onChange={e => (isJackpot ? setJackpotReward(e.target.value) : setIncrementalReward(e.target.value))}
           />
           &nbsp;&nbsp;&nbsp;&nbsp;For Each
         </div>
         <div className={classes.CampaignReward_shift_objective_input}>
-          {jackpot ? (
-            <p>{objective.charAt(0).toUpperCase() + objective.slice(1)} Jackpot Objective:</p>
+          {isJackpot ? (
+            <p>{setObjectiveName(objective)} Jackpot Objective:</p>
           ) : (
-            <p>{objective.charAt(0).toUpperCase() + objective.slice(1)} Incremental Objective:</p>
+            <p>{setObjectiveName(objective)} Incremental Objective:</p>
           )}
-
           <NumberFormat
             className={classes.CampaignReward_input}
-            placeholder={`${jackpot ? '800,000' : '50,000'} ${objective.charAt(0).toUpperCase() + objective.slice(1)}`}
+            placeholder={`${isJackpot ? '800,000' : '50,000'} ${setObjectiveName(objective)}`}
             thousandSeparator={true}
+            value={isJackpot ? jackpotTarget : incrementalTarget}
+            onChange={e => (isJackpot ? setJackpotTarget(e.target.value) : setIncrementalTarget(e.target.value))}
           />
         </div>
       </div>
@@ -71,8 +78,8 @@ const CampaignReward = ({ objective, objectiveAmount, setCampaignSetupStep, stak
         <Button variant="outlined" color="primary" size="small" onClick={handlePrevious}>
           Previous
         </Button>
-        <Button variant="contained" color="primary" size="small" onClick={handleDeposit}>
-          {jackpot ? 'Next' : 'Finish'}
+        <Button variant="contained" color="primary" size="small" onClick={handleNewReward}>
+          {isJackpot ? 'Next' : 'Finish'}
         </Button>
       </div>
     </div>

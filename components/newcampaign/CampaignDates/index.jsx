@@ -5,15 +5,15 @@ import 'react-calendar/dist/Calendar.css';
 import { setObjectiveName } from '../../../utils/ObjectiveNames';
 import { useStyles } from './styles';
 
-const CampaignDates = ({ objective, setRootSimpleDate, setCampaignSetupStep }) => {
+const CampaignDates = ({ objective, setParentSimpleDate, setParentCampaignSetupStep }) => {
   const classes = useStyles();
   const [simpleDate, setSimpleDate] = useState(null);
 
   const getHeading = () => (objective === 'singlePost' ? 'Post Date And Time' : 'Campaign Length');
   const handleDateChange = date => setSimpleDate(date);
   const selectDate = () => {
-    setRootSimpleDate(simpleDate);
-    objective === 'singlePost' ? setCampaignSetupStep(3) : setCampaignSetupStep(4);
+    setParentSimpleDate(simpleDate);
+    objective === 'singlePost' ? setParentCampaignSetupStep(3) : setParentCampaignSetupStep(4);
   };
   return (
     <div className={classes.CampaignDates_layout}>
@@ -36,7 +36,7 @@ const CampaignDates = ({ objective, setRootSimpleDate, setCampaignSetupStep }) =
       </Grid>
       <br />
       <div className={classes.CampaignDates_align_buttons}>
-        <Button onClick={() => setCampaignSetupStep(1)} variant="outlined" color="primary" size="small">
+        <Button onClick={() => setParentCampaignSetupStep(1)} variant="outlined" color="primary" size="small">
           Previous
         </Button>
         {simpleDate ? (

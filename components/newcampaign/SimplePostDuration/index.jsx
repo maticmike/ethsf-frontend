@@ -14,7 +14,7 @@ import {
 import { setObjectiveName } from '../../../utils/ObjectiveNames';
 import { useStyles } from './styles';
 
-const SimplePostDuration = ({ objective, setCampaignSetupStep, setPostDuration }) => {
+const SimplePostDuration = ({ objective, setParentPostDuration, setParentCampaignSetupStep }) => {
   const classes = useStyles();
   const [selectedDuration, setSelectedDuration] = useState('');
   const [showOtherOptions, setShowOtherOptions] = useState(false);
@@ -27,8 +27,8 @@ const SimplePostDuration = ({ objective, setCampaignSetupStep, setPostDuration }
     if (selectedDuration === 'other' && alternativeDuration === '') {
       alert('Please select post duration from dropdown');
     } else {
-      setPostDuration(selectedDuration === '' ? alternativeDuration : selectedDuration);
-      objective === 'singlePost' ? setCampaignSetupStep(4) : setCampaignSetupStep(5);
+      setParentPostDuration(selectedDuration === '' ? alternativeDuration : selectedDuration);
+      objective === 'singlePost' ? setParentCampaignSetupStep(4) : setParentCampaignSetupStep(5);
     }
   };
 
@@ -102,7 +102,7 @@ const SimplePostDuration = ({ objective, setCampaignSetupStep, setPostDuration }
         </Grid>
       </Grid>
       <div className={classes.SimplePostDuration_button_alignment}>
-        <Button variant="outlined" color="primary" size="small" onClick={() => setCampaignSetupStep(2)}>
+        <Button variant="outlined" color="primary" size="small" onClick={() => setParentCampaignSetupStep(2)}>
           Previous
         </Button>
         {selectedDuration ? (

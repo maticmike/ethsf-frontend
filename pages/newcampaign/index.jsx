@@ -24,12 +24,16 @@ const CampaignReward = dynamic(() => import('../../components/newcampaign/Campai
 const NewCampaign = () => {
   const classes = useStyles();
   const [registrationStep, setRegistrationStep] = useState(1);
+
   const [influencer, setInfluencer] = useState('');
   const [objective, setObjective] = useState(''); //views
   const [date, setDate] = useState(null);
-  const [objectiveAmount, setObjectiveAmount] = useState(null); //5000 views
   const [simplePostDuration, setSimplePostDuration] = useState(null);
-  const [stakedMoney, setStakedMoney] = useState(null);
+  const [objectiveAmount, setObjectiveAmount] = useState(null); //5000 views
+  const [stakedAmount, setStakedAmount] = useState(null);
+  const [jackpotRewardAmount, setJackpotRewardAmount] = useState(0);
+  const [incrementalRewardAmount, setIncrementalRewardAmount] = useState(null);
+
   const findInfluencer = influencer => {
     try {
       //search for influencer from api or db
@@ -39,9 +43,10 @@ const NewCampaign = () => {
     }
   };
 
-  const campaignSetupStep = registrationStep => setRegistrationStep(registrationStep);
-  const campaignSimpleDate = date => setDate(date);
-  const depositToEscrow = deposit => setStakedMoney(deposit);
+  /**SET CAMPAIGN DATA FROM CHILDREN TO PARENT */
+  // const setCampaignSetupStep = registrationStep => setRegistrationStep(registrationStep);
+  // const campaignSimpleDate = date => setDate(date);
+  // const setDepositToEscrow = deposit => setStakedAmount(deposit);
 
   const renderSingleRegistrationComponent = () => {
     switch (registrationStep) {
@@ -51,7 +56,7 @@ const NewCampaign = () => {
             <FindInfluencer
               influencer={influencer}
               findInfluencer={findInfluencer}
-              incrementCampaignSetup={campaignSetupStep}
+              setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
             />
           </Paper>
         );
@@ -60,7 +65,7 @@ const NewCampaign = () => {
           <Paper className={classes.NewCampaign_layout_objective} elevation={3}>
             <CampaignObjective
               objective={objective => setObjective(objective)}
-              setCampaignSetupStep={campaignSetupStep}
+              setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
             />
           </Paper>
         );
@@ -69,8 +74,8 @@ const NewCampaign = () => {
           <Paper className={classes.NewCampaign_layout_dates} elevation={3}>
             <CampaignDates
               objective={objective}
-              setRootSimpleDate={campaignSimpleDate}
-              setCampaignSetupStep={campaignSetupStep}
+              setParentSimpleDate={date => setDate(date)} //one date for simple post
+              setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
             />
           </Paper>
         );
@@ -80,8 +85,8 @@ const NewCampaign = () => {
           <Paper className={classes.NewCampaign_layout_duration} elevation={3}>
             <SimplePostDuration
               objective={objective}
-              setPostDuration={duration => setSimplePostDuration(duration)}
-              setCampaignSetupStep={campaignSetupStep}
+              setParentPostDuration={duration => setSimplePostDuration(duration)} //range for campaign
+              setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
             />
           </Paper>
         );
@@ -90,8 +95,8 @@ const NewCampaign = () => {
           <Paper className={classes.NewCampaign_layout_staking} elevation={3}>
             <CampaignStaking
               objective={objective}
-              setCampaignSetupStep={campaignSetupStep}
-              depositToEscrow={depositToEscrow}
+              setParentDepositToEscrow={deposit => setStakedAmount(deposit)}
+              setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
             />
           </Paper>
         );
@@ -99,10 +104,11 @@ const NewCampaign = () => {
         return (
           <Paper className={classes.NewCampaign_layout_staking} elevation={3}>
             <CampaignReward
-              objective="views"
-              objectiveAmount={objectiveAmount}
-              setCampaignSetupStep={campaignSetupStep}
-              stakedAmount={stakedMoney}
+              objective={objective}
+              stakedAmount={stakedAmount}
+              setParentJackpotReward={jackpotReward => setJackpotRewardAmount(jackpotReward)}
+              setParentIncrementalReward={incrementalReward => setIncrementalRewardAmount(incrementalReward)}
+              setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
             ></CampaignReward>
           </Paper>
         );
