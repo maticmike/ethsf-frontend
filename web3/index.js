@@ -84,7 +84,8 @@ const bootstrapWeb3 = async () => {
 
       const famepayAddress = getContractAddress(FamepayAbi, network.chainId);
       const famepay = new ethers.Contract(famepayAddress, FamepayAbi.abi, signer);
-
+      console.log(famepayAddress);
+      console.log(famepay);
       return { famepayFactory, famepay };
     }
   } catch (error) {

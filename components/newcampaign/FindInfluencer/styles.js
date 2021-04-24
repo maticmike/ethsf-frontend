@@ -23,6 +23,9 @@ const useStyles = makeStyles({
 
   FindInfluencer_error_text: {
     color: 'red',
+  },
+
+  FindInfluencer_font: {
     fontFamily: 'Arial, Helvetica, sans-serif',
   },
 

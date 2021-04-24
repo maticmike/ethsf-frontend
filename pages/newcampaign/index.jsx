@@ -23,7 +23,7 @@ const CampaignReward = dynamic(() => import('../../components/newcampaign/Campai
 
 const NewCampaign = () => {
   const classes = useStyles();
-  const [registrationStep, setRegistrationStep] = useState(1);
+  const [registrationStep, setRegistrationStep] = useState(0);
 
   const [influencer, setInfluencer] = useState('');
   const [objective, setObjective] = useState(''); //views
@@ -34,7 +34,7 @@ const NewCampaign = () => {
   const [jackpotRewardAmount, setJackpotRewardAmount] = useState(0);
   const [incrementalRewardAmount, setIncrementalRewardAmount] = useState(null);
 
-  const findInfluencer = influencer => {
+  const findInfluencer = async influencer => {
     try {
       //search for influencer from api or db
       setInfluencer(influencer);
@@ -43,19 +43,14 @@ const NewCampaign = () => {
     }
   };
 
-  /**SET CAMPAIGN DATA FROM CHILDREN TO PARENT */
-  // const setCampaignSetupStep = registrationStep => setRegistrationStep(registrationStep);
-  // const campaignSimpleDate = date => setDate(date);
-  // const setDepositToEscrow = deposit => setStakedAmount(deposit);
-
   const renderSingleRegistrationComponent = () => {
     switch (registrationStep) {
       case 0:
         return (
           <Paper className={classes.NewCampaign_layout_find} elevation={3}>
             <FindInfluencer
-              influencer={influencer}
-              findInfluencer={findInfluencer}
+              foundInfluencer={influencer}
+              parentFindInfluencer={findInfluencer}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
             />
           </Paper>

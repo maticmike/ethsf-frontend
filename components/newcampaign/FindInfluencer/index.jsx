@@ -3,29 +3,30 @@ import { OutlinedInput, Grid, Button } from '@material-ui/core';
 import CheckCircle from '@material-ui/icons/Done';
 import Image from 'next/image';
 import { useStyles } from './styles';
-const FindInfluencer = ({ findInfluencer, setCampaignSetupStep, influencer }) => {
+const FindInfluencer = ({ parentFindInfluencer, foundInfluencer, setParentCampaignSetupStep }) => {
   const classes = useStyles();
 
   const [influencerWasFound, setInfluencerWasFound] = useState(false);
   const [searchAttemptMade, setSearchAttemptMade] = useState(false);
-  const [typedInfluencer, setTypedInfluencer] = useState('');
+  const [searchedInfluencer, setSearchedInfluencer] = useState('');
 
   const handleFindInfluencer = () => {
-    findInfluencer(typedInfluencer);
     setSearchAttemptMade(true);
+    parentFindInfluencer(searchedInfluencer);
+    foundInfluencer === '' ? setInfluencerWasFound(false) : setInfluencerWasFound(true);
   };
 
-  const incrementCampaignSetup = () => setCampaignSetupStep(1);
+  const incrementCampaignSetup = () => setParentCampaignSetupStep(1);
 
   return (
-    <div>
+    <div className={classes.FindInfluencer_font}>
       <Grid container column="column" align="center" spacing={1}>
         <Grid item sm={12}>
           <OutlinedInput
             id="time"
             type="text"
             placeholder="Find Influencer"
-            onChange={e => setTypedInfluencer(e.target.value)}
+            onChange={e => setSearchedInfluencer(e.target.value)}
             className={classes.FindInfluencer_search}
           />
         </Grid>
@@ -34,17 +35,22 @@ const FindInfluencer = ({ findInfluencer, setCampaignSetupStep, influencer }) =>
             <>
               <br />
               <Grid item sm={12} align="center">
-                <Image src="/Instagram.png" alt={`${influencer} Instagram Profile`} width="32" height="32" />
+                <Image src="/Ethereum.png" alt={`${foundInfluencer} Eth Address`} width="32" height="32" />
+                <strong>Ethereum Address&nbsp;</strong>
+                <CheckCircle color="primary" />
+              </Grid>
+              <Grid item sm={12} align="center">
+                <Image src="/Instagram.png" alt={`${foundInfluencer} Instagram Profile`} width="32" height="32" />
                 <strong>@instagramProfile&nbsp;</strong>
                 <CheckCircle color="primary" />
               </Grid>
               <Grid item sm={12} align="center">
-                <Image src="/Twitter.png" alt={`${influencer} Youtube Profile`} width="32" height="32" />
+                <Image src="/Twitter.png" alt={`${foundInfluencer} Youtube Profile`} width="32" height="32" />
                 <strong>@twitterProfile&nbsp;</strong>
                 <CheckCircle color="primary" />
               </Grid>
               <Grid item sm={12} align="center">
-                <Image src="/Youtube.png" alt={`${influencer} Youtube Profile`} width="32" height="32" />
+                <Image src="/Youtube.png" alt={`${foundInfluencer} Youtube Profile`} width="32" height="32" />
                 <strong>@youtubeProfile&nbsp;</strong>
                 <CheckCircle color="primary" />
               </Grid>
