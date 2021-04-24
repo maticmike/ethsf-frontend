@@ -24,7 +24,7 @@ const ConnectButton = () => {
   };
 
   return (
-    <Button className={classes.connectButton} variant="contained" onClick={handleConnectivity}>
+    <Button variant="contained" onClick={handleConnectivity}>
       {/* {shortenedEthAddress(account?.address) || 'connect'} */}
       Connect
     </Button>

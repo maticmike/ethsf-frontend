@@ -47,16 +47,23 @@ const Navbar = () => {
   return (
     <>
       {width > MIN_DESKTOP_PX ? (
-        <AppBar position="sticky" className={classes.navbarBackground}>
+        // <AppBar position="sticky" className={classes.navbarBackground}>
+        <AppBar position="sticky">
           <Toolbar>
-            {/* TODO for launch, redirect all home page traffic to the marketplace
-            future: disable redirect when we actually have the home page content */}
-            <Link href="/marketplace" className={classes.navbarDesktopMenuButton}>
-              <Image className={classes.navbarLogo} src="/logo-large.png" alt="OpenNFT Logo" width="180" height="54" />
+            {/* <Link href="/marketplace" className={classes.navbarDesktopMenuButton}> */}
+            <Link href="/marketplace">
+              {/* <Image className={classes.navbarLogo} src="https://www.mandfhealth.co.uk/wp-content/uploads/2017/12/celebrity-1.jpg" alt="OpenNFT Logo" width="180" height="54" /> */}
+              <img
+                src="https://www.mandfhealth.co.uk/wp-content/uploads/2017/12/celebrity-1.jpg"
+                alt="OpenNFT Logo"
+                width="50"
+                height="54"
+              />
             </Link>
-            <Link className={classes.navbarDesktopMenuButton} href="/marketplace">
+            {/* <Link className={classes.navbarDesktopMenuButton} href="/marketplace"> */}
+            <Link href="/marketplace">
               <Button>
-                <strong className={classes.navbarDesktopMenuButton}>item0</strong>
+                <strong>item0</strong>
               </Button>
             </Link>
             {showMyNft ? (
