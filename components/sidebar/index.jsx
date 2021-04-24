@@ -22,14 +22,11 @@ import SettingsInputHdmiIcon from '@material-ui/icons/SettingsInputHdmi';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import LanguageIcon from '@material-ui/icons/Language';
-import ConnectButton from '../../components/ConnectButton';
-import { useTranslation } from 'next-i18next';
+import ConnectButton from '../../components/connectbuton';
 
 import { useStyles } from './styles';
 
 const Sidebar = ({ isSidebarOpen, closeSidebar, showMyNft, openLanguagesMenu, closeLanguagesMenu, languagesMenu }) => {
-  const { t } = useTranslation('common');
-
   const classes = useStyles();
   const router = useRouter();
 
@@ -53,8 +50,9 @@ const Sidebar = ({ isSidebarOpen, closeSidebar, showMyNft, openLanguagesMenu, cl
             <ListItemIcon>
               {/* TODO for launch, redirect all home page traffic to the marketplace
               future: disable redirect when we actually have the home page content */}
-              <Link href="/marketplace">
-                <Image className={classes.pointer} src="/logo.png" alt="OpenNFT Logo" width="188" height="58" />
+              <Link href="/">
+                {/* <Image className={classes.pointer} src="/logo.png" alt="OpenNFT Logo" width="188" height="58" /> */}
+                <h3>Famepay</h3>
               </Link>
             </ListItemIcon>
             &nbsp;&nbsp;&nbsp;

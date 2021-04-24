@@ -4,26 +4,23 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
 import { AppBar, Toolbar, Menu, MenuItem, Button, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
-import ConnectButton from '../../components/ConnectButton';
-import { MIN_DESKTOP_PX, ALL_LOCALE_SUPPORTED } from '../../utils/constants';
+import { MIN_DESKTOP_PX } from '../../constants/ScreenSize';
+import ConnectButton from '../../components/connectbuton';
 import { useStyles } from './styles';
 
-const Sidebar = dynamic(() => import('../../components/Sidebar'), {
+const Sidebar = dynamic(() => import('../../components/sidebar'), {
   loading: () => <p>Sidebar Loading....</p>,
 });
 
-const navbar = () => {
+const Navbar = () => {
   const classes = useStyles();
 
   const router = useRouter();
 
-  const { t } = useTranslation('common');
-
-  const account = useSelector(state => state.account);
+  // const account = useSelector(state => state.account);
 
   const [languagesMenu, setLanguagesMenu] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -37,8 +34,10 @@ const navbar = () => {
 
   const updateWidth = () => setWidth(window.innerWidth);
 
-  const showMyNft = account.address !== null;
+  const dummyArray = [1, 2, 3, 4, 5, 6];
 
+  // const showMyNft = account.address !== null;
+  const showMyNft = true;
   useEffect(() => {
     setWidth(window.innerWidth);
     window.addEventListener('resize', updateWidth);
@@ -57,28 +56,28 @@ const navbar = () => {
             </Link>
             <Link className={classes.navbarDesktopMenuButton} href="/marketplace">
               <Button>
-                <strong className={classes.navbarDesktopMenuButton}>{t('marketplace')}</strong>
+                <strong className={classes.navbarDesktopMenuButton}>item0</strong>
               </Button>
             </Link>
             {showMyNft ? (
               <Link className={classes.navbarDesktopMenuButton} href="/mynft">
                 <Button>
-                  <strong className={classes.navbarDesktopMenuButton}>{t('mynft')}</strong>
+                  <strong className={classes.navbarDesktopMenuButton}>item 1</strong>
                 </Button>
               </Link>
             ) : null}
-            {account.address && account.isAdmin ? (
+            {/* {account.address && account.isAdmin ? (
               <Link className={classes.navbarDesktopMenuButton} href="/admin">
                 <Button>
-                  <strong className={classes.navbarDesktopMenuButton}>{t('admin')}</strong>
+                  <strong className={classes.navbarDesktopMenuButton}>item2</strong>
                 </Button>
               </Link>
-            ) : null}
+            ) : null} */}
             <div className={classes.navbarGrow} />
             <ConnectButton />
             &nbsp;
             <Button className={classes.languageButton} variant="outlined" onClick={openLanguagesMenu}>
-              {ALL_LOCALE_SUPPORTED[router.locale].BUTTON_NAME}
+              menu test
             </Button>
             &nbsp;
             <Menu
@@ -88,13 +87,14 @@ const navbar = () => {
               open={Boolean(languagesMenu)}
               onClose={closeLanguagesMenu}
             >
-              {Object.entries(ALL_LOCALE_SUPPORTED).map(([key, value]) => {
+              {/* {Object.entries(ALL_LOCALE_SUPPORTED).map(([key, value]) => { */}
+              {dummyArray.map((key, value) => {
                 return (
-                  <Link href={router.asPath} locale={key} key={key}>
-                    <MenuItem onClick={closeLanguagesMenu} key={key}>
-                      {value.MENU_ITEM_NAME}
-                    </MenuItem>
-                  </Link>
+                  // <Link href={router.asPath} locale={key} key={key}>
+                  <MenuItem onClick={closeLanguagesMenu} key={key}>
+                    {value}
+                  </MenuItem>
+                  // </Link>
                 );
               })}
             </Menu>
@@ -128,7 +128,7 @@ const navbar = () => {
               </Link>
             </Toolbar>
           </AppBar>
-          <Sidebar
+          {/* <Sidebar
             className={classes.navbarSideBar}
             isSidebarOpen={sidebarOpen}
             closeSidebar={handleDrawerClose}
@@ -137,11 +137,11 @@ const navbar = () => {
             openLanguagesMenu={openLanguagesMenu}
             closeLanguagesMenu={closeLanguagesMenu}
             languagesMenu={languagesMenu}
-          />
+          /> */}
         </>
       )}
     </>
   );
 };
 
-export default navbar;
+export default Navbar;
