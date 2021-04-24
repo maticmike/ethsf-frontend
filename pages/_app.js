@@ -8,7 +8,7 @@ import { Container } from '@material-ui/core';
 
 import '../styles/globals.css';
 
-import Navbar from '../components/navbar';
+import Navbar from '../components/navigation/navbar';
 
 const MyApp = ({ Component, pageProps }) => {
   return (

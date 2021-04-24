@@ -7,12 +7,14 @@ import { useRouter } from 'next/router';
 import { AppBar, Toolbar, Menu, MenuItem, Button, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
-import { MIN_DESKTOP_PX } from '../../constants/ScreenSize';
-import ConnectButton from '../../components/connectbuton';
+import { MIN_DESKTOP_PX } from '../../../constants/ScreenSize';
 import { useStyles } from './styles';
 
-const Sidebar = dynamic(() => import('../../components/sidebar'), {
+const Sidebar = dynamic(() => import('../sidebar'), {
   loading: () => <p>Sidebar Loading....</p>,
+});
+const ConnectButton = dynamic(() => import('../connectbutton'), {
+  loading: () => <p>Connect Loading....</p>,
 });
 
 const Navbar = () => {

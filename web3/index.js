@@ -101,9 +101,11 @@ const bootstrapWeb3 = async () => {
  */
 const getWalletInfo = async () => {
   try {
-    // const onboard = onBoardInitialize();
-    // await onboard.walletSelect();
-    // await onboard.walletCheck()
+    /*
+    const onboard = onBoardInitialize();
+    await onboard.walletSelect();
+    await onboard.walletCheck()
+    */
     const provider = new ethers.providers.Web3Provider(web3.currentProvider);
     const accounts = await provider.listAccounts();
     const account = accounts && accounts[0];

@@ -14,6 +14,7 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import PersonIcon from '@material-ui/icons/Person';
@@ -22,9 +23,12 @@ import SettingsInputHdmiIcon from '@material-ui/icons/SettingsInputHdmi';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import LanguageIcon from '@material-ui/icons/Language';
-import ConnectButton from '../../components/connectbuton';
 
 import { useStyles } from './styles';
+
+const ConnectButton = dynamic(() => import('../connectbutton'), {
+  loading: () => <p>Connect Loading....</p>,
+});
 
 const Sidebar = ({ isSidebarOpen, closeSidebar, showMyNft, openLanguagesMenu, closeLanguagesMenu, languagesMenu }) => {
   const classes = useStyles();
