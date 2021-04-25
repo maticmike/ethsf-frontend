@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { AppBar, Toolbar, Menu, MenuItem, Button, IconButton } from '@material-ui/core';
@@ -53,7 +52,7 @@ const Navbar = () => {
         <AppBar position="sticky">
           <Toolbar>
             {/* <Link href="/marketplace" className={classes.navbarDesktopMenuButton}> */}
-            <Link href="/marketplace">
+            <a href="/">
               {/* <Image className={classes.navbarLogo} src="https://www.mandfhealth.co.uk/wp-content/uploads/2017/12/celebrity-1.jpg" alt="OpenNFT Logo" width="180" height="54" /> */}
               <img
                 src="https://www.mandfhealth.co.uk/wp-content/uploads/2017/12/celebrity-1.jpg"
@@ -61,19 +60,19 @@ const Navbar = () => {
                 width="50"
                 height="54"
               />
-            </Link>
+            </a>
             {/* <Link className={classes.navbarDesktopMenuButton} href="/marketplace"> */}
-            <Link href="/marketplace">
+            <a href="/">
               <Button>
                 <strong>item0</strong>
               </Button>
-            </Link>
+            </a>
             {showMyNft ? (
-              <Link className={classes.navbarDesktopMenuButton} href="/mynft">
+              <a className={classes.navbarDesktopMenuButton} href="/">
                 <Button>
                   <strong className={classes.navbarDesktopMenuButton}>item 1</strong>
                 </Button>
-              </Link>
+              </a>
             ) : null}
             {/* {account.address && account.isAdmin ? (
               <Link className={classes.navbarDesktopMenuButton} href="/admin">
@@ -126,7 +125,7 @@ const Navbar = () => {
               >
                 <MenuIcon />
               </IconButton>
-              <Link href="/marketplace" className={classes.navbarDesktopMenuButton}>
+              <a href="/" className={classes.navbarDesktopMenuButton}>
                 <Image
                   className={classes.navbarLogo}
                   src="/logo-large.png"
@@ -134,7 +133,7 @@ const Navbar = () => {
                   width="180"
                   height="54"
                 />
-              </Link>
+              </a>
             </Toolbar>
           </AppBar>
           {/* <Sidebar

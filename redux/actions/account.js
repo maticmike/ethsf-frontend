@@ -17,7 +17,7 @@ export const connectAccountThunk = () => {
           consola.info(res, 'the res');
           dispatch(connectAccount(res));
         })
-        .catch(error => consola.error('connectAccountThunk action', error));
+        .catch(error => consola.error('connectAccountThunk action error message:', error));
     }
   };
 };

@@ -1,9 +1,11 @@
 import { ethers } from 'ethers';
 import axios from 'axios';
 import consola from 'consola';
+import detectEthereumProvider from '@metamask/detect-provider';
 import FamepayFactoryAbi from '../contracts/FamepayFactory.json';
 import FamepayAbi from '../contracts/Famepay.json';
-import { CONTRACT_RESPONSE_STATUS } from '../constants/ContractResponse';
+import { CONTRACT_RESPONSE_STATUS } from '../constants/Blockchain';
+import { NETWORK_ID } from '../constants/NetworkItems';
 
 /**
  * Response handler for successful contract interactions
@@ -76,20 +78,19 @@ const bootstrapWeb3 = async () => {
     const provider = new ethers.providers.Web3Provider(web3.currentProvider);
     const signer = provider.getSigner();
     const network = await provider.getNetwork();
+    const chain = await provider.getNetwork();
     if (chain.chainId != NETWORK_ID) {
       return false;
     } else {
       const famepayFactoryAddress = getContractAddress(FamepayFactoryAbi, network.chainId);
-      const famepayFactory = new ethers.Contract(famepayFactoryAddress, FamepayFactory.abi, signer);
+      const famepayFactory = new ethers.Contract(famepayFactoryAddress, FamepayFactoryAbi.abi, signer);
 
-      const famepayAddress = getContractAddress(FamepayAbi, network.chainId);
-      const famepay = new ethers.Contract(famepayAddress, FamepayAbi.abi, signer);
-      console.log(famepayAddress);
-      console.log(famepay);
-      return { famepayFactory, famepay };
+      // const famepayAddress = getContractAddress(FamepayAbi, network.chainId);
+      // const famepay = new ethers.Contract(famepayAddress, FamepayAbi.abi, signer);
+      return { famepayFactory /*, famepay */ };
     }
   } catch (error) {
-    conosola.error('bootstrapWeb3() error:', error);
+    consola.error('bootstrapWeb3() error:', error);
     return null;
   }
 };
@@ -102,21 +103,34 @@ const bootstrapWeb3 = async () => {
 const getWalletInfo = async () => {
   try {
     /*
+    const provider2 = await detectEthereumProvider();
     const onboard = onBoardInitialize();
     await onboard.walletSelect();
     await onboard.walletCheck()
     */
     const provider = new ethers.providers.Web3Provider(web3.currentProvider);
-    const accounts = await provider.listAccounts();
+
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     const account = accounts && accounts[0];
-    const balanceRaw = await provder.getBalance(raw);
+    const balanceRaw = await provider.getBalance(account);
     const balance = balanceRaw.toString();
-    const isAdmin = await marketplace.hasAdminRole(account);
-    return { account, balance, isAdmin };
+    return { account, balance /*, isAdmin*/ };
   } catch (error) {
-    consola.error('getWalletInfo() error:', error);
+    consola.error('getWalletInfo() error message:', error);
     return null;
   }
 };
+
+/**
+ ********************************
+ * ERC20
+ ********************************
+ */
+
+/**
+ ********************************
+ * Famepay Contracts
+ ********************************
+ */
 
 export { handleResponse, handleError, bootstrapWeb3, getWalletInfo };

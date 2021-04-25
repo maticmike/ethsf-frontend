@@ -1,5 +1,6 @@
+import consola from 'consola';
 import { CONNECT_WALLET } from '../actions/account';
-// import { NATIVE_CURRENCY } from '../../utils/constants';
+import { NATIVE_CURRENCY } from '../../constants/Blockchain';
 
 const initialState = {
   address: null,
