@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
 import NumberFormat from 'react-number-format';
 import { FormHelperText, Button } from '@material-ui/core';
 import { setObjectiveName } from '../../../utils/ObjectiveNames';
 import { useStyles } from './styles.js';
-
 const CampaignReward = ({
   objective,
   stakedAmount,
   setParentJackpotReward,
   setParentIncrementalReward,
   setParentCampaignSetupStep,
+  setParentFinishCampaign,
 }) => {
   const classes = useStyles();
   const [isJackpot, setIsJackpot] = useState(true);
@@ -18,12 +17,6 @@ const CampaignReward = ({
   const [incrementalReward, setIncrementalReward] = useState(0);
   const [jackpotTarget, setJackpotTarget] = useState(0);
   const [incrementalTarget, setIncrementalTarget] = useState(0);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(storeFamepayFactoryThunk());
-  }, []);
 
   const getHeading = () => (isJackpot ? 'Jackpot' : 'Incremental');
 
@@ -35,10 +28,11 @@ const CampaignReward = ({
     }
   };
 
-  const handleNewReward = () => {
+  const handleFinish = () => {
     if (!isJackpot) {
       setParentJackpotReward(jackpotReward);
       setParentIncrementalReward(incrementalReward);
+      setParentFinishCampaign();
     } else {
       setIsJackpot(false);
     }
@@ -85,7 +79,7 @@ const CampaignReward = ({
         <Button variant="outlined" color="primary" size="small" onClick={handlePrevious}>
           Previous
         </Button>
-        <Button variant="contained" color="primary" size="small" onClick={handleNewReward}>
+        <Button variant="contained" color="primary" size="small" onClick={handleFinish}>
           {isJackpot ? 'Next' : 'Finish'}
         </Button>
       </div>

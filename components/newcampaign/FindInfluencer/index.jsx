@@ -18,14 +18,21 @@ const FindInfluencer = ({ parentFindInfluencer, foundInfluencer, setParentCampai
       setInfluencerWasFound(false);
     }
     return () => {
-      consola.info('FindInfluencer: cleanup useEffect');
+      consola.info('FindInfluencer: searchedInfluencer useEffect');
     };
   }, [searchedInfluencer]);
 
-  const handleFindInfluencer = () => {
-    setSearchAttemptMade(true);
-    parentFindInfluencer(searchedInfluencer);
+  useEffect(() => {
     foundInfluencer === '' ? setInfluencerWasFound(false) : setInfluencerWasFound(true);
+    return () => {
+      consola.info('FindInfluencer: foundInfluencer useEffect');
+    };
+  }, [foundInfluencer]);
+
+  const handleFindInfluencer = async () => {
+    setSearchAttemptMade(true);
+    await parentFindInfluencer(searchedInfluencer);
+    console.log(foundInfluencer, 'found influencer');
   };
 
   const incrementCampaignSetup = () => setParentCampaignSetupStep(1);

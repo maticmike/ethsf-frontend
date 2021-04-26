@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import consola from 'consola';
+import { useSelector, useDispatch } from 'react-redux';
 import { Paper } from '@material-ui/core';
+import { storeFamepayFactoryThunk } from '../../redux/actions/famepayFactory';
+import { createNewCampaignOnContract } from '../../web3';
 import { useStyles } from './styles';
 
 const FindInfluencer = dynamic(() => import('../../components/newcampaign/FindInfluencer'), {
@@ -24,6 +28,10 @@ const CampaignReward = dynamic(() => import('../../components/newcampaign/Campai
 
 const NewCampaign = () => {
   const classes = useStyles();
+
+  const dispatch = useDispatch();
+  const famepayFactory = useSelector(state => state.famepayFactory);
+
   const [registrationStep, setRegistrationStep] = useState(0);
 
   const [influencer, setInfluencer] = useState('');
@@ -35,12 +43,37 @@ const NewCampaign = () => {
   const [jackpotRewardAmount, setJackpotRewardAmount] = useState(0);
   const [incrementalRewardAmount, setIncrementalRewardAmount] = useState(null);
 
+  useEffect(() => {
+    dispatch(storeFamepayFactoryThunk());
+  }, []);
+
   const findInfluencer = async influencer => {
     try {
       //search for influencer from api or db
       setInfluencer(influencer);
     } catch (error) {
-      console.log(error);
+      consola.error('NewCampaign.findInfluencer():', error);
+    }
+  };
+
+  const createNewCampaign = async () => {
+    try {
+      createNewCampaignOnContract(
+        famepayFactory,
+        /*business,*/
+        influencer,
+        /*
+        campaignId, 
+        startDate,
+        */
+        simplePostDuration, //date,
+        jackpotRewardAmount,
+        incrementalRewardAmount,
+        stakedAmount,
+        objective,
+      );
+    } catch (error) {
+      consola.error('NewCampaign.createCampaign():', error);
     }
   };
 
@@ -93,6 +126,7 @@ const NewCampaign = () => {
               objective={objective}
               setParentDepositToEscrow={deposit => setStakedAmount(deposit)}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
+              setParentFinishCampaign={createNewCampaign}
             />
           </Paper>
         );
@@ -105,6 +139,7 @@ const NewCampaign = () => {
               setParentJackpotReward={jackpotReward => setJackpotRewardAmount(jackpotReward)}
               setParentIncrementalReward={incrementalReward => setIncrementalRewardAmount(incrementalReward)}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
+              setParentFinishCampaign={createNewCampaign}
             ></CampaignReward>
           </Paper>
         );

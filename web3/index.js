@@ -90,7 +90,7 @@ const bootstrapFactory = async () => {
       return { famepayFactory /*, famepay */ };
     }
   } catch (error) {
-    consola.error('bootstrapFactory() error:', error);
+    consola.error('Web3: bootstrapFactory() error:', error);
     return null;
   }
 };
@@ -116,7 +116,7 @@ const getWalletInfo = async () => {
     const balance = balanceRaw.toString();
     return { account, balance /*, isAdmin*/ };
   } catch (error) {
-    consola.error('getWalletInfo() error message:', error);
+    consola.error('Web3: getWalletInfo() error message:', error);
     return null;
   }
 };
@@ -133,7 +133,7 @@ const getWalletInfo = async () => {
  ********************************
  */
 
-const createNewCampaign = async (
+const createNewCampaignOnContract = async (
   famepayFactory,
   business,
   influencer,
@@ -148,20 +148,24 @@ const createNewCampaign = async (
   objective,
 ) => {
   consola.info('web3: createNewCampaign() started');
-  const campaign = await famepayFactory.newFamepayCampaign(
-    business,
-    influencer,
-    campaignId,
-    startDate,
-    deadline,
-    jackpotPayment,
-    incrementalPayment,
-    jackpotTargetAmount,
-    incrementalTargetAmount,
-    potentialPayoutAmount,
-    objective,
-  );
-  return campaign;
+  try {
+    const campaign = await famepayFactory.newFamepayCampaign(
+      business,
+      influencer,
+      campaignId,
+      startDate,
+      deadline,
+      jackpotPayment,
+      incrementalPayment,
+      jackpotTargetAmount,
+      incrementalTargetAmount,
+      potentialPayoutAmount,
+      objective,
+    );
+    return campaign;
+  } catch (error) {
+    consola.error('Web3: createNewCampaignOnContract():', error);
+  }
 };
 
 /**
@@ -170,4 +174,4 @@ const createNewCampaign = async (
  ********************************
  */
 
-export { handleResponse, handleError, bootstrapFactory, getWalletInfo, createNewCampaign };
+export { handleResponse, handleError, bootstrapFactory, getWalletInfo, createNewCampaignOnContract };

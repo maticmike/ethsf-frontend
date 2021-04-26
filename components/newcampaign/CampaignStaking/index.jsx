@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
 import NumberFormat from 'react-number-format';
 import { FormHelperText, Button } from '@material-ui/core';
 import { setObjectiveName } from '../../../utils/ObjectiveNames';
 import { useStyles } from './styles.js';
 
-const CampaignStaking = ({ objective, setParentDepositToEscrow, setParentCampaignSetupStep }) => {
+const CampaignStaking = ({
+  objective,
+  setParentDepositToEscrow,
+  setParentCampaignSetupStep,
+  setParentFinishCampaign,
+}) => {
   const classes = useStyles();
-  const dispatch = useDispatch();
 
   const [stakedAmount, setStakedAmount] = useState(null);
-
-  useEffect(() => {
-    dispatch(storeFamepayFactoryThunk());
-  }, []);
 
   const getHeading = () => (objective === 'singlePost' ? 'Post Staking' : 'Campaign Staking');
 
@@ -23,9 +22,7 @@ const CampaignStaking = ({ objective, setParentDepositToEscrow, setParentCampaig
   };
 
   // only for single post
-  const finishAndDeposit = () => {
-    console.log('Finished Single Post!!');
-  };
+  const finishAndDeposit = () => setParentFinishCampaign();
 
   return (
     <div className={classes.CampaignStaking_font}>
