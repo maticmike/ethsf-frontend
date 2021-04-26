@@ -7,17 +7,8 @@ const useStyles = makeStyles({
     marginTop: '15%',
   },
 
-  FindInfluencer_layout: {
-    width: '450px',
-    height: '300px',
-    borderRadius: '25px',
-    justifyContent: 'center',
-    display: 'flex',
-    paddingTop: '10%',
-  },
-
   FindInfluencer_search: {
-    width: '280px',
+    width: '400px',
     borderRadius: '25px',
   },
 
@@ -27,15 +18,6 @@ const useStyles = makeStyles({
 
   FindInfluencer_font: {
     fontFamily: 'Arial, Helvetica, sans-serif',
-  },
-
-  FindInfluencer_layout: {
-    width: '450px',
-    height: '350px',
-    borderRadius: '25px',
-    justifyContent: 'center',
-    display: 'flex',
-    paddingTop: '15%',
   },
 });
 

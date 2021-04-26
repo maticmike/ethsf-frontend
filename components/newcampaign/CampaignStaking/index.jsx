@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
-import { FormHelperText, Button } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import NumberFormat from 'react-number-format';
+import { FormHelperText, Button } from '@material-ui/core';
 import { setObjectiveName } from '../../../utils/ObjectiveNames';
 import { useStyles } from './styles.js';
 
 const CampaignStaking = ({ objective, setParentDepositToEscrow, setParentCampaignSetupStep }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const [stakedAmount, setStakedAmount] = useState(null);
+
+  useEffect(() => {
+    dispatch(storeFamepayFactoryThunk());
+  }, []);
 
   const getHeading = () => (objective === 'singlePost' ? 'Post Staking' : 'Campaign Staking');
 

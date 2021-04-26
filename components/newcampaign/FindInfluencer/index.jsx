@@ -1,14 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { OutlinedInput, Grid, Button } from '@material-ui/core';
 import CheckCircle from '@material-ui/icons/Done';
 import Image from 'next/image';
 import { useStyles } from './styles';
+import consola from 'consola';
+import { shortenedEthAddress } from '../../../web3/helpers';
 const FindInfluencer = ({ parentFindInfluencer, foundInfluencer, setParentCampaignSetupStep }) => {
   const classes = useStyles();
 
   const [influencerWasFound, setInfluencerWasFound] = useState(false);
   const [searchAttemptMade, setSearchAttemptMade] = useState(false);
   const [searchedInfluencer, setSearchedInfluencer] = useState('');
+
+  useEffect(() => {
+    if (searchedInfluencer.length === 0 && searchAttemptMade) {
+      setSearchAttemptMade(false);
+      setInfluencerWasFound(false);
+    }
+    return () => {
+      consola.info('FindInfluencer: cleanup useEffect');
+    };
+  }, [searchedInfluencer]);
 
   const handleFindInfluencer = () => {
     setSearchAttemptMade(true);
@@ -29,27 +41,28 @@ const FindInfluencer = ({ parentFindInfluencer, foundInfluencer, setParentCampai
             onChange={e => setSearchedInfluencer(e.target.value)}
             className={classes.FindInfluencer_search}
           />
+          <br />
+          <br />
         </Grid>
         {searchAttemptMade ? (
           influencerWasFound ? (
             <>
-              <br />
-              <Grid item sm={12} align="center">
+              <Grid item sm={6} align="center">
                 <Image src="/Ethereum.png" alt={`${foundInfluencer} Eth Address`} width="32" height="32" />
-                <strong>Ethereum Address&nbsp;</strong>
+                <strong>{shortenedEthAddress(searchedInfluencer)}&nbsp;</strong>
                 <CheckCircle color="primary" />
               </Grid>
-              <Grid item sm={12} align="center">
+              <Grid item sm={6} align="center">
                 <Image src="/Instagram.png" alt={`${foundInfluencer} Instagram Profile`} width="32" height="32" />
                 <strong>@instagramProfile&nbsp;</strong>
                 <CheckCircle color="primary" />
               </Grid>
-              <Grid item sm={12} align="center">
+              <Grid item sm={6} align="center">
                 <Image src="/Twitter.png" alt={`${foundInfluencer} Youtube Profile`} width="32" height="32" />
                 <strong>@twitterProfile&nbsp;</strong>
                 <CheckCircle color="primary" />
               </Grid>
-              <Grid item sm={12} align="center">
+              <Grid item sm={6} align="center">
                 <Image src="/Youtube.png" alt={`${foundInfluencer} Youtube Profile`} width="32" height="32" />
                 <strong>@youtubeProfile&nbsp;</strong>
                 <CheckCircle color="primary" />

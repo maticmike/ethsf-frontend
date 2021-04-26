@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import NumberFormat from 'react-number-format';
 import { FormHelperText, Button } from '@material-ui/core';
 import { setObjectiveName } from '../../../utils/ObjectiveNames';
@@ -17,6 +18,12 @@ const CampaignReward = ({
   const [incrementalReward, setIncrementalReward] = useState(0);
   const [jackpotTarget, setJackpotTarget] = useState(0);
   const [incrementalTarget, setIncrementalTarget] = useState(0);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(storeFamepayFactoryThunk());
+  }, []);
 
   const getHeading = () => (isJackpot ? 'Jackpot' : 'Incremental');
 

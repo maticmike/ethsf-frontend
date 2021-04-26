@@ -10,13 +10,9 @@ export const connectAccount = wallet => ({
 
 export const connectAccountThunk = () => {
   return async (dispatch, getState) => {
-    consola.info('here');
     if (typeof window.ethereum !== 'undefined') {
       getWalletInfo()
-        .then(res => {
-          consola.info(res, 'the res');
-          dispatch(connectAccount(res));
-        })
+        .then(res => dispatch(connectAccount(res)))
         .catch(error => consola.error('connectAccountThunk action error message:', error));
     }
   };

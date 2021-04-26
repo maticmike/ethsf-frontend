@@ -70,10 +70,10 @@ const getContractAddress = (abi, chainId) => {
 
 /**
  * Bootstrap web3
- * @function bootstrapWeb3
+ * @function bootstrapFactory
  * @returns the full contract objects with their addresses
  */
-const bootstrapWeb3 = async () => {
+const bootstrapFactory = async () => {
   try {
     const provider = new ethers.providers.Web3Provider(web3.currentProvider);
     const signer = provider.getSigner();
@@ -90,7 +90,7 @@ const bootstrapWeb3 = async () => {
       return { famepayFactory /*, famepay */ };
     }
   } catch (error) {
-    consola.error('bootstrapWeb3() error:', error);
+    consola.error('bootstrapFactory() error:', error);
     return null;
   }
 };
@@ -129,8 +129,45 @@ const getWalletInfo = async () => {
 
 /**
  ********************************
- * Famepay Contracts
+ * Famepay Factory Functions
  ********************************
  */
 
-export { handleResponse, handleError, bootstrapWeb3, getWalletInfo };
+const createNewCampaign = async (
+  famepayFactory,
+  business,
+  influencer,
+  campaignId,
+  startDate,
+  deadline,
+  jackpotPayment,
+  incrementalPayment,
+  jackpotTargetAmount,
+  incrementalTargetAmount,
+  potentialPayoutAmount,
+  objective,
+) => {
+  consola.info('web3: createNewCampaign() started');
+  const campaign = await famepayFactory.newFamepayCampaign(
+    business,
+    influencer,
+    campaignId,
+    startDate,
+    deadline,
+    jackpotPayment,
+    incrementalPayment,
+    jackpotTargetAmount,
+    incrementalTargetAmount,
+    potentialPayoutAmount,
+    objective,
+  );
+  return campaign;
+};
+
+/**
+ ********************************
+ * Famepay Functions
+ ********************************
+ */
+
+export { handleResponse, handleError, bootstrapFactory, getWalletInfo, createNewCampaign };

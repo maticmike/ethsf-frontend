@@ -9,7 +9,7 @@ const useStyles = makeStyles({
 
   NewCampaign_layout_find: {
     width: '450px',
-    height: '350px',
+    height: '410px',
     borderRadius: '25px',
     justifyContent: 'center',
     display: 'flex',

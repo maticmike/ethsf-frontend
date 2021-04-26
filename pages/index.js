@@ -1,15 +1,9 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import Head from 'next/head';
 import { storeFamepayFactoryThunk } from '../redux/actions/famepayFactory';
 import styles from '../styles/Home.module.css';
 
 const Home = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(storeFamepayFactoryThunk());
-  }, []);
   return (
     <div className={styles.container}>
       <main className={styles.main}>
