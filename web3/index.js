@@ -140,11 +140,11 @@ const createNewCampaignOnContract = async (
   campaignId,
   startDate,
   deadline,
-  jackpotPayment,
-  incrementalPayment,
-  jackpotTargetAmount,
-  incrementalTargetAmount,
-  potentialPayoutAmount,
+  jackpotReward,
+  incrementalReward,
+  jackpotTarget,
+  incrementalTarget,
+  potentialPayout,
   objective,
 ) => {
   consola.info('web3: createNewCampaign() started');
@@ -155,11 +155,11 @@ const createNewCampaignOnContract = async (
       campaignId,
       startDate,
       deadline,
-      jackpotPayment,
-      incrementalPayment,
-      jackpotTargetAmount,
-      incrementalTargetAmount,
-      potentialPayoutAmount,
+      jackpotReward,
+      incrementalReward,
+      jackpotTarget,
+      incrementalTarget,
+      potentialPayout,
       objective,
     );
     return campaign;

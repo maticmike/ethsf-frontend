@@ -30,22 +30,21 @@ const NewCampaign = () => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
+  const account = useSelector(state => state.account);
+
   const famepayFactory = useSelector(state => state.famepayFactory);
 
   const [registrationStep, setRegistrationStep] = useState(0);
 
   const [influencer, setInfluencer] = useState('');
   const [objective, setObjective] = useState(''); //views
-  const [date, setDate] = useState(null);
-  const [simplePostDuration, setSimplePostDuration] = useState(null);
-  const [objectiveAmount, setObjectiveAmount] = useState(null); //5000 views
+  const [simpleDate, setSimpleDate] = useState(null);
+  const [campaignPostDuration, setCampaignPostDuration] = useState(null);
   const [stakedAmount, setStakedAmount] = useState(null);
-  const [jackpotRewardAmount, setJackpotRewardAmount] = useState(0);
-  const [incrementalRewardAmount, setIncrementalRewardAmount] = useState(null);
-
-  useEffect(() => {
-    dispatch(storeFamepayFactoryThunk());
-  }, []);
+  const [jackpotTarget, setJackpotTarget] = useState(0);
+  const [incrementalTarget, setIncrementalTarget] = useState(0);
+  const [jackpotReward, setJackpotReward] = useState(0);
+  const [incrementalReward, setIncrementalReward] = useState(null);
 
   const findInfluencer = async influencer => {
     try {
@@ -56,19 +55,27 @@ const NewCampaign = () => {
     }
   };
 
+  const setAccount = () => {
+    dispatch(storeFamepayFactoryThunk());
+  };
+  const factory = useSelector(state => state.factory);
+  const checkAccount = () => {
+    console.log(factory, 'the logged account in useEffect');
+  };
+
   const createNewCampaign = async () => {
     try {
+      //for simple post
       createNewCampaignOnContract(
         famepayFactory,
-        /*business,*/
+        account.address, //business
         influencer,
-        /*
-        campaignId, 
-        startDate,
-        */
-        simplePostDuration, //date,
-        jackpotRewardAmount,
-        incrementalRewardAmount,
+        123, //campaignId
+        simpleDate, //startDate campaignPostDuration, //date,
+        jackpotReward,
+        incrementalReward,
+        jackpotTarget,
+        incrementalTarget,
         stakedAmount,
         objective,
       );
@@ -103,7 +110,7 @@ const NewCampaign = () => {
           <Paper className={classes.NewCampaign_layout_dates} elevation={3}>
             <CampaignDates
               objective={objective}
-              setParentSimpleDate={date => setDate(date)} //one date for simple post
+              setParentSimpleDate={date => setSimpleDate(date)} //one date for simple post
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
             />
           </Paper>
@@ -114,7 +121,7 @@ const NewCampaign = () => {
           <Paper className={classes.NewCampaign_layout_duration} elevation={3}>
             <SimplePostDuration
               objective={objective}
-              setParentPostDuration={duration => setSimplePostDuration(duration)} //range for campaign
+              setParentPostDuration={duration => setCampaignPostDuration(duration)} //range for campaign
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
             />
           </Paper>
@@ -136,8 +143,10 @@ const NewCampaign = () => {
             <CampaignReward
               objective={objective}
               stakedAmount={stakedAmount}
-              setParentJackpotReward={jackpotReward => setJackpotRewardAmount(jackpotReward)}
-              setParentIncrementalReward={incrementalReward => setIncrementalRewardAmount(incrementalReward)}
+              setParentJackpotReward={jackpotReward => setJackpotReward(jackpotReward)}
+              setParentIncrementalReward={incrementalReward => setIncrementalReward(incrementalReward)}
+              setParentJackpotTarget={jackpotTarget => setJackpotTarget(jackpotTarget)}
+              setParentIncrementalTarget={incrementalTarget => setIncrementalTarget(incrementalTarget)}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
               setParentFinishCampaign={createNewCampaign}
             ></CampaignReward>
@@ -145,7 +154,12 @@ const NewCampaign = () => {
         );
     }
   };
-  return <div className={classes.NewCampaign_box_positioning}>{renderSingleRegistrationComponent()}</div>;
+  return (
+    <div className={classes.NewCampaign_box_positioning}>
+      {renderSingleRegistrationComponent()} <button onClick={checkAccount}>Get Account</button>
+      <button onClick={setAccount}>set account</button>
+    </div>
+  );
 };
 
 export default NewCampaign;

@@ -8,6 +8,8 @@ const CampaignReward = ({
   stakedAmount,
   setParentJackpotReward,
   setParentIncrementalReward,
+  setParentJackpotTarget,
+  setParentIncrementalTarget,
   setParentCampaignSetupStep,
   setParentFinishCampaign,
 }) => {
@@ -32,6 +34,8 @@ const CampaignReward = ({
     if (!isJackpot) {
       setParentJackpotReward(jackpotReward);
       setParentIncrementalReward(incrementalReward);
+      setParentJackpotTarget(jackpotTarget);
+      setParentIncrementalTarget(incrementalTarget);
       setParentFinishCampaign();
     } else {
       setIsJackpot(false);
