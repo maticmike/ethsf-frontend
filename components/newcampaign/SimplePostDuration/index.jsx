@@ -14,7 +14,7 @@ import {
 import { setObjectiveName } from '../../../utils/ObjectiveNames';
 import { useStyles } from './styles';
 
-const SimplePostDuration = ({ objective, setParentPostDuration, setParentCampaignSetupStep }) => {
+const SimplePostDuration = ({ objective, setParentSimplePostDuration, setParentCampaignSetupStep }) => {
   const classes = useStyles();
   const [selectedDuration, setSelectedDuration] = useState('');
   const [showOtherOptions, setShowOtherOptions] = useState(false);
@@ -27,7 +27,7 @@ const SimplePostDuration = ({ objective, setParentPostDuration, setParentCampaig
     if (selectedDuration === 'other' && alternativeDuration === '') {
       alert('Please select post duration from dropdown');
     } else {
-      setParentPostDuration(selectedDuration === '' ? alternativeDuration : selectedDuration);
+      setParentSimplePostDuration(selectedDuration === '' ? alternativeDuration : selectedDuration);
       objective === 'singlePost' ? setParentCampaignSetupStep(4) : setParentCampaignSetupStep(5);
     }
   };

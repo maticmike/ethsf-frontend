@@ -1,6 +1,6 @@
 import { CONNECT_FAMEPAY_FACTORY } from '../actions/famepayFactory';
 const initialState = {
-  provider: null,
+  famepayFactory: null,
 };
 
 const famepayFactory = (state = initialState, action) => {

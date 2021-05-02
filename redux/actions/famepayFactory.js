@@ -11,7 +11,6 @@ export const storeFamepayFactory = famepayFactory => ({
 
 export const storeFamepayFactoryThunk = () => {
   return async dispatch => {
-    console.log('hit em');
     if (window.ethereum) {
       //   window.ethereum.enable();
       bootstrapFactory()

@@ -5,14 +5,18 @@ import 'react-calendar/dist/Calendar.css';
 import { setObjectiveName } from '../../../utils/ObjectiveNames';
 import { useStyles } from './styles';
 
-const CampaignDates = ({ objective, setParentSimpleDate, setParentCampaignSetupStep }) => {
+const CampaignDeadline = ({ objective, setParentSimpleDeadline, setParentCampaignSetupStep }) => {
   const classes = useStyles();
-  const [simpleDate, setSimpleDate] = useState(null);
+  const [simpleDeadline, setSimpleDeadline] = useState(null);
+  const [campaignDuration, setCampaignDuration] = useState(null);
 
   const getHeading = () => (objective === 'singlePost' ? 'Post Date And Time' : 'Campaign Length');
-  const handleDateChange = date => setSimpleDate(date);
-  const selectDate = () => {
-    setParentSimpleDate(simpleDate);
+  const handleDeadline = deadline => {
+    objective === 'singlePost' ? setSimpleDeadline(deadline) : setCampaignDuration(deadline);
+  };
+  const selectDeadline = () => {
+    setParentSimpleDeadline(simpleDeadline);
+    setParentCampaignSetupStep(campaignDuration);
     objective === 'singlePost' ? setParentCampaignSetupStep(3) : setParentCampaignSetupStep(4);
   };
   return (
@@ -27,10 +31,10 @@ const CampaignDates = ({ objective, setParentSimpleDate, setParentCampaignSetupS
         </Grid>
         <Grid item xs={6} className={classes.CampaignDates_calendar_right}>
           <Calendar
-            onChange={handleDateChange}
+            onChange={handleDeadline}
             minDate={new Date()}
             selectRange={objective != 'singlePost' ? true : false}
-            value={simpleDate}
+            value={objective === 'singlePost' ? simpleDeadline : campaignDuration}
           />
         </Grid>
       </Grid>
@@ -39,8 +43,8 @@ const CampaignDates = ({ objective, setParentSimpleDate, setParentCampaignSetupS
         <Button onClick={() => setParentCampaignSetupStep(1)} variant="outlined" color="primary" size="small">
           Previous
         </Button>
-        {simpleDate ? (
-          <Button type="submit" variant="contained" color="primary" size="small" onClick={selectDate}>
+        {simpleDeadline || campaignDuration ? (
+          <Button type="submit" variant="contained" color="primary" size="small" onClick={selectDeadline}>
             Next
           </Button>
         ) : null}
@@ -49,4 +53,4 @@ const CampaignDates = ({ objective, setParentSimpleDate, setParentCampaignSetupS
   );
 };
 
-export default CampaignDates;
+export default CampaignDeadline;

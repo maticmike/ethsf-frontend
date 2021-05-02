@@ -78,15 +78,11 @@ const bootstrapFactory = async () => {
     const provider = new ethers.providers.Web3Provider(web3.currentProvider);
     const signer = provider.getSigner();
     const network = await provider.getNetwork();
-    const chain = await provider.getNetwork();
-    if (chain.chainId != NETWORK_ID) {
+    if (network.chainId != NETWORK_ID) {
       return false;
     } else {
       const famepayFactoryAddress = getContractAddress(FamepayFactoryAbi, network.chainId);
       const famepayFactory = new ethers.Contract(famepayFactoryAddress, FamepayFactoryAbi.abi, signer);
-
-      // const famepayAddress = getContractAddress(FamepayAbi, network.chainId);
-      // const famepay = new ethers.Contract(famepayAddress, FamepayAbi.abi, signer);
       return { famepayFactory /*, famepay */ };
     }
   } catch (error) {
@@ -149,19 +145,33 @@ const createNewCampaignOnContract = async (
 ) => {
   consola.info('web3: createNewCampaign() started');
   try {
+    console.log(famepayFactory);
+    console.log(business);
+    console.log(influencer);
+    console.log(campaignId);
+    console.log(startDate);
+    console.log(deadline); //fix me
+    console.log(jackpotReward);
+    console.log(incrementalReward);
+    console.log(jackpotTarget);
+    console.log(incrementalTarget);
+    console.log(potentialPayout);
+    console.log(objective);
     const campaign = await famepayFactory.newFamepayCampaign(
       business,
       influencer,
       campaignId,
       startDate,
-      deadline,
-      jackpotReward,
-      incrementalReward,
+      1619764539,
+      50,
+      10,
       jackpotTarget,
       incrementalTarget,
-      potentialPayout,
+      100000000000000, //potentialPayout
       objective,
+      { value: 100000000000000, gasLimit: 3000000 },
     );
+    console.log(campaign, 'the campaign in web3');
     return campaign;
   } catch (error) {
     consola.error('Web3: createNewCampaignOnContract():', error);

@@ -13,7 +13,7 @@ const FindInfluencer = dynamic(() => import('../../components/newcampaign/FindIn
 const CampaignObjective = dynamic(() => import('../../components/newcampaign/CampaignObjective'), {
   loading: () => <p>Select Campaign Objective Loading....</p>,
 });
-const CampaignDates = dynamic(() => import('../../components/newcampaign/CampaignDates'), {
+const CampaignDeadline = dynamic(() => import('../../components/newcampaign/CampaignDeadline'), {
   loading: () => <p>Set Campaign Dates Loading....</p>,
 });
 const SimplePostDuration = dynamic(() => import('../../components/newcampaign/SimplePostDuration'), {
@@ -31,20 +31,20 @@ const NewCampaign = () => {
 
   const dispatch = useDispatch();
   const account = useSelector(state => state.account);
-
   const famepayFactory = useSelector(state => state.famepayFactory);
 
   const [registrationStep, setRegistrationStep] = useState(0);
 
   const [influencer, setInfluencer] = useState('');
   const [objective, setObjective] = useState(''); //views
-  const [simpleDate, setSimpleDate] = useState(null);
-  const [campaignPostDuration, setCampaignPostDuration] = useState(null);
+  const [simpleDeadline, setSimpleDeadline] = useState(null);
+  const [simplePostDuration, setSimplePostDuration] = useState(null);
+  const [campaignDuration, setCampaignDuration] = useState(null);
   const [stakedAmount, setStakedAmount] = useState(null);
   const [jackpotTarget, setJackpotTarget] = useState(0);
-  const [incrementalTarget, setIncrementalTarget] = useState(0);
+  const [incrementalTarget, setIncrementalTarget] = useState(1);
   const [jackpotReward, setJackpotReward] = useState(0);
-  const [incrementalReward, setIncrementalReward] = useState(null);
+  const [incrementalReward, setIncrementalReward] = useState(0);
 
   const findInfluencer = async influencer => {
     try {
@@ -58,20 +58,20 @@ const NewCampaign = () => {
   const setAccount = () => {
     dispatch(storeFamepayFactoryThunk());
   };
-  const factory = useSelector(state => state.factory);
   const checkAccount = () => {
-    console.log(factory, 'the logged account in useEffect');
+    console.log(famepayFactory, 'the logged account in useEffect');
   };
 
   const createNewCampaign = async () => {
     try {
       //for simple post
-      createNewCampaignOnContract(
+      await createNewCampaignOnContract(
         famepayFactory,
         account.address, //business
         influencer,
         123, //campaignId
-        simpleDate, //startDate campaignPostDuration, //date,
+        1619660168, //startDate or
+        simpleDeadline, //or  campaignPostDuration,
         jackpotReward,
         incrementalReward,
         jackpotTarget,
@@ -108,9 +108,10 @@ const NewCampaign = () => {
       case 2:
         return (
           <Paper className={classes.NewCampaign_layout_dates} elevation={3}>
-            <CampaignDates
+            <CampaignDeadline
               objective={objective}
-              setParentSimpleDate={date => setSimpleDate(date)} //one date for simple post
+              setParentSimpleDeadline={simpleDeadline => setSimpleDeadline(simpleDeadline)} //one date for simple post
+              setParentCampaignDuration={campaignDuration => setCampaignDuration(campaignDuration)}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
             />
           </Paper>
@@ -121,7 +122,7 @@ const NewCampaign = () => {
           <Paper className={classes.NewCampaign_layout_duration} elevation={3}>
             <SimplePostDuration
               objective={objective}
-              setParentPostDuration={duration => setCampaignPostDuration(duration)} //range for campaign
+              setParentSimplePostDuration={duration => setSimplePostDuration(duration)} //range for campaign
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
             />
           </Paper>
@@ -156,7 +157,8 @@ const NewCampaign = () => {
   };
   return (
     <div className={classes.NewCampaign_box_positioning}>
-      {renderSingleRegistrationComponent()} <button onClick={checkAccount}>Get Account</button>
+      {renderSingleRegistrationComponent()}
+      <button onClick={checkAccount}>Get Account</button>
       <button onClick={setAccount}>set account</button>
     </div>
   );

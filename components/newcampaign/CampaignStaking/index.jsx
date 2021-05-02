@@ -12,15 +12,11 @@ const CampaignStaking = ({
 }) => {
   const classes = useStyles();
 
-  const [stakedAmount, setStakedAmount] = useState(null);
+  const [inputEntered, setInputEntered] = useState(null);
 
   const getHeading = () => (objective === 'singlePost' ? 'Post Staking' : 'Campaign Staking');
 
-  const stakeDeposit = () => {
-    setParentDepositToEscrow(stakedAmount.slice(1));
-    setParentCampaignSetupStep(5);
-  };
-
+  const stakeDeposit = () => setParentCampaignSetupStep(5);
   // only for single post
   const finishAndDeposit = () => setParentFinishCampaign();
 
@@ -35,7 +31,10 @@ const CampaignStaking = ({
         placeholder="$1000"
         thousandSeparator={true}
         prefix={'$'}
-        onChange={e => setStakedAmount(e.target.value)}
+        onChange={e => {
+          e.target.value.length ? setInputEntered(true) : setInputEntered(false);
+          setParentDepositToEscrow(e.target.value.slice(1));
+        }}
       />
       <br />
       <br />
@@ -48,12 +47,12 @@ const CampaignStaking = ({
         >
           Previous
         </Button>
-        {stakedAmount && objective != 'singlePost' ? (
+        {inputEntered && objective != 'singlePost' ? (
           <Button variant="contained" color="primary" size="small" onClick={stakeDeposit}>
             Next
           </Button>
         ) : null}
-        {stakedAmount && objective === 'singlePost' ? (
+        {inputEntered && objective === 'singlePost' ? (
           <Button variant="contained" color="primary" size="small" onClick={finishAndDeposit}>
             Finish
           </Button>
