@@ -12,13 +12,13 @@ const CampaignReward = ({
   setParentIncrementalTarget,
   setParentCampaignSetupStep,
   setParentFinishCampaign,
+  parentJackpotReward,
+  parentIncrementalReward,
+  parentJackpotTarget,
+  parentIncrementalTarget,
 }) => {
   const classes = useStyles();
   const [isJackpot, setIsJackpot] = useState(true);
-  const [jackpotReward, setJackpotReward] = useState(0);
-  const [incrementalReward, setIncrementalReward] = useState(0);
-  const [jackpotTarget, setJackpotTarget] = useState(0);
-  const [incrementalTarget, setIncrementalTarget] = useState(0);
 
   const getHeading = () => (isJackpot ? 'Jackpot' : 'Incremental');
 
@@ -53,14 +53,25 @@ const CampaignReward = ({
       <div className={classes.CampaignReward_align_inputs}>
         <div>
           {isJackpot ? <p>Jackpot Payment:</p> : <p>Incremental Payment: </p>}
-          <NumberFormat
-            className={classes.CampaignReward_input}
-            placeholder={`$${isJackpot ? parseInt(stakedAmount) * 0.8 : parseInt(stakedAmount) * 0.2}`}
-            thousandSeparator={true}
-            value={isJackpot ? jackpotReward : incrementalReward}
-            prefix={'$'}
-            onChange={e => (isJackpot ? setJackpotReward(e.target.value) : setIncrementalReward(e.target.value))}
-          />
+          {isJackpot ? (
+            <NumberFormat
+              className={classes.CampaignReward_input}
+              placeholder={`$${parseInt(stakedAmount) * 0.8}`}
+              thousandSeparator={true}
+              value={parentJackpotReward}
+              prefix={'$'}
+              onChange={e => setParentJackpotReward(e.target.value.slice(1))}
+            />
+          ) : (
+            <NumberFormat
+              className={classes.CampaignReward_input}
+              placeholder={`$${parseInt(stakedAmount) * 0.2}`}
+              thousandSeparator={true}
+              value={parentIncrementalReward}
+              prefix={'$'}
+              onChange={e => setParentIncrementalReward(e.target.value.slice(1))}
+            />
+          )}
           &nbsp;&nbsp;&nbsp;&nbsp;For Each
         </div>
         <div className={classes.CampaignReward_shift_objective_input}>
@@ -69,13 +80,23 @@ const CampaignReward = ({
           ) : (
             <p>{setObjectiveName(objective)} Incremental Objective:</p>
           )}
-          <NumberFormat
-            className={classes.CampaignReward_input}
-            placeholder={`${isJackpot ? '800,000' : '50,000'} ${setObjectiveName(objective)}`}
-            thousandSeparator={true}
-            value={isJackpot ? jackpotTarget : incrementalTarget}
-            onChange={e => (isJackpot ? setJackpotTarget(e.target.value) : setIncrementalTarget(e.target.value))}
-          />
+          {isJackpot ? (
+            <NumberFormat
+              className={classes.CampaignReward_input}
+              placeholder={`90,000 ${setObjectiveName(objective)}`}
+              thousandSeparator={true}
+              value={parentJackpotTarget}
+              onChange={e => setParentJackpotTarget(e.target.value)}
+            />
+          ) : (
+            <NumberFormat
+              className={classes.CampaignReward_input}
+              placeholder={`5000 ${setObjectiveName(objective)}`}
+              thousandSeparator={true}
+              value={parentIncrementalTarget}
+              onChange={e => setParentIncrementalTarget(e.target.value)}
+            />
+          )}
         </div>
       </div>
       <br />

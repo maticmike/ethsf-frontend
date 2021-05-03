@@ -163,13 +163,13 @@ const createNewCampaignOnContract = async (
       campaignId,
       startDate,
       1619764539,
-      50,
-      10,
+      jackpotReward,
+      incrementalReward,
       jackpotTarget,
       incrementalTarget,
-      100000000000000, //potentialPayout
+      potentialPayout, //potentialPayout
       objective,
-      { value: 100000000000000, gasLimit: 3000000 },
+      { value: potentialPayout, gasLimit: 3000000 },
     );
     console.log(campaign, 'the campaign in web3');
     return campaign;

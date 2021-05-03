@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Paper } from '@material-ui/core';
 import { storeFamepayFactoryThunk } from '../../redux/actions/famepayFactory';
 import { createNewCampaignOnContract } from '../../web3';
+import { onlyNumeric } from '../../utils/helpers';
 import { useStyles } from './styles';
 
 const FindInfluencer = dynamic(() => import('../../components/newcampaign/FindInfluencer'), {
@@ -46,6 +47,13 @@ const NewCampaign = () => {
   const [jackpotReward, setJackpotReward] = useState(0);
   const [incrementalReward, setIncrementalReward] = useState(0);
 
+  useEffect(() => {
+    dispatch(storeFamepayFactoryThunk());
+    return () => {
+      consola.success('NewCampaign page: cleanup');
+    };
+  }, []);
+
   const findInfluencer = async influencer => {
     try {
       //search for influencer from api or db
@@ -54,14 +62,6 @@ const NewCampaign = () => {
       consola.error('NewCampaign.findInfluencer():', error);
     }
   };
-
-  const setAccount = () => {
-    dispatch(storeFamepayFactoryThunk());
-  };
-  const checkAccount = () => {
-    console.log(famepayFactory, 'the logged account in useEffect');
-  };
-
   const createNewCampaign = async () => {
     try {
       //for simple post
@@ -69,7 +69,7 @@ const NewCampaign = () => {
         famepayFactory,
         account.address, //business
         influencer,
-        123, //campaignId
+        10, //campaignId
         1619660168, //startDate or
         simpleDeadline, //or  campaignPostDuration,
         jackpotReward,
@@ -132,7 +132,7 @@ const NewCampaign = () => {
           <Paper className={classes.NewCampaign_layout_staking} elevation={3}>
             <CampaignStaking
               objective={objective}
-              setParentDepositToEscrow={deposit => setStakedAmount(deposit)}
+              setParentDepositToEscrow={deposit => setStakedAmount(onlyNumeric(deposit))}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
               setParentFinishCampaign={createNewCampaign}
             />
@@ -144,24 +144,22 @@ const NewCampaign = () => {
             <CampaignReward
               objective={objective}
               stakedAmount={stakedAmount}
-              setParentJackpotReward={jackpotReward => setJackpotReward(jackpotReward)}
-              setParentIncrementalReward={incrementalReward => setIncrementalReward(incrementalReward)}
-              setParentJackpotTarget={jackpotTarget => setJackpotTarget(jackpotTarget)}
-              setParentIncrementalTarget={incrementalTarget => setIncrementalTarget(incrementalTarget)}
+              setParentJackpotReward={jackpotReward => setJackpotReward(onlyNumeric(jackpotReward))}
+              setParentIncrementalReward={incrementalReward => setIncrementalReward(onlyNumeric(incrementalReward))}
+              setParentJackpotTarget={jackpotTarget => setJackpotTarget(onlyNumeric(jackpotTarget))}
+              setParentIncrementalTarget={incrementalTarget => setIncrementalTarget(onlyNumeric(incrementalTarget))}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
+              parentJackpotReward={jackpotReward}
+              parentIncrementalReward={incrementalReward}
+              parentJackpotTarget={jackpotTarget}
+              parentIncrementalTarget={incrementalTarget}
               setParentFinishCampaign={createNewCampaign}
             ></CampaignReward>
           </Paper>
         );
     }
   };
-  return (
-    <div className={classes.NewCampaign_box_positioning}>
-      {renderSingleRegistrationComponent()}
-      <button onClick={checkAccount}>Get Account</button>
-      <button onClick={setAccount}>set account</button>
-    </div>
-  );
+  return <div className={classes.NewCampaign_box_positioning}>{renderSingleRegistrationComponent()}</div>;
 };
 
 export default NewCampaign;
