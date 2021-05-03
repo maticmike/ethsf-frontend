@@ -2,6 +2,7 @@ import { getWalletInfo } from '../../web3';
 import consola from 'consola';
 /* Action Types */
 export const CONNECT_WALLET = 'CONNECT_WALLET';
+export const DISCONNECT_WALLET = 'DISCONNECT_WALLET';
 
 export const connectAccount = wallet => ({
   type: CONNECT_WALLET,
@@ -17,3 +18,8 @@ export const connectAccountThunk = () => {
     }
   };
 };
+
+export const disconnectWallet = () => ({
+  type: DISCONNECT_WALLET,
+  payload: {},
+});

@@ -1,5 +1,5 @@
 import consola from 'consola';
-import { CONNECT_WALLET } from '../actions/account';
+import { CONNECT_WALLET, DISCONNECT_WALLET } from '../actions/account';
 import { NATIVE_CURRENCY } from '../../constants/Blockchain';
 
 const initialState = {
@@ -19,6 +19,9 @@ const account = (state = initialState, action) => {
         address: account,
         balances: balance,
       };
+    }
+    case DISCONNECT_WALLET: {
+      return initialState;
     }
     default: {
       return state;
