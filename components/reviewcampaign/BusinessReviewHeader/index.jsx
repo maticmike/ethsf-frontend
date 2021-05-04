@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import { shortenedEthAddress } from '../../../web3/helpers';
 import { useStyles } from './styles';
 const BusinessReviewHeader = () => {
   const classes = useStyles();
@@ -17,6 +18,7 @@ const BusinessReviewHeader = () => {
       </div>
       <div>
         <h1 className={classes.BusinessReview_margin_bottom_h1}>Gym Shark</h1>
+        {/* <p>{shortenedEthAddress()}</p> */}
         <a href="https://gymshark.com" target="_blank">
           https://gymshark.com
         </a>

@@ -30,7 +30,7 @@ const CampaignDeadline = ({
       endCampaignDate = new Date(campaignDuration[1]).getTime() / 1000;
     }
     setParentSimpleDeadline(endOfDaySimplePost);
-    setParentCampaignDuration([startCampaignDate, endCampaignDate]);
+    setParentCampaignDuration([startCampaignDate, parseInt(endCampaignDate)]);
     objective === 'singlePost' ? setParentCampaignSetupStep(3) : setParentCampaignSetupStep(4);
   };
   return (

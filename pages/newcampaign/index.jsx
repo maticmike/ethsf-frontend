@@ -64,14 +64,13 @@ const NewCampaign = () => {
   };
   const createNewCampaign = async () => {
     try {
-      //for simple post
       await createNewCampaignOnContract(
         famepayFactory,
         account.address, //business
         influencer,
-        112, //campaignId
-        1620076006, //startDate or
-        simpleDeadline, //or  campaignPostDuration,
+        113, //campaignId
+        campaignDuration ? campaignDuration[0] : Date.now(), //startDate
+        campaignDuration ? campaignDuration[1] : simpleDeadline, //deadline
         jackpotReward,
         incrementalReward,
         jackpotTarget,
