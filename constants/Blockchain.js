@@ -22,3 +22,5 @@ export const ALL_SUPPORTED_CURRENCIES = {
     PRICE_LOOKUP_KEY: 'dai',
   },
 };
+
+export const GRAPH_API_URL = 'https://api.thegraph.com/subgraphs/name/benjamin852/famepay';
