@@ -14,7 +14,7 @@ const ConnectButton = () => {
     if (account.address === null) {
       dispatch(connectAccountThunk());
     } else {
-      //   // Redirect to marketplace if on mynft or admin page
+      //   // Redirect to homepage if on mynft or admin page
       //   const isOnConnectedOnlyPage = router.pathname === '/mynft' || router.pathname === '/admin';
       //   if (isOnConnectedOnlyPage) router.push('/marketplace');
       dispatch(disconnectWallet());

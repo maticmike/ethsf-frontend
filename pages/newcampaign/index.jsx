@@ -37,10 +37,10 @@ const NewCampaign = () => {
   const [registrationStep, setRegistrationStep] = useState(0);
 
   const [influencer, setInfluencer] = useState('');
-  const [objective, setObjective] = useState(''); //views
-  const [simpleDeadline, setSimpleDeadline] = useState(null);
-  const [simplePostDuration, setSimplePostDuration] = useState(null);
-  const [campaignDuration, setCampaignDuration] = useState(null);
+  const [objective, setObjective] = useState('');
+  const [simpleDeadline, setSimpleDeadline] = useState(null); //sept 1
+  const [simplePostDuration, setSimplePostDuration] = useState(null); //12 hour post
+  const [campaignDuration, setCampaignDuration] = useState([]); //sept 1 - oct 1
   const [stakedAmount, setStakedAmount] = useState(null);
   const [jackpotTarget, setJackpotTarget] = useState(0);
   const [incrementalTarget, setIncrementalTarget] = useState(1);
@@ -69,8 +69,8 @@ const NewCampaign = () => {
         famepayFactory,
         account.address, //business
         influencer,
-        10, //campaignId
-        1619660168, //startDate or
+        112, //campaignId
+        1620076006, //startDate or
         simpleDeadline, //or  campaignPostDuration,
         jackpotReward,
         incrementalReward,

@@ -5,7 +5,12 @@ import 'react-calendar/dist/Calendar.css';
 import { setObjectiveName } from '../../../utils/ObjectiveNames';
 import { useStyles } from './styles';
 
-const CampaignDeadline = ({ objective, setParentSimpleDeadline, setParentCampaignSetupStep }) => {
+const CampaignDeadline = ({
+  objective,
+  setParentSimpleDeadline,
+  setParentCampaignDuration,
+  setParentCampaignSetupStep,
+}) => {
   const classes = useStyles();
   const [simpleDeadline, setSimpleDeadline] = useState(null);
   const [campaignDuration, setCampaignDuration] = useState(null);
@@ -15,8 +20,17 @@ const CampaignDeadline = ({ objective, setParentSimpleDeadline, setParentCampaig
     objective === 'singlePost' ? setSimpleDeadline(deadline) : setCampaignDuration(deadline);
   };
   const selectDeadline = () => {
-    setParentSimpleDeadline(simpleDeadline);
-    setParentCampaignSetupStep(campaignDuration);
+    let endOfDaySimplePost;
+    let startCampaignDate;
+    let endCampaignDate;
+    if (objective === 'singlePost') {
+      endOfDaySimplePost = new Date(simpleDeadline).getTime() / 1000 + 86340;
+    } else {
+      startCampaignDate = new Date(campaignDuration[0]).getTime() / 1000 + 86340;
+      endCampaignDate = new Date(campaignDuration[1]).getTime() / 1000;
+    }
+    setParentSimpleDeadline(endOfDaySimplePost);
+    setParentCampaignDuration([startCampaignDate, endCampaignDate]);
     objective === 'singlePost' ? setParentCampaignSetupStep(3) : setParentCampaignSetupStep(4);
   };
   return (
