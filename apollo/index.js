@@ -1,7 +1,7 @@
 // lib/apolloClient.js
 import { useMemo } from 'react';
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
-import { GRAPH_API_URL } from '../utils/constants';
+import { GRAPH_API_URL } from '../utils/../constants/Blockchain';
 let apolloClient;
 
 function createApolloClient() {

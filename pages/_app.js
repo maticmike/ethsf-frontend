@@ -27,3 +27,5 @@ const MyApp = ({ Component, pageProps }) => {
 };
 
 export default MyApp;
+
+// TODO: Apollo, Campaign Id -> on contract

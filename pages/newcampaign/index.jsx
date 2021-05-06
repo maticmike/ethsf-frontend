@@ -68,7 +68,6 @@ const NewCampaign = () => {
         famepayFactory,
         account.address, //business
         influencer,
-        113, //campaignId
         campaignDuration ? campaignDuration[0] : Date.now(), //startDate
         campaignDuration ? campaignDuration[1] : simpleDeadline, //deadline
         jackpotReward,

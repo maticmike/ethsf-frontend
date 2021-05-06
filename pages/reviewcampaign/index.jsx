@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Button, TextField } from '@material-ui/core';
+import { useQuery } from '@apollo/client';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { useStyles } from './stylesReviewCampaign';
 import { getPostData } from '../../utils/SocialMediaData';
+import { APOLLO_POLL_INTERVAL_MS } from '../../constants/Blockchain';
+import { campaignQuery } from '../../apollo/campaign.gql';
+import { useStyles } from './stylesReviewCampaign';
+
 const BusinessReviewHeader = dynamic(() => import('../../components/reviewcampaign/BusinessReviewHeader'), {
   loading: () => <p>Business Header Loading...</p>,
 });
@@ -16,6 +20,11 @@ const ReviewCampaign = () => {
   const classes = useStyles();
   const [isConfirmed, setIsConfirmed] = useState(true);
   const [postUrl, setPostUrl] = useState('');
+
+  // const campaignQueryRes = useQuery(campaignQuery, {
+  //   pollInterval: APOLLO_POLL_INTERVAL_MS,
+  //   variables: listingsVariables,
+  // });
 
   const handleNewPostUrl = () => getPostData(postUrl);
 

@@ -5,7 +5,7 @@ import detectEthereumProvider from '@metamask/detect-provider';
 import FamepayFactoryAbi from '../contracts/FamepayFactory.json';
 import FamepayAbi from '../contracts/Famepay.json';
 import { CONTRACT_RESPONSE_STATUS } from '../constants/Blockchain';
-import { NETWORK_ID } from '../constants/NetworkItems';
+import { NETWORK_ID } from '../constants/Blockchain';
 
 /**
  * Response handler for successful contract interactions
@@ -148,7 +148,6 @@ const createNewCampaignOnContract = async (
     console.log(famepayFactory);
     console.log(business);
     console.log(influencer);
-    console.log(campaignId);
     console.log(startDate);
     console.log(deadline); //fix me
     console.log(jackpotReward);
@@ -160,7 +159,6 @@ const createNewCampaignOnContract = async (
     const campaign = await famepayFactory.newFamepayCampaign(
       business,
       influencer,
-      campaignId,
       startDate,
       1619764539,
       jackpotReward,

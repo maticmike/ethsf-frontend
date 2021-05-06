@@ -716,7 +716,7 @@
         "id": 2,
         "nodeType": "ImportDirective",
         "scope": 602,
-        "sourceUnit": 1589,
+        "sourceUnit": 1606,
         "src": "194:51:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -742,10 +742,10 @@
               "id": 3,
               "name": "SafeMath",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1588,
+              "referencedDeclaration": 1605,
               "src": "278:8:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_SafeMath_$1588",
+                "typeIdentifier": "t_contract$_SafeMath_$1605",
                 "typeString": "library SafeMath"
               }
             },
@@ -6531,7 +6531,7 @@
                                   "lValueRequested": false,
                                   "memberName": "mul",
                                   "nodeType": "MemberAccess",
-                                  "referencedDeclaration": 1501,
+                                  "referencedDeclaration": 1518,
                                   "src": "5933:41:0",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -8496,7 +8496,7 @@
         "id": 2,
         "nodeType": "ImportDirective",
         "scope": 602,
-        "sourceUnit": 1589,
+        "sourceUnit": 1606,
         "src": "194:51:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -8522,10 +8522,10 @@
               "id": 3,
               "name": "SafeMath",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1588,
+              "referencedDeclaration": 1605,
               "src": "278:8:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_SafeMath_$1588",
+                "typeIdentifier": "t_contract$_SafeMath_$1605",
                 "typeString": "library SafeMath"
               }
             },
@@ -14311,7 +14311,7 @@
                                   "lValueRequested": false,
                                   "memberName": "mul",
                                   "nodeType": "MemberAccess",
-                                  "referencedDeclaration": 1501,
+                                  "referencedDeclaration": 1518,
                                   "src": "5933:41:0",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -16251,7 +16251,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.0",
-  "updatedAt": "2021-05-02T16:15:47.501Z",
+  "updatedAt": "2021-05-06T02:26:26.178Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
