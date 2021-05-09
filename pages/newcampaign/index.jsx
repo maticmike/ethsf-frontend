@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Paper } from '@material-ui/core';
 import { storeFamepayFactoryThunk } from '../../redux/actions/famepayFactory';
 import { createNewCampaignOnContract } from '../../web3';
-import { onlyNumeric } from '../../utils/helpers';
+import { onlyNumeric, setSimplePostMinimumDuration } from '../../utils/helpers';
 import { useStyles } from './styles';
 
 const FindInfluencer = dynamic(() => import('../../components/newcampaign/FindInfluencer'), {
@@ -38,10 +38,10 @@ const NewCampaign = () => {
 
   const [influencer, setInfluencer] = useState('');
   const [objective, setObjective] = useState('');
-  const [simpleDeadline, setSimpleDeadline] = useState(null); //sept 1
-  const [simplePostDuration, setSimplePostDuration] = useState(null); //12 hour post
+  const [simpleDeadline, setSimpleDeadline] = useState(0); //sept 1
+  const [simplePostMinimumDuration, setSimplePostMinimumDuration] = useState(0); //12 hour post
   const [campaignDuration, setCampaignDuration] = useState([]); //sept 1 - oct 1
-  const [stakedAmount, setStakedAmount] = useState(null);
+  const [stakedAmount, setStakedAmount] = useState(0);
   const [jackpotTarget, setJackpotTarget] = useState(0);
   const [incrementalTarget, setIncrementalTarget] = useState(1);
   const [jackpotReward, setJackpotReward] = useState(0);
@@ -63,13 +63,15 @@ const NewCampaign = () => {
     }
   };
   const createNewCampaign = async () => {
+    console.log(simplePostMinimumDuration, 'the duration in newCampaign');
     try {
       await createNewCampaignOnContract(
         famepayFactory,
         account.address, //business
         influencer,
-        campaignDuration ? campaignDuration[0] : Date.now(), //startDate
-        campaignDuration ? campaignDuration[1] : simpleDeadline, //deadline
+        campaignDuration[0] ? campaignDuration[0] : Date.now(), //startDate
+        campaignDuration[1] ? campaignDuration[1] : simpleDeadline, //deadline
+        deadline + simplePostMinimumDuration,
         jackpotReward,
         incrementalReward,
         jackpotTarget,
@@ -120,7 +122,7 @@ const NewCampaign = () => {
           <Paper className={classes.NewCampaign_layout_duration} elevation={3}>
             <SimplePostDuration
               objective={objective}
-              setParentSimplePostDuration={duration => setSimplePostDuration(duration)} //range for campaign
+              setParentSimplePostMinimumDuration={duration => setSimplePostMinimumDuration(duration)} //range for campaign
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
             />
           </Paper>

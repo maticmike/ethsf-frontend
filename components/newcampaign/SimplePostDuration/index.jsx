@@ -14,20 +14,34 @@ import {
 import { setObjectiveName } from '../../../utils/ObjectiveNames';
 import { useStyles } from './styles';
 
-const SimplePostDuration = ({ objective, setParentSimplePostDuration, setParentCampaignSetupStep }) => {
+const SimplePostDuration = ({ objective, setParentSimplePostMinimumDuration, setParentCampaignSetupStep }) => {
   const classes = useStyles();
-  const [selectedDuration, setSelectedDuration] = useState('');
+
+  const [selectedDuration, setSelectedDuration] = useState(''); //radio button
+  const [alternativeDuration, setAlternativeDuration] = useState(1);
+  const [alternativeDurationUnit, setAlternativeDurationUnit] = useState('hours');
   const [showOtherOptions, setShowOtherOptions] = useState(false);
-  const [alternativeDuration, setAlternativeDuration] = useState('');
-  const [alternativeDurationUnit, setAlternativeDurationUnit] = useState('');
 
   const alternativeDurationOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
+  let customDuration;
+  const selectAlternativeDurationTimestamp = duration => {
+    setAlternativeDuration(duration);
+    if (alternativeDurationUnit === 'hours') return (customDuration = duration * 3600);
+    if (alternativeDurationUnit === 'days') return (customDuration = duration * 86400);
+    if (alternativeDurationUnit === 'weeks') return (customDuration = duration * 604800);
+  };
+
   const handlePostDuration = () => {
+    let postDuration;
+    if (selectedDuration === 'twelve') postDuration = 43200;
+    if (selectedDuration === 'oneDay') postDuration = 86400;
+    if (selectedDuration === 'twoDays') postDuration = 172800;
+
     if (selectedDuration === 'other' && alternativeDuration === '') {
       alert('Please select post duration from dropdown');
     } else {
-      setParentSimplePostDuration(selectedDuration === '' ? alternativeDuration : selectedDuration);
+      setParentSimplePostMinimumDuration(selectedDuration === '' ? customDuration : postDuration);
       objective === 'singlePost' ? setParentCampaignSetupStep(4) : setParentCampaignSetupStep(5);
     }
   };
@@ -50,10 +64,21 @@ const SimplePostDuration = ({ objective, setParentSimplePostDuration, setParentC
               value={selectedDuration}
               onChange={e => setSelectedDuration(e.target.value)}
             >
-              <FormControlLabel value="twelve" control={<Radio color="primary" />} label="Twelve Hours" />
-              <FormControlLabel value="oneDay" control={<Radio color="primary" />} label="One Day" />
-              <FormControlLabel value="twoDays" control={<Radio color="primary" />} label="Two Days" />
-              <FormControlLabel value="permanent" control={<Radio color="primary" />} label="Permanent" />
+              <FormControlLabel
+                value="twelve"
+                control={<Radio color="primary" onClick={() => setShowOtherOptions(false)} />}
+                label="Twelve Hours"
+              />
+              <FormControlLabel
+                value="oneDay"
+                control={<Radio color="primary" onClick={() => setShowOtherOptions(false)} />}
+                label="One Day"
+              />
+              <FormControlLabel
+                value="twoDays"
+                control={<Radio color="primary" onClick={() => setShowOtherOptions(false)} />}
+                label="Two Days"
+              />
               <FormControlLabel
                 value="other"
                 control={<Radio color="primary" onClick={() => setShowOtherOptions(true)} />}
@@ -67,7 +92,7 @@ const SimplePostDuration = ({ objective, setParentSimplePostDuration, setParentC
                 labelId="alternative-duration-options"
                 id="alternative-duration-options"
                 value={alternativeDuration}
-                onChange={e => setAlternativeDuration(e.target.value)}
+                onChange={e => selectAlternativeDurationTimestamp(e.target.value)}
                 className={classes.SimplePostDuration_custom_selector}
               >
                 {alternativeDurationOptions.map((durationOption, index) => {
@@ -87,13 +112,13 @@ const SimplePostDuration = ({ objective, setParentSimplePostDuration, setParentC
                 className={classes.SimplePostDuration_custom_selector}
               >
                 <MenuItem key="hours" value={'hours'}>
-                  Hours
+                  {alternativeDuration === 1 ? 'Hour' : 'Hours'}
                 </MenuItem>
                 <MenuItem key="days" value={'days'}>
-                  Days
+                  {alternativeDuration === 1 ? 'Day' : 'Days'}
                 </MenuItem>
                 <MenuItem key="weeks" value={'weeks'}>
-                  Weeks
+                  {alternativeDuration === 1 ? 'Week' : 'Weeks'}
                 </MenuItem>
               </Select>
             </>

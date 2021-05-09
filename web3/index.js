@@ -133,9 +133,9 @@ const createNewCampaignOnContract = async (
   famepayFactory,
   business,
   influencer,
-  campaignId,
   startDate,
   deadline,
+  singlePostDuration,
   jackpotReward,
   incrementalReward,
   jackpotTarget,
@@ -145,22 +145,24 @@ const createNewCampaignOnContract = async (
 ) => {
   consola.info('web3: createNewCampaign() started');
   try {
-    console.log(famepayFactory);
-    console.log(business);
-    console.log(influencer);
-    console.log(startDate);
-    console.log(deadline); //fix me
-    console.log(jackpotReward);
-    console.log(incrementalReward);
-    console.log(jackpotTarget);
-    console.log(incrementalTarget);
-    console.log(potentialPayout);
-    console.log(objective);
+    console.log(famepayFactory, 'factory');
+    console.log(business, 'business');
+    console.log(influencer, 'influencer');
+    console.log(startDate, 'startDate');
+    console.log(deadline, 'deadline');
+    console.log(singlePostDuration, 'singlePostDuration'); //fix me
+    console.log(jackpotReward, 'jackpotReward');
+    console.log(incrementalReward, 'incrementalReward');
+    console.log(jackpotTarget, 'jackpotTarget');
+    console.log(incrementalTarget, 'incrementalTarget');
+    console.log(potentialPayout, 'potentialPayout');
+    console.log(objective, 'objective');
     const campaign = await famepayFactory.newFamepayCampaign(
       business,
       influencer,
       startDate,
-      1619764539,
+      deadline,
+      singlePostDuration,
       jackpotReward,
       incrementalReward,
       jackpotTarget,
