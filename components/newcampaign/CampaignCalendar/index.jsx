@@ -5,31 +5,31 @@ import 'react-calendar/dist/Calendar.css';
 import { setObjectiveName } from '../../../utils/ObjectiveNames';
 import { useStyles } from './styles';
 
-const CampaignDeadline = ({
+const CampaignCalendar = ({
   objective,
-  setParentSimpleDeadline,
+  setParentSimplePostDate,
   setParentCampaignDuration,
   setParentCampaignSetupStep,
 }) => {
   const classes = useStyles();
-  const [simpleDeadline, setSimpleDeadline] = useState(null);
+  const [simplePostDate, setSimplePostDate] = useState(null);
   const [campaignDuration, setCampaignDuration] = useState(null);
 
   const getHeading = () => (objective === 'singlePost' ? 'Post Date And Time' : 'Campaign Length');
-  const handleDeadline = deadline => {
-    objective === 'singlePost' ? setSimpleDeadline(deadline) : setCampaignDuration(deadline);
+  const handlePostDate = postDate => {
+    objective === 'singlePost' ? setSimplePostDate(postDate) : setCampaignDuration(postDate);
   };
-  const selectDeadline = () => {
+  const selectPostDate = () => {
     let endOfDaySimplePost;
     let startCampaignDate;
     let endCampaignDate;
     if (objective === 'singlePost') {
-      endOfDaySimplePost = new Date(simpleDeadline).getTime() / 1000 + 86340;
+      endOfDaySimplePost = new Date(simplePostDate).getTime() / 1000 + 86340;
     } else {
       startCampaignDate = new Date(campaignDuration[0]).getTime() / 1000 + 86340;
       endCampaignDate = new Date(campaignDuration[1]).getTime() / 1000;
     }
-    setParentSimpleDeadline(endOfDaySimplePost);
+    setParentSimplePostDate(endOfDaySimplePost);
     setParentCampaignDuration([startCampaignDate, parseInt(endCampaignDate)]);
     objective === 'singlePost' ? setParentCampaignSetupStep(3) : setParentCampaignSetupStep(4);
   };
@@ -45,10 +45,10 @@ const CampaignDeadline = ({
         </Grid>
         <Grid item xs={6} className={classes.CampaignDates_calendar_right}>
           <Calendar
-            onChange={handleDeadline}
+            onChange={handlePostDate}
             minDate={new Date()}
             selectRange={objective != 'singlePost' ? true : false}
-            value={objective === 'singlePost' ? simpleDeadline : campaignDuration}
+            value={objective === 'singlePost' ? simplePostDate : campaignDuration}
           />
         </Grid>
       </Grid>
@@ -57,8 +57,8 @@ const CampaignDeadline = ({
         <Button onClick={() => setParentCampaignSetupStep(1)} variant="outlined" color="primary" size="small">
           Previous
         </Button>
-        {simpleDeadline || campaignDuration ? (
-          <Button type="submit" variant="contained" color="primary" size="small" onClick={selectDeadline}>
+        {simplePostDate || campaignDuration ? (
+          <Button type="submit" variant="contained" color="primary" size="small" onClick={selectPostDate}>
             Next
           </Button>
         ) : null}
@@ -67,4 +67,4 @@ const CampaignDeadline = ({
   );
 };
 
-export default CampaignDeadline;
+export default CampaignCalendar;

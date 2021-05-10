@@ -14,7 +14,7 @@ const FindInfluencer = dynamic(() => import('../../components/newcampaign/FindIn
 const CampaignObjective = dynamic(() => import('../../components/newcampaign/CampaignObjective'), {
   loading: () => <p>Select Campaign Objective Loading....</p>,
 });
-const CampaignDeadline = dynamic(() => import('../../components/newcampaign/CampaignDeadline'), {
+const CampaignCalendar = dynamic(() => import('../../components/newcampaign/CampaignCalendar'), {
   loading: () => <p>Set Campaign Dates Loading....</p>,
 });
 const SimplePostDuration = dynamic(() => import('../../components/newcampaign/SimplePostDuration'), {
@@ -38,9 +38,11 @@ const NewCampaign = () => {
 
   const [influencer, setInfluencer] = useState('');
   const [objective, setObjective] = useState('');
-  const [simpleDeadline, setSimpleDeadline] = useState(0); //deadline to create post
-  const [simplePostMinimumDuration, setSimplePostMinimumDuration] = useState(0); //duration to keep post up
+
+  const [simplePostDate, setSimplePostDate] = useState(0); //postDate to create post
+  const [simplePostMinimumDuration, setSimplePostMinimumDuration] = useState(0); //duration to keep post up (7hr post)
   const [campaignDuration, setCampaignDuration] = useState([]); //sept 1 - oct 1
+
   const [stakedAmount, setStakedAmount] = useState(0);
   const [jackpotTarget, setJackpotTarget] = useState(0);
   const [incrementalTarget, setIncrementalTarget] = useState(1);
@@ -70,8 +72,7 @@ const NewCampaign = () => {
         account.address, //business
         influencer,
         campaignDuration[0] ? campaignDuration[0] : Date.now(), //startDate
-        campaignDuration[1] ? campaignDuration[1] : simpleDeadline, //deadline
-        deadline + simplePostMinimumDuration,
+        campaignDuration[1] ? campaignDuration[1] : simplePostDate + simplePostMinimumDuration, //postDate
         jackpotReward,
         incrementalReward,
         jackpotTarget,
@@ -108,9 +109,9 @@ const NewCampaign = () => {
       case 2:
         return (
           <Paper className={classes.NewCampaign_layout_dates} elevation={3}>
-            <CampaignDeadline
+            <CampaignCalendar
               objective={objective}
-              setParentSimpleDeadline={simpleDeadline => setSimpleDeadline(simpleDeadline)} //one date for simple post
+              setParentSimplePostDate={simplePostDate => setSimplePostDate(simplePostDate)} //one date for simple post
               setParentCampaignDuration={campaignDuration => setCampaignDuration(campaignDuration)}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
             />

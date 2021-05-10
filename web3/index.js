@@ -135,7 +135,6 @@ const createNewCampaignOnContract = async (
   influencer,
   startDate,
   deadline,
-  singlePostDuration,
   jackpotReward,
   incrementalReward,
   jackpotTarget,
@@ -150,7 +149,6 @@ const createNewCampaignOnContract = async (
     console.log(influencer, 'influencer');
     console.log(startDate, 'startDate');
     console.log(deadline, 'deadline');
-    console.log(singlePostDuration, 'singlePostDuration'); //fix me
     console.log(jackpotReward, 'jackpotReward');
     console.log(incrementalReward, 'incrementalReward');
     console.log(jackpotTarget, 'jackpotTarget');
@@ -162,7 +160,6 @@ const createNewCampaignOnContract = async (
       influencer,
       startDate,
       deadline,
-      singlePostDuration,
       jackpotReward,
       incrementalReward,
       jackpotTarget,

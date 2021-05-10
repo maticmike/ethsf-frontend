@@ -1,0 +1,9 @@
+1. Deadline -> end of day to make the post
+2. Post Time -> 
+3. SimplePostDuration 
+3. Difference of post time and deadline 
+
+
+Ex. 7 hour post.
+1. User provides post URL. Giving us the Post Time
+2. When refund or reward is claimed we then check if difference between SimplePostDuration and postTime is bigger than postDuration minimum 
