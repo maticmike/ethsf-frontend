@@ -24,24 +24,24 @@ const SimplePostDuration = ({ objective, setParentSimplePostMinimumDuration, set
 
   const alternativeDurationOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
-  let customDuration;
-  const selectAlternativeDurationTimestamp = duration => {
-    setAlternativeDuration(duration);
-    if (alternativeDurationUnit === 'hours') return (customDuration = duration * 3600);
-    if (alternativeDurationUnit === 'days') return (customDuration = duration * 86400);
-    if (alternativeDurationUnit === 'weeks') return (customDuration = duration * 604800);
+  const selectAlternativeDurationTimestamp = () => {
+    if (alternativeDurationUnit === 'hours') return alternativeDuration * 3600;
+    if (alternativeDurationUnit === 'days') return alternativeDuration * 86400;
+    if (alternativeDurationUnit === 'weeks') return alternativeDuration * 604800;
   };
 
   const handlePostDuration = () => {
-    let postDuration;
-    if (selectedDuration === 'twelve') postDuration = 43200;
-    if (selectedDuration === 'oneDay') postDuration = 86400;
-    if (selectedDuration === 'twoDays') postDuration = 172800;
+    let radioOptionDuration;
+    if (selectedDuration === 'twelve') radioOptionDuration = 43200;
+    if (selectedDuration === 'oneDay') radioOptionDuration = 86400;
+    if (selectedDuration === 'twoDays') radioOptionDuration = 172800;
 
     if (selectedDuration === 'other' && alternativeDuration === '') {
       alert('Please select post duration from dropdown');
     } else {
-      setParentSimplePostMinimumDuration(selectedDuration === '' ? customDuration : postDuration);
+      setParentSimplePostMinimumDuration(
+        selectedDuration === 'other' ? selectAlternativeDurationTimestamp() : radioOptionDuration,
+      );
       objective === 'singlePost' ? setParentCampaignSetupStep(4) : setParentCampaignSetupStep(5);
     }
   };
@@ -92,7 +92,7 @@ const SimplePostDuration = ({ objective, setParentSimplePostMinimumDuration, set
                 labelId="alternative-duration-options"
                 id="alternative-duration-options"
                 value={alternativeDuration}
-                onChange={e => selectAlternativeDurationTimestamp(e.target.value)}
+                onChange={e => setAlternativeDuration(e.target.value)}
                 className={classes.SimplePostDuration_custom_selector}
               >
                 {alternativeDurationOptions.map((durationOption, index) => {

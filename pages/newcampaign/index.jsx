@@ -38,8 +38,8 @@ const NewCampaign = () => {
 
   const [influencer, setInfluencer] = useState('');
   const [objective, setObjective] = useState('');
-  const [simpleDeadline, setSimpleDeadline] = useState(0); //sept 1
-  const [simplePostMinimumDuration, setSimplePostMinimumDuration] = useState(0); //12 hour post
+  const [simpleDeadline, setSimpleDeadline] = useState(0); //deadline to create post
+  const [simplePostMinimumDuration, setSimplePostMinimumDuration] = useState(0); //duration to keep post up
   const [campaignDuration, setCampaignDuration] = useState([]); //sept 1 - oct 1
   const [stakedAmount, setStakedAmount] = useState(0);
   const [jackpotTarget, setJackpotTarget] = useState(0);
@@ -122,7 +122,7 @@ const NewCampaign = () => {
           <Paper className={classes.NewCampaign_layout_duration} elevation={3}>
             <SimplePostDuration
               objective={objective}
-              setParentSimplePostMinimumDuration={duration => setSimplePostMinimumDuration(duration)} //range for campaign
+              setParentSimplePostMinimumDuration={duration => setSimplePostMinimumDuration(duration)}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
             />
           </Paper>
