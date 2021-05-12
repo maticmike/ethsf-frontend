@@ -6,7 +6,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { getPostData } from '../../utils/SocialMediaData';
 import { APOLLO_POLL_INTERVAL_MS } from '../../constants/Blockchain';
-import { campaignQuery } from '../../apollo/campaign.gql';
+// import { campaignQuery } from '../../apollo/campaign.gql';
 import { useStyles } from './stylesReviewCampaign';
 
 const BusinessReviewHeader = dynamic(() => import('../../components/reviewcampaign/BusinessReviewHeader'), {
@@ -21,6 +21,11 @@ const ReviewCampaign = () => {
   const [isConfirmed, setIsConfirmed] = useState(true);
   const [postUrl, setPostUrl] = useState('');
 
+  // TODO Get Campaign From Subgraph via Campaign_ID
+  // let listingVariables = {
+  //   first: 1,
+  //   where: { id: TOKEN_STATUS.LISTED },
+  // };
   // const campaignQueryRes = useQuery(campaignQuery, {
   //   pollInterval: APOLLO_POLL_INTERVAL_MS,
   //   variables: listingsVariables,

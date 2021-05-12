@@ -144,17 +144,6 @@ const createNewCampaignOnContract = async (
 ) => {
   consola.info('web3: createNewCampaign() started');
   try {
-    console.log(famepayFactory, 'factory');
-    console.log(business, 'business');
-    console.log(influencer, 'influencer');
-    console.log(startDate, 'startDate');
-    console.log(deadline, 'deadline');
-    console.log(jackpotReward, 'jackpotReward');
-    console.log(incrementalReward, 'incrementalReward');
-    console.log(jackpotTarget, 'jackpotTarget');
-    console.log(incrementalTarget, 'incrementalTarget');
-    console.log(potentialPayout, 'potentialPayout');
-    console.log(objective, 'objective');
     const campaign = await famepayFactory.newFamepayCampaign(
       business,
       influencer,
@@ -168,7 +157,6 @@ const createNewCampaignOnContract = async (
       objective,
       { value: potentialPayout, gasLimit: 3000000 },
     );
-    console.log(campaign, 'the campaign in web3');
     return campaign;
   } catch (error) {
     consola.error('Web3: createNewCampaignOnContract():', error);

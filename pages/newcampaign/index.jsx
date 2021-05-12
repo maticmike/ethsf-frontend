@@ -4,6 +4,7 @@ import consola from 'consola';
 import { useSelector, useDispatch } from 'react-redux';
 import { Paper } from '@material-ui/core';
 import { storeFamepayFactoryThunk } from '../../redux/actions/famepayFactory';
+import { createCampaignThunk } from '../../redux/actions/campaign';
 import { createNewCampaignOnContract } from '../../web3';
 import { onlyNumeric, setSimplePostMinimumDuration } from '../../utils/helpers';
 import { useStyles } from './styles';
@@ -65,7 +66,6 @@ const NewCampaign = () => {
     }
   };
   const createNewCampaign = async () => {
-    console.log(simplePostMinimumDuration, 'the duration in newCampaign');
     try {
       await createNewCampaignOnContract(
         famepayFactory,
@@ -80,6 +80,7 @@ const NewCampaign = () => {
         stakedAmount,
         objective,
       );
+      dispatch(createCampaignThunk());
     } catch (error) {
       consola.error('NewCampaign.createCampaign():', error);
     }
