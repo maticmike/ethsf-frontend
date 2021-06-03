@@ -2,6 +2,7 @@ import { ethers } from 'ethers';
 import axios from 'axios';
 import consola from 'consola';
 import detectEthereumProvider from '@metamask/detect-provider';
+import { onBoardInitialize } from '../utils/onboard';
 import FamepayFactoryAbi from '../contracts/FamepayFactory.json';
 import FamepayAbi from '../contracts/Famepay.json';
 import { CONTRACT_RESPONSE_STATUS } from '../constants/Blockchain';
@@ -98,19 +99,25 @@ const bootstrapFactory = async () => {
  */
 const getWalletInfo = async () => {
   try {
-    /*
-    const provider2 = await detectEthereumProvider();
     const onboard = onBoardInitialize();
     await onboard.walletSelect();
-    await onboard.walletCheck()
-    */
-    const provider = new ethers.providers.Web3Provider(web3.currentProvider);
+    await onboard.walletCheck();
+    const currentState = onboard.getState();
+    const account = currentState.address;
+    console.log(account, 'the account');
 
-    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    const account = accounts && accounts[0];
+    const provider = new ethers.providers.Web3Provider(currentState.wallet.provider);
+
+    //returns lowercase
+    // const provider = new ethers.providers.Web3Provider(web3.currentProvider);
+    // const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    // const account = accounts && accounts[0];
+
     const balanceRaw = await provider.getBalance(account);
     const balance = balanceRaw.toString();
-    return { account, balance /*, isAdmin*/ };
+    const signer = provider.getSigner();
+    const chain = await provider.getNetwork();
+    return { account, balance, signer /*, isAdmin*/ };
   } catch (error) {
     consola.error('Web3: getWalletInfo() error message:', error);
     return null;

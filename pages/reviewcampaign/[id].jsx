@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import { Button, TextField } from '@material-ui/core';
-import { useQuery } from '@apollo/client';
 import Calendar from 'react-calendar';
+import consola from 'consola';
+import { Button, TextField } from '@material-ui/core';
 import 'react-calendar/dist/Calendar.css';
-import { getPostData } from '../../utils/SocialMediaData';
-import { APOLLO_POLL_INTERVAL_MS } from '../../constants/Blockchain';
-// import { campaignQuery } from '../../apollo/campaign.gql';
+import { getCampaignProposal } from '../../services/apiService';
 import { useStyles } from './stylesReviewCampaign';
 
 const BusinessReviewHeader = dynamic(() => import('../../components/reviewcampaign/BusinessReviewHeader'), {
@@ -21,17 +19,13 @@ const ReviewCampaign = () => {
   const [isConfirmed, setIsConfirmed] = useState(true);
   const [postUrl, setPostUrl] = useState('');
 
-  // TODO Get Campaign From Subgraph via Campaign_ID
-  // let listingVariables = {
-  //   first: 1,
-  //   where: { id: TOKEN_STATUS.LISTED },
-  // };
-  // const campaignQueryRes = useQuery(campaignQuery, {
-  //   pollInterval: APOLLO_POLL_INTERVAL_MS,
-  //   variables: listingsVariables,
-  // });
-
-  const handleNewPostUrl = () => getPostData(postUrl);
+  useEffect(() => {
+    const data = getCampaignProposal(params.id);
+    console.log('testing the campaign data query', data);
+    return () => {
+      consola.info('Cleanup review campaign component');
+    };
+  }, []);
 
   return (
     <div className={classes.ReviewCampaign_root_center}>

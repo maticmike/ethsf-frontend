@@ -1,22 +1,68 @@
 import axios from 'axios';
+import consola from 'consola';
 
-// export default class ApiService {
-//   constructor() {
-//     this.httpClient = axios.create({
-//       baseURL: process.env.BASE_API_URL,
-//       timeout: 1000,
-//       //   headers: { 'X-Custom-Header': 'foobar' },
-//     });
-//   }
+let api = process.env.BASE_API_URL;
 
-export const getTweetData = async tweet => {
-  //   console.log(this.httpClient);
+export const getTweetDataFromDB = async tweet => {
   try {
-    console.log(tweet, 'the tweet');
     const data = await axios.get(`${process.env.BASE_API_URL}/getTweet/${tweet}`);
     console.log(data, ' the data');
   } catch (error) {
     console.log('ApiService: getTweetData()', error);
   }
 };
-// }
+
+export const getTestRoute = async () => {
+  try {
+    const res = await axios.get(`${api}/test`);
+    return res.data;
+  } catch (error) {
+    consola.error('ApiService: getTestRoute():', error);
+    throw error;
+  }
+};
+
+export const createNewCampaignProposalDb = async (
+  business,
+  influencer,
+  agreedStartDate,
+  agreedDeadline,
+  jackpotReward,
+  incrementalReward,
+  jackpotTarget,
+  incrementalTarget,
+  potentialPayout,
+  objective,
+  niche,
+) => {
+  try {
+    const campaign = await axios.post(`${api}/campaignProposal/create`, {
+      business,
+      influencer,
+      agreedStartDate,
+      agreedDeadline,
+      jackpotReward,
+      incrementalReward,
+      jackpotTarget,
+      incrementalTarget,
+      potentialPayout,
+      objective,
+      niche,
+    });
+    consola.success('ApiService: createNewCampaignProposal() campaign being created:', campaign);
+    return campaign;
+  } catch (error) {
+    consola.error('ApiService: createNewCampaignOnProposal():', error);
+    throw error;
+  }
+};
+
+export const getCampaignProposalDb = async id => {
+  try {
+    const campaign = await axios.get(`${api}/campaignProposal/${id}`);
+    consola.success('ApiService: getCampaignProposal():', campaign);
+    return campaign;
+  } catch (error) {
+    consola.error('ApiService: getCampaignProposal():', error);
+  }
+};

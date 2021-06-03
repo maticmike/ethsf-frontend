@@ -5,7 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Paper } from '@material-ui/core';
 import { storeFamepayFactoryThunk } from '../../redux/actions/famepayFactory';
 import { createCampaignThunk } from '../../redux/actions/campaign';
-import { createNewCampaignOnContract } from '../../web3';
+// import { createNewCampaignOnContract } from '../../web3';
+import { createNewCampaignProposalDb } from '../../services/apiService';
 import { onlyNumeric, setSimplePostMinimumDuration } from '../../utils/helpers';
 import { useStyles } from './styles';
 
@@ -33,17 +34,21 @@ const NewCampaign = () => {
 
   const dispatch = useDispatch();
   const account = useSelector(state => state.account);
-  const famepayFactory = useSelector(state => state.famepayFactory);
+
+  // const famepayFactory = useSelector(state => state.famepayFactory);
 
   const [registrationStep, setRegistrationStep] = useState(0);
 
+  // Campaign Participants
   const [influencer, setInfluencer] = useState('');
   const [objective, setObjective] = useState('');
 
+  //Campaign Dates
   const [simplePostDate, setSimplePostDate] = useState(0); //postDate to create post
   const [simplePostMinimumDuration, setSimplePostMinimumDuration] = useState(0); //duration to keep post up (7hr post)
   const [campaignDuration, setCampaignDuration] = useState([]); //sept 1 - oct 1
 
+  //Campaign $$$$
   const [stakedAmount, setStakedAmount] = useState(0);
   const [jackpotTarget, setJackpotTarget] = useState(0);
   const [incrementalTarget, setIncrementalTarget] = useState(1);
@@ -65,24 +70,45 @@ const NewCampaign = () => {
       consola.error('NewCampaign.findInfluencer():', error);
     }
   };
-  const createNewCampaign = async () => {
+
+  // const createNewCampaign = async () => {
+  //   try {
+  //     await createNewCampaignOnContract(
+  //       famepayFactory,
+  //       account.address, //business
+  //       influencer,
+  //       campaignDuration[0] ? campaignDuration[0] : Date.now(), //startDate
+  //       campaignDuration[1] ? campaignDuration[1] : simplePostDate + simplePostMinimumDuration, //postDate
+  //       jackpotReward,
+  //       incrementalReward,
+  //       jackpotTarget,
+  //       incrementalTarget,
+  //       stakedAmount,
+  //       objective,
+  //     );
+  //     dispatch(createCampaignThunk());
+  //   } catch (error) {
+  //     consola.error('NewCampaign.createCampaign():', error);
+  //   }
+  // };
+
+  const createNewCampaignProposal = async () => {
     try {
-      await createNewCampaignOnContract(
-        famepayFactory,
+      await createNewCampaignProposalDb(
         account.address, //business
         influencer,
-        campaignDuration[0] ? campaignDuration[0] : Date.now(), //startDate
-        campaignDuration[1] ? campaignDuration[1] : simplePostDate + simplePostMinimumDuration, //postDate
+        campaignDuration[0] ? campaignDuration[0] : Date.now(), //agreedStartDate
+        campaignDuration[1] ? campaignDuration[1] : simplePostDate + simplePostMinimumDuration, //agreedDeadline/postDate
         jackpotReward,
         incrementalReward,
         jackpotTarget,
         incrementalTarget,
         stakedAmount,
         objective,
+        // 'niche',
       );
-      dispatch(createCampaignThunk());
     } catch (error) {
-      consola.error('NewCampaign.createCampaign():', error);
+      consola.error('NewCampaign.createNewCampaignProposal():', error);
     }
   };
 
@@ -136,7 +162,7 @@ const NewCampaign = () => {
               objective={objective}
               setParentDepositToEscrow={deposit => setStakedAmount(onlyNumeric(deposit))}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
-              setParentFinishCampaign={createNewCampaign}
+              setParentFinishCampaign={createNewCampaignProposal}
             />
           </Paper>
         );
@@ -155,7 +181,7 @@ const NewCampaign = () => {
               parentIncrementalReward={incrementalReward}
               parentJackpotTarget={jackpotTarget}
               parentIncrementalTarget={incrementalTarget}
-              setParentFinishCampaign={createNewCampaign}
+              setParentFinishCampaign={createNewCampaignProposal}
             ></CampaignReward>
           </Paper>
         );

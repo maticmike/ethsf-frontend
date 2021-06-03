@@ -35,8 +35,8 @@ const CampaignObjective = ({ objective, setParentCampaignSetupStep }) => {
                 value={selectedObjective}
                 onChange={handleRadioChange}
               >
-                <FormControlLabel value="singlePost" control={<Radio />} label="Single Post" />
-                <FormControlLabel value="postViews" control={<Radio />} label="Views" />
+                <FormControlLabel value="singlePost" control={<Radio color="primary" />} label="Single Post" />
+                <FormControlLabel value="postViews" control={<Radio color="primary" />} label="Views" />
               </RadioGroup>
             </FormControl>
           </Grid>
@@ -51,10 +51,10 @@ const CampaignObjective = ({ objective, setParentCampaignSetupStep }) => {
                 value={selectedObjective}
                 onChange={handleRadioChange}
               >
-                <FormControlLabel value="profileGrowth" control={<Radio />} label="Profile Growth" />
-                <FormControlLabel value="likes" control={<Radio />} label="Likes" />
-                <FormControlLabel value="comments" control={<Radio />} label="Comments" />
-                <FormControlLabel value="shares" control={<Radio />} label="Shares" />
+                <FormControlLabel value="profileGrowth" control={<Radio color="primary" />} label="Profile Growth" />
+                <FormControlLabel value="likes" control={<Radio color="primary" />} label="Likes" />
+                <FormControlLabel value="comments" control={<Radio color="primary" />} label="Comments" />
+                <FormControlLabel value="shares" control={<Radio color="primary" />} label="Shares" />
               </RadioGroup>
             </FormControl>
           </Grid>
@@ -69,9 +69,9 @@ const CampaignObjective = ({ objective, setParentCampaignSetupStep }) => {
                 value={selectedObjective}
                 onChange={handleRadioChange}
               >
-                <FormControlLabel value="webVisits" control={<Radio />} label="Website Visits" />
-                <FormControlLabel value="atc" control={<Radio />} label="Add To Carts" />
-                <FormControlLabel value="sales" control={<Radio />} label="Sales" />
+                <FormControlLabel value="webVisits" control={<Radio color="primary" />} label="Website Visits" />
+                <FormControlLabel value="atc" control={<Radio color="primary" />} label="Add To Carts" />
+                <FormControlLabel value="sales" control={<Radio color="primary" />} label="Sales" />
               </RadioGroup>
             </FormControl>
           </Grid>
