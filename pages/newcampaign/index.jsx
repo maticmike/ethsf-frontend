@@ -96,7 +96,7 @@ const NewCampaign = () => {
     try {
       await createNewCampaignProposalDb(
         account.address, //business
-        influencer,
+        influencer.toLowerCase(),
         campaignDuration[0] ? campaignDuration[0] : Date.now(), //agreedStartDate
         campaignDuration[1] ? campaignDuration[1] : simplePostDate + simplePostMinimumDuration, //agreedDeadline/postDate
         jackpotReward,
