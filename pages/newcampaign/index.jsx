@@ -41,6 +41,8 @@ const NewCampaign = () => {
 
   // Campaign Participants
   const [influencer, setInfluencer] = useState('');
+
+  //Campaign Objective
   const [objective, setObjective] = useState('');
 
   //Campaign Dates
@@ -50,8 +52,8 @@ const NewCampaign = () => {
 
   //Campaign $$$$
   const [stakedAmount, setStakedAmount] = useState(0);
-  const [jackpotTarget, setJackpotTarget] = useState(0);
-  const [incrementalTarget, setIncrementalTarget] = useState(1);
+  const [jackpotTarget, setJackpotTarget] = useState(1);
+  const [incrementalTarget, setIncrementalTarget] = useState(0);
   const [jackpotReward, setJackpotReward] = useState(0);
   const [incrementalReward, setIncrementalReward] = useState(0);
 
@@ -93,17 +95,18 @@ const NewCampaign = () => {
   // };
 
   const createNewCampaignProposal = async () => {
+    if (objective === 'singlePost') setJackpotReward(stakedAmount);
     try {
       await createNewCampaignProposalDb(
         account.address, //business
         influencer.toLowerCase(),
-        campaignDuration[0] ? campaignDuration[0] : Date.now(), //agreedStartDate
+        campaignDuration[0] ? campaignDuration[0] : Math.round(Date.now() / 1000), //agreedStartDate
         campaignDuration[1] ? campaignDuration[1] : simplePostDate + simplePostMinimumDuration, //agreedDeadline/postDate
         jackpotReward,
         incrementalReward,
         jackpotTarget,
         incrementalTarget,
-        stakedAmount,
+        stakedAmount, //potentialPayout
         objective,
         // 'niche',
       );

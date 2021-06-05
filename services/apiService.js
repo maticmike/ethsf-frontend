@@ -35,8 +35,6 @@ export const createNewCampaignProposalDb = async (
   objective,
   niche,
 ) => {
-  console.log(business, 'the business');
-  console.log(influencer, 'the influencer');
   try {
     const campaign = await axios.post(`${api}/campaignProposal/create`, {
       business,
