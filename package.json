@@ -28,6 +28,7 @@
     "graphql": "^15.5.0",
     "graphql-tag": "^2.11.0",
     "next": "10.0.4",
+    "next-auth": "^3.25.0",
     "react": "17.0.1",
     "react-app-rewired": "^2.1.8",
     "react-calendar": "^3.3.1",

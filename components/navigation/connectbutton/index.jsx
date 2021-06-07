@@ -1,30 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useRouter } from 'next/router';
 import { Button } from '@material-ui/core';
 import { connectAccountThunk, disconnectWallet } from '../../../redux/actions/account';
 import { shortenedEthAddress } from '../../../web3/helpers';
-import { useStyles } from './styles';
 
-const ConnectButton = () => {
-  const router = useRouter();
+const ConnectButton = ({ handleSignupOpen }) => {
+  const [isRegistered, setIsRegistered] = useState(false);
+
   const account = useSelector(state => state.account);
   const dispatch = useDispatch();
-  const handleConnectivity = () => {
-    if (account.address === null) {
-      dispatch(connectAccountThunk());
-    } else {
-      //   // Redirect to homepage if on mynft or admin page
-      //   const isOnConnectedOnlyPage = router.pathname === '/mynft' || router.pathname === '/admin';
-      //   if (isOnConnectedOnlyPage) router.push('/marketplace');
-      dispatch(disconnectWallet());
+
+  const handleConnectivity = () => dispatch(connectAccountThunk());
+  const handleRegister = () => handleSignupOpen();
+  const handleLogout = () => dispatch(disconnectWallet());
+
+  const renderCorrectButton = () => {
+    if (!isRegistered && account?.address === null) {
+      return (
+        <Button variant="contained" onClick={handleConnectivity}>
+          Connect
+        </Button>
+      );
     }
+    if (!isRegistered)
+      return (
+        <Button variant="contained" onClick={handleRegister}>
+          Signup
+        </Button>
+      );
+    return <Button variant="contained">{shortenedEthAddress(account?.address)}</Button>;
   };
 
-  return (
-    <Button variant="contained" onClick={handleConnectivity}>
-      {shortenedEthAddress(account?.address) || 'connect'}
-    </Button>
-  );
+  return <>{renderCorrectButton()}</>;
 };
+
 export default ConnectButton;

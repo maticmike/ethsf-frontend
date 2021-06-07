@@ -15,11 +15,16 @@ const Sidebar = dynamic(() => import('../sidebar'), {
 const ConnectButton = dynamic(() => import('../connectbutton'), {
   loading: () => <p>Connect Loading....</p>,
 });
+const Signup = dynamic(() => import('../../signupDialog'), {
+  loading: () => <p>Signup Loading....</p>,
+});
 
 const Navbar = () => {
   const classes = useStyles();
 
   const router = useRouter();
+
+  const [isSignupOpen, setIsOpenSignup] = useState(false);
 
   // const account = useSelector(state => state.account);
 
@@ -35,10 +40,11 @@ const Navbar = () => {
 
   const updateWidth = () => setWidth(window.innerWidth);
 
+  const handleSignupOpen = () => setIsOpenSignup(true);
+  const handleSignupClose = () => setIsOpenSignup(false);
+
   const dummyArray = [1, 2, 3, 4, 5, 6];
 
-  // const showMyNft = account.address !== null;
-  const showMyNft = true;
   useEffect(() => {
     setWidth(window.innerWidth);
     window.addEventListener('resize', updateWidth);
@@ -48,7 +54,6 @@ const Navbar = () => {
   return (
     <>
       {width > MIN_DESKTOP_PX ? (
-        // <AppBar position="sticky" className={classes.navbarBackground}>
         <AppBar position="sticky">
           <Toolbar>
             {/* <Link href="/marketplace" className={classes.navbarDesktopMenuButton}> */}
@@ -64,28 +69,19 @@ const Navbar = () => {
             {/* <Link className={classes.navbarDesktopMenuButton} href="/marketplace"> */}
             <a href="/">
               <Button>
-                <strong>item0</strong>
+                <strong>New Campaign</strong>
               </Button>
             </a>
-            {showMyNft ? (
-              <a className={classes.navbarDesktopMenuButton} href="/">
-                <Button>
-                  <strong className={classes.navbarDesktopMenuButton}>item 1</strong>
-                </Button>
-              </a>
-            ) : null}
-            {/* {account.address && account.isAdmin ? (
-              <Link className={classes.navbarDesktopMenuButton} href="/admin">
-                <Button>
-                  <strong className={classes.navbarDesktopMenuButton}>item2</strong>
-                </Button>
-              </Link>
-            ) : null} */}
+            <a className={classes.navbarDesktopMenuButton} href="/">
+              <Button>
+                <strong className={classes.navbarDesktopMenuButton}>Ongoing Campaigns</strong>
+              </Button>
+            </a>
             <div className={classes.navbarGrow} />
-            <ConnectButton />
+            <ConnectButton handleSignupOpen={handleSignupOpen} />
             &nbsp;
             <Button className={classes.languageButton} variant="outlined" onClick={openLanguagesMenu}>
-              menu test
+              Test Dropdown
             </Button>
             &nbsp;
             <Menu
@@ -95,7 +91,6 @@ const Navbar = () => {
               open={Boolean(languagesMenu)}
               onClose={closeLanguagesMenu}
             >
-              {/* {Object.entries(ALL_LOCALE_SUPPORTED).map(([key, value]) => { */}
               {dummyArray.map((key, value) => {
                 return (
                   // <Link href={router.asPath} locale={key} key={key}>
@@ -148,6 +143,7 @@ const Navbar = () => {
           /> */}
         </>
       )}
+      <Signup isSignupOpen={isSignupOpen} handleSignupClose={handleSignupClose} />
     </>
   );
 };

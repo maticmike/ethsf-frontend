@@ -1,8 +1,14 @@
 import { getWalletInfo } from '../../web3';
 import consola from 'consola';
 /* Action Types */
+export const REGISTER_USER = 'REGISTER_USER';
 export const CONNECT_WALLET = 'CONNECT_WALLET';
 export const DISCONNECT_WALLET = 'DISCONNECT_WALLET';
+
+export const registerAccount = wallet => ({
+  type: REGISTER_USER,
+  payload: wallet,
+});
 
 export const connectAccount = wallet => ({
   type: CONNECT_WALLET,
