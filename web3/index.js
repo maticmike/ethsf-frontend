@@ -104,14 +104,8 @@ const getWalletInfo = async () => {
     await onboard.walletCheck();
     const currentState = onboard.getState();
     const account = currentState.address;
-    console.log(account, 'the account');
 
     const provider = new ethers.providers.Web3Provider(currentState.wallet.provider);
-
-    //returns lowercase
-    // const provider = new ethers.providers.Web3Provider(web3.currentProvider);
-    // const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    // const account = accounts && accounts[0];
 
     const balanceRaw = await provider.getBalance(account);
     const balance = balanceRaw.toString();

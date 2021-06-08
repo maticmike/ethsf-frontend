@@ -4,7 +4,7 @@ import Calendar from 'react-calendar';
 import consola from 'consola';
 import { Button, TextField } from '@material-ui/core';
 import 'react-calendar/dist/Calendar.css';
-import { getCampaignProposal } from '../../services/apiService';
+import { getCampaignProposal } from '../../services/api/campaignService';
 import { useStyles } from './stylesReviewCampaign';
 
 const BusinessReviewHeader = dynamic(() => import('../../components/reviewcampaign/BusinessReviewHeader'), {

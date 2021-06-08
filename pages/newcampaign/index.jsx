@@ -6,7 +6,7 @@ import { Paper } from '@material-ui/core';
 import { storeFamepayFactoryThunk } from '../../redux/actions/famepayFactory';
 import { createCampaignThunk } from '../../redux/actions/campaign';
 // import { createNewCampaignOnContract } from '../../web3';
-import { createNewCampaignProposalDb } from '../../services/apiService';
+import { createNewCampaignProposalDb } from '../../services/api/campaignService';
 import { onlyNumeric, setSimplePostMinimumDuration } from '../../utils/helpers';
 import { useStyles } from './styles';
 

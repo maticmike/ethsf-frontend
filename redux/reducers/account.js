@@ -6,7 +6,7 @@ import { GraphQLNonNull } from 'graphql';
 const initialState = {
   address: null,
   balances: {},
-  signer: GraphQLNonNull,
+  signer: null,
   //   isAdmin: false,
 };
 

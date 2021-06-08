@@ -12,16 +12,6 @@ export const getTweetDataFromDB = async tweet => {
   }
 };
 
-export const getTestRoute = async () => {
-  try {
-    const res = await axios.get(`${api}/test`);
-    return res.data;
-  } catch (error) {
-    consola.error('ApiService: getTestRoute():', error);
-    throw error;
-  }
-};
-
 export const createNewCampaignProposalDb = async (
   business,
   influencer,

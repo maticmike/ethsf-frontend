@@ -15,5 +15,9 @@ const useStyles = makeStyles(theme => ({
       margin: theme.spacing(2),
     },
   },
+  accountTypeDimensions: {
+    margin: '8px',
+    width: '450px',
+  },
 }));
 export { useStyles };

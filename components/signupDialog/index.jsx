@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Dialog, TextField, Button } from '@material-ui/core';
+import { Dialog, TextField, Button, InputLabel, Select, FormControl } from '@material-ui/core';
 import { useStyles } from './styles';
 const SignupDialog = ({ isSignupOpen, handleSignupClose }) => {
   const classes = useStyles();
@@ -9,12 +9,13 @@ const SignupDialog = ({ isSignupOpen, handleSignupClose }) => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
+  const [accountType, setAccountType] = useState('');
 
   const account = useSelector(state => state.account);
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(firstName, lastName, email, password);
+    registerNewUserDb(account.address, username, firstName, lastName, account.signer, email, accountType);
     handleSignupClose();
   };
   return (
@@ -24,34 +25,47 @@ const SignupDialog = ({ isSignupOpen, handleSignupClose }) => {
         <form className={classes.root} onSubmit={handleSubmit}>
           <TextField
             label="First Name"
-            variant="filled"
+            variant="outlined"
             required
             value={firstName}
             onChange={e => setFirstName(e.target.value)}
           />
           <TextField
             label="Last Name"
-            variant="filled"
+            variant="outlined"
             required
             value={lastName}
             onChange={e => setLastName(e.target.value)}
           />
           <TextField
             label="Username"
-            variant="filled"
+            variant="outlined"
             required
             value={username}
             onChange={e => setUsername(e.target.value)}
           />
           <TextField
             label="Email"
-            variant="filled"
+            variant="outlined"
             type="email"
             required
             value={email}
             onChange={e => setEmail(e.target.value)}
           />
-          <TextField label="Eth Address" variant="filled" required disabled value={account.address} />
+          <TextField label="Eth Address" variant="outlined" required disabled value={account.address} />
+          <FormControl className={classes.accountTypeDimensions}>
+            <InputLabel htmlFor="select-account-type">Select Account Type</InputLabel>
+            <Select
+              native
+              variant="outlined"
+              value={accountType}
+              onChange={e => setAccountType(e.target.value)}
+              id="select-account-type"
+            >
+              <option value={'business'}>Business</option>
+              <option value={'influencer'}>Influencer</option>
+            </Select>
+          </FormControl>
           <div>
             <Button variant="contained" onClick={handleSignupClose}>
               Cancel

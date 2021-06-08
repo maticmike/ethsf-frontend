@@ -15,7 +15,7 @@ const Sidebar = dynamic(() => import('../sidebar'), {
 const ConnectButton = dynamic(() => import('../connectbutton'), {
   loading: () => <p>Connect Loading....</p>,
 });
-const Signup = dynamic(() => import('../../signupDialog'), {
+const SignupDialog = dynamic(() => import('../../signupDialog'), {
   loading: () => <p>Signup Loading....</p>,
 });
 
@@ -143,7 +143,7 @@ const Navbar = () => {
           /> */}
         </>
       )}
-      <Signup isSignupOpen={isSignupOpen} handleSignupClose={handleSignupClose} />
+      <SignupDialog isSignupOpen={isSignupOpen} handleSignupClose={handleSignupClose} />
     </>
   );
 };

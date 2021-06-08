@@ -28,7 +28,11 @@ const ConnectButton = ({ handleSignupOpen }) => {
           Signup
         </Button>
       );
-    return <Button variant="contained">{shortenedEthAddress(account?.address)}</Button>;
+    return (
+      <Button variant="contained" onClick={handleLogout}>
+        {shortenedEthAddress(account?.address)}
+      </Button>
+    );
   };
 
   return <>{renderCorrectButton()}</>;
