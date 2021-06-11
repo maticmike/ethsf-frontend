@@ -49,7 +49,7 @@ export const createNewCampaignProposalDb = async (
 
 export const getCampaignProposalDb = async id => {
   try {
-    const campaign = await axios.get(`${api}/campaignProposal/${id}`);
+    const campaign = await axios.get(`${api}/campaignProposal/campaign/${id}`);
     consola.success('ApiService: getCampaignProposal():', campaign);
     return campaign;
   } catch (error) {

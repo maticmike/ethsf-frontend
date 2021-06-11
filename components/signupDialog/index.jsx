@@ -15,7 +15,15 @@ const SignupDialog = ({ isSignupOpen, handleSignupClose }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    //1.Register User
     registerNewUserDb(account.address, username, firstName, lastName, account.signer, email, accountType);
+
+    //2. Get the newly registered profile
+
+    //3. Store it in redux
+
+    //4. Close Modal
     handleSignupClose();
   };
   return (

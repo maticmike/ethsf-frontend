@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { shortenedEthAddress } from '../../../web3/helpers';
 import { useStyles } from './styles';
-const BusinessReviewHeader = () => {
+const BusinessReviewHeader = ({ potentialPayout, objective }) => {
   const classes = useStyles();
 
   return (

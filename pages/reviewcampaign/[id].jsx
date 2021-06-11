@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import Calendar from 'react-calendar';
 import consola from 'consola';
 import { Button, TextField } from '@material-ui/core';
 import 'react-calendar/dist/Calendar.css';
-import { getCampaignProposal } from '../../services/api/campaignService';
+import { getCampaignProposalDb } from '../../services/api/campaignService';
 import { useStyles } from './stylesReviewCampaign';
+import { getUserFromEthAddress } from '../../services/api/userService';
 
 const BusinessReviewHeader = dynamic(() => import('../../components/reviewcampaign/BusinessReviewHeader'), {
   loading: () => <p>Business Header Loading...</p>,
@@ -16,26 +18,50 @@ const InfluencerReviewHeader = dynamic(() => import('../../components/reviewcamp
 
 const ReviewCampaign = () => {
   const classes = useStyles();
-  const [isConfirmed, setIsConfirmed] = useState(true);
+  const router = useRouter();
+
+  const [campaign, setCampaign] = useState(null);
+  const [businessUsername, setBusinessUsername] = useState('');
+  const [influencerUsername, setInfluencerUsername] = useState('');
+  const [existingCampaign, setExistingCampaign] = useState(false);
   const [postUrl, setPostUrl] = useState('');
 
+  const { id } = router.query;
+
   useEffect(() => {
-    const data = getCampaignProposal(params.id);
-    console.log('testing the campaign data query', data);
+    async function getCampaignInfo() {
+      const campaign = await getCampaignProposalDb('60bb8f568116625a0812299c');
+      const businessUsername = await getUserFromEthAddress(campaign.data.mongoResponse.business);
+      const influencerUsername = await getUserFromEthAddress(campaign.daata.mongoResponse.influencer);
+      setCampaign(campaign.data.mongoResponse);
+      setBusinessUsername(businessUsername);
+      setInfluencerUsername(influencerUsername);
+    }
     return () => {
       consola.info('Cleanup review campaign component');
     };
+    getCampaignInfo();
   }, []);
+
+  function handleProposalResponse(confirmed) {
+    if (confirmed) {
+      setExistingCampaign(true);
+    }
+  }
 
   return (
     <div className={classes.ReviewCampaign_root_center}>
       <div className={classes.ReviewCampaign_headers_side_by_side}>
         <div className={classes.ReviewCampaign_business_header}>
-          <BusinessReviewHeader />
+          <BusinessReviewHeader
+            potentialPayout={campaign?.potentialPayout}
+            objective={campaign?.objective}
+            username={businessUsername}
+          />
         </div>
         <div className={classes.ReviewCampaign_vertical_line}></div>
         <div className={classes.ReviewCampaign_influencer_header}>
-          <InfluencerReviewHeader />
+          <InfluencerReviewHeader username={influencerUsername} />
         </div>
       </div>
       <br />
@@ -50,15 +76,32 @@ const ReviewCampaign = () => {
       <br />
       <br />
       <div>
-        {!isConfirmed ? (
+        {!existingCampaign ? (
           <>
-            <Button className={classes.ReviewCampaign_reject} variant="contained" color="secondary" size="large">
+            <Button
+              className={classes.ReviewCampaign_reject}
+              variant="contained"
+              color="secondary"
+              size="large"
+              onClick={() => handleProposalResponse(false)}
+            >
               Reject
             </Button>
-            <Button className={classes.ReviewCampaign_amber} variant="contained" size="large">
+            <Button
+              className={classes.ReviewCampaign_amber}
+              variant="contained"
+              size="large"
+              onClick={() => handleProposalResponse(false)}
+            >
               Counter
             </Button>
-            <Button className={classes.ReviewCampaign_accept} variant="contained" size="large" color="secondary">
+            <Button
+              className={classes.ReviewCampaign_accept}
+              variant="contained"
+              size="large"
+              color="secondary"
+              onClick={() => handleProposalResponse(true)}
+            >
               Accept
             </Button>
           </>
@@ -74,7 +117,7 @@ const ReviewCampaign = () => {
             <br />
             <br />
             <br />
-            <Button variant="contained" type="submit" size="large" color="primary" onClick={handleNewPostUrl}>
+            <Button variant="contained" type="submit" size="large" color="primary" /* onClick={handleNewPostUrl}*/>
               Register Post
             </Button>
           </>
