@@ -6,8 +6,9 @@ import consola from 'consola';
 import { Button, TextField } from '@material-ui/core';
 import 'react-calendar/dist/Calendar.css';
 import { getCampaignProposalDb } from '../../services/api/campaignService';
-import { useStyles } from './stylesReviewCampaign';
 import { getUserFromEthAddress } from '../../services/api/userService';
+import { createNewCampaignOnContract } from '../../web3';
+import { useStyles } from './stylesReviewCampaign';
 
 const BusinessReviewHeader = dynamic(() => import('../../components/reviewcampaign/BusinessReviewHeader'), {
   loading: () => <p>Business Header Loading...</p>,
@@ -21,8 +22,8 @@ const ReviewCampaign = () => {
   const router = useRouter();
 
   const [campaign, setCampaign] = useState(null);
-  const [businessUsername, setBusinessUsername] = useState('');
-  const [influencerUsername, setInfluencerUsername] = useState('');
+  const [business, setBusiness] = useState('');
+  const [influencer, setInfluencer] = useState('');
   const [existingCampaign, setExistingCampaign] = useState(false);
   const [postUrl, setPostUrl] = useState('');
 
@@ -31,23 +32,25 @@ const ReviewCampaign = () => {
   useEffect(() => {
     async function getCampaignInfo() {
       const campaign = await getCampaignProposalDb('60bb8f568116625a0812299c');
-      const businessUsername = await getUserFromEthAddress(campaign.data.mongoResponse.business);
-      const influencerUsername = await getUserFromEthAddress(campaign.daata.mongoResponse.influencer);
+      const businessUser = await getUserFromEthAddress(campaign.data.mongoResponse.business);
+      const influencerUser = await getUserFromEthAddress(campaign.data.mongoResponse.influencer);
       setCampaign(campaign.data.mongoResponse);
-      setBusinessUsername(businessUsername);
-      setInfluencerUsername(influencerUsername);
+      setBusiness(businessUser.data.payload);
+      setInfluencer(influencerUser.data.payload);
+      console.log(campaign, 'the campaign');
     }
+    getCampaignInfo();
     return () => {
       consola.info('Cleanup review campaign component');
     };
-    getCampaignInfo();
   }, []);
 
-  function handleProposalResponse(confirmed) {
+  const handleProposalResponse = async confirmed => {
     if (confirmed) {
+      // await createNewCampaignOnContract();
       setExistingCampaign(true);
     }
-  }
+  };
 
   return (
     <div className={classes.ReviewCampaign_root_center}>
@@ -56,12 +59,13 @@ const ReviewCampaign = () => {
           <BusinessReviewHeader
             potentialPayout={campaign?.potentialPayout}
             objective={campaign?.objective}
-            username={businessUsername}
+            username={business?.username}
+            website={business?.website}
           />
         </div>
         <div className={classes.ReviewCampaign_vertical_line}></div>
         <div className={classes.ReviewCampaign_influencer_header}>
-          <InfluencerReviewHeader username={influencerUsername} />
+          <InfluencerReviewHeader username={influencer?.username} />
         </div>
       </div>
       <br />

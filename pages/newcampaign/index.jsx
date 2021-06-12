@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import consola from 'consola';
 import { useSelector, useDispatch } from 'react-redux';
 import { Paper } from '@material-ui/core';
@@ -34,6 +35,7 @@ const NewCampaign = () => {
 
   const dispatch = useDispatch();
   const account = useSelector(state => state.account);
+  const router = useRouter();
 
   // const famepayFactory = useSelector(state => state.famepayFactory);
 
@@ -97,7 +99,7 @@ const NewCampaign = () => {
   const createNewCampaignProposal = async () => {
     if (objective === 'singlePost') setJackpotReward(stakedAmount);
     try {
-      await createNewCampaignProposalDb(
+      const campaignDb = await createNewCampaignProposalDb(
         account.address, //business
         influencer.toLowerCase(),
         campaignDuration[0] ? campaignDuration[0] : Math.round(Date.now() / 1000), //agreedStartDate
@@ -110,6 +112,7 @@ const NewCampaign = () => {
         objective,
         // 'niche',
       );
+      router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
     } catch (error) {
       consola.error('NewCampaign.createNewCampaignProposal():', error);
     }

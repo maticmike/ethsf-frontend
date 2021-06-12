@@ -1,12 +1,16 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import { getTestRoute } from '../services/api/campaignService';
 const Home = () => {
+  const router = useRouter();
+
   return (
     <div className={styles.container}>
       <main className={styles.main}>
         <p>TBD Homepage</p>
+        <button onClick={() => router.push('/reviewcampaign/1')}>yo mama</button>
       </main>
 
       <footer className={styles.footer}>

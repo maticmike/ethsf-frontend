@@ -36,7 +36,7 @@ export const registerNewUserDb = async (ethAddress, username, firstName, lastNam
 
 export const getUserFromEthAddress = async ethAddress => {
   try {
-    const user = await axios.get(`${api}/${ethAddress}/account`);
+    const user = await axios.get(`${api}/user/${ethAddress}/account`);
     consola.success('ApiService: getUserFromEthAddress:'.user);
     return user;
   } catch (error) {
