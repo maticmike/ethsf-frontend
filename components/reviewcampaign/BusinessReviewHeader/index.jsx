@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { shortenedEthAddress } from '../../../web3/helpers';
 import { useStyles } from './styles';
-const BusinessReviewHeader = ({ potentialPayout, objective, username }) => {
+const BusinessReviewHeader = ({ potentialPayout, objective, username, website }) => {
   const classes = useStyles();
 
   return (
@@ -19,8 +19,8 @@ const BusinessReviewHeader = ({ potentialPayout, objective, username }) => {
       <div>
         <h1 className={classes.BusinessReview_margin_bottom_h1}>{username}</h1>
         {/* <p>{shortenedEthAddress()}</p> */}
-        <a href="https://gymshark.com" target="_blank">
-          https://gymshark.com
+        <a href={website} target="_blank">
+          {website}
         </a>
         <h2>${potentialPayout}</h2>
         {objective != 'singlePost' ? <strong>Potential Earnings</strong> : <strong>To Be Paid</strong>}

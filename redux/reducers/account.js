@@ -16,7 +16,7 @@ const account = (state = initialState, action) => {
       const { account, balance, signer } = action.payload;
       let balances = state.balances;
       balances[NATIVE_CURRENCY.symbol] = balance;
-      consola.info(`Connect wallet reducer ${account} ${balance} ${signer}`);
+      consola.success(`Connect wallet reducer ${account} ${balance} ${signer}`);
       return {
         address: account,
         balances: balance,

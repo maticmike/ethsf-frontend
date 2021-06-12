@@ -9,7 +9,7 @@ const campaign = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_CAMPAIGN: {
       const { account, balance } = action.payload;
-      consola.info(`Connect wallet reducer ${account} ${balance}`);
+      consola.success(`Connect wallet reducer ${account} ${balance}`);
       return {
         campaignId: account,
       };

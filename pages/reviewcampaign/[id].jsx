@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import Calendar from 'react-calendar';
+import { useSelector, useDispatch } from 'react-redux';
 import consola from 'consola';
 import { Button, TextField } from '@material-ui/core';
 import 'react-calendar/dist/Calendar.css';
 import { getCampaignProposalDb } from '../../services/api/campaignService';
 import { getUserFromEthAddress } from '../../services/api/userService';
 import { createNewCampaignOnContract } from '../../web3';
+import { storeFamepayFactoryThunk } from '../../redux/actions/famepayFactory';
 import { useStyles } from './stylesReviewCampaign';
 
 const BusinessReviewHeader = dynamic(() => import('../../components/reviewcampaign/BusinessReviewHeader'), {
@@ -20,6 +22,8 @@ const InfluencerReviewHeader = dynamic(() => import('../../components/reviewcamp
 const ReviewCampaign = () => {
   const classes = useStyles();
   const router = useRouter();
+
+  const famepayFactory = useSelector(state => state.famepayFactory);
 
   const [campaign, setCampaign] = useState(null);
   const [business, setBusiness] = useState('');
@@ -37,7 +41,6 @@ const ReviewCampaign = () => {
       setCampaign(campaign.data.mongoResponse);
       setBusiness(businessUser.data.payload);
       setInfluencer(influencerUser.data.payload);
-      console.log(campaign, 'the campaign');
     }
     getCampaignInfo();
     return () => {
@@ -47,7 +50,19 @@ const ReviewCampaign = () => {
 
   const handleProposalResponse = async confirmed => {
     if (confirmed) {
-      // await createNewCampaignOnContract();
+      await createNewCampaignOnContract(
+        famepayFactory,
+        campaign?.business,
+        campaign?.influencer,
+        campaign?.agreedStartDate,
+        campaign?.agreedDeadline,
+        campaign?.jackpotReward,
+        campaign?.incrementalReward,
+        campaign?.jackpotTarget,
+        campaign?.incrementalTarget,
+        campaign?.potentialPayout,
+        campaign?.objective,
+      );
       setExistingCampaign(true);
     }
   };
@@ -65,7 +80,11 @@ const ReviewCampaign = () => {
         </div>
         <div className={classes.ReviewCampaign_vertical_line}></div>
         <div className={classes.ReviewCampaign_influencer_header}>
-          <InfluencerReviewHeader username={influencer?.username} />
+          <InfluencerReviewHeader
+            username={influencer?.username}
+            email={influencer?.email}
+            campaignsCompleted={influencer?.campaignsCompleted}
+          />
         </div>
       </div>
       <br />

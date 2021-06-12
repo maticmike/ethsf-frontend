@@ -84,6 +84,7 @@ const bootstrapFactory = async () => {
     } else {
       const famepayFactoryAddress = getContractAddress(FamepayFactoryAbi, network.chainId);
       const famepayFactory = new ethers.Contract(famepayFactoryAddress, FamepayFactoryAbi.abi, signer);
+      console.log('the factory', famepayFactory);
       return { famepayFactory /*, famepay */ };
     }
   } catch (error) {
@@ -139,6 +140,7 @@ const createNewCampaignOnContract = async (
 ) => {
   consola.info('web3: createNewCampaign() started');
   try {
+    console.log(famepayFactory, 'the factory');
     const campaign = await famepayFactory.newFamepayCampaign(
       business,
       influencer,
