@@ -15,7 +15,7 @@ import { NETWORK_ID } from '../constants/Blockchain';
  * @param res response object
  * @return
  */
-const handleResponse = (functionName, res) => {
+export const handleResponse = (functionName, res) => {
   consola.info(`[${functionName}]`, res);
   return {
     status: CONTRACT_RESPONSE_STATUS,
@@ -30,7 +30,7 @@ const handleResponse = (functionName, res) => {
  * @param error error object
  * @return
  */
-const handleError = (functionName, error) => {
+export const handleError = (functionName, error) => {
   if (error.message.includes('insufficient funds') || error?.data?.messages.includes('insufficient funds')) {
     consola.error(`[${functionName}]`, error);
     return {
@@ -59,7 +59,7 @@ const handleError = (functionName, error) => {
  * @param chainId the network id
  * @returns address of contract
  */
-const getContractAddress = (abi, chainId) => {
+export const getContractAddress = (abi, chainId) => {
   if (!abi || !chainId) return '';
   const { networks } = abi;
   if (networks[chainId.toString()]) {
@@ -74,7 +74,7 @@ const getContractAddress = (abi, chainId) => {
  * @function bootstrapFactory
  * @returns the full contract objects with their addresses
  */
-const bootstrapFactory = async () => {
+export const bootstrapFactory = async () => {
   try {
     const provider = new ethers.providers.Web3Provider(web3.currentProvider);
     const signer = provider.getSigner();
@@ -98,7 +98,7 @@ const bootstrapFactory = async () => {
  * @function getEthWallet
  * @returns wallet and wallet related info
  */
-const getWalletInfo = async () => {
+export const getWalletInfo = async () => {
   try {
     const onboard = onBoardInitialize();
     await onboard.walletSelect();
@@ -125,7 +125,7 @@ const getWalletInfo = async () => {
  ********************************
  */
 
-const createNewCampaignOnContract = async (
+export const createNewCampaignOnContract = async (
   famepayFactory,
   business,
   influencer,
@@ -138,7 +138,6 @@ const createNewCampaignOnContract = async (
   potentialPayout,
   objective,
 ) => {
-  consola.info('web3: createNewCampaign() started');
   try {
     console.log(famepayFactory, 'the factory');
     const campaign = await famepayFactory.newFamepayCampaign(
@@ -160,10 +159,18 @@ const createNewCampaignOnContract = async (
   }
 };
 
+export const getCampaignFromContract = async campaignId => {
+  try {
+    const campaign = await famepayFactory.famepayCampaigns(campaignId);
+    consola.success('Web3: getCampaignFromContract():', campaign);
+    return campaign;
+  } catch (error) {
+    consola.success('Web3: getCampaignFromContract:', error);
+  }
+};
+
 /**
  ********************************
  * Famepay Functions
  ********************************
  */
-
-export { handleResponse, handleError, bootstrapFactory, getWalletInfo, createNewCampaignOnContract };

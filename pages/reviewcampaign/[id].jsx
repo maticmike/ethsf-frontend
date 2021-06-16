@@ -8,8 +8,8 @@ import { Button, TextField } from '@material-ui/core';
 import 'react-calendar/dist/Calendar.css';
 import { getCampaignProposalDb } from '../../services/api/campaignService';
 import { getUserFromEthAddress } from '../../services/api/userService';
-import { createNewCampaignOnContract } from '../../web3';
 import { storeFamepayFactoryThunk } from '../../redux/actions/famepayFactory';
+import { createNewCampaignOnContract } from '../../web3';
 import { useStyles } from './stylesReviewCampaign';
 
 const BusinessReviewHeader = dynamic(() => import('../../components/reviewcampaign/BusinessReviewHeader'), {
@@ -23,8 +23,9 @@ const ReviewCampaign = () => {
   const classes = useStyles();
   const router = useRouter();
 
+  const dispatch = useDispatch();
   const famepayFactory = useSelector(state => state.famepayFactory);
-
+  console.log(famepayFactory, 'fame pay');
   const [campaign, setCampaign] = useState(null);
   const [business, setBusiness] = useState('');
   const [influencer, setInfluencer] = useState('');
@@ -35,9 +36,11 @@ const ReviewCampaign = () => {
 
   useEffect(() => {
     async function getCampaignInfo() {
+      dispatch(storeFamepayFactoryThunk());
       const campaign = await getCampaignProposalDb('60bb8f568116625a0812299c');
-      const businessUser = await getUserFromEthAddress(campaign.data.mongoResponse.business);
-      const influencerUser = await getUserFromEthAddress(campaign.data.mongoResponse.influencer);
+      console.log(campaign, 'the campaign');
+      const businessUser = await getUserFromEthAddress(campaign?.data?.mongoResponse?.business);
+      const influencerUser = await getUserFromEthAddress(campaign?.data?.mongoResponse?.influencer);
       setCampaign(campaign.data.mongoResponse);
       setBusiness(businessUser.data.payload);
       setInfluencer(influencerUser.data.payload);

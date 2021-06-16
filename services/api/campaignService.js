@@ -1,6 +1,6 @@
 import axios from 'axios';
 import consola from 'consola';
-
+import { ethers } from 'ethers';
 let api = process.env.BASE_API_URL;
 
 export const getTweetDataFromDB = async tweet => {
@@ -25,6 +25,7 @@ export const createNewCampaignProposalDb = async (
   objective,
   niche,
 ) => {
+  // const potentialPayoutBN = ethers.utils.parseEther(potentialPayout);
   try {
     const campaign = await axios.post(`${api}/campaignProposal/create`, {
       business,
@@ -38,6 +39,7 @@ export const createNewCampaignProposalDb = async (
       potentialPayout,
       objective,
       niche,
+      // potentialPayoutBN
     });
     consola.success('ApiService: createNewCampaignProposal() campaign being created:', campaign);
     return campaign;
