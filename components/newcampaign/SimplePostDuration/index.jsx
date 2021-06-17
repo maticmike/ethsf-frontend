@@ -42,7 +42,7 @@ const SimplePostDuration = ({ objective, setParentSimplePostMinimumDuration, set
       setParentSimplePostMinimumDuration(
         selectedDuration === 'other' ? selectAlternativeDurationTimestamp() : radioOptionDuration,
       );
-      objective === 'singlePost' ? setParentCampaignSetupStep(4) : setParentCampaignSetupStep(5);
+      objective === 'simplePost' ? setParentCampaignSetupStep(4) : setParentCampaignSetupStep(5);
     }
   };
 

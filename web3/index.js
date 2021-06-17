@@ -84,8 +84,7 @@ export const bootstrapFactory = async () => {
     } else {
       const famepayFactoryAddress = getContractAddress(FamepayFactoryAbi, network.chainId);
       const famepayFactory = new ethers.Contract(famepayFactoryAddress, FamepayFactoryAbi.abi, signer);
-      console.log('the factory', famepayFactory);
-      return { famepayFactory /*, famepay */ };
+      return { famepayFactory };
     }
   } catch (error) {
     consola.error('Web3: bootstrapFactory() error:', error);
@@ -139,7 +138,6 @@ export const createNewCampaignOnContract = async (
   objective,
 ) => {
   try {
-    console.log(famepayFactory, 'the factory');
     const campaign = await famepayFactory.newFamepayCampaign(
       business,
       influencer,
@@ -159,11 +157,14 @@ export const createNewCampaignOnContract = async (
   }
 };
 
-export const getCampaignFromContract = async campaignId => {
+export const getCampaignFromContract = async (famepayFactory, campaignId) => {
   try {
-    const campaign = await famepayFactory.famepayCampaigns(campaignId);
-    consola.success('Web3: getCampaignFromContract():', campaign);
-    return campaign;
+    const provider = new ethers.providers.Web3Provider(web3.currentProvider);
+    const signer = provider.getSigner();
+    const famepayCampaignAddress = await famepayFactory.getCampaign(campaignId);
+    const famepayCampaign = new ethers.Contract(famepayCampaignAddress, FamepayAbi.abi, signer);
+    consola.success('Web3: getCampaignFromContract():', famepayCampaign);
+    return { famepayCampaign };
   } catch (error) {
     consola.success('Web3: getCampaignFromContract:', error);
   }

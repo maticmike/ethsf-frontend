@@ -12,7 +12,7 @@ import {
 
 export const setObjectiveName = name => {
   switch (name) {
-    case 'singlePost':
+    case 'simplePost':
       return SIMPLE_POST;
     case 'postViews':
       return PAY_PER_VIEW;

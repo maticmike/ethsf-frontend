@@ -14,7 +14,7 @@ const CampaignStaking = ({
 
   const [inputEntered, setInputEntered] = useState(null);
 
-  const getHeading = () => (objective === 'singlePost' ? 'Post Staking' : 'Campaign Staking');
+  const getHeading = () => (objective === 'simplePost' ? 'Post Staking' : 'Campaign Staking');
 
   const stakeDeposit = () => setParentCampaignSetupStep(5);
   // only for single post
@@ -43,16 +43,16 @@ const CampaignStaking = ({
           variant="outlined"
           color="primary"
           size="small"
-          onClick={() => setParentCampaignSetupStep(objective === 'singlePost' ? 3 : 2)}
+          onClick={() => setParentCampaignSetupStep(objective === 'simplePost' ? 3 : 2)}
         >
           Previous
         </Button>
-        {inputEntered && objective != 'singlePost' ? (
+        {inputEntered && objective != 'simplePost' ? (
           <Button variant="contained" color="primary" size="small" onClick={stakeDeposit}>
             Next
           </Button>
         ) : null}
-        {inputEntered && objective === 'singlePost' ? (
+        {inputEntered && objective === 'simplePost' ? (
           <Button variant="contained" color="primary" size="small" onClick={finishAndDeposit}>
             Finish
           </Button>

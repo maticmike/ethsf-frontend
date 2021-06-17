@@ -35,7 +35,7 @@ const CampaignObjective = ({ objective, setParentCampaignSetupStep }) => {
                 value={selectedObjective}
                 onChange={handleRadioChange}
               >
-                <FormControlLabel value="singlePost" control={<Radio color="primary" />} label="Single Post" />
+                <FormControlLabel value="simplePost" control={<Radio color="primary" />} label="Single Post" />
                 <FormControlLabel value="postViews" control={<Radio color="primary" />} label="Views" />
               </RadioGroup>
             </FormControl>

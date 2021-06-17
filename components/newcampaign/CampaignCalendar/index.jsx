@@ -15,15 +15,15 @@ const CampaignCalendar = ({
   const [simplePostDate, setSimplePostDate] = useState(null);
   const [campaignDuration, setCampaignDuration] = useState(null);
 
-  const getHeading = () => (objective === 'singlePost' ? 'Post Date And Time' : 'Campaign Length');
+  const getHeading = () => (objective === 'simplePost' ? 'Post Date And Time' : 'Campaign Length');
   const handlePostDate = postDate => {
-    objective === 'singlePost' ? setSimplePostDate(postDate) : setCampaignDuration(postDate);
+    objective === 'simplePost' ? setSimplePostDate(postDate) : setCampaignDuration(postDate);
   };
   const selectPostDate = () => {
     let endOfDaySimplePost;
     let startCampaignDate;
     let endCampaignDate;
-    if (objective === 'singlePost') {
+    if (objective === 'simplePost') {
       endOfDaySimplePost = new Date(simplePostDate).getTime() / 1000 + 86340;
     } else {
       startCampaignDate = new Date(campaignDuration[0]).getTime() / 1000 + 86340;
@@ -31,7 +31,7 @@ const CampaignCalendar = ({
     }
     setParentSimplePostDate(endOfDaySimplePost);
     setParentCampaignDuration([startCampaignDate, parseInt(endCampaignDate)]);
-    objective === 'singlePost' ? setParentCampaignSetupStep(3) : setParentCampaignSetupStep(4);
+    objective === 'simplePost' ? setParentCampaignSetupStep(3) : setParentCampaignSetupStep(4);
   };
   return (
     <div className={classes.CampaignDates_layout}>
@@ -47,8 +47,8 @@ const CampaignCalendar = ({
           <Calendar
             onChange={handlePostDate}
             minDate={new Date()}
-            selectRange={objective != 'singlePost' ? true : false}
-            value={objective === 'singlePost' ? simplePostDate : campaignDuration}
+            selectRange={objective != 'simplePost' ? true : false}
+            value={objective === 'simplePost' ? simplePostDate : campaignDuration}
           />
         </Grid>
       </Grid>

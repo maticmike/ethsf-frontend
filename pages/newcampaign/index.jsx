@@ -75,29 +75,8 @@ const NewCampaign = () => {
     }
   };
 
-  // const createNewCampaign = async () => {
-  //   try {
-  //     await createNewCampaignOnContract(
-  //       famepayFactory,
-  //       account.address, //business
-  //       influencer,
-  //       campaignDuration[0] ? campaignDuration[0] : Date.now(), //startDate
-  //       campaignDuration[1] ? campaignDuration[1] : simplePostDate + simplePostMinimumDuration, //postDate
-  //       jackpotReward,
-  //       incrementalReward,
-  //       jackpotTarget,
-  //       incrementalTarget,
-  //       stakedAmount,
-  //       objective,
-  //     );
-  //     dispatch(createCampaignThunk());
-  //   } catch (error) {
-  //     consola.error('NewCampaign.createCampaign():', error);
-  //   }
-  // };
-
   const createNewCampaignProposal = async () => {
-    if (objective === 'singlePost') setJackpotReward(stakedAmount);
+    if (objective === 'simplePost') setJackpotReward(stakedAmount);
     try {
       const campaignDb = await createNewCampaignProposalDb(
         account.address, //business

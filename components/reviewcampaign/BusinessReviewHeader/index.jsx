@@ -23,8 +23,8 @@ const BusinessReviewHeader = ({ potentialPayout, objective, username, website })
           {website}
         </a>
         <h2>${potentialPayout}</h2>
-        {objective != 'singlePost' ? <strong>Potential Earnings</strong> : <strong>To Be Paid</strong>}
-        {objective != 'singlePost' ? (
+        {objective != 'simplePost' ? <strong>Potential Earnings</strong> : <strong>To Be Paid</strong>}
+        {objective != 'simplePost' ? (
           <>
             <p>$700 on 1,000,000 views</p>
             <p>$50 for each 50,000 views</p>

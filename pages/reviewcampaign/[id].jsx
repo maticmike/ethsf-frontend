@@ -9,7 +9,7 @@ import 'react-calendar/dist/Calendar.css';
 import { getCampaignProposalDb } from '../../services/api/campaignService';
 import { getUserFromEthAddress } from '../../services/api/userService';
 import { storeFamepayFactoryThunk } from '../../redux/actions/famepayFactory';
-import { createNewCampaignOnContract } from '../../web3';
+import { createNewCampaignOnContract, getCampaignFromContract } from '../../web3';
 import { useStyles } from './stylesReviewCampaign';
 
 const BusinessReviewHeader = dynamic(() => import('../../components/reviewcampaign/BusinessReviewHeader'), {
@@ -25,7 +25,6 @@ const ReviewCampaign = () => {
 
   const dispatch = useDispatch();
   const famepayFactory = useSelector(state => state.famepayFactory);
-  console.log(famepayFactory, 'fame pay');
   const [campaign, setCampaign] = useState(null);
   const [business, setBusiness] = useState('');
   const [influencer, setInfluencer] = useState('');
@@ -37,8 +36,7 @@ const ReviewCampaign = () => {
   useEffect(() => {
     async function getCampaignInfo() {
       dispatch(storeFamepayFactoryThunk());
-      const campaign = await getCampaignProposalDb('60bb8f568116625a0812299c');
-      console.log(campaign, 'the campaign');
+      const campaign = await getCampaignProposalDb(id);
       const businessUser = await getUserFromEthAddress(campaign?.data?.mongoResponse?.business);
       const influencerUser = await getUserFromEthAddress(campaign?.data?.mongoResponse?.influencer);
       setCampaign(campaign.data.mongoResponse);
@@ -70,6 +68,10 @@ const ReviewCampaign = () => {
     }
   };
 
+  const temporaryCheckCampaign = async () => {
+    await getCampaignFromContract(famepayFactory, 2);
+  };
+
   return (
     <div className={classes.ReviewCampaign_root_center}>
       <div className={classes.ReviewCampaign_headers_side_by_side}>
@@ -95,7 +97,7 @@ const ReviewCampaign = () => {
       <Calendar
         // onChange={handleDateChange}
         // minDate={new Date()}
-        // selectRange={objective != 'singlePost' ? true : false}
+        // selectRange={objective != 'simplePost' ? true : false}
         // value={simpleDate}
         className={classes.ReviewCampaign_calendar_size}
       />
@@ -143,7 +145,7 @@ const ReviewCampaign = () => {
             <br />
             <br />
             <br />
-            <Button variant="contained" type="submit" size="large" color="primary" /* onClick={handleNewPostUrl}*/>
+            <Button variant="contained" type="submit" size="large" color="primary" onClick={temporaryCheckCampaign}>
               Register Post
             </Button>
           </>
