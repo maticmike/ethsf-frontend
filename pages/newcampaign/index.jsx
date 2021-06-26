@@ -82,7 +82,8 @@ const NewCampaign = () => {
         account.address, //business
         influencer.toLowerCase(),
         campaignDuration[0] ? campaignDuration[0] : Math.round(Date.now() / 1000), //agreedStartDate
-        campaignDuration[1] ? campaignDuration[1] : simplePostDate + simplePostMinimumDuration, //agreedDeadline/postDate
+        campaignDuration[1] ? campaignDuration[1] : simplePostDate, //agreedDeadline/postDate
+        simplePostMinimumDuration,
         jackpotReward,
         incrementalReward,
         jackpotTarget,

@@ -10,7 +10,6 @@ const Home = () => {
     <div className={styles.container}>
       <main className={styles.main}>
         <p>TBD Homepage</p>
-        <button onClick={() => router.push('/reviewcampaign/1')}>yo mama</button>
       </main>
 
       <footer className={styles.footer}>

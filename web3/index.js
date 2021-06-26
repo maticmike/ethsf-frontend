@@ -83,6 +83,7 @@ export const bootstrapFactory = async () => {
       return false;
     } else {
       const famepayFactoryAddress = getContractAddress(FamepayFactoryAbi, network.chainId);
+      console.log(famepayFactoryAddress, 'fp address');
       const famepayFactory = new ethers.Contract(famepayFactoryAddress, FamepayFactoryAbi.abi, signer);
       return { famepayFactory };
     }
@@ -130,6 +131,7 @@ export const createNewCampaignOnContract = async (
   influencer,
   startDate,
   deadline,
+  simplePostDuration,
   jackpotReward,
   incrementalReward,
   jackpotTarget,
@@ -143,6 +145,7 @@ export const createNewCampaignOnContract = async (
       influencer,
       startDate,
       deadline,
+      simplePostDuration,
       jackpotReward,
       incrementalReward,
       jackpotTarget,

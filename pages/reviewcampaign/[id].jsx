@@ -37,6 +37,7 @@ const ReviewCampaign = () => {
     async function getCampaignInfo() {
       dispatch(storeFamepayFactoryThunk());
       const campaign = await getCampaignProposalDb(id);
+      console.log(campaign);
       const businessUser = await getUserFromEthAddress(campaign?.data?.mongoResponse?.business);
       const influencerUser = await getUserFromEthAddress(campaign?.data?.mongoResponse?.influencer);
       setCampaign(campaign.data.mongoResponse);
@@ -57,6 +58,7 @@ const ReviewCampaign = () => {
         campaign?.influencer,
         campaign?.agreedStartDate,
         campaign?.agreedDeadline,
+        campaign?.simplePostDuration,
         campaign?.jackpotReward,
         campaign?.incrementalReward,
         campaign?.jackpotTarget,
