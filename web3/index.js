@@ -140,6 +140,7 @@ export const createNewCampaignOnContract = async (
   objective,
 ) => {
   try {
+    console.log(simplePostDuration, 'the simple post duration');
     const campaign = await famepayFactory.newFamepayCampaign(
       business,
       influencer,

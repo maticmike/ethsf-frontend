@@ -37,7 +37,6 @@ const ReviewCampaign = () => {
     async function getCampaignInfo() {
       dispatch(storeFamepayFactoryThunk());
       const campaign = await getCampaignProposalDb(id);
-      console.log(campaign);
       const businessUser = await getUserFromEthAddress(campaign?.data?.mongoResponse?.business);
       const influencerUser = await getUserFromEthAddress(campaign?.data?.mongoResponse?.influencer);
       setCampaign(campaign.data.mongoResponse);
@@ -66,6 +65,7 @@ const ReviewCampaign = () => {
         campaign?.potentialPayout,
         campaign?.objective,
       );
+      //TODO: Build User Profile Page to get list of all campaigns to get id's to use for campaign detail
       setExistingCampaign(true);
     }
   };

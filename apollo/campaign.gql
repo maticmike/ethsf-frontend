@@ -1,3 +1,25 @@
-# query campaignQuery ($where: Campaign_Filter!) {
-    # campaigns(where: $where)
-# }
+fragment Campaign on Campaign {
+    id
+    startDate
+    deadline
+    business {
+        id
+    }
+    influencer {
+        id
+    }
+    objective
+    outstandingPayments
+    jackpotTargetAmount
+        simplePostDuration
+    incrementalTargetAmount
+    depositedBalance
+    }
+}
+
+
+
+query campaignQuery ($where: Campaign_Filter!) {
+    campaigns(where: $where)
+}
+
