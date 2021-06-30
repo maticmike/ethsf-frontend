@@ -11,5 +11,8 @@ const useStyles = makeStyles({
     background: '#e4dddd',
     textAlign: 'center',
   },
+  test: {
+    display: 'flex',
+  },
 });
 export { useStyles };
