@@ -37,7 +37,7 @@ const Profile = () => {
       <br />
       <br />
       <br />
-      <div className={classes.root}>
+      <div className={classes.Profile_content_container}>
         <GridList cellHeight={200} className={classes.gridList} cols={3}>
           {dummyDatas.map(dummyData => {
             return (
