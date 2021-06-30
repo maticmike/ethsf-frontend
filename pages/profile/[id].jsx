@@ -1,6 +1,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { useStyles } from './styles';
+import Image from 'next/image';
 
 const ProfileHeader = dynamic(() => import('../../components/profile/ProfileHeader'), {
   loading: () => <p>Profile Header Loading....</p>,
@@ -16,7 +17,16 @@ const Profile = () => {
       />
       <br />
       <br />
-      <ProfileHeader />
+      <div className={classes.Profie_cover_flex}>
+        <Image
+          className={classes.ProfileHeader_round_img}
+          src="/TestBusiness.png"
+          alt="Change Me"
+          width="195"
+          height="195"
+        />
+        <ProfileHeader />
+      </div>
     </div>
   );
 };

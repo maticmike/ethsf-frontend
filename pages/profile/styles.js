@@ -12,6 +12,12 @@ const useStyles = makeStyles({
     width: '100%',
     height: '200px',
   },
+  ProfileHeader_round_img: {
+    borderRadius: '50%',
+  },
+  Profie_cover_flex: {
+    display: 'flex',
+  },
 });
 
 export { useStyles };

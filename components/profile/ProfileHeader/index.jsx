@@ -1,48 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { Grid } from '@material-ui/core';
 import { useStyles } from './styles';
 
 const ProfileHeader = () => {
   const classes = useStyles();
-
+  const [tags, setTags] = useState(['Fitness', 'Clothing', 'Activewear', 'Sports']);
   return (
     <div>
-      <Image
-        className={classes.ProfileHeader_round_img}
-        src="/TestBusiness.png"
-        alt="Change Me"
-        width="125"
-        height="125"
-      />
       <Grid container direction="row">
-        {/* <Grid item xs={12}>
-          <Image
-            className={classes.ProfileHeader_round_img}
-            src="/TestBusiness.png"
-            alt="Change Me"
-            width="125"
-            height="125"
-          />
-        </Grid> */}
-        <Grid item xs={6}>
-          <h4>Gym Shark</h4>
+        <Grid item xs={4}>
+          <h2>Gym Shark</h2>
         </Grid>
-        <Grid item xs={6}>
-          Four Stars
+        <Grid item xs={3}>
+          <p>⭐️⭐️⭐️⭐️</p>
         </Grid>
-        <Grid item xs={6}>
-          Los Angeles, CA
+      </Grid>
+      <Grid container direction="row">
+        <Grid item xs={4}>
+          <p>📍 Los Angeles, CA</p>
         </Grid>
-        <Grid item xs={6}>
-          Joined: Jan, 11 2021
+        <Grid item xs={4}>
+          <p>Joined: Jan 11, 2021</p>
         </Grid>
-        <Grid item xs={12}>
-          https://gymshark.com
+        <Grid item xs={4}>
+          <p>https://gymshark.com</p>
         </Grid>
-        <hr />
-        <Grid item xs={12}>
-          <p>Fitness, Clothing, Activewear, Sports</p>
+        <Grid item xs={2} className={classes.ProfileHeader_tags_container}>
+          {tags.map(tag => (
+            <p className={classes.ProfileHeader_tags_text}>{tag}</p>
+          ))}
         </Grid>
       </Grid>
     </div>
