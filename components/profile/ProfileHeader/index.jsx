@@ -26,8 +26,10 @@ const ProfileHeader = () => {
           <p>https://gymshark.com</p>
         </Grid>
         <Grid item xs={2} className={classes.ProfileHeader_tags_container}>
-          {tags.map(tag => (
-            <p className={classes.ProfileHeader_tags_text}>{tag}</p>
+          {tags.map((tag, index) => (
+            <p key={index} className={classes.ProfileHeader_tags_text}>
+              {tag}
+            </p>
           ))}
         </Grid>
       </Grid>

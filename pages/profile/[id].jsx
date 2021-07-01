@@ -39,9 +39,9 @@ const Profile = () => {
       <br />
       <div className={classes.Profile_content_container}>
         <GridList cellHeight={200} className={classes.gridList} cols={3}>
-          {dummyDatas.map(dummyData => {
+          {dummyDatas.map((dummyData, index) => {
             return (
-              <GridListTile cols={1}>
+              <GridListTile cols={1} key={index}>
                 <ProfileCampaigns />
               </GridListTile>
             );
