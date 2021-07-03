@@ -1,25 +1,32 @@
-fragment Campaign on Campaign {
-    id
-    startDate
-    deadline
-    business {
-        id
-    }
-    influencer {
-        id
-    }
-    objective
-    outstandingPayments
-    jackpotTargetAmount
-        simplePostDuration
-    incrementalTargetAmount
-    depositedBalance
+# fragment CampaignFrag on Campaign {
+#     id
+#     startDate
+#     deadline
+#     business {
+#       id
+#     }
+#     influencer {
+#       id
+#     }
+#     objective
+#     outstandingPayments
+#     jackpotTargetAmount
+#     simplePostDuration
+#     incrementalTargetAmount
+#     depositedBalance
+# }
+# query getAllCampaignsForUser($id: String!) {
+#     campaigns(where: {id: $id}) {
+#        ...CampaignFrag
+#     }
+# }
+query getAllCampaignsForUser {
+    campaigns {
+       id
     }
 }
 
-
-
-query campaignQuery ($where: Campaign_Filter!) {
-    campaigns(where: $where)
-}
+# query campaignQuery($where: Campaign_Filter!) {
+#     campaigns(where: $where)
+# }
 

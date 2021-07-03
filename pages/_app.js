@@ -14,7 +14,6 @@ const Navbar = dynamic(() => import('../components/navigation/navbar'), {
 
 const MyApp = ({ Component, pageProps }) => {
   const apolloClient = useApollo(pageProps.initialApolloState);
-
   return (
     <ApolloProvider client={apolloClient}>
       <Provider store={store}>

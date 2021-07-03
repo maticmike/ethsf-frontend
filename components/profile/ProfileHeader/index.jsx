@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Grid } from '@material-ui/core';
+
 import { useStyles } from './styles';
 
 const ProfileHeader = () => {
   const classes = useStyles();
+
   const [tags, setTags] = useState(['Fitness', 'Clothing', 'Activewear', 'Sports']);
+
   return (
     <div>
       <Grid container direction="row">
