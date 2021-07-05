@@ -26,7 +26,6 @@ export const registerNewUserDb = async (ethAddress, username, firstName, lastNam
       email,
       type,
     });
-    consola.success('ApiService: registerNewUserDB() new user has been registered:', registeredUser);
     return registeredUser;
   } catch (error) {
     consola.error('ApiService: registerNewUserDB():', error);
@@ -36,11 +35,19 @@ export const registerNewUserDb = async (ethAddress, username, firstName, lastNam
 
 export const getUserFromEthAddress = async ethAddress => {
   try {
-    const user = await axios.get(`${api}/user/${ethAddress}/account`);
-    consola.success('ApiService: getUserFromEthAddress:', user);
+    const user = await axios.get(`${api}/user/ethAddress/${ethAddress}`);
     return user;
   } catch (error) {
-    consola.error('Api Service getUserFromEthAddress:', error);
+    consola.error('ApiService getUserFromEthAddress():', error);
     throw error;
+  }
+};
+
+export const getUserFromUsernameDb = async username => {
+  try {
+    const user = await axios.get(`${api}/user/username/${username}`);
+    return user;
+  } catch (error) {
+    consola.error('ApiService getUserFromUsernameDB():', error);
   }
 };

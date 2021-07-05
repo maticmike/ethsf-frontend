@@ -15,8 +15,13 @@ fragment CampaignFrag on Campaign {
     incrementalTargetAmount
     depositedBalance
 }
-
-# query campaignQuery($where: Campaign_Filter!) {
-#     campaigns(where: $where)
-# }
-
+query GET_ALL_CAMPAIGNS_FOR_BUSINESS_QUERY($id: String!) {
+    campaigns(where: {business: $id}) {
+       ...CampaignFrag
+    }
+}
+query GET_ALL_CAMPAIGNS_FOR_INFLUENCER_QUERY($id: String!) {
+    campaigns(where: {business: $id}) {
+       ...CampaignFrag
+    }
+}
