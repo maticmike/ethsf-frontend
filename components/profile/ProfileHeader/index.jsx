@@ -3,16 +3,16 @@ import { Grid } from '@material-ui/core';
 
 import { useStyles } from './styles';
 
-const ProfileHeader = () => {
+const ProfileHeader = ({ user }) => {
   const classes = useStyles();
 
   const [tags, setTags] = useState(['Fitness', 'Clothing', 'Activewear', 'Sports']);
-
+  console.log(user, 'the user');
   return (
     <div>
       <Grid container direction="row">
         <Grid item xs={4}>
-          <h2>Gym Shark</h2>
+          <h2>{user.username}</h2>
         </Grid>
         <Grid item xs={3}>
           <p>⭐️⭐️⭐️⭐️</p>
@@ -23,12 +23,14 @@ const ProfileHeader = () => {
           <p>📍 Los Angeles, CA</p>
         </Grid>
         <Grid item xs={4}>
-          <p>Joined: Jan 11, 2021</p>
+          <p>
+            <a href={'mailto:' + user.email}>Send Email</a>
+          </p>
         </Grid>
         <Grid item xs={4}>
-          <p>https://gymshark.com</p>
+          <p>{user.website}</p>
         </Grid>
-        <Grid item xs={2} className={classes.ProfileHeader_tags_container}>
+        <Grid item xs={3} className={classes.ProfileHeader_tags_container}>
           {tags.map((tag, index) => (
             <p key={index} className={classes.ProfileHeader_tags_text}>
               {tag}

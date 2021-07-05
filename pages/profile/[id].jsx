@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import Error from 'next/error';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GridList, GridListTile } from '@material-ui/core';
@@ -22,16 +23,20 @@ const Profile = () => {
 
   const { id } = router.query;
 
-  const [userEthAddress, setUserEthAddress] = useState('');
+  const [user, setUser] = useState('');
   const [profileIsBusiness, setProfileIsBusiness] = useState(false);
   const classes = useStyles();
 
   useEffect(() => {
     async function getUsernameEthAddress() {
       if (!router.isReady) return;
-      const user = await getUserFromUsernameDb(id);
-      setUserEthAddress(user.data.payload.userEthAddress);
-      if (user.data.payload.type === 'BUSINESS') setProfileIsBusiness(true);
+      const userDb = await getUserFromUsernameDb(id);
+      if (userDb === undefined) {
+        return <Error statusCode={404} />;
+      } else {
+        setUser(userDb.data.payload);
+        if (userDb.data.payload.type === 'BUSINESS') setProfileIsBusiness(true);
+      }
     }
     getUsernameEthAddress();
     return () => {
@@ -43,21 +48,22 @@ const Profile = () => {
 
   if (profileIsBusiness) {
     const { loading, error, data } = useQuery(GET_ALL_CAMPAIGNS_FOR_BUSINESS_QUERY, {
-      variables: { id: userEthAddress },
+      variables: { id: user.userEthAddress },
       pollInterval: APOLLO_POLL_INTERVAL_MS,
     });
     if (loading) return null;
-    if (error) return `Error! ${error}`;
+    if (error) return <Error statusCode={404} />;
     campaigns = data?.campaigns;
   } else {
     const { loading, error, data } = useQuery(GET_ALL_CAMPAIGNS_FOR_BUSINESS_QUERY, {
-      variables: { id: userEthAddress },
+      variables: { id: user.userEthAddress },
       pollInterval: APOLLO_POLL_INTERVAL_MS,
     });
+    if (loading) return null;
+    if (error) return <Error statusCode={404} />;
     campaigns = data?.campaigns;
   }
 
-  console.log(campaigns, 'the campaigns var');
   return (
     <>
       <div className={classes.Profile_header_container}>
@@ -75,7 +81,7 @@ const Profile = () => {
             width="195"
             height="195"
           />
-          <ProfileHeader />
+          <ProfileHeader user={user} />
         </div>
       </div>
       <br />
@@ -83,7 +89,7 @@ const Profile = () => {
       <br />
       <div className={classes.Profile_content_container}>
         <GridList cellHeight={200} className={classes.gridList} cols={3}>
-          {campaigns.map((dummyData, index) => {
+          {campaigns?.map((campaign, index) => {
             return (
               <GridListTile cols={1} key={index}>
                 <ProfileCampaigns />
