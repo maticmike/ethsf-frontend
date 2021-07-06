@@ -63,7 +63,7 @@ const Profile = () => {
     if (error) return <Error statusCode={404} />;
     campaigns = data?.campaigns;
   }
-
+  console.log(campaigns, 'the campaigns');
   return (
     <>
       <div className={classes.Profile_header_container}>
@@ -92,7 +92,9 @@ const Profile = () => {
           {campaigns?.map((campaign, index) => {
             return (
               <GridListTile cols={1} key={index}>
-                <ProfileCampaigns />
+                <a href={'/reviewcampaign/' + campaign.id}>
+                  <ProfileCampaigns campaign={campaign} isBusiness={profileIsBusiness} />
+                </a>
               </GridListTile>
             );
           })}

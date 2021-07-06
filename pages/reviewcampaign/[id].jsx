@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import Error from 'next/error';
 import { useRouter } from 'next/router';
 import Calendar from 'react-calendar';
 import { useSelector, useDispatch } from 'react-redux';
@@ -37,6 +38,7 @@ const ReviewCampaign = () => {
     async function getCampaignInfo() {
       dispatch(storeFamepayFactoryThunk());
       const campaign = await getCampaignProposalDb(id);
+      if (Object.entries(campaign.data.payload).length === 0) return <Error statusCode={404} />;
       const businessUser = await getUserFromEthAddress(campaign?.data?.mongoResponse?.business);
       const influencerUser = await getUserFromEthAddress(campaign?.data?.mongoResponse?.influencer);
       setCampaign(campaign.data.mongoResponse);

@@ -7,7 +7,6 @@ const ProfileHeader = ({ user }) => {
   const classes = useStyles();
 
   const [tags, setTags] = useState(['Fitness', 'Clothing', 'Activewear', 'Sports']);
-  console.log(user, 'the user');
   return (
     <div>
       <Grid container direction="row">
@@ -20,15 +19,15 @@ const ProfileHeader = ({ user }) => {
       </Grid>
       <Grid container direction="row">
         <Grid item xs={4}>
-          <p>📍 Los Angeles, CA</p>
+          <p>📍 {user.location}</p>
         </Grid>
         <Grid item xs={4}>
-          <p>
-            <a href={'mailto:' + user.email}>Send Email</a>
+          <p className={classes.ProfileHeader_link_text}>
+            <a href={'mailto:' + user.email}>Contact</a>
           </p>
         </Grid>
         <Grid item xs={4}>
-          <p>{user.website}</p>
+          <p className={classes.ProfileHeader_link_text}>{user.website}</p>
         </Grid>
         <Grid item xs={3} className={classes.ProfileHeader_tags_container}>
           {tags.map((tag, index) => (
