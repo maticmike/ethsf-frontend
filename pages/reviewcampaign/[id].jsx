@@ -29,8 +29,6 @@ const ReviewCampaign = () => {
   const [campaign, setCampaign] = useState(null);
   const [business, setBusiness] = useState('');
   const [influencer, setInfluencer] = useState('');
-  const [existingCampaign, setExistingCampaign] = useState(false);
-  const [postUrl, setPostUrl] = useState('');
 
   const { id } = router.query;
 
@@ -67,8 +65,6 @@ const ReviewCampaign = () => {
         campaign?.potentialPayout,
         campaign?.objective,
       );
-      //TODO: Build User Profile Page to get list of all campaigns to get id's to use for campaign detail
-      setExistingCampaign(true);
     }
   };
 
@@ -108,52 +104,34 @@ const ReviewCampaign = () => {
       <br />
       <br />
       <div>
-        {!existingCampaign ? (
-          <>
-            <Button
-              className={classes.ReviewCampaign_reject}
-              variant="contained"
-              color="secondary"
-              size="large"
-              onClick={() => handleProposalResponse(false)}
-            >
-              Reject
-            </Button>
-            <Button
-              className={classes.ReviewCampaign_amber}
-              variant="contained"
-              size="large"
-              onClick={() => handleProposalResponse(false)}
-            >
-              Counter
-            </Button>
-            <Button
-              className={classes.ReviewCampaign_accept}
-              variant="contained"
-              size="large"
-              color="secondary"
-              onClick={() => handleProposalResponse(true)}
-            >
-              Accept
-            </Button>
-          </>
-        ) : (
-          <>
-            <TextField
-              className={classes.ReviewCampaign_post_url}
-              id="outlined-basic"
-              label="Post URL"
-              variant="outlined"
-              onChange={e => setPostUrl(e.target.value)}
-            />
-            <br />
-            <br />
-            <br />
-            <Button variant="contained" type="submit" size="large" color="primary" onClick={temporaryCheckCampaign}>
-              Register Post
-            </Button>
-          </>
-        )}
+        <>
+          <Button
+            className={classes.ReviewCampaign_reject}
+            variant="contained"
+            color="secondary"
+            size="large"
+            onClick={() => handleProposalResponse(false)}
+          >
+            Reject
+          </Button>
+          <Button
+            className={classes.ReviewCampaign_amber}
+            variant="contained"
+            size="large"
+            onClick={() => handleProposalResponse(false)}
+          >
+            Counter
+          </Button>
+          <Button
+            className={classes.ReviewCampaign_accept}
+            variant="contained"
+            size="large"
+            color="secondary"
+            onClick={() => handleProposalResponse(true)}
+          >
+            Accept
+          </Button>
+        </>
       </div>
     </div>
   );

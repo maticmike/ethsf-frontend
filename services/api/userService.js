@@ -16,10 +16,11 @@ let api = process.env.BASE_API_URL;
 // 3. authenticate user (in web3ethers ephimera)
 
 export const registerNewUserDb = async (ethAddress, username, firstName, lastName, signature, email, type) => {
+  const usernameLowercase = username.toLowercase();
   try {
     const registeredUser = await axios.post(`${api}/user/register`, {
       ethAddress,
-      username,
+      usernameLowercase,
       firstName,
       lastName,
       signature,

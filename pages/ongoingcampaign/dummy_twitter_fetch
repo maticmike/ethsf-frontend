@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { getTweetData } from '../../services/apiService';
+// import { getTweetData } from '../../services/apiService';
 import { useQuery } from '@apollo/client';
 import { getPostData } from '../../utils/SocialMediaData';
 import { APOLLO_POLL_INTERVAL_MS } from '../../constants/Blockchain';
@@ -22,14 +22,14 @@ const OngoingCampaign = () => {
   //   });
   //   console.log(data);
   // };
-  const getApiService = () => {
-    // const apiService = new ApiService();
-    getTweetData();
-  };
+  // const getApiService = () => {
+  // const apiService = new ApiService();
+  // getTweetData();
+  // };
   return (
     <div>
       {/* <button onClick={getData}>get twitter data</button> */}
-      <button onClick={getApiService}>get axios</button>
+      {/* <button onClick={getApiService}>get axios</button> */}
     </div>
   );
 };
