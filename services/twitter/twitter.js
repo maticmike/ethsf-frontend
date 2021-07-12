@@ -4,16 +4,15 @@
 //   });
 //   console.log(data);
 // };
-import twitter from '../../services/twitter';
+import twitter from '../../pages/api/twitter/[tweet]';
 
-const cors = Cors({
-  methods: ['GET', 'HEAD'],
-});
+// const cors = Cors({
+//   methods: ['GET', 'HEAD'],
+// });
 
 const getTweetData = async tweetId => {
   try {
     const getTweetData = await twitter.getTweetInfo(tweetId);
-    console.log(getTweetData, 'the tweet data');
     const response = {
       statusCode: 200,
       headers: { 'Content-Type': 'application/json' },
@@ -43,9 +42,30 @@ export const getPostData = postId => {
     } else {
       tweetId = postId.substr(postId.length - 19);
     }
-    tweetId;
     getTweetData(tweetId);
   }
   //if facebook
   //if youtube
 };
+
+function runMiddleware(req, res, fn) {
+  return new Promise((resolve, reject) => {
+    fn(req, res, result => {
+      if (result instanceof Error) {
+        return reject(result);
+      }
+
+      return resolve(result);
+    });
+  });
+}
+
+async function handler(req, res) {
+  // Run the middleware
+  await runMiddleware(req, res, cors);
+
+  // Rest of the API logic
+  res.json({ message: 'Hello Everyone!' });
+}
+
+export default handler;
