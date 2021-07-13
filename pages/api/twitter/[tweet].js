@@ -18,5 +18,6 @@ export default async (req, res) => {
     return res.status(200).json(tweetData);
   } catch (error) {
     console.log('Error On getTweetInfo():', error);
+    return error.statusCode;
   }
 };
