@@ -83,7 +83,6 @@ export const bootstrapFactory = async () => {
       return false;
     } else {
       const famepayFactoryAddress = getContractAddress(FamepayFactoryAbi, network.chainId);
-      console.log(famepayFactoryAddress, 'fp address');
       const famepayFactory = new ethers.Contract(famepayFactoryAddress, FamepayFactoryAbi.abi, signer);
       return { famepayFactory };
     }
@@ -185,9 +184,8 @@ export const getCampaignFromContract = async (famepayFactory, campaignId) => {
   try {
     const provider = new ethers.providers.Web3Provider(web3.currentProvider);
     const signer = provider.getSigner();
-    const famepayCampaignAddress = await famepayFactory.getCampaign(campaignId);
+    const famepayCampaignAddress = await famepayFactory.getCampaign('1');
     const famepayCampaign = new ethers.Contract(famepayCampaignAddress, FamepayAbi.abi, signer);
-    consola.success('Web3: getCampaignFromContract():', famepayCampaign);
     return { famepayCampaign };
   } catch (error) {
     consola.error('Web3: getCampaignFromContract:', error);

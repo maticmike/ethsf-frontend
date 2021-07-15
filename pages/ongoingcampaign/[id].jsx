@@ -4,9 +4,11 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import { TextField, Button } from '@material-ui/core';
 import { getCampaignFromContract } from '../../web3';
+import { storeFamepayFactoryThunk } from '../../redux/actions/famepayFactory';
 
 const OngoingCampaign = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const { id } = router.query;
 
@@ -16,11 +18,15 @@ const OngoingCampaign = () => {
   const [invalidPost, setInvalidPost] = useState(false);
   const [postData, setPostData] = useState(null);
 
-  // TODO Add dispatch for famepayFactory
+  useEffect(() => {
+    dispatch(storeFamepayFactoryThunk());
+    return () => {
+      console.log('cleanup ongoingCampaign page');
+    };
+  }, []);
 
   useEffect(() => {
     async function getCampaign() {
-      console.log(famepayFactory, 'I AM NULL!!!');
       const campaign = await getCampaignFromContract(famepayFactory, id);
       console.log(campaign, 'did we get the camapign??');
     }
@@ -28,7 +34,7 @@ const OngoingCampaign = () => {
     return () => {
       console.log('cleanup ongoingCampaign page');
     };
-  }, []);
+  }, [famepayFactory]);
 
   const getPostData = async e => {
     e.preventDefault();
