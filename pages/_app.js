@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { Provider } from 'react-redux';
 import store from '../redux/store';
@@ -14,6 +14,7 @@ const Navbar = dynamic(() => import('../components/navigation/navbar'), {
 
 const MyApp = ({ Component, pageProps }) => {
   const apolloClient = useApollo(pageProps.initialApolloState);
+
   return (
     <ApolloProvider client={apolloClient}>
       <Provider store={store}>

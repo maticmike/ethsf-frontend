@@ -125,6 +125,21 @@ export const getWalletInfo = async () => {
  ********************************
  */
 
+/**
+ * @param {contract} famepayFactory
+ * @param {address} business participating business
+ * @param {address} influencer participating influencer
+ * @param {uint256} startDate beginning of campaign
+ * @param {uint256} deadline end date of campaign
+ * @param {uint256} simplePostDuration duration of post (24 hrs) only for simple post
+ * @param {uint256} jackpotReward  payment for jackpot target
+ * @param {uint256} incrementalReward  payment per incremental target
+ * @param {uint256} jackpotTarget target amount for jackpot objective
+ * @param {uint256} incrementalTarget  target amount for incremental objective
+ * @param {uint256} potentialPayout total staked in contradct
+ * @param {string} objective objective of the campaign
+ * @returns {object} campaign object
+ */
 export const createNewCampaignOnContract = async (
   famepayFactory,
   business,
@@ -161,6 +176,11 @@ export const createNewCampaignOnContract = async (
   }
 };
 
+/**
+ * @param {contract} famepayFactory
+ * @param {uint256} campaignId
+ * @returns {object}
+ */
 export const getCampaignFromContract = async (famepayFactory, campaignId) => {
   try {
     const provider = new ethers.providers.Web3Provider(web3.currentProvider);
@@ -170,7 +190,7 @@ export const getCampaignFromContract = async (famepayFactory, campaignId) => {
     consola.success('Web3: getCampaignFromContract():', famepayCampaign);
     return { famepayCampaign };
   } catch (error) {
-    consola.success('Web3: getCampaignFromContract:', error);
+    consola.error('Web3: getCampaignFromContract:', error);
   }
 };
 
@@ -179,3 +199,10 @@ export const getCampaignFromContract = async (famepayFactory, campaignId) => {
  * Famepay Functions
  ********************************
  */
+
+export const setPaymentTargetReached = async () => {
+  try {
+  } catch (error) {
+    consola.error('Web3: setPaymentTargetReached:', error);
+  }
+};

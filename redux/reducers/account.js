@@ -1,4 +1,3 @@
-import consola from 'consola';
 import { CONNECT_WALLET, DISCONNECT_WALLET } from '../actions/account';
 import { NATIVE_CURRENCY } from '../../constants/Blockchain';
 import { GraphQLNonNull } from 'graphql';
@@ -16,7 +15,6 @@ const account = (state = initialState, action) => {
       const { account, balance, signer } = action.payload;
       let balances = state.balances;
       balances[NATIVE_CURRENCY.symbol] = balance;
-      consola.success(`Connect wallet reducer ${account} ${balance} ${signer}`);
       return {
         address: account,
         balances: balance,

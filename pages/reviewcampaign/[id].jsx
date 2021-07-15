@@ -5,12 +5,12 @@ import { useRouter } from 'next/router';
 import Calendar from 'react-calendar';
 import { useSelector, useDispatch } from 'react-redux';
 import consola from 'consola';
-import { Button, TextField } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import 'react-calendar/dist/Calendar.css';
 import { getCampaignProposalDb } from '../../services/api/campaignService';
 import { getUserFromEthAddress } from '../../services/api/userService';
 import { storeFamepayFactoryThunk } from '../../redux/actions/famepayFactory';
-import { createNewCampaignOnContract, getCampaignFromContract } from '../../web3';
+import { createNewCampaignOnContract } from '../../web3';
 import { useStyles } from './stylesReviewCampaign';
 
 const BusinessReviewHeader = dynamic(() => import('../../components/reviewcampaign/BusinessReviewHeader'), {
@@ -66,10 +66,6 @@ const ReviewCampaign = () => {
         campaign?.objective,
       );
     }
-  };
-
-  const temporaryCheckCampaign = async () => {
-    await getCampaignFromContract(famepayFactory, 2);
   };
 
   return (
