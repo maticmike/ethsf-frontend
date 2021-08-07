@@ -17,6 +17,7 @@ const OngoingCampaign = () => {
   const [postUrl, setPostUrl] = useState('');
   const [invalidPost, setInvalidPost] = useState(false);
   const [postData, setPostData] = useState(null);
+  const [campaign, setCampaign] = useState(null);
 
   useEffect(() => {
     dispatch(storeFamepayFactoryThunk());
@@ -28,7 +29,7 @@ const OngoingCampaign = () => {
   useEffect(() => {
     async function getCampaign() {
       const campaign = await getCampaignFromContract(famepayFactory, id);
-      console.log(campaign, 'did we get the camapign??');
+      setCampaign(campaign);
     }
     getCampaign();
     return () => {
@@ -50,9 +51,8 @@ const OngoingCampaign = () => {
     } else {
       setInvalidPost(true);
     }
-    const postData = await axios.get(`http://localhost:3000/api/twitter/1414241162848657409`);
-    setPostData(postData);
-    console.log(postData);
+    const postData = await axios.get(`http://localhost:3000/api/twitter/${tweetId}`);
+    setPostData(postData.data.data[0]);
   };
 
   return (

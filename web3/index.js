@@ -184,7 +184,7 @@ export const getCampaignFromContract = async (famepayFactory, campaignId) => {
   try {
     const provider = new ethers.providers.Web3Provider(web3.currentProvider);
     const signer = provider.getSigner();
-    const famepayCampaignAddress = await famepayFactory.getCampaign('1');
+    const famepayCampaignAddress = await famepayFactory.getCampaign(campaignId, { gasLimit: 3000000 });
     const famepayCampaign = new ethers.Contract(famepayCampaignAddress, FamepayAbi.abi, signer);
     return { famepayCampaign };
   } catch (error) {

@@ -47,7 +47,7 @@ const ReviewCampaign = () => {
     return () => {
       consola.info('Cleanup review campaign component');
     };
-  }, []);
+  }, [id]);
 
   const handleProposalResponse = async confirmed => {
     if (confirmed) {
