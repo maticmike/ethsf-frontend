@@ -39,12 +39,14 @@ const ReviewCampaign = () => {
       consola.info('Cleanup review campaign component');
     };
   }, []);
-  () => {
+
+  useEffect(() => {
     async function getCampaignInfo() {
       const campaign = await getCampaignProposalDb(id);
       if (Object.entries(campaign.data.payload).length === 0) return <Error statusCode={404} />;
       const businessUser = await getUserFromEthAddress(campaign?.data?.mongoResponse?.business);
       const influencerUser = await getUserFromEthAddress(campaign?.data?.mongoResponse?.influencer);
+      console.log(campaign, 'the campaign');
       setCampaign(campaign.data.mongoResponse);
       setBusiness(businessUser.data.payload);
       setInfluencer(influencerUser.data.payload);
@@ -53,10 +55,10 @@ const ReviewCampaign = () => {
     return () => {
       consola.info('Cleanup review campaign component');
     };
-  },
-    [id];
+  }, [id]);
 
   const handleProposalResponse = async confirmed => {
+    console.log(campaign, 'this is the campaign');
     if (confirmed) {
       await createNewCampaignOnContract(
         famepayFactory,

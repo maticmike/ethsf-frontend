@@ -164,7 +164,18 @@ export const createNewCampaignOnContract = async (
   try {
     // const objectiveBytes = ethers.utils.hexlify(setObjectiveName(objective));' //<--- Preferable to web3
     const objectiveBytes = web3.utils.toHex(setObjectiveName(objective));
-    console.log(famepayFactory, 'the factory');
+    console.log(famepayFactory, 'the factory on create');
+    console.log(influencer, 'inf');
+    console.log(business, 'biz');
+    console.log(startDate, 'start');
+    console.log(deadline, 'dead');
+    console.log(simplePostDuration, 'simple dur');
+    console.log(jackpotReward, 'jackpot reward');
+    console.log(incrementalReward, 'incremental rteward');
+    console.log(jackpotTarget, 'jackpot target');
+    console.log(incrementalTarget, 'incremtnal tagrtet');
+    console.log(potentialPayout, 'potential apyout');
+    console.log(objective, 'objective');
     const campaign = await famepayFactory.newFamepayCampaign(
       influencer,
       business,
@@ -184,6 +195,20 @@ export const createNewCampaignOnContract = async (
     consola.error('Web3: createNewCampaignOnContract():', error);
   }
 };
+
+// function newFamepayCampaign(
+//     address payable _influencer,
+//     address payable _business,
+//     uint256 _startDate,
+//     uint256 _deadline,
+//     uint256 _simplePostDuration,
+//     uint256 _jackpotPayment, //$1000 if we hit 1,000,000 views
+//     uint256 _incrementalPayment, //$50 for every 50,000 views    //0 for simple post
+//     uint256 _jackpotTargetAmount,
+//     uint256 _incrementalTargetAmount, //1 for simple post
+//     uint256 _potentialPayoutAmount, //total in contract $2000
+//     bytes4  _objective
+// ) payable public {
 
 /**
  * @param {contract} famepayFactory
