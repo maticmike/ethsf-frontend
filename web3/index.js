@@ -3,10 +3,13 @@ import axios from 'axios';
 import consola from 'consola';
 import detectEthereumProvider from '@metamask/detect-provider';
 import { onBoardInitialize } from '../utils/onboard';
+import { setObjectiveName } from '../utils/ObjectiveNames';
 import FamepayFactoryAbi from '../contracts/FamepayFactory.json';
 import FamepayAbi from '../contracts/Famepay.json';
 import { CONTRACT_RESPONSE_STATUS } from '../constants/Blockchain';
 import { NETWORK_ID } from '../constants/Blockchain';
+
+import web3 from 'web3';
 
 /**
  * Response handler for successful contract interactions
@@ -64,6 +67,7 @@ export const getContractAddress = (abi, chainId) => {
   const { networks } = abi;
   if (networks[chainId.toString()]) {
     const address = networks[chainId.toString()].address;
+
     return address || '';
   }
   return '';
@@ -74,9 +78,13 @@ export const getContractAddress = (abi, chainId) => {
  * @function bootstrapFactory
  * @returns the full contract objects with their addresses
  */
+let onboard;
+let currentState;
 export const bootstrapFactory = async () => {
   try {
-    const provider = new ethers.providers.Web3Provider(web3.currentProvider);
+    // const provider = new ethers.providers.Web3Provider(web3.currentProvider);
+    currentState = onboard.getState();
+    const provider = new ethers.providers.Web3Provider(currentState.wallet.provider);
     const signer = provider.getSigner();
     const network = await provider.getNetwork();
     if (network.chainId != NETWORK_ID) {
@@ -99,10 +107,10 @@ export const bootstrapFactory = async () => {
  */
 export const getWalletInfo = async () => {
   try {
-    const onboard = onBoardInitialize();
+    onboard = onBoardInitialize();
     await onboard.walletSelect();
     await onboard.walletCheck();
-    const currentState = onboard.getState();
+    currentState = onboard.getState();
     const account = currentState.address;
 
     const provider = new ethers.providers.Web3Provider(currentState.wallet.provider);
@@ -141,8 +149,8 @@ export const getWalletInfo = async () => {
  */
 export const createNewCampaignOnContract = async (
   famepayFactory,
-  business,
   influencer,
+  business,
   startDate,
   deadline,
   simplePostDuration,
@@ -154,10 +162,12 @@ export const createNewCampaignOnContract = async (
   objective,
 ) => {
   try {
-    console.log(simplePostDuration, 'the simple post duration');
+    // const objectiveBytes = ethers.utils.hexlify(setObjectiveName(objective));' //<--- Preferable to web3
+    const objectiveBytes = web3.utils.toHex(setObjectiveName(objective));
+    console.log(famepayFactory, 'the factory');
     const campaign = await famepayFactory.newFamepayCampaign(
-      business,
       influencer,
+      business,
       startDate,
       deadline,
       simplePostDuration,
@@ -165,8 +175,8 @@ export const createNewCampaignOnContract = async (
       incrementalReward,
       jackpotTarget,
       incrementalTarget,
-      potentialPayout, //potentialPayout
-      objective,
+      potentialPayout,
+      objectiveBytes,
       { value: potentialPayout, gasLimit: 3000000 },
     );
     return campaign;

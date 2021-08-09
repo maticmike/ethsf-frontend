@@ -33,8 +33,14 @@ const ReviewCampaign = () => {
   const { id } = router.query;
 
   useEffect(() => {
+    dispatch(storeFamepayFactoryThunk());
+    console.log(famepayFactory, 'factory69');
+    return () => {
+      consola.info('Cleanup review campaign component');
+    };
+  }, []);
+  () => {
     async function getCampaignInfo() {
-      dispatch(storeFamepayFactoryThunk());
       const campaign = await getCampaignProposalDb(id);
       if (Object.entries(campaign.data.payload).length === 0) return <Error statusCode={404} />;
       const businessUser = await getUserFromEthAddress(campaign?.data?.mongoResponse?.business);
@@ -47,14 +53,15 @@ const ReviewCampaign = () => {
     return () => {
       consola.info('Cleanup review campaign component');
     };
-  }, [id]);
+  },
+    [id];
 
   const handleProposalResponse = async confirmed => {
     if (confirmed) {
       await createNewCampaignOnContract(
         famepayFactory,
-        campaign?.business,
         campaign?.influencer,
+        campaign?.business,
         campaign?.agreedStartDate,
         campaign?.agreedDeadline,
         campaign?.simplePostDuration,

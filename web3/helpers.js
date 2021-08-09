@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 const axiosSetting = {
   method: 'HEAD',
   mode: 'no-cors',
@@ -26,6 +25,12 @@ export const ethToUsd = async symbol => {
   return price;
 };
 
+/**
+ * Cuts full eth addresses to shortened cleaner address
+ * @function shortenedEthAddress
+ * @param {adddress} address
+ * @returns shortened address
+ */
 export const shortenedEthAddress = address => {
   return address && address.startsWith('0x')
     ? address.substr(0, 6) + '...' + address.substr(address.length - 6, address.length)

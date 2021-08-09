@@ -5,6 +5,7 @@ import consola from 'consola';
 import { useSelector, useDispatch } from 'react-redux';
 import { Paper } from '@material-ui/core';
 import { storeFamepayFactoryThunk } from '../../redux/actions/famepayFactory';
+import { connectAccountThunk } from '../../redux/actions/account';
 import { createCampaignThunk } from '../../redux/actions/campaign';
 import { createNewCampaignProposalDb } from '../../services/api/campaignService';
 import { onlyNumeric, setSimplePostMinimumDuration } from '../../utils/helpers';
@@ -59,11 +60,20 @@ const NewCampaign = () => {
   const [incrementalReward, setIncrementalReward] = useState(0);
 
   useEffect(() => {
-    dispatch(storeFamepayFactoryThunk());
+    dispatch(connectAccountThunk());
     return () => {
       consola.success('NewCampaign page: cleanup');
     };
   }, []);
+
+  useEffect(() => {
+    if (account.address != null) {
+      dispatch(storeFamepayFactoryThunk());
+    }
+    return () => {
+      consola.success('NewCampaign page: cleanup');
+    };
+  }, [account]);
 
   const findInfluencer = async influencer => {
     try {
