@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import consola from 'consola';
 import { useSelector, useDispatch } from 'react-redux';
+import { formatEther } from 'ethers';
 import { Paper } from '@material-ui/core';
 import { storeFamepayFactoryThunk } from '../../redux/actions/famepayFactory';
 import { connectAccountThunk } from '../../redux/actions/account';
@@ -155,7 +156,8 @@ const NewCampaign = () => {
           <Paper className={classes.NewCampaign_layout_staking} elevation={3}>
             <CampaignStaking
               objective={objective}
-              setParentDepositToEscrow={deposit => setStakedAmount(onlyNumeric(deposit))}
+              setParentDepositToEscrow={deposit => console.log(deposit, 'this is the despoit')} //TODO Test ME!
+              // setStakedAmount(onlyNumeric(deposit));
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
               setParentFinishCampaign={createNewCampaignProposal}
             />
@@ -167,7 +169,8 @@ const NewCampaign = () => {
             <CampaignReward
               objective={objective}
               stakedAmount={stakedAmount}
-              setParentJackpotReward={jackpotReward => setJackpotReward(onlyNumeric(jackpotReward))}
+              // setParentJackpotReward={jackpotReward => setJackpotReward(onlyNumeric(jackpotReward))}
+              setParentJackpotReward={jackpotReward => console.log('hello')}
               setParentIncrementalReward={incrementalReward => setIncrementalReward(onlyNumeric(incrementalReward))}
               setParentJackpotTarget={jackpotTarget => setJackpotTarget(onlyNumeric(jackpotTarget))}
               setParentIncrementalTarget={incrementalTarget => setIncrementalTarget(onlyNumeric(incrementalTarget))}

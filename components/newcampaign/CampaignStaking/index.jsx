@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { utils } from 'ethers';
 import NumberFormat from 'react-number-format';
 import { FormHelperText, Button } from '@material-ui/core';
 import { setObjectiveName } from '../../../utils/ObjectiveNames';
@@ -16,7 +17,14 @@ const CampaignStaking = ({
 
   const getHeading = () => (objective === 'simplePost' ? 'Post Staking' : 'Campaign Staking');
 
+  const parseDeposit = e => {
+    e.target.value.length ? setInputEntered(true) : setInputEntered(false);
+    const deposit = e.target.value.slice(1).replace(/,/g, '').replace(/ eth/g, '');
+    deposit.length > 0 ? setParentDepositToEscrow(utils.formatEther(deposit)) : null;
+  };
+
   const stakeDeposit = () => setParentCampaignSetupStep(5);
+
   // only for single post
   const finishAndDeposit = () => setParentFinishCampaign();
 
@@ -28,13 +36,10 @@ const CampaignStaking = ({
       <p>Amount to deposit for Influencer</p>
       <NumberFormat
         className={classes.CampaignStaking_input}
-        placeholder="$1000"
+        placeholder="5 eth"
         thousandSeparator={true}
-        prefix={'$'}
-        onChange={e => {
-          e.target.value.length ? setInputEntered(true) : setInputEntered(false);
-          setParentDepositToEscrow(e.target.value.slice(1));
-        }}
+        suffix={' eth'}
+        onChange={e => parseDeposit(e)}
       />
       <br />
       <br />

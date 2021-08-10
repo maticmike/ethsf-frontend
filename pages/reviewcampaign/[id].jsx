@@ -34,7 +34,6 @@ const ReviewCampaign = () => {
 
   useEffect(() => {
     dispatch(storeFamepayFactoryThunk());
-    console.log(famepayFactory, 'factory69');
     return () => {
       consola.info('Cleanup review campaign component');
     };
@@ -46,7 +45,8 @@ const ReviewCampaign = () => {
       if (Object.entries(campaign.data.payload).length === 0) return <Error statusCode={404} />;
       const businessUser = await getUserFromEthAddress(campaign?.data?.mongoResponse?.business);
       const influencerUser = await getUserFromEthAddress(campaign?.data?.mongoResponse?.influencer);
-      console.log(campaign, 'the campaign');
+      // console.log(campaign, 'the campaign');
+      console.log(campaign.data.mongoResponse, 'mongo');
       setCampaign(campaign.data.mongoResponse);
       setBusiness(businessUser.data.payload);
       setInfluencer(influencerUser.data.payload);
