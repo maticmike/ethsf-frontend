@@ -40,7 +40,6 @@ const BusinessReviewHeader = ({ potentialPayout, objective, username, website, e
         <a href={website} target="_blank">
           {website}
         </a>
-        {console.log(potentialPayout, 'pp payout')}
         <h2>{payoutInWei()} eth</h2>
         {objective != 'simplePost' ? <strong>Potential Earnings</strong> : <strong>To Be Paid</strong>}
         {objective != 'simplePost' ? (
