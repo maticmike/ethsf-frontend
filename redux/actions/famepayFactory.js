@@ -15,7 +15,6 @@ export const storeFamepayFactoryThunk = () => {
       window.ethereum.enable();
       bootstrapFactory()
         .then(res => {
-          console.log(res, 'this is the res');
           dispatch(storeFamepayFactory(res.famepayFactory));
         })
         .catch(error => consola.error('error in storeFamepayFactoryThunk action', error));

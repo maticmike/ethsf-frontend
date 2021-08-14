@@ -24,7 +24,7 @@ export const createNewCampaignProposalDb = async (
   incrementalTarget,
   potentialPayout,
   objective,
-  niche,
+  // niche,
 ) => {
   // const potentialPayoutBN = ethers.utils.parseEther(potentialPayout);
   try {
@@ -40,7 +40,7 @@ export const createNewCampaignProposalDb = async (
       incrementalTarget,
       potentialPayout,
       objective,
-      niche,
+      // niche,
       // potentialPayoutBN
     });
     consola.success('ApiService: createNewCampaignProposal() campaign being created:', campaign);

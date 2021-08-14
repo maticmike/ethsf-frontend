@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { utils } from 'ethers';
+import { utils } from 'web3';
 import NumberFormat from 'react-number-format';
 import { FormHelperText, Button } from '@material-ui/core';
 import { setObjectiveName } from '../../../utils/ObjectiveNames';
@@ -17,10 +17,13 @@ const CampaignStaking = ({
 
   const getHeading = () => (objective === 'simplePost' ? 'Post Staking' : 'Campaign Staking');
 
+  let parsedEth;
+
   const parseDeposit = e => {
     e.target.value.length ? setInputEntered(true) : setInputEntered(false);
-    const deposit = e.target.value.slice(1).replace(/,/g, '').replace(/ eth/g, '');
-    deposit.length > 0 ? setParentDepositToEscrow(utils.formatEther(deposit)) : null;
+    const deposit = e.target.value.replace(/,/g, '').replace(/ eth/g, '');
+    deposit.length > 0 ? (parsedEth = utils.toWei(deposit)) : (parsedEth = '0');
+    setParentDepositToEscrow(parsedEth);
   };
 
   const stakeDeposit = () => setParentCampaignSetupStep(5);

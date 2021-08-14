@@ -45,8 +45,6 @@ const ReviewCampaign = () => {
       if (Object.entries(campaign.data.payload).length === 0) return <Error statusCode={404} />;
       const businessUser = await getUserFromEthAddress(campaign?.data?.mongoResponse?.business);
       const influencerUser = await getUserFromEthAddress(campaign?.data?.mongoResponse?.influencer);
-      // console.log(campaign, 'the campaign');
-      console.log(campaign.data.mongoResponse, 'mongo');
       setCampaign(campaign.data.mongoResponse);
       setBusiness(businessUser.data.payload);
       setInfluencer(influencerUser.data.payload);
@@ -58,7 +56,6 @@ const ReviewCampaign = () => {
   }, [id]);
 
   const handleProposalResponse = async confirmed => {
-    console.log(campaign, 'this is the campaign');
     if (confirmed) {
       await createNewCampaignOnContract(
         famepayFactory,
@@ -86,6 +83,7 @@ const ReviewCampaign = () => {
             objective={campaign?.objective}
             username={business?.username}
             website={business?.website}
+            ethAddress={business?.userEthAddress}
           />
         </div>
         <div className={classes.ReviewCampaign_vertical_line}></div>
@@ -94,6 +92,7 @@ const ReviewCampaign = () => {
             username={influencer?.username}
             email={influencer?.email}
             campaignsCompleted={influencer?.campaignsCompleted}
+            ethAddress={influencer?.userEthAddress}
           />
         </div>
       </div>

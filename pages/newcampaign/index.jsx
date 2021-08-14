@@ -156,8 +156,7 @@ const NewCampaign = () => {
           <Paper className={classes.NewCampaign_layout_staking} elevation={3}>
             <CampaignStaking
               objective={objective}
-              setParentDepositToEscrow={deposit => console.log(deposit, 'this is the despoit')} //TODO Test ME!
-              // setStakedAmount(onlyNumeric(deposit));
+              setParentDepositToEscrow={deposit => setStakedAmount(onlyNumeric(deposit))}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
               setParentFinishCampaign={createNewCampaignProposal}
             />
@@ -169,8 +168,7 @@ const NewCampaign = () => {
             <CampaignReward
               objective={objective}
               stakedAmount={stakedAmount}
-              // setParentJackpotReward={jackpotReward => setJackpotReward(onlyNumeric(jackpotReward))}
-              setParentJackpotReward={jackpotReward => console.log('hello')}
+              setParentJackpotReward={jackpotReward => setJackpotReward(onlyNumeric(jackpotReward))}
               setParentIncrementalReward={incrementalReward => setIncrementalReward(onlyNumeric(incrementalReward))}
               setParentJackpotTarget={jackpotTarget => setJackpotTarget(onlyNumeric(jackpotTarget))}
               setParentIncrementalTarget={incrementalTarget => setIncrementalTarget(onlyNumeric(incrementalTarget))}

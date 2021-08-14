@@ -1,14 +1,27 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { utils } from 'web3';
+import { shortenedEthAddress } from '../../../web3/helpers';
 import { useStyles } from './styles';
-const InfluencerReviewHeader = ({ username, email, campaignsCompleted }) => {
+const InfluencerReviewHeader = ({ username, email, campaignsCompleted, ethAddress }) => {
   const classes = useStyles();
+
+  const copyToClipboard = async copyMe => {
+    try {
+      await navigator.clipboard.writeText(copyMe);
+    } catch (err) {
+      consola.error('copyToClipboard:', err);
+    }
+  };
 
   return (
     <div className={classes.InfluencerReview_component_outline}>
       <div>
         <h1 className={classes.InfluencerReview_margin_bottom_h1}>{username}</h1>
+        <p className={classes.InfluencerReview_pointer} onClick={() => copyToClipboard(ethAddress)}>
+          {shortenedEthAddress(ethAddress)}
+        </p>
         <a href="https://google.com" target="_blank">
           {email}
         </a>

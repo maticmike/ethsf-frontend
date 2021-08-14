@@ -11,6 +11,9 @@ const useStyles = makeStyles({
   InfluencerReview_margin_bottom_h1: {
     marginBottom: '6px',
   },
+  InfluencerReview_pointer: {
+    cursor: 'pointer',
+  },
 });
 
 export { useStyles };
