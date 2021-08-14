@@ -68,7 +68,7 @@ const ReviewCampaign = () => {
         campaign?.incrementalReward,
         campaign?.jackpotTarget,
         campaign?.incrementalTarget,
-        campaign?.potentialPayout,
+        campaign?.potentialPayout.toString(),
         campaign?.objective,
       );
     }
