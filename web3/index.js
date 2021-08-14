@@ -175,7 +175,7 @@ export const createNewCampaignOnContract = async (
     console.log(jackpotTarget, 'jackpot target');
     console.log(incrementalTarget, 'incremtnal tagrtet');
     console.log(potentialPayout, 'potential apyout');
-    console.log(objective, 'objective');
+    console.log(objectiveBytes, 'objective');
     const campaign = await famepayFactory.newFamepayCampaign(
       influencer,
       business,
