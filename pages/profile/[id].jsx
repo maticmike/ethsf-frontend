@@ -8,6 +8,7 @@ import { GridList, GridListTile } from '@material-ui/core';
 import consola from 'consola';
 import { getUserFromUsernameDb } from '../../services/api/userService';
 import { GET_ALL_CAMPAIGNS_FOR_BUSINESS_QUERY, GET_ALL_CAMPAIGNS_FOR_INFLUENCER_QUERY } from '../../apollo/user.gql';
+import { campaignQuery } from '../../apollo/campaign.gql';
 import { APOLLO_POLL_INTERVAL_MS } from '../../constants/Blockchain';
 import { useStyles } from './styles';
 
@@ -47,23 +48,25 @@ const Profile = () => {
   let campaigns;
 
   if (profileIsBusiness) {
-    const { loading, error, data } = useQuery(GET_ALL_CAMPAIGNS_FOR_BUSINESS_QUERY, {
+    const { loading, error, data } = useQuery(getProjectsQuery, {
       variables: { id: user.userEthAddress },
       pollInterval: APOLLO_POLL_INTERVAL_MS,
     });
     if (loading) return null;
     if (error) return <Error statusCode={404} />;
     campaigns = data?.campaigns;
+
+    //if influencer
   } else {
-    const { loading, error, data } = useQuery(GET_ALL_CAMPAIGNS_FOR_BUSINESS_QUERY, {
+    const { loading, error, data } = useQuery(GET_ALL_CAMPAIGNS_FOR_INFLUENCER_QUERY, {
       variables: { id: user.userEthAddress },
       pollInterval: APOLLO_POLL_INTERVAL_MS,
     });
     if (loading) return null;
     if (error) return <Error statusCode={404} />;
-    campaigns = data?.campaigns;
+    console.log(data, 'this is the data');
+    // campaigns = data?.campaigns;
   }
-  console.log(campaigns, 'the campaigns');
   return (
     <>
       <div className={classes.Profile_header_container}>

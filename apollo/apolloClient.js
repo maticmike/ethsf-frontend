@@ -6,7 +6,7 @@ let apolloClient;
 
 function createApolloClient() {
   return new ApolloClient({
-    ssrMode: typeof window === 'undefined', // set to true for SSR
+    ssrMode: true, // set to true for SSR
     link: new HttpLink({
       uri: GRAPH_API_URL,
     }),
