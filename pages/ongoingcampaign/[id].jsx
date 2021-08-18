@@ -22,12 +22,14 @@ const OngoingCampaign = () => {
   const [invalidPost, setInvalidPost] = useState(false);
   const [campaign, setCampaign] = useState(null);
 
-  // const queryRes = useQuery(campaignQuery, {
-  //   pollInterval: APOLLO_POLL_INTERVAL_MS,
-  //   variables: { id: listingId },
-  // });
-  // const isQuerySuccess = !queryRes.error && !queryRes.loading;
-  // const listing = isQuerySuccess ? queryRes.data?.array[0] : null;
+  const { loading, error, data } = useQuery(campaignQuery, {
+    variables: { id: id },
+    // pollInterval: APOLLO_POLL_INTERVAL_MS,
+  });
+  // if (loading) return null;
+  // if (error) return <Error statusCode={404} />;
+  //  campaigns = data?.campaigns;
+  console.log(data, 'the dats13');
 
   useEffect(() => {
     dispatch(storeFamepayFactoryThunk());
@@ -36,17 +38,17 @@ const OngoingCampaign = () => {
     };
   }, []);
 
-  useEffect(() => {
-    async function getCampaign() {
-      const campaign = await getCampaignFromContract(famepayFactory, id);
-      console.log(campaign, ' this is the campaignnn');
-      setCampaign(campaign);
-    }
-    getCampaign();
-    return () => {
-      console.log('cleanup ongoingCampaign page');
-    };
-  }, [famepayFactory]);
+  // useEffect(() => {
+  //   async function getCampaign() {
+  //     const campaign = await getCampaignFromContract(famepayFactory, id);
+  //     console.log(campaign, ' this is the campaignnn');
+  //     setCampaign(campaign);
+  //   }
+  //   getCampaign();
+  //   return () => {
+  //     console.log('cleanup ongoingCampaign page');
+  //   };
+  // }, [famepayFactory]);
 
   const getPostData = async e => {
     e.preventDefault();

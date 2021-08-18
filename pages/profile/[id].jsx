@@ -8,7 +8,6 @@ import { GridList, GridListTile } from '@material-ui/core';
 import consola from 'consola';
 import { getUserFromUsernameDb } from '../../services/api/userService';
 import { GET_ALL_CAMPAIGNS_FOR_BUSINESS_QUERY, GET_ALL_CAMPAIGNS_FOR_INFLUENCER_QUERY } from '../../apollo/user.gql';
-import { campaignQuery } from '../../apollo/campaign.gql';
 import { APOLLO_POLL_INTERVAL_MS } from '../../constants/Blockchain';
 import { useStyles } from './styles';
 
@@ -95,7 +94,7 @@ const Profile = () => {
           {campaigns?.map((campaign, index) => {
             return (
               <GridListTile cols={1} key={index}>
-                <a href={'/reviewcampaign/' + campaign.id}>
+                <a href={'/ongoingcampaign/' + campaign.id}>
                   <ProfileCampaigns campaign={campaign} isBusiness={profileIsBusiness} />
                 </a>
               </GridListTile>

@@ -18,8 +18,8 @@ fragment CampaignFrag on Campaign {
 }
 
 query campaignQuery($id: String!) {
-    campaigns: campaigns(where: {id: $id}) {
-      ...Campaign
+    campaigns(where: {id: $id}) {
+      ...CampaignFrag
     }
 }
 
