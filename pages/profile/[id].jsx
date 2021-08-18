@@ -64,8 +64,8 @@ const Profile = () => {
     });
     if (loading) return null;
     if (error) return <Error statusCode={404} />;
-    console.log(data, 'this is the data');
-    // campaigns = data?.campaigns;
+    campaigns = data?.influencers[0]?.campaigns;
+    console.log(campaigns, 'this is the data');
   }
   return (
     <>
