@@ -1,4 +1,6 @@
+import { utils } from 'web3';
 import axios from 'axios';
+import Web3 from 'web3';
 const axiosSetting = {
   method: 'HEAD',
   mode: 'no-cors',
@@ -36,3 +38,5 @@ export const shortenedEthAddress = address => {
     ? address.substr(0, 6) + '...' + address.substr(address.length - 6, address.length)
     : address;
 };
+
+export const objectiveToString = objective => utils.hexToAscii(objective);

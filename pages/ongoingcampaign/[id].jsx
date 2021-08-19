@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import Error from 'next/error';
 import { useQuery } from '@apollo/client';
 import axios from 'axios';
 import { TextField, Button } from '@material-ui/core';
@@ -16,39 +17,25 @@ const OngoingCampaign = () => {
 
   const { id } = router.query;
 
-  const famepayFactory = useSelector(state => state.famepayFactory);
-
   const [postUrl, setPostUrl] = useState('');
   const [invalidPost, setInvalidPost] = useState(false);
-  const [campaign, setCampaign] = useState(null);
+
+  let campaign;
 
   const { loading, error, data } = useQuery(campaignQuery, {
     variables: { id: id },
-    // pollInterval: APOLLO_POLL_INTERVAL_MS,
+    pollInterval: APOLLO_POLL_INTERVAL_MS,
   });
-  // if (loading) return null;
-  // if (error) return <Error statusCode={404} />;
-  //  campaigns = data?.campaigns;
-  console.log(data, 'the dats13');
-
-  useEffect(() => {
-    dispatch(storeFamepayFactoryThunk());
-    return () => {
-      console.log('cleanup ongoingCampaign page');
-    };
-  }, []);
+  if (loading) return null;
+  if (error) return <Error statusCode={404} />;
+  campaign = data?.campaigns[0];
 
   // useEffect(() => {
-  //   async function getCampaign() {
-  //     const campaign = await getCampaignFromContract(famepayFactory, id);
-  //     console.log(campaign, ' this is the campaignnn');
-  //     setCampaign(campaign);
-  //   }
-  //   getCampaign();
+  //   dispatch(storeFamepayFactoryThunk());
   //   return () => {
   //     console.log('cleanup ongoingCampaign page');
   //   };
-  // }, [famepayFactory]);
+  // }, []);
 
   const getPostData = async e => {
     e.preventDefault();
@@ -65,8 +52,9 @@ const OngoingCampaign = () => {
       setInvalidPost(true);
     }
     const postData = await axios.get(`http://localhost:3000/api/twitter/${tweetId}`);
-
-    parseTwitterPostData(postData);
+    console.log(campaign, 'the campaign data');
+    console.log(postData, 'the post data');
+    parseTwitterPostData(campaign.objective, postData);
 
     /**Contract Interaction**/
     // await setPaymentTargetReached()

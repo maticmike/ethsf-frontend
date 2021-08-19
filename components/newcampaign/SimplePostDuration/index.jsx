@@ -12,6 +12,7 @@ import {
   MenuItem,
 } from '@material-ui/core';
 import { setObjectiveName } from '../../../utils/ObjectiveNames';
+import { SIMPLE_POST } from '../../../constants/CampaignObjectives';
 import { useStyles } from './styles';
 
 const SimplePostDuration = ({ objective, setParentSimplePostMinimumDuration, setParentCampaignSetupStep }) => {
@@ -42,7 +43,7 @@ const SimplePostDuration = ({ objective, setParentSimplePostMinimumDuration, set
       setParentSimplePostMinimumDuration(
         selectedDuration === 'other' ? selectAlternativeDurationTimestamp() : radioOptionDuration,
       );
-      objective === 'simplePost' ? setParentCampaignSetupStep(4) : setParentCampaignSetupStep(5);
+      objective === SIMPLE_POST ? setParentCampaignSetupStep(4) : setParentCampaignSetupStep(5);
     }
   };
 

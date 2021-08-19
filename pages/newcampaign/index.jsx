@@ -10,6 +10,7 @@ import { connectAccountThunk } from '../../redux/actions/account';
 import { createCampaignThunk } from '../../redux/actions/campaign';
 import { createNewCampaignProposalDb } from '../../services/api/campaignService';
 import { onlyNumeric, setSimplePostMinimumDuration } from '../../utils/helpers';
+import { SIMPLE_POST } from '../../constants/CampaignObjectives';
 import { useStyles } from './styles';
 
 const FindInfluencer = dynamic(() => import('../../components/newcampaign/FindInfluencer'), {
@@ -86,7 +87,7 @@ const NewCampaign = () => {
   };
 
   const createNewCampaignProposal = async () => {
-    if (objective === 'simplePost') setJackpotReward(stakedAmount);
+    if (objective === SIMPLE_POST) setJackpotReward(stakedAmount);
     try {
       const campaignDb = await createNewCampaignProposalDb(
         account.address, //business
@@ -124,7 +125,7 @@ const NewCampaign = () => {
         return (
           <Paper className={classes.NewCampaign_layout_objective} elevation={3}>
             <CampaignObjective
-              objective={objective => setObjective(objective)}
+              setParentObjective={objective => setObjective(objective)}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
             />
           </Paper>

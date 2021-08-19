@@ -12,23 +12,23 @@ import {
 
 export const setObjectiveName = name => {
   switch (name) {
-    case 'simplePost':
+    case 'post':
       return SIMPLE_POST;
-    case 'postViews':
+    case 'view':
       return PAY_PER_VIEW;
-    case 'profileGrowth':
+    case 'grow':
       return PROFILE_GROWTH;
-    case 'likes':
+    case 'like':
       return LIKES;
-    case 'comments':
+    case 'comm':
       return COMMENTS;
-    case 'shares':
+    case 'shar':
       return SHARES;
-    case 'webVisits':
+    case 'webv':
       return WEB_VISITS;
-    case 'atc':
+    case 'cart':
       return ADD_TO_CART;
-    case 'sales':
+    case 'sale':
       return SALES;
     default:
       break;

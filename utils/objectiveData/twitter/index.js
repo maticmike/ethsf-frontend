@@ -1,5 +1,7 @@
+import { objectiveToString } from '../../../web3/helpers';
 export const parseTwitterPostData = (objective, tweetStats) => {
-  switch (objective) {
+  const objectiveString = objectiveToString(objective);
+  switch (objectiveString) {
     case SIMPLE_POST:
       return;
     case PAY_PER_VIEW:

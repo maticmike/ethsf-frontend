@@ -4,6 +4,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { setObjectiveName } from '../../../utils/ObjectiveNames';
 import { useStyles } from './styles';
+import { SIMPLE_POST } from '../../../constants/CampaignObjectives';
 
 const CampaignCalendar = ({
   objective,
@@ -15,15 +16,15 @@ const CampaignCalendar = ({
   const [simplePostDate, setSimplePostDate] = useState(null);
   const [campaignDuration, setCampaignDuration] = useState(null);
 
-  const getHeading = () => (objective === 'simplePost' ? 'Post Date And Time' : 'Campaign Length');
+  const getHeading = () => (objective === SIMPLE_POST ? 'Post Date And Time' : 'Campaign Length');
   const handlePostDate = postDate => {
-    objective === 'simplePost' ? setSimplePostDate(postDate) : setCampaignDuration(postDate);
+    objective === SIMPLE_POST ? setSimplePostDate(postDate) : setCampaignDuration(postDate);
   };
   const selectPostDate = () => {
     let endOfDaySimplePost;
     let startCampaignDate;
     let endCampaignDate;
-    if (objective === 'simplePost') {
+    if (objective === SIMPLE_POST) {
       endOfDaySimplePost = new Date(simplePostDate).getTime() / 1000 + 86340;
     } else {
       startCampaignDate = new Date(campaignDuration[0]).getTime() / 1000 + 86340;
@@ -31,7 +32,7 @@ const CampaignCalendar = ({
     }
     setParentSimplePostDate(endOfDaySimplePost);
     setParentCampaignDuration([startCampaignDate, parseInt(endCampaignDate)]);
-    objective === 'simplePost' ? setParentCampaignSetupStep(3) : setParentCampaignSetupStep(4);
+    objective === SIMPLE_POST ? setParentCampaignSetupStep(3) : setParentCampaignSetupStep(4);
   };
   return (
     <div className={classes.CampaignDates_layout}>
@@ -47,8 +48,8 @@ const CampaignCalendar = ({
           <Calendar
             onChange={handlePostDate}
             minDate={new Date()}
-            selectRange={objective != 'simplePost' ? true : false}
-            value={objective === 'simplePost' ? simplePostDate : campaignDuration}
+            selectRange={objective != SIMPLE_POST ? true : false}
+            value={objective === SIMPLE_POST ? simplePostDate : campaignDuration}
           />
         </Grid>
       </Grid>

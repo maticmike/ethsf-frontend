@@ -4,7 +4,7 @@ import NumberFormat from 'react-number-format';
 import { FormHelperText, Button } from '@material-ui/core';
 import { setObjectiveName } from '../../../utils/ObjectiveNames';
 import { useStyles } from './styles.js';
-
+import { SIMPLE_POST } from '../../../constants/CampaignObjectives';
 const CampaignStaking = ({
   objective,
   setParentDepositToEscrow,
@@ -15,7 +15,7 @@ const CampaignStaking = ({
 
   const [inputEntered, setInputEntered] = useState(null);
 
-  const getHeading = () => (objective === 'simplePost' ? 'Post Staking' : 'Campaign Staking');
+  const getHeading = () => (objective === SIMPLE_POST ? 'Post Staking' : 'Campaign Staking');
 
   let parsedEth;
 
@@ -51,16 +51,16 @@ const CampaignStaking = ({
           variant="outlined"
           color="primary"
           size="small"
-          onClick={() => setParentCampaignSetupStep(objective === 'simplePost' ? 3 : 2)}
+          onClick={() => setParentCampaignSetupStep(objective === SIMPLE_POST ? 3 : 2)}
         >
           Previous
         </Button>
-        {inputEntered && objective != 'simplePost' ? (
+        {inputEntered && objective != SIMPLE_POST ? (
           <Button variant="contained" color="primary" size="small" onClick={stakeDeposit}>
             Next
           </Button>
         ) : null}
-        {inputEntered && objective === 'simplePost' ? (
+        {inputEntered && objective === SIMPLE_POST ? (
           <Button variant="contained" color="primary" size="small" onClick={finishAndDeposit}>
             Finish
           </Button>

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Grid, FormControl, FormControlLabel, RadioGroup, Radio, Button } from '@material-ui/core';
 import { useStyles } from './styles.js';
+import { setObjectiveName } from '../../../utils/ObjectiveNames';
 
-const CampaignObjective = ({ objective, setParentCampaignSetupStep }) => {
+const CampaignObjective = ({ setParentObjective, setParentCampaignSetupStep }) => {
   const classes = useStyles();
 
   const [selectedObjective, setSelectedObjective] = useState('');
@@ -14,7 +15,8 @@ const CampaignObjective = ({ objective, setParentCampaignSetupStep }) => {
   };
 
   const submitCampaignObjective = () => {
-    objective(selectedObjective);
+    const parsedObjectiveName = setObjectiveName(selectedObjective);
+    setParentObjective(parsedObjectiveName);
     setParentCampaignSetupStep(2);
   };
 
@@ -35,8 +37,8 @@ const CampaignObjective = ({ objective, setParentCampaignSetupStep }) => {
                 value={selectedObjective}
                 onChange={handleRadioChange}
               >
-                <FormControlLabel value="simplePost" control={<Radio color="primary" />} label="Single Post" />
-                <FormControlLabel value="postViews" control={<Radio color="primary" />} label="Views" />
+                <FormControlLabel value="post" control={<Radio color="primary" />} label="Single Post" />
+                <FormControlLabel value="view" control={<Radio color="primary" />} label="Views" />
               </RadioGroup>
             </FormControl>
           </Grid>
@@ -51,10 +53,10 @@ const CampaignObjective = ({ objective, setParentCampaignSetupStep }) => {
                 value={selectedObjective}
                 onChange={handleRadioChange}
               >
-                <FormControlLabel value="profileGrowth" control={<Radio color="primary" />} label="Profile Growth" />
-                <FormControlLabel value="likes" control={<Radio color="primary" />} label="Likes" />
-                <FormControlLabel value="comments" control={<Radio color="primary" />} label="Comments" />
-                <FormControlLabel value="shares" control={<Radio color="primary" />} label="Shares" />
+                <FormControlLabel value="grow" control={<Radio color="primary" />} label="Profile Growth" />
+                <FormControlLabel value="like" control={<Radio color="primary" />} label="Likes" />
+                <FormControlLabel value="comm" control={<Radio color="primary" />} label="Comments" />
+                <FormControlLabel value="shar" control={<Radio color="primary" />} label="Shares" />
               </RadioGroup>
             </FormControl>
           </Grid>
