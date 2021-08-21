@@ -11,7 +11,7 @@ import { getCampaignProposalDb } from '../../services/api/campaignService';
 import { getUserFromEthAddress } from '../../services/api/userService';
 import { storeFamepayFactoryThunk } from '../../redux/actions/famepayFactory';
 import { createNewCampaignOnContract } from '../../web3';
-import { useStyles } from './stylesReviewCampaign';
+import { useStyles } from './styles';
 
 const BusinessReviewHeader = dynamic(() => import('../../components/reviewcampaign/BusinessReviewHeader'), {
   loading: () => <p>Business Header Loading...</p>,
