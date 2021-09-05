@@ -185,7 +185,7 @@ export const createNewCampaignOnContract = async (
 };
 
 /**
- * @param {contract} famepayFactory
+ * @param {contract}  amepayFactory
  * @param {uint256} campaignId
  * @returns {object}
  */
@@ -197,7 +197,7 @@ export const getCampaignFromContract = async (famepayFactory, campaignId) => {
     const famepayCampaign = new ethers.Contract(famepayCampaignAddress, FamepayAbi.abi, signer);
     return { famepayCampaign };
   } catch (error) {
-    consola.error('Web3: getCampaignFromContract:', error);
+    consola.error('Web3: getCampaignFromContract():', error);
   }
 };
 
@@ -211,9 +211,13 @@ export const getCampaignFromContract = async (famepayFactory, campaignId) => {
  * @param {number} postStat measures post performance
  * @param {*} postPosted measures is post was posted or not
  */
-export const setPaymentTargetReached = async (famepay, postStat, postPosted) => {
+export const setPaymentTargetReached = async (campaignAddress, postStat, postPosted) => {
   try {
+    const provider = new ethers.providers.Web3Provider(currentState.wallet.provider);
+    const signer = provider.getSigner();
+    const famepayCampaign = new ethers.Contract(campaignAddress, FamepayAbi.abi, signer);
+    await famepayCampaign.checkCampaignObjectiveReached(postStat, postPosted);
   } catch (error) {
-    consola.error('Web3: setPaymentTargetReached:', error);
+    consola.error('Web3: setPaymentTargetReached():', error);
   }
 };

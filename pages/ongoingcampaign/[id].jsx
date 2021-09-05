@@ -37,17 +37,11 @@ const OngoingCampaign = () => {
 
   const { id } = router.query;
 
-  const [postUrl, setPostUrl] = useState('');
   const [invalidPost, setInvalidPost] = useState(false);
+  const [postUrl, setPostUrl] = useState('');
   const [business, setBusiness] = useState('');
   const [influencer, setInfluencer] = useState('');
-
-  // useEffect(() => {
-  //   dispatch(storeFamepayFactoryThunk());
-  //   return () => {
-  //     console.log('cleanup ongoingCampaign page');
-  //   };
-  // }, []);
+  const [postData, setPostData] = useState(null);
 
   let campaign;
 
@@ -57,8 +51,14 @@ const OngoingCampaign = () => {
   });
   useEffect(() => {
     async function getUserEthAddress() {
-      const businessUser = await campaign?.business;
-      setBusiness(businessUser);
+      try {
+        const businessUser = await getUserFromEthAddress(campaign?.business?.id);
+        const influencerUser = await getUserFromEthAddress(campaign?.influencer?.id);
+        setBusiness(businessUser?.data?.payload);
+        setInfluencer(influencerUser?.data?.payload);
+      } catch (error) {
+        consola.error(error, 'the error on getUserFromEthAddress');
+      }
     }
     getUserEthAddress();
     return () => {
@@ -70,10 +70,6 @@ const OngoingCampaign = () => {
   if (error) return <Error statusCode={404} />;
 
   campaign = data?.campaigns[0];
-
-  console.log(campaign, 'the campaign');
-
-  console.log(business, 'b user2');
 
   const getPostData = async e => {
     e.preventDefault();
@@ -92,53 +88,35 @@ const OngoingCampaign = () => {
     try {
       const { data } = await axios.get(`http://localhost:3000/api/twitter/${tweetId}`);
       const tweetResult = parseTwitterPostData(campaign.objective, data);
+      setPostData(tweetResult);
     } catch (error) {
       setInvalidPost(true);
       consola.error('getPostData():', error);
     }
-
+    console.log(postData[0], postData[1], 'the post data');
     /**Contract Interaction**/
-    // await setPaymentTargetReached()
+    await setPaymentTargetReached(campaign?.campaignAddress, postData[0], postData[1]);
   };
-
   return (
-    // <div>
-    //   <br />
-    //   <form noValidate autoComplete="off" onSubmit={getPostData}>
-    //     <TextField
-    //       id="outlined-basic"
-    //       label="Post URL"
-    //       onChange={e => setPostUrl(e.target.value)}
-    //       fullWidth
-    //       variant="outlined"
-    //       error={invalidPost}
-    //     />
-    //     <br />
-    //     <Button type="submit" variant="contained" color="primary">
-    //       Submit Post
-    //     </Button>
-    //   </form>
-    // </div>
-
     <div className={classes.ReviewCampaign_root_center}>
       <h2>Ongoing Campaign</h2>
-      {/* <div className={classes.ReviewCampaign_headers_side_by_side}>
+      <div className={classes.ReviewCampaign_headers_side_by_side}>
         <div className={classes.ReviewCampaign_business_header}>
           <BusinessReviewHeader
-            potentialPayout={campaign?.potentialPayout}
+            potentialPayout={campaign?.depositedBalance}
             objective={campaign?.objective}
-            username={businessUser?.username}
-            website={businessUser?.website}
-            ethAddress={businessUser?.userEthAddress}
+            username={business?.username}
+            website={business?.website}
+            ethAddress={business?.userEthAddress}
           />
         </div>
         <div className={classes.ReviewCampaign_vertical_line}></div>
         <div className={classes.ReviewCampaign_influencer_header}>
           <InfluencerReviewHeader
-            username={influencerUser?.username}
-            email={influencerUser?.email}
-            campaignsCompleted={influencerUser?.campaignsCompleted}
-            ethAddress={influencerUser?.userEthAddress}
+            username={influencer?.username}
+            email={influencer?.email}
+            campaignsCompleted={influencer?.campaignsCompleted}
+            ethAddress={influencer?.userEthAddress}
           />
         </div>
       </div>
@@ -154,35 +132,23 @@ const OngoingCampaign = () => {
       <br />
       <br />
       <div>
-        <>
-          <Button
-            className={classes.ReviewCampaign_reject}
-            variant="contained"
-            color="secondary"
-            size="large"
-            onClick={() => handleProposalResponse(false)}
-          >
-            Reject
+        <br />
+        <form noValidate autoComplete="off" onSubmit={getPostData}>
+          <TextField
+            id="outlined-basic"
+            fullWidth
+            label="Post URL"
+            onChange={e => setPostUrl(e.target.value)}
+            variant="outlined"
+            error={invalidPost}
+          />
+          <br />
+          <br />
+          <Button type="submit" variant="contained" color="primary">
+            Submit Post
           </Button>
-          <Button
-            className={classes.ReviewCampaign_amber}
-            variant="contained"
-            size="large"
-            onClick={() => handleProposalResponse(false)}
-          >
-            Counter
-          </Button>
-          <Button
-            className={classes.ReviewCampaign_accept}
-            variant="contained"
-            size="large"
-            color="secondary"
-            onClick={() => handleProposalResponse(true)}
-          >
-            Accept
-          </Button>
-        </>
-      </div> */}
+        </form>
+      </div>
     </div>
   );
 };

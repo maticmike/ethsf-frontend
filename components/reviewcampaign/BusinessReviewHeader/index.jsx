@@ -1,20 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { utils } from 'web3';
 import consola from 'consola';
-import { shortenedEthAddress } from '../../../web3/helpers';
 import { SIMPLE_POST } from '../../../constants/CampaignObjectives';
 import { useStyles } from './styles';
 const BusinessReviewHeader = ({ potentialPayout, objective, username, website, ethAddress }) => {
   const classes = useStyles();
-
-  const copyToClipboard = async copyMe => {
-    try {
-      await navigator.clipboard.writeText(copyMe);
-    } catch (err) {
-      consola.error('copyToClipboard:', err);
-    }
-  };
 
   const payoutInWei = () => {
     if (potentialPayout != undefined) {
@@ -35,9 +26,7 @@ const BusinessReviewHeader = ({ potentialPayout, objective, username, website, e
       </div>
       <div>
         <h1 className={classes.BusinessReview_margin_bottom_h1}>{username}</h1>
-        <p className={classes.BusinessReview_pointer} onClick={() => copyToClipboard(ethAddress)}>
-          {shortenedEthAddress(ethAddress)}
-        </p>
+
         <a href={website} target="_blank">
           {website}
         </a>

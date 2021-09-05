@@ -15,7 +15,7 @@ export const parseTwitterPostData = (objective, tweetStats) => {
   const tweetData = tweetStats.data[0];
   switch (objectiveString) {
     case SIMPLE_POST:
-      return true;
+      return [1, true];
     case PAY_PER_VIEW:
       return;
     case PROFILE_GROWTH:

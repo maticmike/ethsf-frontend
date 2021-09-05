@@ -30,7 +30,7 @@ export const NETWORK_ID = 4;
 // export const EXPLORER_URL = 'https://hecoinfo.com/';
 // export const BASE_URL = 'https://opennft.io/';
 // export const META_IMG = `${BASE_URL}logo-text-under-large.png`;
-// export const CONTRACT_ADDRESS = '0xEfFFbc5fAB4133406CB37d51B273FE4CCE45D741';
+// export const CONTRACT_ADDRESS = '0x90aCBa94573634Ec6ABc07B34152A1da922bFa20';
 // export const PROJECT_APPLICATION_FORM_URL = 'https://jinshuju.net/f/SBuz52';
 
 export const APOLLO_POLL_INTERVAL_MS = 1000;

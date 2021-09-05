@@ -1,5 +1,6 @@
 fragment CampaignFrag on Campaign {
     id
+    campaignAddress
     startDate
     deadline
     business {
@@ -15,6 +16,7 @@ fragment CampaignFrag on Campaign {
     incrementalTargetAmount
     depositedBalance
     ongoing
+    jackpotObjectiveReached
 }
 
 query campaignQuery($id: String!) {

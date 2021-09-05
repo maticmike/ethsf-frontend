@@ -43,10 +43,10 @@ export const createNewCampaignProposalDb = async (
       // niche,
       // potentialPayoutBN
     });
-    consola.success('ApiService: createNewCampaignProposal() campaign being created:', campaign);
+    consola.success('ApiService: createNewCampaignProposalDb() campaign being created:', campaign);
     return campaign;
   } catch (error) {
-    consola.error('ApiService: createNewCampaignOnProposal():', error);
+    consola.error('ApiService: createNewCampaignOnProposalDb():', error);
     throw error;
   }
 };

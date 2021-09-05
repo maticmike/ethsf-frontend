@@ -26,10 +26,17 @@ const CampaignCalendar = ({
     let endCampaignDate;
     if (objective === SIMPLE_POST) {
       endOfDaySimplePost = new Date(simplePostDate).getTime() / 1000 + 86340;
+      //If decimal then post is today
+      if (endOfDaySimplePost % 1 != 0) {
+        const endOfDaySimplePostDate = new Date();
+        endOfDaySimplePostDate.setHours(0, 0, 0, 0);
+        endOfDaySimplePost = new Date(endOfDaySimplePostDate).getTime() / 1000 + 86340;
+      }
     } else {
       startCampaignDate = new Date(campaignDuration[0]).getTime() / 1000 + 86340;
       endCampaignDate = new Date(campaignDuration[1]).getTime() / 1000;
     }
+    //TODO specify timezone right now its eastern
     setParentSimplePostDate(endOfDaySimplePost);
     setParentCampaignDuration([startCampaignDate, parseInt(endCampaignDate)]);
     objective === SIMPLE_POST ? setParentCampaignSetupStep(3) : setParentCampaignSetupStep(4);
