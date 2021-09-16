@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
   },
 
   navbarDesktopMenuButton: {
-    color: '#797777',
+    color: 'white',
     marginLeft: theme.spacing(4),
     '&:hover': {
       color: 'white',
@@ -60,14 +60,6 @@ const useStyles = makeStyles(theme => ({
     opacity: '0.99',
     backgroundColor: '#1E1E1E',
     color: 'white',
-  },
-
-  languageButton: {
-    backgroundColor: '#797777',
-    borderRadius: '0',
-    '&:hover': {
-      color: 'white',
-    },
   },
 }));
 

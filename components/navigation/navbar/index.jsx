@@ -4,8 +4,10 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { AppBar, Toolbar, Menu, MenuItem, Button, IconButton } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
+import consola from 'consola';
+import MenuIcon from '@material-ui/icons/Menu';
+import { getUserFromEthAddress } from '../../../services/api/userService';
 import { MIN_DESKTOP_PX } from '../../../constants/ScreenSize';
 import { useStyles } from './styles';
 
@@ -24,9 +26,12 @@ const Navbar = () => {
 
   const router = useRouter();
 
-  const [isSignupOpen, setIsOpenSignup] = useState(false);
+  const { id } = router.query;
 
-  // const account = useSelector(state => state.account);
+  const account = useSelector(state => state.account);
+
+  const [isSignupOpen, setIsOpenSignup] = useState(false);
+  const [username, setUsername] = useState('');
 
   const [languagesMenu, setLanguagesMenu] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -43,22 +48,35 @@ const Navbar = () => {
   const handleSignupOpen = () => setIsOpenSignup(true);
   const handleSignupClose = () => setIsOpenSignup(false);
 
-  const dummyArray = [1, 2, 3, 4, 5, 6];
-
   useEffect(() => {
     setWidth(window.innerWidth);
     window.addEventListener('resize', updateWidth);
     return () => window.removeEventListener('resize', updateWidth);
   }, []);
 
+  useEffect(() => {
+    async function getUsernameEthAddress() {
+      if (!router.isReady) return;
+      let userDb;
+      account?.address != null ? (userDb = await getUserFromEthAddress(account?.address)) : null;
+      if (userDb === undefined) {
+        return <Error statusCode={404} />;
+      } else {
+        setUsername(userDb.data.payload.username);
+      }
+    }
+    getUsernameEthAddress();
+    return () => {
+      consola.success('Cleanup profile page');
+    };
+  }, [account]);
+
   return (
     <>
       {width > MIN_DESKTOP_PX ? (
         <AppBar position="sticky">
           <Toolbar>
-            {/* <Link href="/marketplace" className={classes.navbarDesktopMenuButton}> */}
             <a href="/">
-              {/* <Image className={classes.navbarLogo} src="https://www.mandfhealth.co.uk/wp-content/uploads/2017/12/celebrity-1.jpg" alt="OpenNFT Logo" width="180" height="54" /> */}
               <img
                 src="https://www.mandfhealth.co.uk/wp-content/uploads/2017/12/celebrity-1.jpg"
                 alt="OpenNFT Logo"
@@ -66,41 +84,20 @@ const Navbar = () => {
                 height="54"
               />
             </a>
-            {/* <Link className={classes.navbarDesktopMenuButton} href="/marketplace"> */}
-            <a href="/">
+            <a href="/newcampaign" className={classes.navbarDesktopMenuButton}>
               <Button>
-                <strong>New Campaign</strong>
+                <strong className={classes.navbarDesktopMenuButton}>New Campaign</strong>
               </Button>
             </a>
-            <a className={classes.navbarDesktopMenuButton} href="/">
-              <Button>
-                <strong className={classes.navbarDesktopMenuButton}>Ongoing Campaigns</strong>
-              </Button>
-            </a>
+            {account == null ? null : (
+              <a className={classes.navbarDesktopMenuButton} href={`profile/${username}`}>
+                <Button>
+                  <strong className={classes.navbarDesktopMenuButton}>My Profile</strong>
+                </Button>
+              </a>
+            )}
             <div className={classes.navbarGrow} />
             <ConnectButton handleSignupOpen={handleSignupOpen} />
-            &nbsp;
-            <Button className={classes.languageButton} variant="outlined" onClick={openLanguagesMenu}>
-              Test Dropdown
-            </Button>
-            &nbsp;
-            <Menu
-              id="currency-types"
-              anchorEl={languagesMenu}
-              keepMounted
-              open={Boolean(languagesMenu)}
-              onClose={closeLanguagesMenu}
-            >
-              {dummyArray.map((key, value) => {
-                return (
-                  // <Link href={router.asPath} locale={key} key={key}>
-                  <MenuItem onClick={closeLanguagesMenu} key={key}>
-                    {value}
-                  </MenuItem>
-                  // </Link>
-                );
-              })}
-            </Menu>
           </Toolbar>
         </AppBar>
       ) : (

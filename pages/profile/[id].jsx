@@ -47,7 +47,7 @@ const Profile = () => {
   let campaigns;
 
   if (profileIsBusiness) {
-    const { loading, error, data } = useQuery(getProjectsQuery, {
+    const { loading, error, data } = useQuery(GET_ALL_CAMPAIGNS_FOR_BUSINESS_QUERY, {
       variables: { id: user.userEthAddress },
       pollInterval: APOLLO_POLL_INTERVAL_MS,
     });

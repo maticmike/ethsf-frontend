@@ -164,6 +164,7 @@ export const createNewCampaignOnContract = async (
   try {
     // const objectiveBytes = ethers.utils.hexlify(setObjectiveName(objective));' //<--- Preferable to web3
     const objectiveBytes = web3.utils.toHex(setObjectiveName(objective));
+    console.log(famepayFactory, 'the famepay factory');
     const campaign = await famepayFactory.newFamepayCampaign(
       influencer,
       business,
