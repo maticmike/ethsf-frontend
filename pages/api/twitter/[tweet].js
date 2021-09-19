@@ -12,7 +12,16 @@ export default async (req, res) => {
     const tweetData = await client.get('tweets', {
       ids: req.query.tweet,
       tweet: {
-        fields: ['created_at', 'entities', 'public_metrics', 'author_id', 'geo', 'lang', 'source'],
+        fields: [
+          'created_at',
+          'entities',
+          'public_metrics',
+          'author_id',
+          'geo',
+          'lang',
+          'source',
+          'non_public_metrics', // NOT WORKING FOR TWEETS OLDER THAN 30 DAYS
+        ],
       },
     });
     return res.status(200).json(tweetData);

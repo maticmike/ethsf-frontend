@@ -11,11 +11,24 @@ import {
 } from '../../../constants/CampaignObjectives';
 import { objectiveToString } from '../../../web3/helpers';
 export const parseTwitterPostData = (objective, tweetStats) => {
+  let isValidPost;
+
+  //TWEET STATS
   const objectiveString = objectiveToString(objective);
   const tweetData = tweetStats.data[0];
+  const postTimestamp = Math.round(new Date(tweetData.created_at).getTime() / 1000);
+
+  //CHECK VALID TWEET
+  if ('entities' in tweetData /* && tweetData.author_id == correctAuthorId */) {
+    isValidPost = true;
+  } else {
+    isValidPost = false;
+  }
   switch (objectiveString) {
     case SIMPLE_POST:
-      return [1, true];
+      //correct influencer
+      //tagged the business
+      return [1, isValidPost, postTimestamp, isValidPost];
     case PAY_PER_VIEW:
       return;
     case PROFILE_GROWTH:

@@ -212,7 +212,7 @@ export const getCampaignFromContract = async (famepayFactory, campaignId) => {
  * @param {number} postStat measures post performance
  * @param {*} postPosted measures is post was posted or not
  */
-export const setPaymentTargetReached = async (campaignAddress, postStat, postPosted) => {
+export const setPaymentTargetReached = async (campaignAddress, postStat, postPosted, postTimestamp) => {
   try {
     const provider = new ethers.providers.Web3Provider(currentState.wallet.provider);
     const signer = provider.getSigner();

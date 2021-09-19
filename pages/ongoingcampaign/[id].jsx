@@ -41,7 +41,6 @@ const OngoingCampaign = () => {
   const [postUrl, setPostUrl] = useState('');
   const [business, setBusiness] = useState('');
   const [influencer, setInfluencer] = useState('');
-  const [postData, setPostData] = useState(null);
 
   let campaign;
 
@@ -87,15 +86,13 @@ const OngoingCampaign = () => {
     }
     try {
       const { data } = await axios.get(`http://localhost:3000/api/twitter/${tweetId}`);
-      const tweetResult = parseTwitterPostData(campaign.objective, data);
-      setPostData(tweetResult);
+      let postData;
+      postData = parseTwitterPostData(campaign.objective, data);
+      // await setPaymentTargetReached(campaign?.campaignAddress, postData[0], postData[1], postData[2]);
     } catch (error) {
       setInvalidPost(true);
       consola.error('getPostData():', error);
     }
-    console.log(postData[0], postData[1], 'the post data');
-    /**Contract Interaction**/
-    await setPaymentTargetReached(campaign?.campaignAddress, postData[0], postData[1]);
   };
   return (
     <div className={classes.ReviewCampaign_root_center}>
@@ -144,7 +141,7 @@ const OngoingCampaign = () => {
           />
           <br />
           <br />
-          <Button type="submit" variant="contained" color="primary">
+          <Button type="submit" variant="contained" color="primary" onClick={getPostData}>
             Submit Post
           </Button>
         </form>
