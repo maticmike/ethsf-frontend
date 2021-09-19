@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { AppBar, Toolbar, Menu, MenuItem, Button, IconButton } from '@material-ui/core';
 import clsx from 'clsx';
 import consola from 'consola';
@@ -90,7 +91,7 @@ const Navbar = () => {
               </Button>
             </a>
             {username == null ? null : (
-              <a className={classes.navbarDesktopMenuButton} href={`profile/${username}`}>
+              <a className={classes.navbarDesktopMenuButton} href={'/profile/' + username}>
                 <Button>
                   <strong className={classes.navbarDesktopMenuButton}>My Profile</strong>
                 </Button>
