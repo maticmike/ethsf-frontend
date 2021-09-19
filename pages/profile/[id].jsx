@@ -64,7 +64,6 @@ const Profile = () => {
     if (loading) return null;
     if (error) return <Error statusCode={404} />;
     campaigns = data?.influencers[0]?.campaigns;
-    console.log(campaigns, 'this is the data');
   }
   return (
     <>

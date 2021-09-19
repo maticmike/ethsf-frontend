@@ -31,7 +31,7 @@ const Navbar = () => {
   const account = useSelector(state => state.account);
 
   const [isSignupOpen, setIsOpenSignup] = useState(false);
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState(null);
 
   const [languagesMenu, setLanguagesMenu] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -58,7 +58,7 @@ const Navbar = () => {
     async function getUsernameEthAddress() {
       if (!router.isReady) return;
       let userDb;
-      account?.address != null ? (userDb = await getUserFromEthAddress(account?.address)) : null;
+      account?.address == null ? null : (userDb = await getUserFromEthAddress(account?.address));
       if (userDb === undefined) {
         return <Error statusCode={404} />;
       } else {
@@ -89,7 +89,7 @@ const Navbar = () => {
                 <strong className={classes.navbarDesktopMenuButton}>New Campaign</strong>
               </Button>
             </a>
-            {account == null ? null : (
+            {username == null ? null : (
               <a className={classes.navbarDesktopMenuButton} href={`profile/${username}`}>
                 <Button>
                   <strong className={classes.navbarDesktopMenuButton}>My Profile</strong>

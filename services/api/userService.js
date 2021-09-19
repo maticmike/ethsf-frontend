@@ -36,11 +36,11 @@ export const registerNewUserDb = async (ethAddress, username, firstName, lastNam
 
 export const getUserFromEthAddress = async ethAddress => {
   try {
+    console.log(ethAddress, 'the eth address');
     const user = await axios.get(`${api}/user/ethAddress/${ethAddress}`);
     return user;
   } catch (error) {
     consola.error('ApiService getUserFromEthAddress():', error);
-    throw error;
   }
 };
 

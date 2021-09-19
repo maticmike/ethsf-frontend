@@ -52,8 +52,6 @@ const Sidebar = ({ isSidebarOpen, closeSidebar, showMyNft, openLanguagesMenu, cl
         <List>
           <ListItem>
             <ListItemIcon>
-              {/* TODO for launch, redirect all home page traffic to the marketplace
-              future: disable redirect when we actually have the home page content */}
               <Link href="/">
                 {/* <Image className={classes.pointer} src="/logo.png" alt="OpenNFT Logo" width="188" height="58" /> */}
                 <h3>Famepay</h3>

@@ -8,7 +8,6 @@ export const createCampaign = campaign => ({
   payload: campaign,
 });
 
-// TODO Set the ID in redux
 export const createCampaignThunk = id => {
   return async (dispatch, getState) => {
     if (window.ethereum) {
