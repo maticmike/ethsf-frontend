@@ -27,6 +27,7 @@ export const createNewCampaignProposalDb = async (
   // niche,
 ) => {
   // const potentialPayoutBN = ethers.utils.parseEther(potentialPayout);
+  console.log(jackpotReward, 'the jackpot reward 2');
   try {
     const campaign = await axios.post(`${api}/campaignProposal/create`, {
       business,

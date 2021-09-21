@@ -164,21 +164,21 @@ export const createNewCampaignOnContract = async (
   try {
     // const objectiveBytes = ethers.utils.hexlify(setObjectiveName(objective));' //<--- Preferable to web3
     const objectiveBytes = web3.utils.toHex(setObjectiveName(objective));
-    console.log(famepayFactory, 'the famepay factory');
-    const campaign = await famepayFactory.newFamepayCampaign(
-      influencer,
-      business,
-      startDate,
-      deadline,
-      simplePostDuration,
-      jackpotReward,
-      incrementalReward,
-      jackpotTarget,
-      incrementalTarget,
-      potentialPayout,
-      objectiveBytes,
-      { value: potentialPayout, gasLimit: 3000000 },
-    );
+    console.log(jackpotReward, 'the famepay jackpot reward 3');
+    // const campaign = await famepayFactory.newFamepayCampaign(
+    //   influencer,
+    //   business,
+    //   startDate,
+    //   deadline,
+    //   simplePostDuration,
+    //   jackpotReward,
+    //   incrementalReward,
+    //   jackpotTarget,
+    //   incrementalTarget,
+    //   potentialPayout,
+    //   objectiveBytes,
+    //   { value: potentialPayout, gasLimit: 3000000 },
+    // );
     return campaign;
   } catch (error) {
     consola.error('Web3: createNewCampaignOnContract():', error);

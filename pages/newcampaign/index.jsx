@@ -61,6 +61,8 @@ const NewCampaign = () => {
   const [jackpotReward, setJackpotReward] = useState(0);
   const [incrementalReward, setIncrementalReward] = useState(0);
 
+  let jackpotRewardAmount;
+
   useEffect(() => {
     dispatch(connectAccountThunk());
     return () => {
@@ -87,8 +89,14 @@ const NewCampaign = () => {
   };
 
   const createNewCampaignProposal = async () => {
-    if (objective === SIMPLE_POST) setJackpotReward(stakedAmount);
+    if (objective === SIMPLE_POST) {
+      // setJackpotReward(stakedAmount);
+      jackpotRewardAmount = stakedAmount;
+    }
+
     try {
+      console.log(jackpotReward, 'the one jackpot reward');
+      console.log(testMe, 'the one one jackpot reward');
       const campaignDb = await createNewCampaignProposalDb(
         account.address, //business
         influencer.toLowerCase(),
@@ -97,7 +105,7 @@ const NewCampaign = () => {
         simplePostMinimumDuration,
         jackpotReward,
         incrementalReward,
-        jackpotTarget,
+        jackpotRewardAmount,
         incrementalTarget,
         stakedAmount, //potentialPayout
         objective,
@@ -165,6 +173,7 @@ const NewCampaign = () => {
         );
       case 5:
         return (
+          // TODO JACKPOT REARD COULD BE A BUG CONSIDER USING GLOBAL VAR INSTEAD OF STATE
           <Paper className={classes.NewCampaign_layout_staking} elevation={3}>
             <CampaignReward
               objective={objective}

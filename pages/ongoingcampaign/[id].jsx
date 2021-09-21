@@ -86,9 +86,8 @@ const OngoingCampaign = () => {
     }
     try {
       const { data } = await axios.get(`http://localhost:3000/api/twitter/${tweetId}`);
-      let postData;
-      postData = parseTwitterPostData(campaign.objective, data);
-      // await setPaymentTargetReached(campaign?.campaignAddress, postData[0], postData[1], postData[2]);
+      const postData = parseTwitterPostData(campaign.objective, data);
+      await setPaymentTargetReached(campaign?.campaignAddress, postData[0], postData[1], postData[2]);
     } catch (error) {
       setInvalidPost(true);
       consola.error('getPostData():', error);

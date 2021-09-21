@@ -10,25 +10,29 @@ import {
   SALES,
 } from '../../../constants/CampaignObjectives';
 import { objectiveToString } from '../../../web3/helpers';
-export const parseTwitterPostData = (objective, tweetStats) => {
+export const parseTwitterPostData = (objective, tweetStats, business) => {
   let isValidPost;
 
   //TWEET STATS
   const objectiveString = objectiveToString(objective);
   const tweetData = tweetStats.data[0];
   const postTimestamp = Math.round(new Date(tweetData.created_at).getTime() / 1000);
+  const taggedBusiness = tweetData.entities.mentions[0].username;
 
   //CHECK VALID TWEET
-  if ('entities' in tweetData /* && tweetData.author_id == correctAuthorId */) {
+  /*
+  if (taggedBusiness == business* && tweetData.author_id == correctAuthorId ) {
     isValidPost = true;
   } else {
     isValidPost = false;
   }
+  */
+  isValidPost = true;
   switch (objectiveString) {
     case SIMPLE_POST:
       //correct influencer
       //tagged the business
-      return [1, isValidPost, postTimestamp, isValidPost];
+      return [1, isValidPost, postTimestamp];
     case PAY_PER_VIEW:
       return;
     case PROFILE_GROWTH:
