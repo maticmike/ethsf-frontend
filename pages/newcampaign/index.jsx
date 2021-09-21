@@ -89,10 +89,8 @@ const NewCampaign = () => {
   };
 
   const createNewCampaignProposal = async () => {
-    if (objective === SIMPLE_POST) {
-      // setJackpotReward(stakedAmount);
-      jackpotRewardAmount = stakedAmount;
-    }
+    // setJackpotReward(stakedAmount);
+    objective === SIMPLE_POST ? (jackpotRewardAmount = stakedAmount) : (jackpotRewardAmount = jackpotReward);
 
     try {
       console.log(jackpotReward, 'the one jackpot reward');
