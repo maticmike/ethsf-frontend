@@ -6,8 +6,7 @@ import { onBoardInitialize } from '../utils/onboard';
 import { setObjectiveName } from '../utils/ObjectiveNames';
 import FamepayFactoryAbi from '../contracts/FamepayFactory.json';
 import FamepayAbi from '../contracts/Famepay.json';
-import { CONTRACT_RESPONSE_STATUS } from '../constants/Blockchain';
-import { NETWORK_ID } from '../constants/Blockchain';
+import { CONTRACT_RESPONSE_STATUS, NETWORK_ID } from '../constants/Blockchain';
 
 import web3 from 'web3';
 
@@ -78,13 +77,15 @@ export const getContractAddress = (abi, chainId) => {
  * @function bootstrapFactory
  * @returns the full contract objects with their addresses
  */
+
 let onboard;
-let currentState;
+let currentOnboardState;
+
 export const bootstrapFactory = async () => {
   try {
     // const provider = new ethers.providers.Web3Provider(web3.currentProvider);
-    currentState = onboard.getState();
-    const provider = new ethers.providers.Web3Provider(currentState.wallet.provider);
+    currentOnboardState = onboard.getState();
+    const provider = new ethers.providers.Web3Provider(currentOnboardState.wallet.provider);
     const signer = provider.getSigner();
     const network = await provider.getNetwork();
     if (network.chainId != NETWORK_ID) {
@@ -101,6 +102,12 @@ export const bootstrapFactory = async () => {
 };
 
 /**
+ ********************************
+ * Wallet
+ ********************************
+ */
+
+/**
  * Get eth wallet info
  * @function getEthWallet
  * @returns wallet and wallet related info
@@ -110,10 +117,10 @@ export const getWalletInfo = async () => {
     onboard = onBoardInitialize();
     await onboard.walletSelect();
     await onboard.walletCheck();
-    currentState = onboard.getState();
-    const account = currentState.address;
+    currentOnboardState = onboard.getState();
+    const account = currentOnboardState.address;
 
-    const provider = new ethers.providers.Web3Provider(currentState.wallet.provider);
+    const provider = new ethers.providers.Web3Provider(currentOnboardState.wallet.provider);
 
     const balanceRaw = await provider.getBalance(account);
     const balance = balanceRaw.toString();
@@ -164,21 +171,20 @@ export const createNewCampaignOnContract = async (
   try {
     // const objectiveBytes = ethers.utils.hexlify(setObjectiveName(objective));' //<--- Preferable to web3
     const objectiveBytes = web3.utils.toHex(setObjectiveName(objective));
-    console.log(jackpotReward, 'the famepay jackpot reward 3');
-    // const campaign = await famepayFactory.newFamepayCampaign(
-    //   influencer,
-    //   business,
-    //   startDate,
-    //   deadline,
-    //   simplePostDuration,
-    //   jackpotReward,
-    //   incrementalReward,
-    //   jackpotTarget,
-    //   incrementalTarget,
-    //   potentialPayout,
-    //   objectiveBytes,
-    //   { value: potentialPayout, gasLimit: 3000000 },
-    // );
+    const campaign = await famepayFactory.newFamepayCampaign(
+      influencer,
+      business,
+      startDate,
+      deadline,
+      simplePostDuration,
+      jackpotReward,
+      incrementalReward,
+      jackpotTarget,
+      incrementalTarget,
+      potentialPayout,
+      objectiveBytes,
+      { value: potentialPayout, gasLimit: 3000000 },
+    );
     return campaign;
   } catch (error) {
     consola.error('Web3: createNewCampaignOnContract():', error);
@@ -192,7 +198,8 @@ export const createNewCampaignOnContract = async (
  */
 export const getCampaignFromContract = async (famepayFactory, campaignId) => {
   try {
-    const provider = new ethers.providers.Web3Provider(web3.currentProvider);
+    // const provider = new ethers.providers.Web3Provider(web3.currentProvider);
+    const provider = new ethers.providers.Web3Provider(currentOnboardState.wallet.provider); //Untested<<---
     const signer = provider.getSigner();
     const famepayCampaignAddress = await famepayFactory.getCampaign(campaignId, { gasLimit: 3000000 });
     const famepayCampaign = new ethers.Contract(famepayCampaignAddress, FamepayAbi.abi, signer);
@@ -214,10 +221,10 @@ export const getCampaignFromContract = async (famepayFactory, campaignId) => {
  */
 export const setPaymentTargetReached = async (campaignAddress, postStat, postPosted, postTimestamp) => {
   try {
-    const provider = new ethers.providers.Web3Provider(currentState.wallet.provider);
+    const provider = new ethers.providers.Web3Provider(currentOnboardState.wallet.provider);
     const signer = provider.getSigner();
     const famepayCampaign = new ethers.Contract(campaignAddress, FamepayAbi.abi, signer);
-    await famepayCampaign.checkCampaignObjectiveReached(postStat, postPosted);
+    await famepayCampaign.checkCampaignObjectiveReached(postStat, postPosted, postTimestamp);
   } catch (error) {
     consola.error('Web3: setPaymentTargetReached():', error);
   }

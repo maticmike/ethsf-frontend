@@ -17,7 +17,7 @@ export const parseTwitterPostData = (objective, tweetStats, business) => {
   const objectiveString = objectiveToString(objective);
   const tweetData = tweetStats.data[0];
   const postTimestamp = Math.round(new Date(tweetData.created_at).getTime() / 1000);
-  const taggedBusiness = tweetData.entities.mentions[0].username;
+  // const taggedBusiness = tweetData.entities.mentions[0].username;
 
   //CHECK VALID TWEET
   /*

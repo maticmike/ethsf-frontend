@@ -7,6 +7,7 @@ const initialState = {
   balances: {},
   signer: null,
   //   isAdmin: false,
+  isLoggedIn: false,
 };
 
 const account = (state = initialState, action) => {

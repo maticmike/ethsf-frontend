@@ -8,7 +8,7 @@ import consola from 'consola';
 import { Button } from '@material-ui/core';
 import 'react-calendar/dist/Calendar.css';
 import { getCampaignProposalDb } from '../../services/api/campaignService';
-import { getUserFromEthAddress } from '../../services/api/userService';
+import { getUserFromEthAddressDb } from '../../services/api/userService';
 import { storeFamepayFactoryThunk } from '../../redux/actions/famepayFactory';
 import { createNewCampaignOnContract } from '../../web3';
 import { useStyles } from './styles';
@@ -43,8 +43,8 @@ const ReviewCampaign = () => {
     async function getCampaignInfo() {
       const campaign = await getCampaignProposalDb(id);
       if (Object.entries(campaign.data.payload).length === 0) return <Error statusCode={404} />;
-      const businessUser = await getUserFromEthAddress(campaign?.data?.mongoResponse?.business);
-      const influencerUser = await getUserFromEthAddress(campaign?.data?.mongoResponse?.influencer);
+      const businessUser = await getUserFromEthAddressDb(campaign?.data?.mongoResponse?.business);
+      const influencerUser = await getUserFromEthAddressDb(campaign?.data?.mongoResponse?.influencer);
       setCampaign(campaign.data.mongoResponse);
       setBusiness(businessUser.data.payload);
       setInfluencer(influencerUser.data.payload);

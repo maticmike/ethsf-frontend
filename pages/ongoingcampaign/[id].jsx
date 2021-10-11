@@ -18,7 +18,7 @@ import { parseTwitterPostData } from '../../utils/objectiveData/twitter';
 import { storeFamepayFactoryThunk } from '../../redux/actions/famepayFactory';
 import { campaignQuery } from '../../apollo/campaign.gql';
 import { APOLLO_POLL_INTERVAL_MS } from '../../constants/Blockchain';
-import { getUserFromEthAddress } from '../../services/api/userService';
+import { getUserFromEthAddressDb } from '../../services/api/userService';
 import { useStyles } from './styles';
 
 const BusinessReviewHeader = dynamic(() => import('../../components/reviewcampaign/BusinessReviewHeader'), {
@@ -51,12 +51,12 @@ const OngoingCampaign = () => {
   useEffect(() => {
     async function getUserEthAddress() {
       try {
-        const businessUser = await getUserFromEthAddress(campaign?.business?.id);
-        const influencerUser = await getUserFromEthAddress(campaign?.influencer?.id);
+        const businessUser = await getUserFromEthAddressDb(campaign?.business?.id);
+        const influencerUser = await getUserFromEthAddressDb(campaign?.influencer?.id);
         setBusiness(businessUser?.data?.payload);
         setInfluencer(influencerUser?.data?.payload);
       } catch (error) {
-        consola.error(error, 'the error on getUserFromEthAddress');
+        consola.error(error, 'the error on getUserFromEthAddressDb');
       }
     }
     getUserEthAddress();

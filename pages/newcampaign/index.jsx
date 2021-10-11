@@ -89,21 +89,19 @@ const NewCampaign = () => {
   };
 
   const createNewCampaignProposal = async () => {
-    // setJackpotReward(stakedAmount);
+    // setJackpotReward(stakedAmount); //REVIEW ME LATER<<<
     objective === SIMPLE_POST ? (jackpotRewardAmount = stakedAmount) : (jackpotRewardAmount = jackpotReward);
 
     try {
-      console.log(jackpotReward, 'the one jackpot reward');
-      console.log(testMe, 'the one one jackpot reward');
       const campaignDb = await createNewCampaignProposalDb(
         account.address, //business
         influencer.toLowerCase(),
         campaignDuration[0] ? campaignDuration[0] : Math.round(Date.now() / 1000), //agreedStartDate
         campaignDuration[1] ? campaignDuration[1] : simplePostDate, //agreedDeadline/postDate
         simplePostMinimumDuration,
-        jackpotReward,
-        incrementalReward,
         jackpotRewardAmount,
+        incrementalReward,
+        jackpotTarget,
         incrementalTarget,
         stakedAmount, //potentialPayout
         objective,

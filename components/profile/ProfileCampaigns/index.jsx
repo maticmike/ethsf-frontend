@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { getUserFromEthAddress } from '../../../services/api/userService';
+import { getUserFromEthAddressDb } from '../../../services/api/userService';
 import { useStyles } from './styles';
 
 //check isBusiness to know if populate cards with influencer or business data
@@ -8,7 +8,7 @@ const ProfileCampaigns = ({ campaign, isBusiness }) => {
   const classes = useStyles();
   const [username, setUsername] = useState('');
 
-  getUserFromEthAddress(isBusiness ? campaign.influencer.id : campaign.business.id).then(({ data }) =>
+  getUserFromEthAddressDb(isBusiness ? campaign.influencer.id : campaign.business.id).then(({ data }) =>
     setUsername(data.payload.username),
   );
 
