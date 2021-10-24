@@ -56,7 +56,7 @@ const OngoingCampaign = () => {
         setBusiness(businessUser?.data?.payload);
         setInfluencer(influencerUser?.data?.payload);
       } catch (error) {
-        consola.error(error, 'the error on getUserFromEthAddressDb');
+        consola.error(error, 'OngoingCampaign.getUserEthAddress: error');
       }
     }
     getUserEthAddress();

@@ -10,6 +10,9 @@ import { CONTRACT_RESPONSE_STATUS, NETWORK_ID } from '../constants/Blockchain';
 
 import web3 from 'web3';
 
+let onboard;
+let currentOnboardState;
+
 /**
  * Response handler for successful contract interactions
  * @function handleResponse
@@ -78,9 +81,6 @@ export const getContractAddress = (abi, chainId) => {
  * @returns the full contract objects with their addresses
  */
 
-let onboard;
-let currentOnboardState;
-
 export const bootstrapFactory = async () => {
   try {
     // const provider = new ethers.providers.Web3Provider(web3.currentProvider);
@@ -109,13 +109,13 @@ export const bootstrapFactory = async () => {
 
 /**
  * Get eth wallet info
- * @function getEthWallet
+ * @function signInWalletWeb3
  * @returns wallet and wallet related info
  */
-export const getWalletInfo = async () => {
+export const signInWalletWeb3 = async previousWallet => {
   try {
-    onboard = onBoardInitialize();
-    await onboard.walletSelect();
+    onboard = onBoardInitialize(previousWallet);
+    await onboard.walletSelect(previousWallet);
     await onboard.walletCheck();
     currentOnboardState = onboard.getState();
     const account = currentOnboardState.address;
@@ -129,6 +129,15 @@ export const getWalletInfo = async () => {
     return { account, balance, signer /*, isAdmin*/ };
   } catch (error) {
     consola.error('Web3: getWalletInfo() error message:', error);
+    return null;
+  }
+};
+
+export const clearWalletOnboard = async () => {
+  try {
+    await onboard.walletReset();
+  } catch (error) {
+    consola.error('Web3: clearWalletOnboard() error message:', error);
     return null;
   }
 };

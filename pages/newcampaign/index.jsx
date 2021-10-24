@@ -39,8 +39,6 @@ const NewCampaign = () => {
   const account = useSelector(state => state.account);
   const router = useRouter();
 
-  // const famepayFactory = useSelector(state => state.famepayFactory);
-
   const [registrationStep, setRegistrationStep] = useState(0);
 
   // Campaign Participants
@@ -63,21 +61,21 @@ const NewCampaign = () => {
 
   let jackpotRewardAmount;
 
-  useEffect(() => {
-    dispatch(connectAccountThunk());
-    return () => {
-      consola.success('NewCampaign page: cleanup');
-    };
-  }, []);
+  // useEffect(() => {
+  //   dispatch(connectAccountThunk());
+  //   return () => {
+  //     consola.success('NewCampaign page: cleanup');
+  //   };
+  // }, []);
 
-  useEffect(() => {
-    if (account.address != null) {
-      dispatch(storeFamepayFactoryThunk());
-    }
-    return () => {
-      consola.success('NewCampaign page: cleanup');
-    };
-  }, [account]);
+  // useEffect(() => {
+  //   if (account.address != null) {
+  //     dispatch(storeFamepayFactoryThunk());
+  //   }
+  //   return () => {
+  //     consola.success('NewCampaign page: cleanup');
+  //   };
+  // }, [account]);
 
   const findInfluencer = async influencer => {
     try {

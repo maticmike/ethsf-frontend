@@ -1,6 +1,5 @@
 import { CONNECT_WALLET, DISCONNECT_WALLET } from '../actions/account';
 import { NATIVE_CURRENCY } from '../../constants/Blockchain';
-import { GraphQLNonNull } from 'graphql';
 
 const initialState = {
   address: null,

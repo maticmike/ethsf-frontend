@@ -48,7 +48,7 @@ export const getUserFromUsernameDb = async username => {
 export const generateChallengeDb = async ethAddress => {
   try {
     const challenge = await axios.get(`${api}/user/${ethAddress}/auth/generate-challenge`);
-    return challenge;
+    return challenge.data.challenge;
   } catch (error) {
     consola.error('ApiSerivce generateChallengeDb():', error);
   }

@@ -1,5 +1,6 @@
-import { getWalletInfo } from '../../web3';
+import { signInWalletWeb3 } from '../../web3';
 import consola from 'consola';
+import { getCurrentLoggedInAccountStore } from '../../utils/onboard';
 /* Action Types */
 export const REGISTER_USER = 'REGISTER_USER';
 export const CONNECT_WALLET = 'CONNECT_WALLET';
@@ -18,8 +19,11 @@ export const connectAccount = wallet => ({
 export const connectAccountThunk = () => {
   return async (dispatch, getState) => {
     if (typeof window.ethereum !== 'undefined') {
-      getWalletInfo()
-        .then(res => dispatch(connectAccount(res)))
+      signInWalletWeb3()
+        .then(res => {
+          dispatch(connectAccount(res));
+          getCurrentLoggedInAccountStore(res);
+        })
         .catch(error => consola.error('connectAccountThunk action error message:', error));
     }
   };
