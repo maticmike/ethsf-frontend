@@ -2,7 +2,7 @@ import consola from 'consola';
 import { generateChallengeDb } from '../services/api/userService';
 import { generateJwtDb } from '../services/api/jwtTokenService';
 import { setJwtThunk, clearJwtRedux } from '../redux/actions/jwt';
-import { disconnectWallet } from '../redux/actions/account';
+import { logoutAccountAndWallet } from '../redux/actions/account';
 import { clearWalletOnboard } from '../web3';
 import { clearJwt } from '../services/api/jwtTokenService';
 // redux store
@@ -20,11 +20,10 @@ export const generateNewSignedJWT = async (ethAddress, signer) => {
     //Sign message
     const signature = await signer.signMessage(challenge);
 
-    //generateJWT
+    //generateJWT ---> validate jwt
     const jwt = await generateJwtDb(ethAddress, challenge, signature);
 
-    //Set jwt in reducer
-    // jwt ? setJwtThunk(jwt) : clearUserAuthAll();
+    //Set jwt in reducer. Change me to setIsLoggedIn in reducer.
     jwt ? store.dispatch(setJwtThunk(jwt)) : clearUserAuthAll();
   } catch (error) {
     consola.error('web3/generateNewSignedJWT():', error);
@@ -38,7 +37,7 @@ export const clearUserAuthAll = async () => {
   //reducer clear jwt
   clearJwtRedux();
   //reducer clear account
-  disconnectWallet();
+  logoutAccountAndWallet();
   //clear local storage
   clearJwt();
   //onboard reset

@@ -1,4 +1,4 @@
-import { CONNECT_WALLET, DISCONNECT_WALLET } from '../actions/account';
+import { CONNECT_ACCOUNT, LOGIN_ACCOUNT, DISCONNECT_ACCOUNT } from '../actions/account';
 import { NATIVE_CURRENCY } from '../../constants/Blockchain';
 
 const initialState = {
@@ -11,7 +11,7 @@ const initialState = {
 
 const account = (state = initialState, action) => {
   switch (action.type) {
-    case CONNECT_WALLET: {
+    case CONNECT_ACCOUNT: {
       const { account, balance, signer } = action.payload;
       let balances = state.balances;
       balances[NATIVE_CURRENCY.symbol] = balance;
@@ -21,7 +21,11 @@ const account = (state = initialState, action) => {
         signer: signer,
       };
     }
-    case DISCONNECT_WALLET: {
+    case LOGIN_ACCOUNT: {
+      const { isLogin } = action.payload;
+      return { isLoggedIn: isLogin };
+    }
+    case DISCONNECT_ACCOUNT: {
       return initialState;
     }
     default: {

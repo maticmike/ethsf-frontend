@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import consola from 'consola';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@material-ui/core';
-import { connectAccountThunk, disconnectWallet } from '../../../redux/actions/account';
+import { connectAccountThunk, logoutAccountAndWallet } from '../../../redux/actions/account';
 import { clearJwtRedux } from '../../../redux/actions/jwt';
 import { signInWalletWeb3 } from '../../../web3';
 import { shortenedEthAddress } from '../../../web3/helpers';
@@ -65,7 +65,7 @@ const ConnectButton = ({ handleSignupOpen }) => {
     }
   };
   const handleRegister = () => handleSignupOpen();
-  const handleLogout = () => dispatch(disconnectWallet());
+  const handleLogout = () => dispatch(loginAccount());
 
   const renderCorrectButton = () => {
     if (!isRegistered && account?.address === null) {

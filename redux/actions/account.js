@@ -3,8 +3,9 @@ import consola from 'consola';
 import { getCurrentLoggedInAccountStore } from '../../utils/onboard';
 /* Action Types */
 export const REGISTER_USER = 'REGISTER_USER';
-export const CONNECT_WALLET = 'CONNECT_WALLET';
-export const DISCONNECT_WALLET = 'DISCONNECT_WALLET';
+export const CONNECT_ACCOUNT = 'CONNECT_ACCOUNT'; //web3 login
+export const LOGIN_ACCOUNT = 'LOGIN_ACCOUNT'; //bool switched when valid jwt received
+export const DISCONNECT_ACCOUNT = 'DISCONNECT_ACCOUNT';
 
 export const registerAccount = wallet => ({
   type: REGISTER_USER,
@@ -12,8 +13,18 @@ export const registerAccount = wallet => ({
 });
 
 export const connectAccount = wallet => ({
-  type: CONNECT_WALLET,
+  type: CONNECT_ACCOUNT,
   payload: wallet,
+});
+
+export const loginAccount = isLogin => ({
+  type: LOGIN_ACCOUNT,
+  payload: isLogin,
+});
+
+export const logoutAccountAndWallet = () => ({
+  type: DISCONNECT_ACCOUNT,
+  payload: {},
 });
 
 export const connectAccountThunk = () => {
@@ -29,7 +40,8 @@ export const connectAccountThunk = () => {
   };
 };
 
-export const disconnectWallet = () => ({
-  type: DISCONNECT_WALLET,
-  payload: {},
-});
+export const loginAccountThunk = () => {
+  return async (dispatch, getState) => {
+    dispatch(loginAccount(true));
+  };
+};

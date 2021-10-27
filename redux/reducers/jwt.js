@@ -3,6 +3,7 @@ const initialState = {
   jwt: null,
 };
 
+//dont think i'll end up needing JWT in store
 const setJwt = (state = initialState, action) => {
   switch (action.type) {
     case SET_JWT: {
