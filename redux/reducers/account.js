@@ -19,6 +19,7 @@ const account = (state = initialState, action) => {
         address: account,
         balances: balance,
         signer: signer,
+        isLoggedIn: false,
       };
     }
     case LOGIN_ACCOUNT: {

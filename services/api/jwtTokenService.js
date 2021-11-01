@@ -41,6 +41,12 @@ export const validateJwtFromDb = async ethAddress => {
   }
 };
 
-const setJwtLocalStorage = token => localStorage.setItem(JWT_TOKEN, token);
-const getJwtLocalStorage = () => localStorage.getItem(JWT_TOKEN);
-const clearJwtLocalStorage = () => localStorage.removeItem(JWT_TOKEN);
+export const setJwtLocalStorage = token => {
+  localStorage.setItem(JWT_TOKEN, token);
+  // this.httpClient.defaults.headers.common.Authorization = `Bearer ${authToken}`;
+};
+export const getJwtLocalStorage = () => localStorage.getItem(JWT_TOKEN);
+export const clearJwtLocalStorage = () => {
+  localStorage.removeItem(JWT_TOKEN);
+  // delete this.httpClient.defaults.headers.common.Authorization;
+};

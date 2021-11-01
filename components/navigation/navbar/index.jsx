@@ -11,6 +11,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { getUserFromEthAddressDb } from '../../../services/api/userService';
 import { MIN_DESKTOP_PX } from '../../../constants/ScreenSize';
 import { useStyles } from './styles';
+import { AccountTree } from '@material-ui/icons';
 
 const Sidebar = dynamic(() => import('../sidebar'), {
   loading: () => <p>Sidebar Loading....</p>,
@@ -90,7 +91,7 @@ const Navbar = () => {
                 <strong className={classes.navbarDesktopMenuButton}>New Campaign</strong>
               </Button>
             </a>
-            {username == null ? null : (
+            {username == null || account?.isLoggedIn === false ? null : (
               <a className={classes.navbarDesktopMenuButton} href={'/profile/' + username}>
                 <Button>
                   <strong className={classes.navbarDesktopMenuButton}>My Profile</strong>

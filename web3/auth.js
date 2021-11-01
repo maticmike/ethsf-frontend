@@ -1,45 +1,42 @@
 import consola from 'consola';
 import { generateChallengeDb } from '../services/api/userService';
 import { generateJwtDb } from '../services/api/jwtTokenService';
-import { setJwtThunk, clearJwtRedux } from '../redux/actions/jwt';
-import { logoutAccountAndWallet } from '../redux/actions/account';
+import { logoutAccountThunk } from '../redux/actions/account';
 import { clearWalletOnboard } from '../web3';
-import { clearJwt } from '../services/api/jwtTokenService';
+import { setJwtLocalStorage, clearJwtLocalStorage } from '../services/api/jwtTokenService';
 // redux store
 import store from '../redux/store';
 
 /**
  * create new token with account, challenge, and signature
- * @function generateNewSignedJWT
+ * @function generateNewSignedJwt
  */
-export const generateNewSignedJWT = async (ethAddress, signer) => {
+export const generateNewSignedJwt = async (ethAddress, signer) => {
   try {
     //Get Challenge
     const challenge = await generateChallengeDb(ethAddress);
 
-    //Sign message
+    //Triggers meta mask popup
     const signature = await signer.signMessage(challenge);
 
-    //generateJWT ---> validate jwt
+    //generateJWT on dob
     const jwt = await generateJwtDb(ethAddress, challenge, signature);
 
-    //Set jwt in reducer. Change me to setIsLoggedIn in reducer.
-    jwt ? store.dispatch(setJwtThunk(jwt)) : clearUserAuthAll();
+    //Set jwt in local storage
+    jwt ? setJwtLocalStorage(jwt?.data?.token) : clearUserAuthAll();
   } catch (error) {
     consola.error('web3/generateNewSignedJWT():', error);
-    // clearUserAuthAll();
+    clearUserAuthAll();
   }
   return Promise.resolve();
 };
 
 /** LOGOUT USER INFO */
 export const clearUserAuthAll = async () => {
-  //reducer clear jwt
-  clearJwtRedux();
   //reducer clear account
-  logoutAccountAndWallet();
+  logoutAccountThunk();
   //clear local storage
-  clearJwt();
+  clearJwtLocalStorage();
   //onboard reset
   await clearWalletOnboard();
 };
