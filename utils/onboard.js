@@ -10,7 +10,13 @@ import store from '../redux/store';
 const rinkeby = 4;
 const rpcUrl = 'https://rinkeby.infura.io/v3/8bbc1bc12f9348b3ad49a4ee99e370b2';
 
-let ethersProvider;
+//TODO try use me to get prev account
+export const getCurrentLoggedInAccountStore = accountFromThunk => {
+  console.log(accountFromThunk, 'the account from thunk');
+  currentLoggedInAccountFromStore = accountFromThunk.account;
+  return currentLoggedInAccountFromStore;
+};
+
 export const onBoardInitialize = () => {
   return Onboard({
     dappId: process.env.ONBOARD_KEY,
