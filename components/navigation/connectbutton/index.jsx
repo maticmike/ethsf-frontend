@@ -5,9 +5,7 @@ import { Button } from '@material-ui/core';
 import { connectAccountThunk, logoutAccountAndWallet } from '../../../redux/actions/account';
 import { clearJwtLocalStorage } from '../../../services/api/jwtTokenService';
 import { clearJwtRedux } from '../../../redux/actions/jwt';
-import { signInWalletWeb3 } from '../../../web3';
 import { shortenedEthAddress } from '../../../web3/helpers';
-import { generateNewSignedJwt } from '../../../web3/auth';
 import { getUserFromEthAddressDb } from '../../../services/api/userService';
 
 const ConnectButton = ({ handleSignupOpen }) => {

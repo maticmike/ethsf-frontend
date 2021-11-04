@@ -1,15 +1,16 @@
 import BlocknativeSDK from 'bnc-sdk';
 import Onboard from 'bnc-onboard';
-import { bootstrapFactory, signInWalletWeb3 } from '../web3';
+import { bootstrapFactory, signInWalletWeb3, getWalletProvider } from '../web3';
 import { validateJwtFromDb, getJwtLocalStorage } from '../services/api/jwtTokenService';
 import { getUserFromEthAddressDb } from '../services/api/userService';
-import { clearUserAuthAll } from '../web3/auth';
+import { clearUserAuthAll, generateNewSignedJwt } from '../web3/auth';
 import { connectAccountThunk, loginAccount, logout } from '../redux/actions/account';
 import store from '../redux/store';
 
 const rinkeby = 4;
 const rpcUrl = 'https://rinkeby.infura.io/v3/8bbc1bc12f9348b3ad49a4ee99e370b2';
 
+let ethersProvider;
 export const onBoardInitialize = () => {
   return Onboard({
     dappId: process.env.ONBOARD_KEY,
@@ -25,24 +26,27 @@ export const onBoardInitialize = () => {
       address: async ethAddress => {
         //get profile from db
         const profile = await getUserFromEthAddressDb(ethAddress);
-        console.log(profile, 'this is hte profile');
+        console.log(profile, 'the profile');
         //user is valid profile
         if (profile) {
-          //if jwt exists in local storage
-          if (getJwtLocalStorage()) {
+          if (ethAddress != profile?.data?.payload?.userEthAddress) {
+            //get provider
+            const provider = await getWalletProvider();
+            // get signer
+            const signer = provider.getSigner();
+            //generate new jwt
+            await generateNewSignedJwt(ethAddress, signer);
             const isTokenValid = await validateJwtFromDb(ethAddress);
             //validate token
             if (isTokenValid) {
-              // store.dispatch(loginAccount());
-            } else {
-              // store.dispatch(connectAccountThunk());
+              store.dispatch(connectAccountThunk());
             }
             //profile not even found in db
           } else if (!profile) {
-            alert('please signup');
+            console.log('profile not found in onboardjs');
+          } else {
+            console.log('user has no eth address');
           }
-        } else {
-          console.log('user has no eth address');
         }
       },
     },

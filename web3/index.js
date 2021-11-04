@@ -11,6 +11,7 @@ import web3 from 'web3';
 
 let onboard;
 let currentOnboardState;
+let provider;
 
 /**
  * Response handler for successful contract interactions
@@ -82,7 +83,6 @@ export const getContractAddress = (abi, chainId) => {
 
 export const bootstrapFactory = async () => {
   try {
-    // const provider = new ethers.providers.Web3Provider(web3.currentProvider);
     currentOnboardState = onboard.getState();
     const provider = new ethers.providers.Web3Provider(currentOnboardState.wallet.provider);
     const signer = provider.getSigner();
@@ -120,7 +120,7 @@ export const signInWalletWeb3 = async previousWallet => {
     currentOnboardState = onboard.getState();
     const account = currentOnboardState.address;
 
-    const provider = new ethers.providers.Web3Provider(currentOnboardState.wallet.provider);
+    provider = new ethers.providers.Web3Provider(currentOnboardState.wallet.provider);
 
     const balanceRaw = await provider.getBalance(account);
     const balance = balanceRaw.toString();
@@ -131,6 +131,10 @@ export const signInWalletWeb3 = async previousWallet => {
     consola.error('Web3: getWalletInfo() error message:', error);
     return null;
   }
+};
+
+export const getWalletProvider = async () => {
+  return provider;
 };
 
 export const clearWalletOnboard = async () => {

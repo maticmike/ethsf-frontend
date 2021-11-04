@@ -16,6 +16,7 @@ const account = (state = initialState, action) => {
       let balances = state.balances;
       balances[NATIVE_CURRENCY.symbol] = balance;
       return {
+        ...state,
         address: account,
         balances: balance,
         signer: signer,

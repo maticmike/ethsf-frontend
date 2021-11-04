@@ -19,6 +19,9 @@ export const generateNewSignedJwt = async (ethAddress, signer) => {
     //Triggers meta mask popup
     const signature = await signer.signMessage(challenge);
 
+    //TODO not throwing an error if i click cancel on meta mask
+    console.log(signature, 'test me');
+
     //generateJWT on dob
     const jwt = await generateJwtDb(ethAddress, challenge, signature);
 
