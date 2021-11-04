@@ -1,7 +1,6 @@
 import { ethers } from 'ethers';
 import axios from 'axios';
 import consola from 'consola';
-import detectEthereumProvider from '@metamask/detect-provider';
 import { onBoardInitialize } from '../utils/onboard';
 import { setObjectiveName } from '../utils/ObjectiveNames';
 import FamepayFactoryAbi from '../contracts/FamepayFactory.json';
@@ -117,6 +116,7 @@ export const signInWalletWeb3 = async previousWallet => {
     onboard = onBoardInitialize(previousWallet);
     await onboard.walletSelect(previousWallet);
     await onboard.walletCheck();
+
     currentOnboardState = onboard.getState();
     const account = currentOnboardState.address;
 

@@ -1,7 +1,7 @@
 import consola from 'consola';
 import { generateChallengeDb } from '../services/api/userService';
 import { generateJwtDb } from '../services/api/jwtTokenService';
-import { logoutAccountThunk } from '../redux/actions/account';
+import { logoutAccount } from '../redux/actions/account';
 import { clearWalletOnboard } from '../web3';
 import { setJwtLocalStorage, clearJwtLocalStorage } from '../services/api/jwtTokenService';
 // redux store
@@ -34,7 +34,7 @@ export const generateNewSignedJwt = async (ethAddress, signer) => {
 /** LOGOUT USER INFO */
 export const clearUserAuthAll = async () => {
   //reducer clear account
-  logoutAccountThunk();
+  logoutAccount();
   //clear local storage
   clearJwtLocalStorage();
   //onboard reset

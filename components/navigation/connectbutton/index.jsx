@@ -37,25 +37,8 @@ const ConnectButton = ({ handleSignupOpen }) => {
   //Connect to Web3
   const handleConnectivityWeb3 = async () => dispatch(connectAccountThunk());
 
-  //Sign In With JWT
-  // const handleSignIn = async () => {
-  //   //clear auth token
-  //   clearJwtLocalStorage();
-  //   //if account web3 connect
-  //   if (account.address === null) {
-  //     consola.error('No web3 account detected');
-  //     return;
-  //   }
-  //   //get profile from db
-  //   if (profileInDb === undefined) {
-  //     consola.error('No profile found in db');
-  //     return;
-  //   }
-  //   //generate jwt
-  //   await generateNewSignedJwt(account?.address, account?.signer);
-  // };
   const handleRegister = () => handleSignupOpen();
-  const handleLogout = () => dispatch(loginAccount());
+  // const handleLogout = () => dispatch(loginAccount());
 
   const renderCorrectButton = () => {
     if (!isRegistered && account?.address === null) {
@@ -88,7 +71,7 @@ const ConnectButton = ({ handleSignupOpen }) => {
     }
 
     return (
-      <Button variant="contained" onClick={handleLogout}>
+      <Button variant="contained" onClick={() => console.log('logout')}>
         {shortenedEthAddress(account?.address)}
       </Button>
     );

@@ -23,8 +23,8 @@ const account = (state = initialState, action) => {
       };
     }
     case LOGIN_ACCOUNT: {
-      const { isLogin } = action.payload;
-      return { isLoggedIn: isLogin };
+      const isLoggedIn = action.payload;
+      return { ...state, isLoggedIn };
     }
     case DISCONNECT_ACCOUNT: {
       return initialState;

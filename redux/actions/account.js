@@ -1,6 +1,5 @@
 import { signInWalletWeb3 } from '../../web3';
 import consola from 'consola';
-import { getCurrentLoggedInAccountStore } from '../../utils/onboard';
 import { generateNewSignedJwt } from '../../web3/auth';
 
 /* Action Types */
@@ -19,9 +18,9 @@ export const connectAccount = wallet => ({
   payload: wallet,
 });
 
-export const loginAccount = isLogin => ({
+export const loginAccount = () => ({
   type: LOGIN_ACCOUNT,
-  payload: isLogin,
+  payload: true,
 });
 
 export const logoutAccount = () => ({
@@ -34,26 +33,11 @@ export const connectAccountThunk = () => {
     if (typeof window.ethereum !== 'undefined') {
       signInWalletWeb3()
         .then(res => {
-          dispatch(connectAccount(res));
-          // generateNewSignedJwt(res?.account, res?.signer);
+          generateNewSignedJwt(res?.account, res?.signer)
+            .then(() => dispatch(connectAccount(res)))
+            .then(() => dispatch(loginAccount()));
         })
-        .catch(error => consola.error('connectAccountThunk action error message:', error));
+        .catch(error => consola.error('connectAccountThunk: error message:', error));
     }
   };
 };
-
-// export const connectAccountThunk = () => {
-//   return async (dispatch, getState) => {
-//     if (typeof window.ethereum !== 'undefined') {
-//       try {
-//         const signInWalletRes = await signInWalletWeb3();
-//         dispatch(connectAccount(signInWalletRes));
-//         // await generateNewSignedJwt(signInWalletRes?.account, signInWalletRes?.signer);
-//       } catch (error) {
-//         consola.error('connectAccountThunk error:', error);
-//       }
-//     }
-//   };
-// };
-
-export const loginAccountThunk = () => async (dispatch, getState) => await dispatch(loginAccount(true));
