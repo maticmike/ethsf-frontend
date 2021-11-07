@@ -41,3 +41,14 @@ export const connectAccountThunk = () => {
     }
   };
 };
+
+export const loginAccountOnSwitchThunk = (account, balance, signer) => {
+  return async (dispatch, getState) => {
+    if (typeof window.ethereum !== 'undefined') {
+      const res = { account, balance, signer };
+      console.log(res, 'this is the res2');
+      await dispatch(connectAccount(res));
+      await dispatch(loginAccount());
+    }
+  };
+};

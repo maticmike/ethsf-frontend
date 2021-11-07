@@ -4,18 +4,11 @@ import { bootstrapFactory, signInWalletWeb3, getWalletProvider } from '../web3';
 import { validateJwtFromDb, getJwtLocalStorage } from '../services/api/jwtTokenService';
 import { getUserFromEthAddressDb } from '../services/api/userService';
 import { clearUserAuthAll, generateNewSignedJwt } from '../web3/auth';
-import { connectAccountThunk, loginAccount, logout } from '../redux/actions/account';
+import { connectAccountThunk, loginAccount, loginAccountOnSwitchThunk, logout } from '../redux/actions/account';
 import store from '../redux/store';
 
 const rinkeby = 4;
 const rpcUrl = 'https://rinkeby.infura.io/v3/8bbc1bc12f9348b3ad49a4ee99e370b2';
-
-//TODO try use me to get prev account
-export const getCurrentLoggedInAccountStore = accountFromThunk => {
-  console.log(accountFromThunk, 'the account from thunk');
-  currentLoggedInAccountFromStore = accountFromThunk.account;
-  return currentLoggedInAccountFromStore;
-};
 
 export const onBoardInitialize = () => {
   return Onboard({
@@ -30,30 +23,52 @@ export const onBoardInitialize = () => {
       },
       //Necessary for switching a meta mask account
       address: async ethAddress => {
+        console.log(ethAddress, 'incoming eth addr');
+
+        const ethAddressInRedux = store.getState();
+        console.log(ethAddressInRedux, 'eth addr redux');
+
         //get profile from db
         const profile = await getUserFromEthAddressDb(ethAddress);
         console.log(profile, 'the profile');
+
+        const ethAddressInDb = profile?.data?.payload?.userEthAddress;
+        console.log(ethAddressInDb, 'the ethAddressInDb');
+
         //user is valid profile
-        if (profile) {
-          if (ethAddress != profile?.data?.payload?.userEthAddress) {
+        if (profile != undefined) {
+          //switching a user
+          if (ethAddressInDb != ethAddressInRedux?.account?.address && ethAddressInRedux?.account?.address != null) {
             //get provider
             const provider = await getWalletProvider();
+
+            //get balance
+            const balanceRaw = await provider.getBalance(ethAddress);
+            const balance = balanceRaw.toString();
+
             // get signer
             const signer = provider.getSigner();
+
+            console.log(ethAddress, 'a new address was switched to!!!');
+            console.log(balance, 'the balance of the new address');
+            console.log(signer, 'the isgner of the new eth addresss');
+
             //generate new jwt
-            await generateNewSignedJwt(ethAddress, signer);
-            const isTokenValid = await validateJwtFromDb(ethAddress);
+            // await generateNewSignedJwt(ethAddress, signer);
+
+            // const isTokenValid = await validateJwtFromDb(ethAddress);
             //validate token
-            if (isTokenValid) {
-              store.dispatch(connectAccountThunk());
-            }
-            //profile not even found in db
-          } else if (!profile) {
-            console.log('profile not found in onboardjs');
-          } else {
-            console.log('user has no eth address');
+            // if (isTokenValid) {
+            store.dispatch(loginAccountOnSwitchThunk(ethAddress, balance, signer));
+            // }
           }
+          //profile not even found in db
+        } else if (!profile) {
+          console.log('profile not found in onboardjs');
+        } else {
+          console.log('user has no eth address');
         }
+        // }
       },
     },
     walletSelect: {
