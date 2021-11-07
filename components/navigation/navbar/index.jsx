@@ -8,9 +8,10 @@ import { AppBar, Toolbar, Menu, MenuItem, Button, IconButton } from '@material-u
 import clsx from 'clsx';
 import consola from 'consola';
 import MenuIcon from '@material-ui/icons/Menu';
-import { getUserFromEthAddress } from '../../../services/api/userService';
+import { getUserFromEthAddressDb } from '../../../services/api/userService';
 import { MIN_DESKTOP_PX } from '../../../constants/ScreenSize';
 import { useStyles } from './styles';
+import { AccountTree } from '@material-ui/icons';
 
 const Sidebar = dynamic(() => import('../sidebar'), {
   loading: () => <p>Sidebar Loading....</p>,
@@ -59,7 +60,7 @@ const Navbar = () => {
     async function getUsernameEthAddress() {
       if (!router.isReady) return;
       let userDb;
-      account?.address == null ? null : (userDb = await getUserFromEthAddress(account?.address));
+      account?.address == null ? null : (userDb = await getUserFromEthAddressDb(account?.address));
       if (userDb === undefined) {
         return <Error statusCode={404} />;
       } else {
@@ -90,7 +91,7 @@ const Navbar = () => {
                 <strong className={classes.navbarDesktopMenuButton}>New Campaign</strong>
               </Button>
             </a>
-            {username == null ? null : (
+            {username == null || account?.isLoggedIn === false ? null : (
               <a className={classes.navbarDesktopMenuButton} href={'/profile/' + username}>
                 <Button>
                   <strong className={classes.navbarDesktopMenuButton}>My Profile</strong>

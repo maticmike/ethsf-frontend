@@ -22,7 +22,7 @@ const CampaignStaking = ({
   const parseDeposit = e => {
     e.target.value.length ? setInputEntered(true) : setInputEntered(false);
     let deposit;
-    deposit = e.target.value.replace(/,/g, '').replace(/ eth/g, ''); //.replace(/./g, '');
+    deposit = e.target.value.replace(/,/g, '').replace(/ eth/g, '');
     deposit === '.' ? (deposit = 0 + deposit) : deposit;
     deposit.length > 0 ? (parsedEth = utils.toWei(deposit)) : (parsedEth = '0');
     setParentDepositToEscrow(parsedEth);

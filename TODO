@@ -1,3 +1,3 @@
-1. JWT Auth
-2. OAuth
-3. Lazy Load Material UI
+1. isLoggedInProfile on redux
+2. put JWT in local localStorage
+3. set sign in button to logout
