@@ -46,13 +46,6 @@ const ConnectButton = ({ handleSignupOpen }) => {
         </Button>
       );
     }
-    if (account?.address && isRegistered) {
-      return (
-        <Button variant="contained" onClick={() => console.log('clicked signin')}>
-          Benny
-        </Button>
-      );
-    }
     if (account?.address && !isRegistered)
       return (
         <Button variant="contained" onClick={handleRegister}>
