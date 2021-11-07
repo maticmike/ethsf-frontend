@@ -86,17 +86,18 @@ const Navbar = () => {
                 height="54"
               />
             </a>
-            <a href="/newcampaign" className={classes.navbarDesktopMenuButton}>
+            <Link href="/newcampaign" className={classes.navbarDesktopMenuButton}>
               <Button>
                 <strong className={classes.navbarDesktopMenuButton}>New Campaign</strong>
               </Button>
-            </a>
+            </Link>
             {username == null || account?.isLoggedIn === false ? null : (
-              <a className={classes.navbarDesktopMenuButton} href={'/profile/' + username}>
+              <Link className={classes.navbarDesktopMenuButton} href="/profile/[id]" as={`profile/${username}`}>
+                {/* // <Link className={classes.navbarDesktopMenuButton} href={`/profile/${username}`}> */}
                 <Button>
                   <strong className={classes.navbarDesktopMenuButton}>My Profile</strong>
                 </Button>
-              </a>
+              </Link>
             )}
             <div className={classes.navbarGrow} />
             <ConnectButton handleSignupOpen={handleSignupOpen} />
