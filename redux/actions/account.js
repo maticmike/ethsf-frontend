@@ -1,6 +1,7 @@
-import { signInWalletWeb3 } from '../../web3';
 import consola from 'consola';
+import { signInWalletWeb3 } from '../../web3';
 import { generateNewSignedJwt } from '../../web3/auth';
+import { validateJwtFromDb } from '../../services/api/jwtTokenService';
 
 /* Action Types */
 export const REGISTER_USER = 'REGISTER_USER';
@@ -46,9 +47,14 @@ export const loginAccountOnSwitchThunk = (account, balance, signer) => {
   return async (dispatch, getState) => {
     if (typeof window.ethereum !== 'undefined') {
       const res = { account, balance, signer };
-      console.log(res, 'this is the res2');
+      await generateNewSignedJwt(res?.account, res?.signer);
+      const isTokenValid = await validateJwtFromDb(res?.account);
+      console.log(isTokenValid, 'is token valid??');
       await dispatch(connectAccount(res));
-      await dispatch(loginAccount());
+      if (isTokenValid) {
+        await dispatch(loginAccount());
+      }
+      await dispatch(logoutAccount());
     }
   };
 };

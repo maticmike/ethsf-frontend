@@ -13,10 +13,8 @@ const account = (state = initialState, action) => {
   switch (action.type) {
     case CONNECT_ACCOUNT: {
       const { account, balance, signer } = action.payload;
-      let balances = state.balances;
-      console.log(balance, 'this is the incoming balance');
+      // let balances = state.balances;
       // balances[NATIVE_CURRENCY.symbol] = balance;]
-      console.log(balances[NATIVE_CURRENCY.symbol], 'the guy causing the problems');
       return {
         ...state,
         address: account,

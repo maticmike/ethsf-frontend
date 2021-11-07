@@ -1,10 +1,7 @@
-import BlocknativeSDK from 'bnc-sdk';
 import Onboard from 'bnc-onboard';
-import { bootstrapFactory, signInWalletWeb3, getWalletProvider } from '../web3';
-import { validateJwtFromDb, getJwtLocalStorage } from '../services/api/jwtTokenService';
+import { bootstrapFactory, getWalletProvider } from '../web3';
 import { getUserFromEthAddressDb } from '../services/api/userService';
-import { clearUserAuthAll, generateNewSignedJwt } from '../web3/auth';
-import { connectAccountThunk, loginAccount, loginAccountOnSwitchThunk, logout } from '../redux/actions/account';
+import { loginAccountOnSwitchThunk, logout } from '../redux/actions/account';
 import store from '../redux/store';
 
 const rinkeby = 4;
@@ -23,17 +20,12 @@ export const onBoardInitialize = () => {
       },
       //Necessary for switching a meta mask account
       address: async ethAddress => {
-        console.log(ethAddress, 'incoming eth addr');
-
         const ethAddressInRedux = store.getState();
-        console.log(ethAddressInRedux, 'eth addr redux');
 
         //get profile from db
         const profile = await getUserFromEthAddressDb(ethAddress);
-        console.log(profile, 'the profile');
 
         const ethAddressInDb = profile?.data?.payload?.userEthAddress;
-        console.log(ethAddressInDb, 'the ethAddressInDb');
 
         //user is valid profile
         if (profile != undefined) {
@@ -49,18 +41,8 @@ export const onBoardInitialize = () => {
             // get signer
             const signer = provider.getSigner();
 
-            console.log(ethAddress, 'a new address was switched to!!!');
-            console.log(balance, 'the balance of the new address');
-            console.log(signer, 'the isgner of the new eth addresss');
-
-            //generate new jwt
-            // await generateNewSignedJwt(ethAddress, signer);
-
-            // const isTokenValid = await validateJwtFromDb(ethAddress);
-            //validate token
-            // if (isTokenValid) {
+            //login account
             store.dispatch(loginAccountOnSwitchThunk(ethAddress, balance, signer));
-            // }
           }
           //profile not even found in db
         } else if (!profile) {
