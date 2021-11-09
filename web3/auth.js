@@ -34,7 +34,7 @@ export const generateNewSignedJwt = async (ethAddress, signer) => {
 /** LOGOUT USER INFO */
 export const clearUserAuthAll = async () => {
   //reducer clear account
-  logoutAccount();
+  store.dispatch(logoutAccount());
   //clear local storage
   clearJwtLocalStorage();
   //onboard reset

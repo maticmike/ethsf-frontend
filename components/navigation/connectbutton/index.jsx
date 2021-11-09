@@ -39,7 +39,7 @@ const ConnectButton = ({ handleSignupOpen }) => {
   // const handleLogout = () => dispatch(loginAccount());
 
   const renderCorrectButton = () => {
-    if (!isRegistered && account?.address === null) {
+    if (account?.address === null) {
       return (
         <Button variant="contained" onClick={handleConnectivityWeb3}>
           Connect

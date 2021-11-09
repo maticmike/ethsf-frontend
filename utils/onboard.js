@@ -2,6 +2,7 @@ import Onboard from 'bnc-onboard';
 import { bootstrapFactory, getWalletProvider } from '../web3';
 import { getUserFromEthAddressDb } from '../services/api/userService';
 import { loginAccountOnSwitchThunk, logout } from '../redux/actions/account';
+import { clearUserAuthAll } from '../web3/auth';
 import store from '../redux/store';
 
 const rinkeby = 4;
@@ -46,11 +47,10 @@ export const onBoardInitialize = () => {
           }
           //profile not even found in db
         } else if (!profile) {
-          console.log('profile not found in onboardjs');
+          clearUserAuthAll();
         } else {
           console.log('user has no eth address');
         }
-        // }
       },
     },
     walletSelect: {

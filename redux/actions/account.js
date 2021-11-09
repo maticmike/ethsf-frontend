@@ -32,13 +32,15 @@ export const logoutAccount = () => ({
 export const connectAccountThunk = () => {
   return async (dispatch, getState) => {
     if (typeof window.ethereum !== 'undefined') {
-      signInWalletWeb3()
-        .then(res => {
-          generateNewSignedJwt(res?.account, res?.signer)
-            .then(() => dispatch(connectAccount(res)))
-            .then(() => dispatch(loginAccount()));
-        })
-        .catch(error => consola.error('connectAccountThunk: error message:', error));
+      try {
+        const res = await signInWalletWeb3();
+        await generateNewSignedJwt(res?.account, res?.signer);
+        dispatch(connectAccount(res));
+        const isTokenValid = await validateJwtFromDb(res?.account);
+        if (isTokenValid) dispatch(loginAccount());
+      } catch (error) {
+        consola.error('connectAccountThunk: error message:', error);
+      }
     }
   };
 };
@@ -46,15 +48,16 @@ export const connectAccountThunk = () => {
 export const loginAccountOnSwitchThunk = (account, balance, signer) => {
   return async (dispatch, getState) => {
     if (typeof window.ethereum !== 'undefined') {
-      const res = { account, balance, signer };
-      await generateNewSignedJwt(res?.account, res?.signer);
-      const isTokenValid = await validateJwtFromDb(res?.account);
-      console.log(isTokenValid, 'is token valid??');
-      await dispatch(connectAccount(res));
-      if (isTokenValid) {
-        await dispatch(loginAccount());
+      try {
+        const res = { account, balance, signer };
+        await generateNewSignedJwt(res?.account, res?.signer);
+        const isTokenValid = await validateJwtFromDb(res?.account);
+        console.log(isTokenValid, 'is token valid');
+        await dispatch(connectAccount(res));
+        if (isTokenValid) await dispatch(loginAccount());
+      } catch (error) {
+        consola.error('loginAccountOnSwitchThunk Error: ', error);
       }
-      await dispatch(logoutAccount());
     }
   };
 };
