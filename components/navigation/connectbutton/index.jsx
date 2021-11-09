@@ -2,17 +2,15 @@ import React, { useState, useEffect } from 'react';
 import consola from 'consola';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@material-ui/core';
-import { connectAccountThunk, logoutAccountAndWallet } from '../../../redux/actions/account';
-import { clearJwtLocalStorage } from '../../../services/api/jwtTokenService';
-import { clearJwtRedux } from '../../../redux/actions/jwt';
+import { connectAccountThunk } from '../../../redux/actions/account';
 import { shortenedEthAddress } from '../../../web3/helpers';
 import { getUserFromEthAddressDb } from '../../../services/api/userService';
+import { clearUserAuthAll } from '../../../web3/auth';
 
 const ConnectButton = ({ handleSignupOpen }) => {
   const [isRegistered, setIsRegistered] = useState(false);
   const [profileInDb, setProfileInDb] = useState(null);
   const account = useSelector(state => state.account);
-  // const jwt = useSelector(state => state.jwt);
   const dispatch = useDispatch();
 
   //Connect to DB
@@ -36,7 +34,8 @@ const ConnectButton = ({ handleSignupOpen }) => {
   const handleConnectivityWeb3 = async () => dispatch(connectAccountThunk());
 
   const handleRegister = () => handleSignupOpen();
-  // const handleLogout = () => dispatch(loginAccount());
+
+  const handleLogout = () => clearUserAuthAll();
 
   const renderCorrectButton = () => {
     if (account?.address === null) {
@@ -55,7 +54,7 @@ const ConnectButton = ({ handleSignupOpen }) => {
 
     if (account?.address && account?.isLoggedIn) {
       return (
-        <Button variant="contained" onClick={() => console.log('i am logging out')}>
+        <Button variant="contained" onClick={handleLogout}>
           Logout
         </Button>
       );
