@@ -5,6 +5,7 @@ const useStyles = makeStyles({
     border: '1px solid black',
     width: '250px',
     display: 'flex',
+    cursor: 'pointer',
   },
   ProfileCampaigns_round_img: {
     borderRadius: '50%',

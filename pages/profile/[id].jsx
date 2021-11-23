@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Error from 'next/error';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GridList, GridListTile } from '@material-ui/core';
@@ -23,9 +24,13 @@ const Profile = () => {
 
   const { id } = router.query;
 
-  const [user, setUser] = useState('');
+  const mountedRef = useRef(true);
+
+  const [user, setUser] = useState({});
   const [profileIsBusiness, setProfileIsBusiness] = useState(false);
   const classes = useStyles();
+
+  let campaigns;
 
   useEffect(() => {
     async function getUsernameEthAddress() {
@@ -34,37 +39,33 @@ const Profile = () => {
       if (userDb === undefined) {
         return <Error statusCode={404} />;
       } else {
-        setUser(userDb.data.payload);
+        setUser(userDb?.data?.payload);
         if (userDb.data.payload.type === 'BUSINESS') setProfileIsBusiness(true);
       }
     }
     getUsernameEthAddress();
-    return () => {
-      consola.success('Cleanup profile page');
-    };
+    return () => (mountedRef.current = false);
   }, [router.isReady]);
-
-  let campaigns;
 
   if (profileIsBusiness) {
     const { loading, error, data } = useQuery(GET_ALL_CAMPAIGNS_FOR_BUSINESS_QUERY, {
-      variables: { id: user.userEthAddress },
+      variables: { id: user?.userEthAddress },
       pollInterval: APOLLO_POLL_INTERVAL_MS,
     });
     if (loading) return null;
     if (error) return <Error statusCode={404} />;
     campaigns = data?.campaigns;
-
-    //if influencer
-  } else {
+  }
+  if (!profileIsBusiness) {
     const { loading, error, data } = useQuery(GET_ALL_CAMPAIGNS_FOR_INFLUENCER_QUERY, {
-      variables: { id: user.userEthAddress },
-      pollInterval: APOLLO_POLL_INTERVAL_MS,
+      variables: { id: user?.userEthAddress },
     });
     if (loading) return null;
-    if (error) return <Error statusCode={404} />;
-    campaigns = data?.influencers[0]?.campaigns;
+    // if (error) return <Error statusCode={404} />;
+    if (error) console.log(error, 'belzzzzz');
+    campaigns = data?.campaigns;
   }
+
   return (
     <>
       <div className={classes.Profile_header_container}>
@@ -89,13 +90,11 @@ const Profile = () => {
       <br />
       <br />
       <div className={classes.Profile_content_container}>
-        <GridList cellHeight={200} className={classes.gridList} cols={3}>
+        <GridList cellHeight={200} className={classes.Profile_gridList} cols={3}>
           {campaigns?.map((campaign, index) => {
             return (
-              <GridListTile cols={1} key={index}>
-                <a href={'/ongoingcampaign/' + campaign.id}>
-                  <ProfileCampaigns campaign={campaign} isBusiness={profileIsBusiness} />
-                </a>
+              <GridListTile cols={1} key={index} component={Link} href={`/ongoingcampaign/${campaign.id}`}>
+                <ProfileCampaigns campaign={campaign} isBusiness={profileIsBusiness} />
               </GridListTile>
             );
           })}
