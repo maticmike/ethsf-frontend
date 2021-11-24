@@ -1,28 +1,28 @@
 fragment CampaignFrag on Campaign {
+  id
+  campaignAddress
+  startDate
+  deadline
+  business {
     id
-    campaignAddress
-    startDate
-    deadline
-    business {
-      id
-    }
-    influencer {
-      id
-    }
-    objective
-    outstandingPayments
-    jackpotTargetAmount
-    simplePostDuration
-    incrementalTargetAmount
-    depositedBalance
-    ongoing
-    jackpotObjectiveReached
+  }
+  influencer {
+    id
+  }
+  objective
+  outstandingPayments
+  jackpotTargetAmount
+  simplePostDuration
+  incrementalTargetAmount
+  depositedBalance
+  ongoing
+  jackpotObjectiveReached
+  incrementalRewardAmount
+  jackpotRewardAmount
 }
 
 query campaignQuery($id: String!) {
-    campaigns(where: {id: $id}) {
-      ...CampaignFrag
-    }
+  campaigns(where: { id: $id }) {
+    ...CampaignFrag
+  }
 }
-
-

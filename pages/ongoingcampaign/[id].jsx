@@ -12,7 +12,6 @@ import dynamic from 'next/dynamic';
 import consola from 'consola';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { TextField, Button } from '@material-ui/core';
 import { getCampaignFromContract, setPaymentTargetReached } from '../../web3';
 import { parseTwitterPostData } from '../../utils/objectiveData/twitter';
 import { storeFamepayFactoryThunk } from '../../redux/actions/famepayFactory';
@@ -26,6 +25,12 @@ const BusinessReviewHeader = dynamic(() => import('../../components/reviewcampai
 });
 const InfluencerReviewHeader = dynamic(() => import('../../components/reviewcampaign/InfluencerReviewHeader'), {
   loading: () => <p>Influencer Header Loading...</p>,
+});
+const SubmitPost = dynamic(() => import('../../components/onogoing-components/SubmitPost'), {
+  loading: () => <p>Loading Submit Post Button....</p>,
+});
+const ClaimPrize = dynamic(() => import('../../components/onogoing-components/ClaimPrize'), {
+  loading: () => <p>Claim Prize Button....</p>,
 });
 
 const OngoingCampaign = () => {
@@ -93,6 +98,7 @@ const OngoingCampaign = () => {
       consola.error('getPostData():', error);
     }
   };
+
   return (
     <div className={classes.ReviewCampaign_root_center}>
       <h2>Ongoing Campaign</h2>
@@ -127,24 +133,16 @@ const OngoingCampaign = () => {
       />
       <br />
       <br />
-      <div>
-        <br />
-        <form noValidate autoComplete="off" onSubmit={getPostData}>
-          <TextField
-            id="outlined-basic"
-            fullWidth
-            label="Post URL"
-            onChange={e => setPostUrl(e.target.value)}
-            variant="outlined"
-            error={invalidPost}
-          />
-          <br />
-          <br />
-          <Button type="submit" variant="contained" color="primary" onClick={getPostData}>
-            Submit Post
-          </Button>
-        </form>
-      </div>
+      {campaign.jackpotObjectiveReached ? (
+        <ClaimPrize
+          outstandingIncrementals={campaign?.outstandingPayments}
+          incrementalAmount={campaign?.incrementalRewardAmount}
+          outstandingJackpot={campaign?.jackpotObjectiveReached ? 1 : 0}
+          jackpotAmount={campaign?.jackpotRewardAmount}
+        />
+      ) : (
+        <SubmitPost invalidPost={invalidPost} />
+      )}
     </div>
   );
 };

@@ -50,7 +50,6 @@ const Profile = () => {
   if (profileIsBusiness) {
     const { loading, error, data } = useQuery(GET_ALL_CAMPAIGNS_FOR_BUSINESS_QUERY, {
       variables: { id: user?.userEthAddress },
-      pollInterval: APOLLO_POLL_INTERVAL_MS,
     });
     if (loading) return null;
     if (error) return <Error statusCode={404} />;
