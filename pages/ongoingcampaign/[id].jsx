@@ -131,7 +131,7 @@ const OngoingCampaign = () => {
       />
       <br />
       <br />
-      {campaign.jackpotObjectiveReached ? (
+      {campaign?.jackpotObjectiveReached ? (
         <ClaimPrize
           outstandingIncrementals={campaign?.outstandingPayments}
           incrementalAmount={campaign?.incrementalRewardAmount}
@@ -143,7 +143,7 @@ const OngoingCampaign = () => {
           confirmedPaymentamount={campaign?.refundedAmount}
         />
       ) : (
-        <SubmitPost invalidPost={invalidPost} />
+        <SubmitPost invalidPost={invalidPost} getPostData={getPostData} />
       )}
     </div>
   );
