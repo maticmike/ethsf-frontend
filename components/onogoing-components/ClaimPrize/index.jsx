@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { utils } from 'web3';
 import { Button } from '@material-ui/core';
 import { outstandingIncrementalOwed, outstandingJackpotOwed } from '../../../utils/helpers';
+import { payInfluencer } from '../../../web3';
 import { useStyles } from './styles';
 
 const ClaimPrize = ({ outstandingIncrementals, incrementalAmount, outstandingJackpot, jackpotAmount }) => {
@@ -17,7 +18,7 @@ const ClaimPrize = ({ outstandingIncrementals, incrementalAmount, outstandingJac
     return () => console.log('cleanup claim prize');
   }, []);
 
-  const claimReward = () => {};
+  const claimReward = () => payInfluencer();
 
   return (
     <>

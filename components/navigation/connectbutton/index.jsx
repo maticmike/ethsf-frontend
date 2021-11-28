@@ -3,6 +3,7 @@ import consola from 'consola';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@material-ui/core';
 import { connectAccountThunk } from '../../../redux/actions/account';
+import { storeFamepayFactoryThunk } from '../../../redux/actions/famepayFactory';
 import { shortenedEthAddress } from '../../../web3/helpers';
 import { getUserFromEthAddressDb } from '../../../services/api/userService';
 import { clearUserAuthAll } from '../../../web3/auth';
@@ -31,7 +32,10 @@ const ConnectButton = ({ handleSignupOpen }) => {
   }, [account]);
 
   //Connect to Web3
-  const handleConnectivityWeb3 = async () => dispatch(connectAccountThunk());
+  const handleConnectivityWeb3 = async () => {
+    await dispatch(connectAccountThunk());
+    await dispatch(storeFamepayFactoryThunk());
+  };
 
   const handleRegister = () => handleSignupOpen();
 

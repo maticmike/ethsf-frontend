@@ -230,7 +230,7 @@ export const getCampaignFromContract = async (famepayFactory, campaignId) => {
 
 /**
  * @param {number} postStat measures post performance
- * @param {*} postPosted measures is post was posted or not
+ * @param {boolean} postPosted measures is post was posted or not
  */
 export const setPaymentTargetReached = async (campaignAddress, postStat, postPosted, postTimestamp) => {
   try {
@@ -240,5 +240,19 @@ export const setPaymentTargetReached = async (campaignAddress, postStat, postPos
     await famepayCampaign.checkCampaignObjectiveReached(postStat, postPosted, postTimestamp);
   } catch (error) {
     consola.error('Web3: setPaymentTargetReached():', error);
+  }
+};
+
+/**
+ *
+ * @param {address} campaignAddress
+ * @param {boolean} businessConfirmed
+ * @param {boolean} influencerConfirmed
+ * @param {number} confirmedAmount
+ */
+export const payInfluencer = async (campaignAddress, businessConfirmed, influencerConfirmed, confirmedAmount) => {
+  try {
+  } catch (error) {
+    consola.error('Web3: payInfluencer():', error);
   }
 };

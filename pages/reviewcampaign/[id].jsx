@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import Error from 'next/error';
 import { useRouter } from 'next/router';
 import Calendar from 'react-calendar';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import consola from 'consola';
 import { Button } from '@material-ui/core';
 import 'react-calendar/dist/Calendar.css';
@@ -24,20 +24,12 @@ const ReviewCampaign = () => {
   const classes = useStyles();
   const router = useRouter();
 
-  const dispatch = useDispatch();
   const famepayFactory = useSelector(state => state.famepayFactory);
   const [campaign, setCampaign] = useState(null);
   const [business, setBusiness] = useState('');
   const [influencer, setInfluencer] = useState('');
 
   const { id } = router.query;
-
-  useEffect(() => {
-    dispatch(storeFamepayFactoryThunk());
-    return () => {
-      consola.info('Cleanup review campaign component');
-    };
-  }, []);
 
   useEffect(() => {
     async function getCampaignInfo() {
@@ -64,10 +56,10 @@ const ReviewCampaign = () => {
         campaign?.agreedStartDate,
         campaign?.agreedDeadline,
         campaign?.simplePostDuration,
-        campaign?.jackpotReward,
-        campaign?.incrementalReward,
-        campaign?.jackpotTarget,
-        campaign?.incrementalTarget,
+        campaign?.jackpotReward.toString(),
+        campaign?.incrementalReward.toString(),
+        campaign?.jackpotTarget.toString(),
+        campaign?.incrementalTarget.toString(),
         campaign?.potentialPayout.toString(),
         campaign?.objective,
       );

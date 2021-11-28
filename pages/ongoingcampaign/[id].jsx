@@ -37,8 +37,6 @@ const OngoingCampaign = () => {
   const classes = useStyles();
   const router = useRouter();
   const dispatch = useDispatch();
-  const famepayFactory = useSelector(state => state.famepayFactory);
-  const famepay = useSelector(state => state.famepay);
 
   const { id } = router.query;
 
@@ -139,6 +137,10 @@ const OngoingCampaign = () => {
           incrementalAmount={campaign?.incrementalRewardAmount}
           outstandingJackpot={campaign?.jackpotObjectiveReached ? 1 : 0}
           jackpotAmount={campaign?.jackpotRewardAmount}
+          campaignAddress={campaign?.id}
+          businessConfirmed={campaign?.businessConfirmedPayment}
+          influencerConfirmed={campaign?.influencerConfirmedPayment}
+          confirmedPaymentamount={campaign?.refundedAmount}
         />
       ) : (
         <SubmitPost invalidPost={invalidPost} />
