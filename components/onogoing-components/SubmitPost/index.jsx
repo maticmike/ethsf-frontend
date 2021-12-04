@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextField, Button } from '@material-ui/core';
 
-const SubmitPost = ({ invalidPost, getPostData }) => {
+const SubmitPost = ({ invalidPost, getPostData, setPostUrl }) => {
   return (
     <div>
       <br />

@@ -12,7 +12,7 @@ import dynamic from 'next/dynamic';
 import consola from 'consola';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { getCampaignFromContract, setPaymentTargetReached } from '../../web3';
+import { getCampaignFromContract, setPaymentTargetReachedWeb3, payInfluencerWeb3 } from '../../web3';
 import { parseTwitterPostData } from '../../utils/objectiveData/twitter';
 import { storeFamepayFactoryThunk } from '../../redux/actions/famepayFactory';
 import { campaignQuery } from '../../apollo/campaign.gql';
@@ -72,7 +72,7 @@ const OngoingCampaign = () => {
   if (error) return <Error statusCode={404} />;
 
   campaign = data?.campaigns[0];
-
+  console.log(campaign, ' iam the campaign');
   const getPostData = async e => {
     e.preventDefault();
     setInvalidPost(false);
@@ -90,11 +90,20 @@ const OngoingCampaign = () => {
     try {
       const { data } = await axios.get(`http://localhost:3000/api/twitter/${tweetId}`);
       const postData = parseTwitterPostData(campaign.objective, data);
-      await setPaymentTargetReached(campaign?.campaignAddress, postData[0], postData[1], postData[2]);
+      await setPaymentTargetReachedWeb3(campaign?.campaignAddress, postData[0], postData[1], postData[2]);
     } catch (error) {
       setInvalidPost(true);
       consola.error('getPostData():', error);
     }
+  };
+
+  const payInfluencer = () => {
+    payInfluencerWeb3(
+      campaign?.campaignAddress,
+      campaign?.businessConfirmedPayment,
+      campaign?.influencerConfirmedPayment,
+      campaign?.confirmedPaymentAmount,
+    );
   };
 
   return (
@@ -133,6 +142,7 @@ const OngoingCampaign = () => {
       <br />
       {campaign?.jackpotObjectiveReached ? (
         <ClaimPrize
+          payInfluencer={payInfluencer}
           outstandingIncrementals={campaign?.outstandingPayments}
           incrementalAmount={campaign?.incrementalRewardAmount}
           outstandingJackpot={campaign?.jackpotObjectiveReached ? 1 : 0}
@@ -140,10 +150,10 @@ const OngoingCampaign = () => {
           campaignAddress={campaign?.id}
           businessConfirmed={campaign?.businessConfirmedPayment}
           influencerConfirmed={campaign?.influencerConfirmedPayment}
-          confirmedPaymentamount={campaign?.refundedAmount}
+          confirmedPaymentAmount={campaign?.refundedAmount}
         />
       ) : (
-        <SubmitPost invalidPost={invalidPost} getPostData={getPostData} />
+        <SubmitPost invalidPost={invalidPost} getPostData={getPostData} setPostUrl={setPostUrl} />
       )}
     </div>
   );

@@ -5,7 +5,13 @@ import { outstandingIncrementalOwed, outstandingJackpotOwed } from '../../../uti
 import { payInfluencer } from '../../../web3';
 import { useStyles } from './styles';
 
-const ClaimPrize = ({ outstandingIncrementals, incrementalAmount, outstandingJackpot, jackpotAmount }) => {
+const ClaimPrize = ({
+  payInfluencer,
+  outstandingIncrementals,
+  incrementalAmount,
+  outstandingJackpot,
+  jackpotAmount,
+}) => {
   const classes = useStyles();
 
   const [totalAmountOwed, setTotalAmountOwed] = useState(0);
@@ -18,15 +24,13 @@ const ClaimPrize = ({ outstandingIncrementals, incrementalAmount, outstandingJac
     return () => console.log('cleanup claim prize');
   }, []);
 
-  const claimReward = () => payInfluencer();
-
   return (
     <>
       <p>
         Prize money available to claim <strong>{utils.fromWei(totalAmountOwed.toString())} Eth</strong>
       </p>
       <Button
-        onClick={() => claimReward}
+        onClick={payInfluencer}
         className={classes.ClaimPrize_claimButton}
         variant="contained"
         size="large"

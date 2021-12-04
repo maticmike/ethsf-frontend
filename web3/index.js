@@ -232,14 +232,14 @@ export const getCampaignFromContract = async (famepayFactory, campaignId) => {
  * @param {number} postStat measures post performance
  * @param {boolean} postPosted measures is post was posted or not
  */
-export const setPaymentTargetReached = async (campaignAddress, postStat, postPosted, postTimestamp) => {
+export const setPaymentTargetReachedWeb3 = async (campaignAddress, postStat, postPosted, postTimestamp) => {
   try {
     const provider = new ethers.providers.Web3Provider(currentOnboardState.wallet.provider);
     const signer = provider.getSigner();
     const famepayCampaign = new ethers.Contract(campaignAddress, FamepayAbi.abi, signer);
     await famepayCampaign.checkCampaignObjectiveReached(postStat, postPosted, postTimestamp);
   } catch (error) {
-    consola.error('Web3: setPaymentTargetReached():', error);
+    consola.error('Web3: setPaymentTargetReachedWeb3():', error);
   }
 };
 
@@ -250,8 +250,12 @@ export const setPaymentTargetReached = async (campaignAddress, postStat, postPos
  * @param {boolean} influencerConfirmed
  * @param {number} confirmedAmount
  */
-export const payInfluencer = async (campaignAddress, businessConfirmed, influencerConfirmed, confirmedAmount) => {
+export const payInfluencerWeb3 = async (campaignAddress, businessConfirmed, influencerConfirmed, confirmedAmount) => {
   try {
+    const provider = new ethers.providers.Web3Provider(currentOnboardState.wallet.provider);
+    const signer = provider.getSigner();
+    const famepayCampaign = new ethers.Contract(campaignAddress, FamepayAbi.abi, signer);
+    await famepayCampaign?.payInfluencer(businessConfirmed, influencerConfirmed);
   } catch (error) {
     consola.error('Web3: payInfluencer():', error);
   }
