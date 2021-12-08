@@ -12,7 +12,7 @@ import dynamic from 'next/dynamic';
 import consola from 'consola';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { getCampaignFromContract, setPaymentTargetReachedWeb3, payInfluencerWeb3 } from '../../web3';
+import { getCampaignFromContract, setPaymentTargetReachedWeb3, payInfluencerWeb3, endCampaignWeb3 } from '../../web3';
 import { parseTwitterPostData } from '../../utils/objectiveData/twitter';
 import { storeFamepayFactoryThunk } from '../../redux/actions/famepayFactory';
 import { campaignQuery } from '../../apollo/campaign.gql';
@@ -26,17 +26,22 @@ const BusinessReviewHeader = dynamic(() => import('../../components/reviewcampai
 const InfluencerReviewHeader = dynamic(() => import('../../components/reviewcampaign/InfluencerReviewHeader'), {
   loading: () => <p>Influencer Header Loading...</p>,
 });
-const SubmitPost = dynamic(() => import('../../components/onogoing-components/SubmitPost'), {
-  loading: () => <p>Loading Submit Post Button....</p>,
+const SubmitPost = dynamic(() => import('../../components/onogoingComponents/SubmitPost'), {
+  loading: () => <p>Loading Submit Post....</p>,
 });
-const ClaimPrize = dynamic(() => import('../../components/onogoing-components/ClaimPrize'), {
-  loading: () => <p>Claim Prize Button....</p>,
+const ClaimPrize = dynamic(() => import('../../components/onogoingComponents/ClaimPrize'), {
+  loading: () => <p>Loading Claim Prize....</p>,
+});
+
+const ClaimRefund = dynamic(() => import('../../components/onogoingComponents/ClaimRefund'), {
+  loading: () => <p>Loading Claim Refund Prize....</p>,
 });
 
 const OngoingCampaign = () => {
   const classes = useStyles();
   const router = useRouter();
-  const dispatch = useDispatch();
+
+  const account = useSelector(state => state.account);
 
   const { id } = router.query;
 
@@ -51,6 +56,7 @@ const OngoingCampaign = () => {
     variables: { id: id },
     pollInterval: APOLLO_POLL_INTERVAL_MS,
   });
+
   useEffect(() => {
     async function getUserEthAddress() {
       try {
@@ -72,7 +78,6 @@ const OngoingCampaign = () => {
   if (error) return <Error statusCode={404} />;
 
   campaign = data?.campaigns[0];
-  console.log(campaign, ' iam the campaign');
   const getPostData = async e => {
     e.preventDefault();
     setInvalidPost(false);
@@ -97,6 +102,7 @@ const OngoingCampaign = () => {
     }
   };
 
+  /** Web 3 **/
   const payInfluencer = () => {
     payInfluencerWeb3(
       campaign?.campaignAddress,
@@ -106,9 +112,61 @@ const OngoingCampaign = () => {
     );
   };
 
+  const claimRefund = () => endCampaignWeb3(campaign?.campaignAddress);
+
+  /** Components **/
+  const isObjectiveComplete = () =>
+    campaign?.jackpotObjectiveReached || campaign?.incrementalObjectiveReached ? true : false;
+
+  /** ONGOING **/
+  const isObjectiveCompleteInfluencerUI = () => {
+    if (isObjectiveComplete()) {
+      return (
+        <ClaimPrize
+          payInfluencer={payInfluencer}
+          outstandingIncrementals={campaign?.outstandingPayments}
+          incrementalAmount={campaign?.incrementalRewardAmount}
+          outstandingJackpot={campaign?.jackpotObjectiveReached ? 1 : 0}
+          jackpotAmount={campaign?.jackpotRewardAmount}
+          campaignAddress={campaign?.id}
+          businessConfirmed={campaign?.businessConfirmedPayment}
+          influencerConfirmed={campaign?.influencerConfirmedPayment}
+          confirmedPaymentAmount={campaign?.refundedAmount}
+        />
+      );
+    }
+    if (campaign?.deadline >= Date.now()) {
+      //if ongoing but no prize to claim
+      return <SubmitPost invalidPost={invalidPost} getPostData={getPostData} setPostUrl={setPostUrl} />;
+    }
+    //if not ongoing
+    return <p>Campaign is over. Thank you for participating.</p>;
+  };
+
+  const isObjectiveCompleteBusinessUI = () => {
+    if (isObjectiveComplete()) {
+      return <p>View Live Post!</p>;
+    }
+    //if ongoing but no post
+    if (campaign?.deadline >= Date.now()) {
+      return <p>Pending Influencer Post</p>;
+    }
+    //if not ongoing
+    return <ClaimRefund claimRefund={claimRefund} campaignBalance={campaign?.depositedBalance} />;
+  };
+
+  const ongoingPostUIActions = () => {
+    if (account?.address == business?.userEthAddress) {
+      return isObjectiveCompleteBusinessUI();
+    }
+    if (account?.address == influencer?.userEthAddress) {
+      return isObjectiveCompleteInfluencerUI();
+    }
+  };
+
   return (
     <div className={classes.ReviewCampaign_root_center}>
-      <h2>Ongoing Campaign</h2>
+      <h2>{campaign.ongoing ? 'Ongoing Campaign' : 'Campaign Completed'}</h2>
       <div className={classes.ReviewCampaign_headers_side_by_side}>
         <div className={classes.ReviewCampaign_business_header}>
           <BusinessReviewHeader
@@ -140,21 +198,7 @@ const OngoingCampaign = () => {
       />
       <br />
       <br />
-      {campaign?.jackpotObjectiveReached ? (
-        <ClaimPrize
-          payInfluencer={payInfluencer}
-          outstandingIncrementals={campaign?.outstandingPayments}
-          incrementalAmount={campaign?.incrementalRewardAmount}
-          outstandingJackpot={campaign?.jackpotObjectiveReached ? 1 : 0}
-          jackpotAmount={campaign?.jackpotRewardAmount}
-          campaignAddress={campaign?.id}
-          businessConfirmed={campaign?.businessConfirmedPayment}
-          influencerConfirmed={campaign?.influencerConfirmedPayment}
-          confirmedPaymentAmount={campaign?.refundedAmount}
-        />
-      ) : (
-        <SubmitPost invalidPost={invalidPost} getPostData={getPostData} setPostUrl={setPostUrl} />
-      )}
+      {ongoingPostUIActions()}
     </div>
   );
 };

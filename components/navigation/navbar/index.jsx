@@ -91,13 +91,13 @@ const Navbar = () => {
                 <strong className={classes.navbarDesktopMenuButton}>New Campaign</strong>
               </Button>
             </Link>
-            {/* {username == null || account?.isLoggedIn === false ? null : ( */}
-            <Link className={classes.navbarDesktopMenuButton} href="/profile/[id]" as={`/profile/${username}`}>
-              <Button>
-                <strong className={classes.navbarDesktopMenuButton}>My Profile</strong>
-              </Button>
-            </Link>
-            {/* )} */}
+            {username == null || account?.isLoggedIn === false ? null : (
+              <Link className={classes.navbarDesktopMenuButton} href="/profile/[id]" as={`/profile/${username}`}>
+                <Button>
+                  <strong className={classes.navbarDesktopMenuButton}>My Profile</strong>
+                </Button>
+              </Link>
+            )}
             <div className={classes.navbarGrow} />
             <ConnectButton handleSignupOpen={handleSignupOpen} />
           </Toolbar>

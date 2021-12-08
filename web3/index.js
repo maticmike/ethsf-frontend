@@ -257,6 +257,21 @@ export const payInfluencerWeb3 = async (campaignAddress, businessConfirmed, infl
     const famepayCampaign = new ethers.Contract(campaignAddress, FamepayAbi.abi, signer);
     await famepayCampaign?.payInfluencer(businessConfirmed, influencerConfirmed);
   } catch (error) {
-    consola.error('Web3: payInfluencer():', error);
+    consola.error('Web3: payInfluencerWeb3():', error);
+  }
+};
+
+/**
+ *
+ * @param {address} campaignAddress
+ */
+export const endCampaignWeb3 = async campaignAddress => {
+  try {
+    const provider = new ethers.providers.Web3Provider(currentOnboardState.wallet.provider);
+    const signer = provider.getSigner();
+    const famepayCampaign = new ethers.Contract(campaignAddress, FamepayAbi.abi, signer);
+    await famepayCampaign?.campaignEnded();
+  } catch (error) {
+    consola.error('Web3: endCampaignWeb3():', error);
   }
 };

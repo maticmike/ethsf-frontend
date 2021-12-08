@@ -11,7 +11,6 @@ const ProfileCampaigns = ({ campaign, isBusiness }) => {
   getUserFromEthAddressDb(isBusiness ? campaign.influencer.id : campaign.business.id).then(({ data }) =>
     setUsername(data.payload.username),
   );
-
   return (
     <div className={classes.ProfileCampaigns_container}>
       <div>
