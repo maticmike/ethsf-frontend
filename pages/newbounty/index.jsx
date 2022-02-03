@@ -37,7 +37,7 @@ const NewBounty = () => {
   const account = useSelector(state => state.account);
   const router = useRouter();
 
-  const [registrationStep, setRegistrationStep] = useState(6);
+  const [registrationStep, setRegistrationStep] = useState(0);
 
   //Bounty Objecitve
   const [objective, setObjective] = useState('');

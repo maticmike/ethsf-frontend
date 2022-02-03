@@ -86,9 +86,9 @@ const Navbar = () => {
                 height="54"
               />
             </a>
-            <Link href="/newcampaign" className={classes.navbarDesktopMenuButton}>
+            <Link href="/newdeal" className={classes.navbarDesktopMenuButton}>
               <Button>
-                <strong className={classes.navbarDesktopMenuButton}>New Campaign</strong>
+                <strong className={classes.navbarDesktopMenuButton}>New Deal</strong>
               </Button>
             </Link>
             <Link href="/newbounty" className={classes.navbarDesktopMenuButton}>

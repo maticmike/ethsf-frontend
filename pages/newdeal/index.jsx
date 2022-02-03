@@ -4,31 +4,31 @@ import { useRouter } from 'next/router';
 import consola from 'consola';
 import { useSelector, useDispatch } from 'react-redux';
 import { Paper } from '@material-ui/core';
-import { createNewCampaignProposalDb } from '../../services/api/campaignService';
+import { createNewDealProposalDb } from '../../services/api/campaignService';
 import { onlyNumeric } from '../../utils/helpers';
 import { SIMPLE_POST } from '../../constants/CampaignObjectives';
 import { useStyles } from './styles';
 
-const FindInfluencer = dynamic(() => import('../../components/newcampaign/Campaign/FindInfluencer'), {
+const FindInfluencer = dynamic(() => import('../../components/newCampaign/Deal/FindInfluencer'), {
   loading: () => <p>Find Influencer Loading....</p>,
 });
-const CampaignObjective = dynamic(() => import('../../components/newcampaign/CampaignObjective'), {
+const CampaignObjective = dynamic(() => import('../../components/newCampaign/CampaignObjective'), {
   loading: () => <p>Select Campaign Objective Loading....</p>,
 });
-const CampaignCalendar = dynamic(() => import('../../components/newcampaign/CampaignCalendar'), {
+const CampaignCalendar = dynamic(() => import('../../components/newCampaign/CampaignCalendar'), {
   loading: () => <p>Set Campaign Dates Loading....</p>,
 });
-const SimplePostDuration = dynamic(() => import('../../components/newcampaign/SimplePostDuration'), {
+const SimplePostDuration = dynamic(() => import('../../components/newCampaign/SimplePostDuration'), {
   loading: () => <p>Post Duration Loading....</p>,
 });
-const CampaignStaking = dynamic(() => import('../../components/newcampaign/CampaignStaking'), {
+const CampaignStaking = dynamic(() => import('../../components/newCampaign/CampaignStaking'), {
   loading: () => <p>Campaign Staking Loading...</p>,
 });
-const CampaignReward = dynamic(() => import('../../components/newcampaign/CampaignReward'), {
+const CampaignReward = dynamic(() => import('../../components/newCampaign/CampaignReward'), {
   loading: () => <p>Campaign Payment Loading...</p>,
 });
 
-const NewCampaign = () => {
+const NewDeal = () => {
   const classes = useStyles();
 
   const account = useSelector(state => state.account);
@@ -45,7 +45,7 @@ const NewCampaign = () => {
   //Campaign Dates
   const [simplePostDate, setSimplePostDate] = useState(0); //postDate to create post
   const [simplePostMinimumDuration, setSimplePostMinimumDuration] = useState(0); //duration to keep post up (7hr post)
-  const [campaignDuration, setCampaignDuration] = useState([]); //sept 1 - oct 1
+  const [dealDuration, setDealDuration] = useState([]); //sept 1 - oct 1
 
   //Campaign $$$$
   const [stakedAmount, setStakedAmount] = useState(0);
@@ -61,20 +61,20 @@ const NewCampaign = () => {
       //search for influencer from api or db
       setInfluencer(influencer);
     } catch (error) {
-      consola.error('NewCampaign.findInfluencer():', error);
+      consola.error('NewDeal.findInfluencer():', error);
     }
   };
 
-  const createNewCampaignProposal = async () => {
+  const createNewDealProposal = async () => {
     // setJackpotReward(stakedAmount); //REVIEW ME LATER<<<
     objective === SIMPLE_POST ? (jackpotRewardAmount = stakedAmount) : (jackpotRewardAmount = jackpotReward);
 
     try {
-      const campaignDb = await createNewCampaignProposalDb(
+      const campaignDb = await createNewDealProposalDb(
         account.address, //business
         influencer.toLowerCase(),
-        campaignDuration[0] ? campaignDuration[0] : Math.round(Date.now() / 1000), //agreedStartDate
-        campaignDuration[1] ? campaignDuration[1] : simplePostDate, //agreedDeadline/postDate
+        dealDuration[0] ? dealDuration[0] : Math.round(Date.now() / 1000), //agreedStartDate
+        dealDuration[1] ? dealDuration[1] : simplePostDate, //agreedDeadline/postDate
         simplePostMinimumDuration,
         jackpotRewardAmount,
         incrementalReward,
@@ -86,7 +86,7 @@ const NewCampaign = () => {
       );
       router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
     } catch (error) {
-      consola.error('NewCampaign.createNewCampaignProposal():', error);
+      consola.error('NewDeal.createNewDealProposal():', error);
     }
   };
 
@@ -94,7 +94,7 @@ const NewCampaign = () => {
     switch (registrationStep) {
       case 0:
         return (
-          <Paper className={classes.NewCampaign_layout_find} elevation={3}>
+          <Paper className={classes.NewDeal_layout_find} elevation={3}>
             <FindInfluencer
               foundInfluencer={influencer}
               parentFindInfluencer={findInfluencer}
@@ -104,7 +104,7 @@ const NewCampaign = () => {
         );
       case 1:
         return (
-          <Paper className={classes.NewCampaign_layout_objective} elevation={3}>
+          <Paper className={classes.NewDeal_layout_objective} elevation={3}>
             <CampaignObjective
               setParentObjective={objective => setObjective(objective)}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
@@ -113,11 +113,11 @@ const NewCampaign = () => {
         );
       case 2:
         return (
-          <Paper className={classes.NewCampaign_layout_dates} elevation={3}>
+          <Paper className={classes.NewDeal_layout_dates} elevation={3}>
             <CampaignCalendar
               objective={objective}
               setParentSimplePostDate={simplePostDate => setSimplePostDate(simplePostDate)} //one date for simple post
-              setParentCampaignDuration={campaignDuration => setCampaignDuration(campaignDuration)}
+              setParentCampaignDuration={dealDuration => setDealDuration(dealDuration)}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
             />
           </Paper>
@@ -125,7 +125,7 @@ const NewCampaign = () => {
       //Duration of post on page only for simple posts
       case 3:
         return (
-          <Paper className={classes.NewCampaign_layout_duration} elevation={3}>
+          <Paper className={classes.NewDeal_layout_duration} elevation={3}>
             <SimplePostDuration
               objective={objective}
               setParentSimplePostMinimumDuration={duration => setSimplePostMinimumDuration(duration)}
@@ -135,19 +135,19 @@ const NewCampaign = () => {
         );
       case 4:
         return (
-          <Paper className={classes.NewCampaign_layout_staking} elevation={3}>
+          <Paper className={classes.NewDeal_layout_staking} elevation={3}>
             <CampaignStaking
               objective={objective}
               setParentDepositToEscrow={deposit => setStakedAmount(onlyNumeric(deposit))}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
-              setParentFinishCampaign={createNewCampaignProposal}
+              setParentFinishCampaign={createNewDealProposal}
             />
           </Paper>
         );
       case 5:
         return (
           // TODO JACKPOT REARD COULD BE A BUG CONSIDER USING GLOBAL VAR INSTEAD OF STATE
-          <Paper className={classes.NewCampaign_layout_staking} elevation={3}>
+          <Paper className={classes.NewDeal_layout_staking} elevation={3}>
             <CampaignReward
               objective={objective}
               stakedAmount={stakedAmount}
@@ -160,13 +160,13 @@ const NewCampaign = () => {
               parentIncrementalReward={incrementalReward}
               parentJackpotTarget={jackpotTarget}
               parentIncrementalTarget={incrementalTarget}
-              setParentFinishCampaign={createNewCampaignProposal}
+              setParentFinishCampaign={createNewDealProposal}
             ></CampaignReward>
           </Paper>
         );
     }
   };
-  return <div className={classes.NewCampaign_box_positioning}>{renderSingleRegistrationComponent()}</div>;
+  return <div className={classes.NewDeal_box_positioning}>{renderSingleRegistrationComponent()}</div>;
 };
 
-export default NewCampaign;
+export default NewDeal;
