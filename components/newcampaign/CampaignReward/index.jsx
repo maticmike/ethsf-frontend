@@ -30,6 +30,12 @@ const CampaignReward = ({
     }
   };
 
+  const maxJackpotRewardInput = jackpotReward => {
+    const { value } = jackpotReward;
+    if (value <= stakedAmount) return true;
+    return false;
+  };
+
   const handleFinish = () => {
     if (!isJackpot) {
       setParentJackpotReward(jackpotReward);
@@ -47,8 +53,7 @@ const CampaignReward = ({
       <h1>{setObjectiveName(objective)} Objective</h1>
       <p className={classes.CampaignReward_p_heading}>5. {getHeading()} Payment</p>
       <FormHelperText>
-        Enter the conditions for influencer to earn an incremental payment as well as the reward for completing the
-        objective
+        Enter the conditions for influencer to earn a reward as well as the reward for completing the objective
       </FormHelperText>
       <div className={classes.CampaignReward_align_inputs}>
         <div>
@@ -61,6 +66,7 @@ const CampaignReward = ({
               value={parentJackpotReward}
               prefix={'$'}
               onChange={e => setParentJackpotReward(e.target.value.slice(1))}
+              isAllowed={maxJackpotRewardInput}
             />
           ) : (
             <NumberFormat

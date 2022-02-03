@@ -4,7 +4,7 @@ import CheckCircle from '@material-ui/icons/Done';
 import Image from 'next/image';
 import { useStyles } from './styles';
 import consola from 'consola';
-import { shortenedEthAddress } from '../../../web3/helpers';
+import { shortenedEthAddress } from '../../../../web3/helpers';
 const FindInfluencer = ({ parentFindInfluencer, foundInfluencer, setParentCampaignSetupStep }) => {
   const classes = useStyles();
 

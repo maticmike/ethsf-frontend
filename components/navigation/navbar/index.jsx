@@ -91,6 +91,11 @@ const Navbar = () => {
                 <strong className={classes.navbarDesktopMenuButton}>New Campaign</strong>
               </Button>
             </Link>
+            <Link href="/newbounty" className={classes.navbarDesktopMenuButton}>
+              <Button>
+                <strong className={classes.navbarDesktopMenuButton}>New Bounty</strong>
+              </Button>
+            </Link>
             {username == null || account?.isLoggedIn === false ? null : (
               <Link className={classes.navbarDesktopMenuButton} href="/profile/[id]" as={`/profile/${username}`}>
                 <Button>
