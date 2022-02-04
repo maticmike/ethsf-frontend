@@ -9,22 +9,22 @@ import { onlyNumeric } from '../../utils/helpers';
 import { SIMPLE_POST } from '../../constants/CampaignObjectives';
 import { useStyles } from './styles';
 
-const FindInfluencer = dynamic(() => import('../../components/newCampaign/Deal/FindInfluencer'), {
+const FindInfluencer = dynamic(() => import('../../components/newcampaign/Deal/FindInfluencer'), {
   loading: () => <p>Find Influencer Loading....</p>,
 });
-const CampaignObjective = dynamic(() => import('../../components/newCampaign/CampaignObjective'), {
+const CampaignObjective = dynamic(() => import('../../components/newcampaign/CampaignObjective'), {
   loading: () => <p>Select Campaign Objective Loading....</p>,
 });
-const CampaignCalendar = dynamic(() => import('../../components/newCampaign/CampaignCalendar'), {
+const CampaignCalendar = dynamic(() => import('../../components/newcampaign/CampaignCalendar'), {
   loading: () => <p>Set Campaign Dates Loading....</p>,
 });
-const SimplePostDuration = dynamic(() => import('../../components/newCampaign/SimplePostDuration'), {
+const SimplePostDuration = dynamic(() => import('../../components/newcampaign/SimplePostDuration'), {
   loading: () => <p>Post Duration Loading....</p>,
 });
-const CampaignStaking = dynamic(() => import('../../components/newCampaign/CampaignStaking'), {
+const CampaignStaking = dynamic(() => import('../../components/newcampaign/CampaignStaking'), {
   loading: () => <p>Campaign Staking Loading...</p>,
 });
-const CampaignReward = dynamic(() => import('../../components/newCampaign/CampaignReward'), {
+const CampaignReward = dynamic(() => import('../../components/newcampaign/CampaignReward'), {
   loading: () => <p>Campaign Payment Loading...</p>,
 });
 
@@ -45,7 +45,7 @@ const NewDeal = () => {
   //Campaign Dates
   const [simplePostDate, setSimplePostDate] = useState(0); //postDate to create post
   const [simplePostMinimumDuration, setSimplePostMinimumDuration] = useState(0); //duration to keep post up (7hr post)
-  const [dealDuration, setDealDuration] = useState([]); //sept 1 - oct 1
+  const [campaignDuration, setCampaignDuration] = useState([]); //sept 1 - oct 1
 
   //Campaign $$$$
   const [stakedAmount, setStakedAmount] = useState(0);
@@ -73,8 +73,8 @@ const NewDeal = () => {
       const campaignDb = await createNewDealProposalDb(
         account.address, //business
         influencer.toLowerCase(),
-        dealDuration[0] ? dealDuration[0] : Math.round(Date.now() / 1000), //agreedStartDate
-        dealDuration[1] ? dealDuration[1] : simplePostDate, //agreedDeadline/postDate
+        campaignDuration[0] ? campaignDuration[0] : Math.round(Date.now() / 1000), //agreedStartDate
+        campaignDuration[1] ? campaignDuration[1] : simplePostDate, //agreedDeadline/postDate
         simplePostMinimumDuration,
         jackpotRewardAmount,
         incrementalReward,
@@ -117,7 +117,7 @@ const NewDeal = () => {
             <CampaignCalendar
               objective={objective}
               setParentSimplePostDate={simplePostDate => setSimplePostDate(simplePostDate)} //one date for simple post
-              setParentCampaignDuration={dealDuration => setDealDuration(dealDuration)}
+              setParentCampaignDuration={campaignDuration => setCampaignDuration(campaignDuration)}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
             />
           </Paper>

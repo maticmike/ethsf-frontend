@@ -5,52 +5,41 @@ import { setObjectiveName } from '../../../../utils/ObjectiveNames';
 import { useStyles } from './styles.js';
 const BountyParticipants = ({
   objective,
-  stakedAmount,
-  setParentJackpotReward,
-  setParentJackpotTarget,
+  setParentMaxParticipants,
+  setParentMaxWinners,
   setParentCampaignSetupStep,
-  parentJackpotReward,
-  parentJackpotTarget,
 }) => {
   const classes = useStyles();
-  const [isJackpot, setIsJackpot] = useState(true);
 
-  const handlePrevious = () => {
-    console.log('previous');
-  };
-
-  const handleNext = () => {
-    console.log('next');
-  };
+  const handlePrevious = () => setParentCampaignSetupStep(3);
+  const handleNext = () => setParentCampaignSetupStep(5);
 
   return (
     <div className={classes.BountyReward_font}>
       <h1>{setObjectiveName(objective)} Objective</h1>
       <p className={classes.BountyReward_p_heading}>4. Bounty Participants</p>
       <FormHelperText>
-        Enter the conditions for influencer to earn the bounty reward for completing the objective
+        Enter the maximum amount of influencers who can participate and the maximum amount of winners for this bounty
       </FormHelperText>
       <div className={classes.BountyReward_align_inputs}>
         <div>
           <p>Max campaign participants</p>
           <TextField
             id="outlined-basic"
-            // fullWidth
             size="small"
-            label="50 participants (Optional)"
-            // onChange={e => setPostUrl(e.target.value)}
+            label="Bounty Participants"
+            onChange={e => setParentMaxParticipants(e.target.value)}
             variant="outlined"
             // error={invalidPost}
           />
         </div>
         <div className={classes.BountyReward_shift_objective_input}>
-          <p>Max payout per influencer</p>
+          <p>Max winning influencers</p>
           <TextField
             id="outlined-basic"
-            // fullWidth
             size="small"
-            label="10 winners (Optional)"
-            // onChange={e => setPostUrl(e.target.value)}
+            label="Bounty Winners"
+            onChange={e => setParentMaxWinners(e.target.value)}
             variant="outlined"
             // error={invalidPost}
           />
