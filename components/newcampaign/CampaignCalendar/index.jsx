@@ -46,7 +46,7 @@ const CampaignCalendar = ({
       <Grid container direction="row">
         <Grid item xs={6}>
           <h2 className={classes.CampaignDates_custom_font}>{setObjectiveName(objective)} Objective</h2>
-          <p className={classes.CampaignDates_heading_font_size}>2. {getHeading()}</p>
+          <p className={classes.CampaignDates_heading_font_size}>{getHeading()}</p>
           <p className={classes.CampaignDates_helper_font}>
             Select the range of dates which you want the campaign to last for
           </p>

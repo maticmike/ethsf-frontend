@@ -17,7 +17,7 @@ const BountyParticipants = ({
   return (
     <div className={classes.BountyReward_font}>
       <h1>{setObjectiveName(objective)} Objective</h1>
-      <p className={classes.BountyReward_p_heading}>4. Bounty Participants</p>
+      <p className={classes.BountyReward_p_heading}>Bounty Participants</p>
       <FormHelperText>
         Enter the maximum amount of influencers who can participate and the maximum amount of winners for this bounty
       </FormHelperText>

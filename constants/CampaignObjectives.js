@@ -1,7 +1,7 @@
 module.exports = {
   SIMPLE_POST: 'post',
-  PAY_PER_VIEW: 'View',
-  PROFILE_GROWTH: 'Grow',
+  PAY_PER_VIEW: 'view',
+  PROFILE_GROWTH: 'grow',
   LIKES: 'like',
   COMMENTS: 'comm',
   SHARES: 'shar',

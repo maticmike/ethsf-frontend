@@ -10,6 +10,7 @@ const CampaignStaking = ({
   setParentDepositToEscrow,
   setParentCampaignSetupStep,
   setParentFinishCampaign,
+  isBounty,
 }) => {
   const classes = useStyles();
 
@@ -28,7 +29,7 @@ const CampaignStaking = ({
     setParentDepositToEscrow(parsedEth);
   };
 
-  const stakeDeposit = () => setParentCampaignSetupStep(5);
+  const stakeDeposit = () => (isBounty ? setParentCampaignSetupStep(6) : setParentCampaignSetupStep(5));
 
   // only for single post
   const finishAndDeposit = () => setParentFinishCampaign();
@@ -36,7 +37,7 @@ const CampaignStaking = ({
   return (
     <div className={classes.CampaignStaking_font}>
       <h1>{setObjectiveName(objective)} Objective</h1>
-      <p className={classes.CampaignStaking_heading}>3. {getHeading()}</p>
+      <p className={classes.CampaignStaking_heading}>{getHeading()}</p>
       <FormHelperText>Enter the amount of money you want to be available for the influencer to earn.</FormHelperText>
       <p>Amount to deposit for Influencer</p>
       <NumberFormat

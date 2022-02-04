@@ -23,7 +23,7 @@ const CampaignObjective = ({ setParentObjective, setParentCampaignSetupStep }) =
   return (
     <div className={classes.CampaignObjective_custom_font}>
       <h2>Choose Campaign Objective</h2>
-      <p>1. Campaign Objective</p>
+      <p>Campaign Objective</p>
       <form onSubmit={submitCampaignObjective}>
         <Grid container direction="row" spacing={1}>
           <Grid item xs={4}>

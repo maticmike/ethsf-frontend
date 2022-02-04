@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import NumberFormat from 'react-number-format';
 import { FormHelperText, Button } from '@material-ui/core';
+import { utils } from 'web3';
 import { setObjectiveName } from '../../../utils/ObjectiveNames';
 import { useStyles } from './styles.js';
 const CampaignReward = ({
@@ -16,6 +17,10 @@ const CampaignReward = ({
   parentIncrementalReward,
   parentJackpotTarget,
   parentIncrementalTarget,
+  isBounty,
+  bountyType,
+  bountyParticipants,
+  fixedPotReward,
 }) => {
   const classes = useStyles();
   const [isJackpot, setIsJackpot] = useState(true);
@@ -48,20 +53,37 @@ const CampaignReward = ({
     }
   };
 
+  const handleBountyRewardCalc = () => (bountyType == 'var' ? bountyParticipants / stakedAmount : fixedPotReward);
+
+  const handleRewardPlaceholder = () => {
+    if (isBounty) {
+      const bountyReward = handleBountyRewardCalc();
+      return `${bountyReward.toString().slice(0, 6)} eth`;
+    } else {
+      return `${utils.fromWei(stakedAmount.toString())} eth`;
+    }
+  };
+
   return (
     <div className={classes.CampaignReward_font}>
-      <h1>{setObjectiveName(objective)} Objective</h1>
-      <p className={classes.CampaignReward_p_heading}>5. {getHeading()} Payment</p>
+      <h1>{objective} Objective</h1>
+      <p className={classes.CampaignReward_p_heading}>{getHeading()} Reward</p>
       <FormHelperText>
-        Enter the conditions for influencer to earn a reward as well as the reward for completing the objective
+        Enter the conditions for the influencer to earn a reward as well as the reward for completing the objective
       </FormHelperText>
       <div className={classes.CampaignReward_align_inputs}>
         <div>
-          {isJackpot ? <p>Jackpot Payment:</p> : <p>Incremental Payment: </p>}
+          {isBounty ? (
+            <p>{bountyType == 'var' ? 'Minimum ' : null}Bounty Reward Per Influencer</p>
+          ) : isJackpot ? (
+            <p>Jackpot Reward:</p>
+          ) : (
+            <p>Incremental Reward: </p>
+          )}
           {isJackpot ? (
             <NumberFormat
               className={classes.CampaignReward_input}
-              placeholder={`$${parseInt(stakedAmount) * 0.8}`}
+              placeholder={handleRewardPlaceholder()}
               thousandSeparator={true}
               value={parentJackpotReward}
               prefix={'$'}
@@ -81,15 +103,11 @@ const CampaignReward = ({
           &nbsp;&nbsp;&nbsp;&nbsp;For Each
         </div>
         <div className={classes.CampaignReward_shift_objective_input}>
-          {isJackpot ? (
-            <p>{setObjectiveName(objective)} Jackpot Objective:</p>
-          ) : (
-            <p>{setObjectiveName(objective)} Incremental Objective:</p>
-          )}
+          {isJackpot ? <p>{objective} Jackpot Objective:</p> : <p>{objective} Incremental Objective:</p>}
           {isJackpot ? (
             <NumberFormat
               className={classes.CampaignReward_input}
-              placeholder={`90,000 ${setObjectiveName(objective)}`}
+              placeholder={`90,000 ${objective}`}
               thousandSeparator={true}
               value={parentJackpotTarget}
               onChange={e => setParentJackpotTarget(e.target.value)}
@@ -97,7 +115,7 @@ const CampaignReward = ({
           ) : (
             <NumberFormat
               className={classes.CampaignReward_input}
-              placeholder={`5000 ${setObjectiveName(objective)}`}
+              placeholder={`5000 ${objective}`}
               thousandSeparator={true}
               value={parentIncrementalTarget}
               onChange={e => setParentIncrementalTarget(e.target.value)}

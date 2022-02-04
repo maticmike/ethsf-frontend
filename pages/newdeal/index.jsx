@@ -141,6 +141,7 @@ const NewDeal = () => {
               setParentDepositToEscrow={deposit => setStakedAmount(onlyNumeric(deposit))}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
               setParentFinishCampaign={createNewDealProposal}
+              isBounty={false}
             />
           </Paper>
         );
@@ -161,6 +162,7 @@ const NewDeal = () => {
               parentJackpotTarget={jackpotTarget}
               parentIncrementalTarget={incrementalTarget}
               setParentFinishCampaign={createNewDealProposal}
+              isBounty={false}
             ></CampaignReward>
           </Paper>
         );

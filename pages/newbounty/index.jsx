@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import consola from 'consola';
 import { useSelector, useDispatch } from 'react-redux';
+import { utils } from 'web3';
 import { Paper } from '@material-ui/core';
 import { createNewCampaignProposalDb } from '../../services/api/campaignService';
 import { onlyNumeric } from '../../utils/helpers';
@@ -27,9 +28,9 @@ const BountyParticipants = dynamic(() => import('../../components/newcampaign/Bo
 const CampaignStaking = dynamic(() => import('../../components/newcampaign/CampaignStaking'), {
   loading: () => <p>Campaign Staking Loading.....</p>,
 });
-// const CampaignReward = dynamic(() => import('../../components/newcampaign/CampaignReward'), {
-//   loading: () => <p>Campaign Reward Loading....</p>,
-// });
+const CampaignReward = dynamic(() => import('../../components/newcampaign/CampaignReward'), {
+  loading: () => <p>Campaign Reward Loading....</p>,
+});
 
 const NewBounty = () => {
   const classes = useStyles();
@@ -37,10 +38,14 @@ const NewBounty = () => {
   const account = useSelector(state => state.account);
   const router = useRouter();
 
-  const [registrationStep, setRegistrationStep] = useState(1);
+  const [registrationStep, setRegistrationStep] = useState(0);
 
   //Bounty Objecitve
   const [objective, setObjective] = useState('');
+
+  //Bounty Participants & Winners
+  const [bountyParticipants, setBountyParticipants] = useState(null);
+  const [bountyMaxWinners, setBountyMaxWinners] = useState(null);
 
   //Bounty Type
   const [bountyType, setBountyType] = useState('');
@@ -52,8 +57,8 @@ const NewBounty = () => {
 
   //Bounty $$$
   const [stakedAmount, setStakedAmount] = useState(0);
-  const [jackpotTarget, setJackpotTarget] = useState(0);
-  const [jackpotReward, setJackpotReward] = useState(0);
+  const [jackpotTarget, setJackpotTarget] = useState(null);
+  const [jackpotReward, setJackpotReward] = useState(null);
 
   let jackpotRewardAmount;
 
@@ -62,7 +67,10 @@ const NewBounty = () => {
       case 0:
         return (
           <Paper className={classes.NewBounty_layout_find}>
-            <BountyType setParentBountySetupStep={registrationStep => setRegistrationStep(registrationStep)} />
+            <BountyType
+              setParentBountyType={bountyType => setBountyType(bountyType)}
+              setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
+            />
           </Paper>
         );
       case 1:
@@ -101,8 +109,8 @@ const NewBounty = () => {
           <Paper className={classes.NewBounty_layout_objective} elevation={3}>
             <BountyParticipants
               objective={objective}
-              setParentMaxParticipants={jackpotReward => setJackpotReward(onlyNumeric(jackpotReward))}
-              setParentMaxWinners={jackpotTarget => setJackpotTarget(onlyNumeric(jackpotTarget))}
+              setParentMaxParticipants={jackpotReward => setBountyParticipants(jackpotReward)}
+              setParentMaxWinners={jackpotTarget => setBountyMaxWinners(jackpotTarget)}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
             />
           </Paper>
@@ -117,30 +125,36 @@ const NewBounty = () => {
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
               // setParentFinishCampaign={createNewCampaignProposal} //finish on simple
               setParentFinishCampaign={() => console.log('finish campaign')} //finish on simple
+              isBounty={true}
             />
           </Paper>
         );
       //objective amount & calculate payout -> create new
-      // case 6:
-      //   return (
-      //     <Paper className={classes.NewBounty_layout_staking} elevation={3}>
-      //       <CampaignReward
-      //         objective={objective}
-      //         stakedAmount={stakedAmount}
-      //         setParentJackpotReward={jackpotReward => setJackpotReward(onlyNumeric(jackpotReward))}
-      //         setParentIncrementalReward={() => {}}
-      //         setParentJackpotTarget={jackpotTarget => setJackpotTarget(onlyNumeric(jackpotTarget))}
-      //         setParentIncrementalTarget={() => {}}
-      //         setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
-      //         parentJackpotReward={jackpotReward} //could be either min reward if var or fixed if fixed
-      //         parentIncrementalReward={''}
-      //         parentJackpotTarget={jackpotTarget}
-      //         parentIncrementalTarget={''}
-      //         setParentFinishCampaign={() => {}}
-      //         // setParentFinishCampaign={createNewCampaignProposal}
-      //       ></CampaignReward>
-      //     </Paper>
-      //   );
+      case 6:
+        return (
+          <Paper className={classes.NewBounty_layout_staking} elevation={3}>
+            <CampaignReward
+              objective={objective}
+              stakedAmount={utils.fromWei(stakedAmount.toString())}
+              setParentJackpotReward={jackpotReward => setJackpotReward(onlyNumeric(jackpotReward))}
+              setParentIncrementalReward={() => {}}
+              setParentJackpotTarget={jackpotTarget => setJackpotTarget(onlyNumeric(jackpotTarget))}
+              setParentIncrementalTarget={() => {}}
+              setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
+              parentJackpotReward={''} //could be either min reward if var or fixed if fixed
+              parentIncrementalReward={''}
+              parentJackpotTarget={jackpotTarget}
+              parentIncrementalTarget={''}
+              setParentFinishCampaign={() => {}}
+              // setParentFinishCampaign={createNewCampaignProposal}
+              isBounty={true}
+              bountyType={bountyType}
+              bountyParticipants={bountyParticipants}
+              // fixedPotReward={utils.fromWei(fixedPotReward.toString())}
+              fixedPotReward={0}
+            ></CampaignReward>
+          </Paper>
+        );
     }
   };
   return <div className={classes.NewBounty_box_positioning}>{renderSingleRegistrationComponent()}</div>;
