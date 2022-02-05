@@ -135,6 +135,7 @@ const NewBounty = () => {
           <Paper className={classes.NewBounty_layout_staking} elevation={3}>
             <CampaignReward
               objective={objective}
+              maxWinners={bountyMaxWinners}
               stakedAmount={utils.fromWei(stakedAmount.toString())}
               setParentJackpotReward={jackpotReward => setJackpotReward(onlyNumeric(jackpotReward))}
               setParentIncrementalReward={() => {}}
@@ -149,9 +150,6 @@ const NewBounty = () => {
               // setParentFinishCampaign={createNewCampaignProposal}
               isBounty={true}
               bountyType={bountyType}
-              bountyParticipants={bountyParticipants}
-              // fixedPotReward={utils.fromWei(fixedPotReward.toString())}
-              fixedPotReward={0}
             ></CampaignReward>
           </Paper>
         );

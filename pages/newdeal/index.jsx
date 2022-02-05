@@ -151,6 +151,7 @@ const NewDeal = () => {
           <Paper className={classes.NewDeal_layout_staking} elevation={3}>
             <CampaignReward
               objective={objective}
+              maxWinners={null}
               stakedAmount={stakedAmount}
               setParentJackpotReward={jackpotReward => setJackpotReward(onlyNumeric(jackpotReward))}
               setParentIncrementalReward={incrementalReward => setIncrementalReward(onlyNumeric(incrementalReward))}

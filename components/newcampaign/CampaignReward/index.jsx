@@ -6,6 +6,7 @@ import { setObjectiveName } from '../../../utils/ObjectiveNames';
 import { useStyles } from './styles.js';
 const CampaignReward = ({
   objective,
+  maxWinners,
   stakedAmount,
   setParentJackpotReward,
   setParentIncrementalReward,
@@ -19,11 +20,11 @@ const CampaignReward = ({
   parentIncrementalTarget,
   isBounty,
   bountyType,
-  bountyParticipants,
-  fixedPotReward,
 }) => {
   const classes = useStyles();
   const [isJackpot, setIsJackpot] = useState(true);
+  const [jackpotReward, setJackpotReward] = useState(null);
+  const [incrementalReward, setIncrementalReward] = useState(null);
 
   const getHeading = () => (isJackpot ? 'Jackpot' : 'Incremental');
 
@@ -37,7 +38,8 @@ const CampaignReward = ({
 
   const maxJackpotRewardInput = jackpotReward => {
     const { value } = jackpotReward;
-    if (value <= stakedAmount) return true;
+    if (isNaN(parseInt(value))) return true;
+    if (parseInt(value) <= stakedAmount) return true;
     return false;
   };
 
@@ -53,7 +55,7 @@ const CampaignReward = ({
     }
   };
 
-  const handleBountyRewardCalc = () => (bountyType == 'var' ? bountyParticipants / stakedAmount : fixedPotReward);
+  const handleBountyRewardCalc = () => (bountyType == 'var' ? stakedAmount / maxWinners : jackpotReward);
 
   const handleRewardPlaceholder = () => {
     if (isBounty) {
@@ -74,7 +76,9 @@ const CampaignReward = ({
       <div className={classes.CampaignReward_align_inputs}>
         <div>
           {isBounty ? (
-            <p>{bountyType == 'var' ? 'Minimum ' : null}Bounty Reward Per Influencer</p>
+            <p>
+              {bountyType == 'var' ? 'Minimum ' : 'Set fixed pot reward per influencer'}Bounty Reward Per Influencer
+            </p>
           ) : isJackpot ? (
             <p>Jackpot Reward:</p>
           ) : (
@@ -85,9 +89,9 @@ const CampaignReward = ({
               className={classes.CampaignReward_input}
               placeholder={handleRewardPlaceholder()}
               thousandSeparator={true}
-              value={parentJackpotReward}
-              prefix={'$'}
-              onChange={e => setParentJackpotReward(e.target.value.slice(1))}
+              value={jackpotReward}
+              suffix=" eth"
+              onChange={e => setJackpotReward(e.target.value.slice(0, e.target.value.length - 4))}
               isAllowed={maxJackpotRewardInput}
             />
           ) : (
@@ -96,8 +100,8 @@ const CampaignReward = ({
               placeholder={`$${parseInt(stakedAmount) * 0.2}`}
               thousandSeparator={true}
               value={parentIncrementalReward}
-              prefix={'$'}
-              onChange={e => setParentIncrementalReward(e.target.value.slice(1))}
+              suffix=" eth"
+              onChange={e => setIncrementalReward(e.target.value.slice(0, 1))}
             />
           )}
           &nbsp;&nbsp;&nbsp;&nbsp;For Each
