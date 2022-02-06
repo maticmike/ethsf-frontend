@@ -158,12 +158,9 @@ const NewDeal = () => {
               setParentJackpotTarget={jackpotTarget => setJackpotTarget(onlyNumeric(jackpotTarget))}
               setParentIncrementalTarget={incrementalTarget => setIncrementalTarget(onlyNumeric(incrementalTarget))}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
-              parentJackpotReward={jackpotReward}
-              parentIncrementalReward={incrementalReward}
-              parentJackpotTarget={jackpotTarget}
-              parentIncrementalTarget={incrementalTarget}
               setParentFinishCampaign={createNewDealProposal}
               isBounty={false}
+              bountyType={null}
             ></CampaignReward>
           </Paper>
         );

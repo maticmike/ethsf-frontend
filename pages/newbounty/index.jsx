@@ -60,7 +60,33 @@ const NewBounty = () => {
   const [jackpotTarget, setJackpotTarget] = useState(null);
   const [jackpotReward, setJackpotReward] = useState(null);
 
-  let jackpotRewardAmount;
+  // let jackpotRewardAmount;
+
+  const createNewDealProposal = async () => {
+    // setJackpotReward(stakedAmount); //REVIEW ME LATER<<<
+    // objective === SIMPLE_POST ? (jackpotRewardAmount = stakedAmount) : (jackpotRewardAmount = jackpotReward);
+
+    try {
+      //CALL CONTRACT
+      // const campaignDb = await createNewDealProposalDb(
+      //   account.address, //business
+      //   influencer.toLowerCase(),
+      //   campaignDuration[0] ? campaignDuration[0] : Math.round(Date.now() / 1000), //agreedStartDate
+      //   campaignDuration[1] ? campaignDuration[1] : simplePostDate, //agreedDeadline/postDate
+      //   simplePostMinimumDuration,
+      //   jackpotRewardAmount,
+      //   incrementalReward,
+      //   jackpotTarget,
+      //   incrementalTarget,
+      //   stakedAmount, //potentialPayout
+      //   objective,
+      //   // 'niche',
+      // );
+      // router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
+    } catch (error) {
+      consola.error('NewDeal.createNewDealProposal():', error);
+    }
+  };
 
   const renderSingleRegistrationComponent = () => {
     switch (registrationStep) {
@@ -137,17 +163,12 @@ const NewBounty = () => {
               objective={objective}
               maxWinners={bountyMaxWinners}
               stakedAmount={utils.fromWei(stakedAmount.toString())}
-              setParentJackpotReward={jackpotReward => setJackpotReward(onlyNumeric(jackpotReward))}
+              setParentJackpotReward={jackpotReward => setJackpotReward(jackpotReward)}
               setParentIncrementalReward={() => {}}
               setParentJackpotTarget={jackpotTarget => setJackpotTarget(onlyNumeric(jackpotTarget))}
               setParentIncrementalTarget={() => {}}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
-              parentJackpotReward={''} //could be either min reward if var or fixed if fixed
-              parentIncrementalReward={''}
-              parentJackpotTarget={jackpotTarget}
-              parentIncrementalTarget={''}
-              setParentFinishCampaign={() => {}}
-              // setParentFinishCampaign={createNewCampaignProposal}
+              setParentFinishCampaign={createNewDealProposal}
               isBounty={true}
               bountyType={bountyType}
             ></CampaignReward>
