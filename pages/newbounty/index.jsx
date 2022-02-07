@@ -8,6 +8,7 @@ import { Paper } from '@material-ui/core';
 import { createNewCampaignProposalDb } from '../../services/api/campaignService';
 import { onlyNumeric } from '../../utils/helpers';
 import { SIMPLE_POST } from '../../constants/CampaignObjectives';
+import { createNewBountyOnContract } from '../../web3';
 import { useStyles } from './styles';
 
 const BountyType = dynamic(() => import('../../components/newcampaign/Bounty/BountyType'), {
@@ -36,6 +37,7 @@ const NewBounty = () => {
   const classes = useStyles();
 
   const account = useSelector(state => state.account);
+  const famepayFactory = useSelector(state => state.famepayFactory);
   const router = useRouter();
 
   const [registrationStep, setRegistrationStep] = useState(0);
@@ -57,8 +59,8 @@ const NewBounty = () => {
 
   //Bounty $$$
   const [stakedAmount, setStakedAmount] = useState(0);
-  const [jackpotTarget, setJackpotTarget] = useState(null);
   const [jackpotReward, setJackpotReward] = useState(null);
+  const [jackpotTarget, setJackpotTarget] = useState(null);
 
   // let jackpotRewardAmount;
 
@@ -68,20 +70,18 @@ const NewBounty = () => {
 
     try {
       //CALL CONTRACT
-      // const campaignDb = await createNewDealProposalDb(
-      //   account.address, //business
-      //   influencer.toLowerCase(),
-      //   campaignDuration[0] ? campaignDuration[0] : Math.round(Date.now() / 1000), //agreedStartDate
-      //   campaignDuration[1] ? campaignDuration[1] : simplePostDate, //agreedDeadline/postDate
-      //   simplePostMinimumDuration,
-      //   jackpotRewardAmount,
-      //   incrementalReward,
-      //   jackpotTarget,
-      //   incrementalTarget,
-      //   stakedAmount, //potentialPayout
-      //   objective,
-      //   // 'niche',
-      // );
+      await createNewBountyOnContract(
+        famepayFactory,
+        account,
+        campaignDuration[0] ? campaignDuration[0] : Math.round(Date.now() / 1000), //agreedStartDate
+        campaignDuration[1] ? campaignDuration[1] : simplePostDate, //agreedDeadline/postDate,
+        simplePostMinimumDuration,
+        jackpotReward,
+        jackpotTarget,
+        bountyMaxWinners,
+        objective,
+        bountyType,
+      );
       // router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
     } catch (error) {
       consola.error('NewDeal.createNewDealProposal():', error);

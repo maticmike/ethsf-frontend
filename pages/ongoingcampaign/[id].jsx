@@ -20,20 +20,20 @@ import { APOLLO_POLL_INTERVAL_MS } from '../../constants/Blockchain';
 import { getUserFromEthAddressDb } from '../../services/api/userService';
 import { useStyles } from './styles';
 
-const BusinessReviewHeader = dynamic(() => import('../../components/reviewcampaign/BusinessReviewHeader'), {
+const BusinessReviewHeader = dynamic(() => import('../../components/reviewdeal/BusinessReviewHeader'), {
   loading: () => <p>Business Header Loading...</p>,
 });
-const InfluencerReviewHeader = dynamic(() => import('../../components/reviewcampaign/InfluencerReviewHeader'), {
+const InfluencerReviewHeader = dynamic(() => import('../../components/reviewdeal/InfluencerReviewHeader'), {
   loading: () => <p>Influencer Header Loading...</p>,
 });
-const SubmitPost = dynamic(() => import('../../components/onogoingComponents/SubmitPost'), {
+const SubmitPost = dynamic(() => import('../../components/onogoingdeal/SubmitPost'), {
   loading: () => <p>Loading Submit Post....</p>,
 });
-const ClaimPrize = dynamic(() => import('../../components/onogoingComponents/ClaimPrize'), {
+const ClaimPrize = dynamic(() => import('../../components/onogoingdeal/ClaimPrize'), {
   loading: () => <p>Loading Claim Prize....</p>,
 });
 
-const ClaimRefund = dynamic(() => import('../../components/onogoingComponents/ClaimRefund'), {
+const ClaimRefund = dynamic(() => import('../../components/onogoingdeal/ClaimRefund'), {
   loading: () => <p>Loading Claim Refund Prize....</p>,
 });
 

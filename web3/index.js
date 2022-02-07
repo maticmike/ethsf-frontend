@@ -205,6 +205,50 @@ export const createNewCampaignOnContract = async (
 };
 
 /**
+ *
+ * @param {contract} famepayFactory
+ * @param {address} business
+ * @param {uint256} startDate
+ * @param {uint256} deadline
+ * @param {uint256} simplePostduration
+ * @param {uint256} maxJackpotReward
+ * @param {uint256} jackpotTarget
+ * @param {uint256} maxWinners
+ * @param {bytes4} objective
+ * @param {bytes32} bountyType
+ */
+export const createNewBountyOnContract = async (
+  famepayFactory,
+  business,
+  startDate,
+  deadline,
+  simplePostduration,
+  maxJackpotReward,
+  jackpotTarget,
+  maxWinners,
+  objective,
+  bountyType,
+) => {
+  try {
+    const objectiveBytes = web3.utils.toHex(setObjectiveName(objective));
+    const bounty = await famepayFactory.newFamepayBounty(
+      business,
+      startDate,
+      deadline,
+      simplePostduration,
+      maxJackpotReward,
+      jackpotTarget,
+      maxWinners,
+      objectiveBytes,
+      bountyType,
+    );
+    return bounty;
+  } catch (error) {
+    consola.error('Web3: createNewBountyContract():', error);
+  }
+};
+
+/**
  * @param {contract}  amepayFactory
  * @param {uint256} campaignId
  * @returns {object}
