@@ -42,25 +42,24 @@ const CampaignReward = ({
   };
 
   const handleFinish = () => {
-    switch (isBounty) {
-      case isBounty:
+    if (isBounty) {
+      setParentJackpotReward(utils.toWei(jackpotReward));
+      setParentJackpotTarget(jackpotTarget);
+      setParentFinishCampaign();
+    } else {
+      if (!isJackpot) {
         setParentJackpotReward(jackpotReward);
+        setParentIncrementalReward(incrementalReward);
         setParentJackpotTarget(jackpotTarget);
+        setParentIncrementalTarget(incrementalTarget);
         setParentFinishCampaign();
-      case !isBounty:
-        if (!isJackpot) {
-          setParentJackpotReward(jackpotReward);
-          setParentIncrementalReward(incrementalReward);
-          setParentJackpotTarget(jackpotTarget);
-          setParentIncrementalTarget(incrementalTarget);
-          setParentFinishCampaign();
-        } else {
-          setIsJackpot(false);
-        }
+      } else {
+        setIsJackpot(false);
+      }
     }
   };
 
-  const handleBountyRewardCalc = () => (bountyType == 'var' ? stakedAmount / maxWinners : jackpotReward);
+  const handleBountyRewardCalc = () => (bountyType == 'varPot' ? stakedAmount / maxWinners : jackpotReward);
 
   const handleRewardPlaceholder = () => {
     if (isBounty) {
@@ -82,7 +81,7 @@ const CampaignReward = ({
         <div>
           {isBounty ? (
             <p>
-              {bountyType == 'var' ? 'Minimum ' : 'Set fixed pot reward per influencer'}Bounty Reward Per Influencer
+              {bountyType == 'varPot' ? 'Minimum ' : 'Set fixed pot reward per influencer'}Bounty Reward Per Influencer
             </p>
           ) : isJackpot ? (
             <p>Jackpot Reward:</p>
@@ -138,7 +137,7 @@ const CampaignReward = ({
           Previous
         </Button>
         <Button variant="contained" color="primary" size="small" onClick={handleFinish}>
-          {isJackpot ? 'Next' : 'Finish'}
+          {isJackpot && !isBounty ? 'Next' : 'Finish'}
         </Button>
       </div>
     </div>

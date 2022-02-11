@@ -228,11 +228,15 @@ export const createNewBountyOnContract = async (
   maxWinners,
   objective,
   bountyType,
+  stakedAmount,
 ) => {
   try {
     const objectiveBytes = web3.utils.toHex(setObjectiveName(objective));
+    const bountyTypeHex = web3.utils.toHex(bountyType);
+    const bountyTypeBytes = web3.utils.padRight(bountyTypeHex, 64);
+
     const bounty = await famepayFactory.newFamepayBounty(
-      business,
+      business.address,
       startDate,
       deadline,
       simplePostduration,
@@ -240,7 +244,8 @@ export const createNewBountyOnContract = async (
       jackpotTarget,
       maxWinners,
       objectiveBytes,
-      bountyType,
+      bountyTypeBytes.toString(),
+      { value: stakedAmount.toString(), gasLimit: 3000000 },
     );
     return bounty;
   } catch (error) {

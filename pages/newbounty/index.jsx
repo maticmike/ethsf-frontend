@@ -5,7 +5,6 @@ import consola from 'consola';
 import { useSelector, useDispatch } from 'react-redux';
 import { utils } from 'web3';
 import { Paper } from '@material-ui/core';
-import { createNewCampaignProposalDb } from '../../services/api/campaignService';
 import { onlyNumeric } from '../../utils/helpers';
 import { SIMPLE_POST } from '../../constants/CampaignObjectives';
 import { createNewBountyOnContract } from '../../web3';
@@ -67,7 +66,17 @@ const NewBounty = () => {
   const createNewDealProposal = async () => {
     // setJackpotReward(stakedAmount); //REVIEW ME LATER<<<
     // objective === SIMPLE_POST ? (jackpotRewardAmount = stakedAmount) : (jackpotRewardAmount = jackpotReward);
-
+    console.log(famepayFactory, 'factory');
+    console.log(account, 'account');
+    console.log(campaignDuration[0] ? campaignDuration[0] : Math.round(Date.now() / 1000), 'start');
+    console.log(campaignDuration[1] ? campaignDuration[1] : simplePostDate, 'end');
+    console.log(simplePostMinimumDuration, 'simplePostMinimumDuration');
+    console.log(jackpotReward, 'jackpotReward');
+    console.log(jackpotTarget, 'jackpotTarget');
+    console.log(bountyMaxWinners, 'bountyMaxWinners');
+    console.log(objective, 'objective');
+    console.log(bountyType, 'bountyType');
+    console.log(stakedAmount, 'staked amount');
     try {
       //CALL CONTRACT
       await createNewBountyOnContract(
@@ -81,6 +90,7 @@ const NewBounty = () => {
         bountyMaxWinners,
         objective,
         bountyType,
+        stakedAmount,
       );
       // router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
     } catch (error) {
@@ -135,8 +145,8 @@ const NewBounty = () => {
           <Paper className={classes.NewBounty_layout_objective} elevation={3}>
             <BountyParticipants
               objective={objective}
-              setParentMaxParticipants={jackpotReward => setBountyParticipants(jackpotReward)}
-              setParentMaxWinners={jackpotTarget => setBountyMaxWinners(jackpotTarget)}
+              setParentMaxParticipants={bountyParticipants => setBountyParticipants(bountyParticipants)}
+              setParentMaxWinners={maxWiners => setBountyMaxWinners(maxWiners)}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
             />
           </Paper>

@@ -16,11 +16,11 @@ const BountyType = ({ setParentBountyType, setParentCampaignSetupStep }) => {
         <h3>New Famepay Bounty</h3>
       </div>
       <div className={classes.BountyType_buttons_spacing}>
-        <Button variant="contained" color="primary" onClick={() => setBountyType('var')}>
+        <Button variant="contained" color="primary" onClick={() => setBountyType('varPot')}>
           Variable Pot
         </Button>
 
-        <Button variant="contained" color="secondary" onClick={() => setBountyType('fixed')}>
+        <Button variant="contained" color="secondary" onClick={() => setBountyType('fixPot')}>
           Fixed Pot
         </Button>
       </div>
