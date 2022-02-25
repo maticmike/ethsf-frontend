@@ -52,7 +52,8 @@ const NewBounty = () => {
   const [bountyType, setBountyType] = useState('');
 
   //Bounty Dates
-  const [simplePostDate, setSimplePostDate] = useState(0); //postDate to create post
+  const [simplePostDateStart, setSimplePostDateStart] = useState(0); //postDate to create post
+  const [simplePostDateEnd, setSimplePostDateEnd] = useState(0); //postDate to create post
   const [simplePostMinimumDuration, setSimplePostMinimumDuration] = useState(0); //duration to keep post up (7hr post)
   const [campaignDuration, setCampaignDuration] = useState([]); //sept 1 - oct 1
 
@@ -63,27 +64,16 @@ const NewBounty = () => {
 
   // let jackpotRewardAmount;
 
-  const createNewDealProposal = async () => {
+  const createNewBounty = async () => {
     // setJackpotReward(stakedAmount); //REVIEW ME LATER<<<
     // objective === SIMPLE_POST ? (jackpotRewardAmount = stakedAmount) : (jackpotRewardAmount = jackpotReward);
-    console.log(famepayFactory, 'factory');
-    console.log(account, 'account');
-    console.log(campaignDuration[0] ? campaignDuration[0] : Math.round(Date.now() / 1000), 'start');
-    console.log(campaignDuration[1] ? campaignDuration[1] : simplePostDate, 'end');
-    console.log(simplePostMinimumDuration, 'simplePostMinimumDuration');
-    console.log(jackpotReward, 'jackpotReward');
-    console.log(jackpotTarget, 'jackpotTarget');
-    console.log(bountyMaxWinners, 'bountyMaxWinners');
-    console.log(objective, 'objective');
-    console.log(bountyType, 'bountyType');
-    console.log(stakedAmount, 'staked amount');
     try {
       //CALL CONTRACT
       await createNewBountyOnContract(
         famepayFactory,
         account,
-        campaignDuration[0] ? campaignDuration[0] : Math.round(Date.now() / 1000), //agreedStartDate
-        campaignDuration[1] ? campaignDuration[1] : simplePostDate, //agreedDeadline/postDate,
+        campaignDuration[0] ? campaignDuration[0] : simplePostDateStart, //agreedStartDate
+        campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd, //agreedDeadline/postDate,
         simplePostMinimumDuration,
         jackpotReward,
         jackpotTarget,
@@ -94,7 +84,7 @@ const NewBounty = () => {
       );
       // router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
     } catch (error) {
-      consola.error('NewDeal.createNewDealProposal():', error);
+      consola.error('NewBounty.createNewBounty():', error);
     }
   };
 
@@ -123,7 +113,8 @@ const NewBounty = () => {
           <Paper className={classes.NewBounty_layout_dates} elevation={3}>
             <CampaignCalendar
               objective={objective}
-              setParentSimplePostDate={simplePostDate => setSimplePostDate(simplePostDate)} //one date for simple post
+              setParentSimplePostDateStart={simplePostDateStart => setSimplePostDateStart(simplePostDateStart)} //one date for simple post
+              setParentSimplePostDateEnd={simplePostDateEnd => setSimplePostDateEnd(simplePostDateEnd)} //one date for simple post
               setParentCampaignDuration={campaignDuration => setCampaignDuration(campaignDuration)}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
             />
@@ -159,8 +150,7 @@ const NewBounty = () => {
               objective={objective}
               setParentDepositToEscrow={deposit => setStakedAmount(onlyNumeric(deposit))}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
-              // setParentFinishCampaign={createNewCampaignProposal} //finish on simple
-              setParentFinishCampaign={() => console.log('finish campaign')} //finish on simple
+              setParentFinishCampaign={createNewBounty} //finish on simple
               isBounty={true}
             />
           </Paper>
@@ -178,7 +168,7 @@ const NewBounty = () => {
               setParentJackpotTarget={jackpotTarget => setJackpotTarget(onlyNumeric(jackpotTarget))}
               setParentIncrementalTarget={() => {}}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
-              setParentFinishCampaign={createNewDealProposal}
+              setParentFinishCampaign={createNewBounty}
               isBounty={true}
               bountyType={bountyType}
             ></CampaignReward>

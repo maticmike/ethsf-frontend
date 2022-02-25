@@ -43,7 +43,8 @@ const NewDeal = () => {
   const [objective, setObjective] = useState('');
 
   //Campaign Dates
-  const [simplePostDate, setSimplePostDate] = useState(0); //postDate to create post
+  const [simplePostDateStart, setSimplePostDateStart] = useState(0); //postDate to create post
+  const [simplePostDateEnd, setSimplePostDateEnd] = useState(0); //postDate to create post
   const [simplePostMinimumDuration, setSimplePostMinimumDuration] = useState(0); //duration to keep post up (7hr post)
   const [campaignDuration, setCampaignDuration] = useState([]); //sept 1 - oct 1
 
@@ -73,8 +74,8 @@ const NewDeal = () => {
       const campaignDb = await createNewDealProposalDb(
         account.address, //business
         influencer.toLowerCase(),
-        campaignDuration[0] ? campaignDuration[0] : Math.round(Date.now() / 1000), //agreedStartDate
-        campaignDuration[1] ? campaignDuration[1] : simplePostDate, //agreedDeadline/postDate
+        campaignDuration[0] ? campaignDuration[0] : simplePostDateStart, //agreedStartDate
+        campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd, //agreedDeadline/postDate
         simplePostMinimumDuration,
         jackpotRewardAmount,
         incrementalReward,
@@ -116,7 +117,8 @@ const NewDeal = () => {
           <Paper className={classes.NewDeal_layout_dates} elevation={3}>
             <CampaignCalendar
               objective={objective}
-              setParentSimplePostDate={simplePostDate => setSimplePostDate(simplePostDate)} //one date for simple post
+              setParentSimplePostDateStart={simplePostDateStart => setSimplePostDateStart(simplePostDateStart)} //one date for simple post
+              setParentSimplePostDateEnd={simplePostDateEnd => setSimplePostDateEnd(simplePostDateEnd)} //one date for simple post
               setParentCampaignDuration={campaignDuration => setCampaignDuration(campaignDuration)}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
             />

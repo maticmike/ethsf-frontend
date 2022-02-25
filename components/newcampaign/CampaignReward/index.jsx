@@ -41,24 +41,6 @@ const CampaignReward = ({
     return false;
   };
 
-  const handleFinish = () => {
-    if (isBounty) {
-      setParentJackpotReward(utils.toWei(jackpotReward));
-      setParentJackpotTarget(jackpotTarget);
-      setParentFinishCampaign();
-    } else {
-      if (!isJackpot) {
-        setParentJackpotReward(jackpotReward);
-        setParentIncrementalReward(incrementalReward);
-        setParentJackpotTarget(jackpotTarget);
-        setParentIncrementalTarget(incrementalTarget);
-        setParentFinishCampaign();
-      } else {
-        setIsJackpot(false);
-      }
-    }
-  };
-
   const handleBountyRewardCalc = () => (bountyType == 'varPot' ? stakedAmount / maxWinners : jackpotReward);
 
   const handleRewardPlaceholder = () => {
@@ -67,6 +49,26 @@ const CampaignReward = ({
       return `${bountyReward.toString().slice(0, 6)} eth`;
     } else {
       return `${utils.fromWei(stakedAmount.toString())} eth`;
+    }
+  };
+
+  const handleJackpotRewardAmount = jackpotReward => setJackpotReward(jackpotReward.slice(0, jackpotReward.length - 4));
+
+  const handleFinish = () => {
+    if (isBounty) {
+      setParentJackpotReward(utils.toWei(jackpotReward));
+      setParentJackpotTarget(jackpotTarget);
+      setParentFinishCampaign();
+    } else {
+      if (!isJackpot) {
+        setParentJackpotReward(jackpotReward); //SET TO WEI??????
+        setParentIncrementalReward(incrementalReward);
+        setParentJackpotTarget(jackpotTarget);
+        setParentIncrementalTarget(incrementalTarget);
+        setParentFinishCampaign();
+      } else {
+        setIsJackpot(false);
+      }
     }
   };
 
@@ -95,7 +97,7 @@ const CampaignReward = ({
               thousandSeparator={true}
               value={jackpotReward}
               suffix=" eth"
-              onChange={e => setJackpotReward(e.target.value.slice(0, e.target.value.length - 4))}
+              onChange={e => handleJackpotRewardAmount(e.target.value)}
               isAllowed={maxJackpotRewardInput}
             />
           ) : (

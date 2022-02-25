@@ -12,7 +12,7 @@ export const getTweetDataFromDB = async tweet => {
   }
 };
 
-export const createNewCampaignProposalDb = async (
+export const createNewDealProposalDb = async (
   business,
   influencer,
   agreedStartDate,

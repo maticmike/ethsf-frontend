@@ -8,7 +8,8 @@ import { SIMPLE_POST } from '../../../constants/CampaignObjectives';
 
 const CampaignCalendar = ({
   objective,
-  setParentSimplePostDate,
+  setParentSimplePostDateStart,
+  setParentSimplePostDateEnd,
   setParentCampaignDuration,
   setParentCampaignSetupStep,
 }) => {
@@ -21,10 +22,12 @@ const CampaignCalendar = ({
     objective === SIMPLE_POST ? setSimplePostDate(postDate) : setCampaignDuration(postDate);
   };
   const selectPostDate = () => {
+    let startOfDaySimplePost;
     let endOfDaySimplePost;
     let startCampaignDate;
     let endCampaignDate;
     if (objective === SIMPLE_POST) {
+      startOfDaySimplePost = new Date(simplePostDate).getTime() / 1000;
       endOfDaySimplePost = new Date(simplePostDate).getTime() / 1000 + 86340;
       //If decimal then post is today
       if (endOfDaySimplePost % 1 != 0) {
@@ -37,7 +40,8 @@ const CampaignCalendar = ({
       endCampaignDate = new Date(campaignDuration[1]).getTime() / 1000;
     }
     //TODO specify timezone right now its eastern
-    setParentSimplePostDate(endOfDaySimplePost);
+    setParentSimplePostDateStart(startOfDaySimplePost);
+    setParentSimplePostDateEnd(endOfDaySimplePost);
     setParentCampaignDuration([startCampaignDate, parseInt(endCampaignDate)]);
     objective === SIMPLE_POST ? setParentCampaignSetupStep(3) : setParentCampaignSetupStep(4);
   };
