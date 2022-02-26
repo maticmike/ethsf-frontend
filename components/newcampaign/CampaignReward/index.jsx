@@ -34,25 +34,27 @@ const CampaignReward = ({
     }
   };
 
-  const maxJackpotRewardInput = jackpotReward => {
-    const { value } = jackpotReward;
+  const maxJackpotRewardInput = reward => {
+    const { value } = reward;
     if (isNaN(parseInt(value))) return true;
     if (parseInt(value) <= stakedAmount) return true;
     return false;
   };
 
-  const handleBountyRewardCalc = () => (bountyType == 'varPot' ? stakedAmount / maxWinners : jackpotReward);
+  const handleBountyRewardPerInfluencerCalc = () =>
+    bountyType == 'varPot' ? stakedAmount / maxWinners : jackpotReward;
+
+  const handleDealRewardPerInfluencerCal = () => (objective != 'post' ? stakedAmount / 2 : stakedAmount);
 
   const handleRewardPlaceholder = () => {
     if (isBounty) {
-      const bountyReward = handleBountyRewardCalc();
+      const bountyReward = handleBountyRewardPerInfluencerCalc();
       return `${bountyReward.toString().slice(0, 6)} eth`;
     } else {
-      return `${utils.fromWei(stakedAmount.toString())} eth`;
+      const dealReward = handleDealRewardPerInfluencerCal();
+      return `${utils.fromWei(dealReward.toString())} eth`;
     }
   };
-
-  const handleJackpotRewardAmount = jackpotReward => setJackpotReward(jackpotReward.slice(0, jackpotReward.length - 4));
 
   const handleFinish = () => {
     if (isBounty) {
@@ -61,7 +63,7 @@ const CampaignReward = ({
       setParentFinishCampaign();
     } else {
       if (!isJackpot) {
-        setParentJackpotReward(jackpotReward); //SET TO WEI??????
+        setParentJackpotReward(jackpotReward);
         setParentIncrementalReward(incrementalReward);
         setParentJackpotTarget(jackpotTarget);
         setParentIncrementalTarget(incrementalTarget);
@@ -97,7 +99,7 @@ const CampaignReward = ({
               thousandSeparator={true}
               value={jackpotReward}
               suffix=" eth"
-              onChange={e => handleJackpotRewardAmount(e.target.value)}
+              onChange={e => setJackpotReward(e.target.value.slice(0, e.target.value.length - 4))}
               isAllowed={maxJackpotRewardInput}
             />
           ) : (
@@ -107,7 +109,7 @@ const CampaignReward = ({
               thousandSeparator={true}
               value={incrementalReward}
               suffix=" eth"
-              onChange={e => setIncrementalReward(e.target.value.slice(0, 1))}
+              onChange={e => setIncrementalReward(e.target.value.slice(0, e.target.value.length - 4))}
             />
           )}
           &nbsp;&nbsp;&nbsp;&nbsp;For Each
