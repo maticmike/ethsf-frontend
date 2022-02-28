@@ -4,19 +4,7 @@ import { FormHelperText, Button } from '@material-ui/core';
 import { utils } from 'web3';
 import { setObjectiveName } from '../../../utils/ObjectiveNames';
 import { useStyles } from './styles.js';
-const CampaignReward = ({
-  objective,
-  maxWinners,
-  stakedAmount,
-  setParentJackpotReward,
-  setParentIncrementalReward,
-  setParentJackpotTarget,
-  setParentIncrementalTarget,
-  setParentCampaignSetupStep,
-  setParentFinishCampaign,
-  isBounty,
-  bountyType,
-}) => {
+const CampaignReward = ({ objective, maxWinners, stakedAmount, setParentFinishCampaign, isBounty, bountyType }) => {
   const classes = useStyles();
   const [isJackpot, setIsJackpot] = useState(true);
   const [jackpotReward, setJackpotReward] = useState(null);
@@ -26,13 +14,7 @@ const CampaignReward = ({
 
   const getHeading = () => (isJackpot ? 'Jackpot' : 'Incremental');
 
-  const handlePrevious = () => {
-    if (!isJackpot) {
-      setIsJackpot(true);
-    } else {
-      setParentCampaignSetupStep(4);
-    }
-  };
+  const handlePrevious = () => (!isJackpot ? setIsJackpot(true) : setParentCampaignSetupStep(4));
 
   const maxJackpotRewardInput = reward => {
     const { value } = reward;
@@ -58,19 +40,11 @@ const CampaignReward = ({
 
   const handleFinish = () => {
     if (isBounty) {
-      setParentJackpotReward(utils.toWei(jackpotReward));
-      setParentJackpotTarget(jackpotTarget);
-      setParentFinishCampaign();
+      setParentFinishCampaign(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget);
     } else {
-      if (!isJackpot) {
-        setParentJackpotReward(jackpotReward);
-        setParentIncrementalReward(incrementalReward);
-        setParentJackpotTarget(jackpotTarget);
-        setParentIncrementalTarget(incrementalTarget);
-        setParentFinishCampaign();
-      } else {
-        setIsJackpot(false);
-      }
+      !isJackpot
+        ? setParentFinishCampaign(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget)
+        : setIsJackpot(false);
     }
   };
 

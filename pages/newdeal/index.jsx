@@ -50,10 +50,6 @@ const NewDeal = () => {
 
   //Campaign $$$$
   const [stakedAmount, setStakedAmount] = useState(0);
-  const [jackpotTarget, setJackpotTarget] = useState(0);
-  const [incrementalTarget, setIncrementalTarget] = useState(0);
-  const [jackpotReward, setJackpotReward] = useState(0);
-  const [incrementalReward, setIncrementalReward] = useState(0);
 
   let jackpotRewardAmount;
 
@@ -66,26 +62,51 @@ const NewDeal = () => {
     }
   };
 
-  const createNewDealProposal = async () => {
+  const createNewDealProposal = async (
+    jackpotReward,
+    incrementalReward,
+    jackpotTarget,
+    incrementalTarget,
+    // registrationStep,
+  ) => {
     // setJackpotReward(stakedAmount); //REVIEW ME LATER<<<
     objective === SIMPLE_POST ? (jackpotRewardAmount = stakedAmount) : (jackpotRewardAmount = jackpotReward);
 
     try {
-      const campaignDb = await createNewDealProposalDb(
-        account.address, //business
-        influencer.toLowerCase(),
-        campaignDuration[0] ? campaignDuration[0] : simplePostDateStart, //agreedStartDate
-        campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd, //agreedDeadline/postDate
-        simplePostMinimumDuration,
-        jackpotRewardAmount,
-        incrementalReward,
-        jackpotTarget,
-        incrementalTarget,
-        stakedAmount, //potentialPayout
-        objective,
-        // 'niche',
+      // const campaignDb = await createNewDealProposalDb(
+      //   account.address, //business
+      //   influencer.toLowerCase(),
+      //   campaignDuration[0] ? campaignDuration[0] : simplePostDateStart, //agreedStartDate
+      //   campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd, //agreedDeadline/postDate
+      //   simplePostMinimumDuration,
+      //   jackpotRewardAmount,
+      //   incrementalReward,
+      //   jackpotTarget,
+      //   incrementalTarget,
+      //   stakedAmount, //potentialPayout
+      //   objective,
+      //   // 'niche',
+      // );
+
+      console.log(account.address, 'account.address');
+      console.log(influencer.toLowerCase(), 'influencer.toLowerCase()');
+      console.log(
+        campaignDuration[0] ? campaignDuration[0] : simplePostDateStart,
+        'campaignDuration[0] ? campaignDuration[0] : simplePostDateStart',
       );
-      router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
+      console.log(
+        campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd,
+        'campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd',
+      );
+      console.log(simplePostMinimumDuration, 'simplePostMinimumDuration');
+      console.log(jackpotRewardAmount, 'jackpotRewardAmount');
+      console.log(incrementalReward, 'incrementalReward');
+      console.log(jackpotTarget, 'jackpotTarget');
+      console.log(incrementalTarget, 'incrementalTarget');
+      console.log(stakedAmount, 'stakedAmount');
+      console.log(objective, 'objective');
+
+      // router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
     } catch (error) {
       consola.error('NewDeal.createNewDealProposal():', error);
     }
@@ -149,18 +170,14 @@ const NewDeal = () => {
         );
       case 5:
         return (
-          // TODO JACKPOT REARD COULD BE A BUG CONSIDER USING GLOBAL VAR INSTEAD OF STATE
           <Paper className={classes.NewDeal_layout_staking} elevation={3}>
             <CampaignReward
               objective={objective}
               maxWinners={null}
               stakedAmount={stakedAmount}
-              setParentJackpotReward={jackpotReward => setJackpotReward(onlyNumeric(jackpotReward))}
-              setParentIncrementalReward={incrementalReward => setIncrementalReward(onlyNumeric(incrementalReward))}
-              setParentJackpotTarget={jackpotTarget => setJackpotTarget(onlyNumeric(jackpotTarget))}
-              setParentIncrementalTarget={incrementalTarget => setIncrementalTarget(onlyNumeric(incrementalTarget))}
-              setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
-              setParentFinishCampaign={createNewDealProposal}
+              setParentFinishCampaign={(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget) =>
+                createNewDealProposal(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget)
+              }
               isBounty={false}
               bountyType={null}
             ></CampaignReward>
