@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import consola from 'consola';
 import { useSelector, useDispatch } from 'react-redux';
+import consola from 'consola';
+import { utils } from 'web3';
 import { Paper } from '@material-ui/core';
-import { createNewDealProposalDb } from '../../services/api/campaignService';
 import { onlyNumeric } from '../../utils/helpers';
 import { SIMPLE_POST } from '../../constants/CampaignObjectives';
+import { createNewDealProposalDb } from '../../services/api/campaignService';
 import { useStyles } from './styles';
 
 const FindInfluencer = dynamic(() => import('../../components/newcampaign/Deal/FindInfluencer'), {
@@ -73,38 +74,20 @@ const NewDeal = () => {
     objective === SIMPLE_POST ? (jackpotRewardAmount = stakedAmount) : (jackpotRewardAmount = jackpotReward);
 
     try {
-      // const campaignDb = await createNewDealProposalDb(
-      //   account.address, //business
-      //   influencer.toLowerCase(),
-      //   campaignDuration[0] ? campaignDuration[0] : simplePostDateStart, //agreedStartDate
-      //   campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd, //agreedDeadline/postDate
-      //   simplePostMinimumDuration,
-      //   jackpotRewardAmount,
-      //   incrementalReward,
-      //   jackpotTarget,
-      //   incrementalTarget,
-      //   stakedAmount, //potentialPayout
-      //   objective,
-      //   // 'niche',
-      // );
-
-      console.log(account.address, 'account.address');
-      console.log(influencer.toLowerCase(), 'influencer.toLowerCase()');
-      console.log(
-        campaignDuration[0] ? campaignDuration[0] : simplePostDateStart,
-        'campaignDuration[0] ? campaignDuration[0] : simplePostDateStart',
+      const campaignDb = await createNewDealProposalDb(
+        account.address, //business
+        influencer.toLowerCase(),
+        campaignDuration[0] ? campaignDuration[0] : simplePostDateStart, //agreedStartDate
+        campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd, //agreedDeadline/postDate
+        simplePostMinimumDuration,
+        utils.toWei(jackpotRewardAmount),
+        utils.toWei(incrementalReward),
+        jackpotTarget.replace(/,/g, ''),
+        incrementalTarget.replace(/,/g, ''),
+        stakedAmount, //potentialPayout
+        objective,
+        // 'niche',
       );
-      console.log(
-        campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd,
-        'campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd',
-      );
-      console.log(simplePostMinimumDuration, 'simplePostMinimumDuration');
-      console.log(jackpotRewardAmount, 'jackpotRewardAmount');
-      console.log(incrementalReward, 'incrementalReward');
-      console.log(jackpotTarget, 'jackpotTarget');
-      console.log(incrementalTarget, 'incrementalTarget');
-      console.log(stakedAmount, 'stakedAmount');
-      console.log(objective, 'objective');
 
       // router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
     } catch (error) {
@@ -175,6 +158,7 @@ const NewDeal = () => {
               objective={objective}
               maxWinners={null}
               stakedAmount={stakedAmount}
+              setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
               setParentFinishCampaign={(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget) =>
                 createNewDealProposal(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget)
               }

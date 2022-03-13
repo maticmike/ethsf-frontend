@@ -59,29 +59,42 @@ const NewBounty = () => {
 
   //Bounty $$$
   const [stakedAmount, setStakedAmount] = useState(0);
-  const [jackpotReward, setJackpotReward] = useState(null);
-  const [jackpotTarget, setJackpotTarget] = useState(null);
 
-  // let jackpotRewardAmount;
+  const createNewBounty = async (jackpotRewardAmount, jackpotTargetAmount) => {
+    // setJackpotRewardAmount(stakedAmount); //REVIEW ME LATER<<<
+    // objective === SIMPLE_POST ? (jackpotRewardAmountAmount = stakedAmount) : (jackpotRewardAmountAmount = jackpotRewardAmount);
 
-  const createNewBounty = async () => {
-    // setJackpotReward(stakedAmount); //REVIEW ME LATER<<<
-    // objective === SIMPLE_POST ? (jackpotRewardAmount = stakedAmount) : (jackpotRewardAmount = jackpotReward);
+    console.log(account.address, 'account.address');
+    console.log(
+      campaignDuration[0] ? campaignDuration[0] : simplePostDateStart,
+      'campaignDuration[0] ? campaignDuration[0] : simplePostDateStart',
+    );
+    console.log(
+      campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd,
+      'campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd',
+    );
+    console.log(simplePostMinimumDuration, 'simplePostMinimumDuration');
+
+    console.log(utils.toWei(jackpotRewardAmount?.toString()), 'jackpotRewardAmountAmount');
+    console.log(jackpotTargetAmount.replace(/,/g, ''), 'jackpotTargetAmount');
+    console.log(stakedAmount, 'stakedAmount');
+    console.log(objective, 'objective');
+
     try {
       //CALL CONTRACT
-      await createNewBountyOnContract(
-        famepayFactory,
-        account,
-        campaignDuration[0] ? campaignDuration[0] : simplePostDateStart, //agreedStartDate
-        campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd, //agreedDeadline/postDate,
-        simplePostMinimumDuration,
-        jackpotReward,
-        jackpotTarget,
-        bountyMaxWinners,
-        objective,
-        bountyType,
-        stakedAmount,
-      );
+      // await createNewBountyOnContract(
+      //   famepayFactory,
+      //   account,
+      //   campaignDuration[0] ? campaignDuration[0] : simplePostDateStart, //agreedStartDate
+      //   campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd, //agreedDeadline/postDate,
+      //   simplePostMinimumDuration,
+      //   jackpotRewardAmount,
+      //   jackpotTargetAmount,
+      //   bountyMaxWinners,
+      //   objective,
+      //   bountyType,
+      //   stakedAmount,
+      // );
       // router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
     } catch (error) {
       consola.error('NewBounty.createNewBounty():', error);
@@ -163,12 +176,8 @@ const NewBounty = () => {
               objective={objective}
               maxWinners={bountyMaxWinners}
               stakedAmount={utils.fromWei(stakedAmount.toString())}
-              setParentJackpotReward={jackpotReward => setJackpotReward(jackpotReward)}
-              setParentIncrementalReward={() => {}}
-              setParentJackpotTarget={jackpotTarget => setJackpotTarget(onlyNumeric(jackpotTarget))}
-              setParentIncrementalTarget={() => {}}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
-              setParentFinishCampaign={createNewBounty}
+              setParentFinishCampaign={(jackpotReward, jackpotTarget) => createNewBounty(jackpotReward, jackpotTarget)}
               isBounty={true}
               bountyType={bountyType}
             ></CampaignReward>

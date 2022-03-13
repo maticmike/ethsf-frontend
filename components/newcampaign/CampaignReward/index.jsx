@@ -4,7 +4,15 @@ import { FormHelperText, Button } from '@material-ui/core';
 import { utils } from 'web3';
 import { setObjectiveName } from '../../../utils/ObjectiveNames';
 import { useStyles } from './styles.js';
-const CampaignReward = ({ objective, maxWinners, stakedAmount, setParentFinishCampaign, isBounty, bountyType }) => {
+const CampaignReward = ({
+  objective,
+  maxWinners,
+  stakedAmount,
+  setParentCampaignSetupStep,
+  setParentFinishCampaign,
+  isBounty,
+  bountyType,
+}) => {
   const classes = useStyles();
   const [isJackpot, setIsJackpot] = useState(true);
   const [jackpotReward, setJackpotReward] = useState(null);
@@ -40,7 +48,7 @@ const CampaignReward = ({ objective, maxWinners, stakedAmount, setParentFinishCa
 
   const handleFinish = () => {
     if (isBounty) {
-      setParentFinishCampaign(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget);
+      setParentFinishCampaign(jackpotReward, jackpotTarget);
     } else {
       !isJackpot
         ? setParentFinishCampaign(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget)
@@ -52,9 +60,16 @@ const CampaignReward = ({ objective, maxWinners, stakedAmount, setParentFinishCa
     <div className={classes.CampaignReward_font}>
       <h1>{objective} Objective</h1>
       <p className={classes.CampaignReward_p_heading}>{getHeading()} Reward</p>
-      <FormHelperText>
-        Enter the conditions for the influencer to earn a reward as well as the reward for completing the objective
-      </FormHelperText>
+      {isBounty ? (
+        <FormHelperText>
+          {bountyType === 'varPot' ? 'Minimum' : 'Fixed'} amount which each influencer would earn if all influencers
+          accomplish bounty
+        </FormHelperText>
+      ) : (
+        <FormHelperText>
+          Enter the conditions for the influencer to earn a reward as well as the reward for completing the objective
+        </FormHelperText>
+      )}
       <div className={classes.CampaignReward_align_inputs}>
         <div>
           {isBounty ? (
@@ -69,12 +84,12 @@ const CampaignReward = ({ objective, maxWinners, stakedAmount, setParentFinishCa
           {isJackpot ? (
             <NumberFormat
               className={classes.CampaignReward_input}
-              placeholder={handleRewardPlaceholder()}
+              placeholder={bountyType == 'varPot' ? null : handleRewardPlaceholder()}
               thousandSeparator={true}
-              value={jackpotReward}
+              value={bountyType == 'varPot' ? handleRewardPlaceholder() : jackpotReward}
               suffix=" eth"
               onChange={e => setJackpotReward(e.target.value.slice(0, e.target.value.length - 4))}
-              isAllowed={maxJackpotRewardInput}
+              isAllowed={bountyType == 'varPot' ? () => false : maxJackpotRewardInput}
             />
           ) : (
             <NumberFormat
