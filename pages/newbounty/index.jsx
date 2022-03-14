@@ -63,38 +63,21 @@ const NewBounty = () => {
   const createNewBounty = async (jackpotRewardAmount, jackpotTargetAmount) => {
     // setJackpotRewardAmount(stakedAmount); //REVIEW ME LATER<<<
     // objective === SIMPLE_POST ? (jackpotRewardAmountAmount = stakedAmount) : (jackpotRewardAmountAmount = jackpotRewardAmount);
-
-    console.log(account.address, 'account.address');
-    console.log(
-      campaignDuration[0] ? campaignDuration[0] : simplePostDateStart,
-      'campaignDuration[0] ? campaignDuration[0] : simplePostDateStart',
-    );
-    console.log(
-      campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd,
-      'campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd',
-    );
-    console.log(simplePostMinimumDuration, 'simplePostMinimumDuration');
-
-    console.log(utils.toWei(jackpotRewardAmount?.toString()), 'jackpotRewardAmountAmount');
-    console.log(jackpotTargetAmount.replace(/,/g, ''), 'jackpotTargetAmount');
-    console.log(stakedAmount, 'stakedAmount');
-    console.log(objective, 'objective');
-
     try {
       //CALL CONTRACT
-      // await createNewBountyOnContract(
-      //   famepayFactory,
-      //   account,
-      //   campaignDuration[0] ? campaignDuration[0] : simplePostDateStart, //agreedStartDate
-      //   campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd, //agreedDeadline/postDate,
-      //   simplePostMinimumDuration,
-      //   jackpotRewardAmount,
-      //   jackpotTargetAmount,
-      //   bountyMaxWinners,
-      //   objective,
-      //   bountyType,
-      //   stakedAmount,
-      // );
+      await createNewBountyOnContract(
+        famepayFactory,
+        account,
+        campaignDuration[0] ? campaignDuration[0] : simplePostDateStart, //agreedStartDate
+        campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd, //agreedDeadline/postDate,
+        simplePostMinimumDuration,
+        jackpotRewardAmount,
+        jackpotTargetAmount,
+        bountyMaxWinners,
+        objective,
+        bountyType,
+        stakedAmount,
+      );
       // router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
     } catch (error) {
       consola.error('NewBounty.createNewBounty():', error);
@@ -175,7 +158,7 @@ const NewBounty = () => {
             <CampaignReward
               objective={objective}
               maxWinners={bountyMaxWinners}
-              stakedAmount={utils.fromWei(stakedAmount.toString())}
+              stakedAmount={stakedAmount}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
               setParentFinishCampaign={(jackpotReward, jackpotTarget) => createNewBounty(jackpotReward, jackpotTarget)}
               isBounty={true}

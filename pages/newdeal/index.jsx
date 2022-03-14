@@ -63,14 +63,7 @@ const NewDeal = () => {
     }
   };
 
-  const createNewDealProposal = async (
-    jackpotReward,
-    incrementalReward,
-    jackpotTarget,
-    incrementalTarget,
-    // registrationStep,
-  ) => {
-    // setJackpotReward(stakedAmount); //REVIEW ME LATER<<<
+  const createNewDealProposal = async (jackpotReward, incrementalReward, jackpotTarget, incrementalTarget) => {
     objective === SIMPLE_POST ? (jackpotRewardAmount = stakedAmount) : (jackpotRewardAmount = jackpotReward);
 
     try {
@@ -89,7 +82,7 @@ const NewDeal = () => {
         // 'niche',
       );
 
-      // router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
+      router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
     } catch (error) {
       consola.error('NewDeal.createNewDealProposal():', error);
     }
@@ -156,7 +149,7 @@ const NewDeal = () => {
           <Paper className={classes.NewDeal_layout_staking} elevation={3}>
             <CampaignReward
               objective={objective}
-              maxWinners={null}
+              maxWinners={1}
               stakedAmount={stakedAmount}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
               setParentFinishCampaign={(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget) =>
