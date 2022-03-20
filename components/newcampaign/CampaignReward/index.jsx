@@ -15,10 +15,10 @@ const CampaignReward = ({
 }) => {
   const classes = useStyles();
   const [isJackpot, setIsJackpot] = useState(true);
-  const [incrementalReward, setIncrementalReward] = useState(null);
   const [jackpotTarget, setJackpotTarget] = useState(null);
-  const [incrementalTarget, setIncrementalTarget] = useState(null);
   const [jackpotReward, setJackpotReward] = useState(null);
+  const [incrementalReward, setIncrementalReward] = useState(0);
+  const [incrementalTarget, setIncrementalTarget] = useState(0);
 
   const getHeading = () => (isJackpot ? 'Jackpot' : 'Incremental');
 
@@ -35,6 +35,13 @@ const CampaignReward = ({
     if (floatValue <= maxRewardPerInfluencer) return true;
     return false;
   };
+
+  const maxIncrementalTargetInput = incrementalTargetAmount => {
+    const { floatValue } = incrementalTargetAmount;
+    if (floatValue < jackpotTarget) return true;
+    return false;
+  };
+
   const handleDealRewardPerInfluencerCal = () => (objective != 'post' ? stakedAmount / 2 : stakedAmount);
 
   const handleRewardPlaceholder = () => {
@@ -47,12 +54,27 @@ const CampaignReward = ({
     }
   };
 
+  //calculate incremental reward based on target
+  const handleIncrementalReward = incrementalTargetAmount => {
+    setIncrementalTarget(incrementalTargetAmount);
+    const incrementalRewardAvailable = stakedAmount - utils.toWei(jackpotReward);
+    const possibleIncrementalPayments = jackpotTarget / incrementalTargetAmount;
+    const incrementalRewardDistributed = incrementalRewardAvailable / possibleIncrementalPayments;
+    //parse int to remove decimals
+    setIncrementalReward(parseInt(incrementalRewardDistributed));
+  };
+
   const handleFinish = () => {
     if (isBounty) {
-      setParentFinishCampaign(utils.toWei(jackpotReward), jackpotTarget.replace(/,/g, ''));
+      setParentFinishCampaign(utils.toWei(jackpotReward), jackpotTarget);
     } else {
       !isJackpot
-        ? setParentFinishCampaign(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget)
+        ? setParentFinishCampaign(
+            utils.toWei(jackpotReward),
+            incrementalReward.toString(),
+            jackpotTarget,
+            incrementalTarget,
+          )
         : setIsJackpot(false);
     }
   };
@@ -88,16 +110,17 @@ const CampaignReward = ({
               value={bountyType == 'varPot' ? handleRewardPlaceholder() : jackpotReward}
               suffix=" eth"
               onChange={e => setJackpotReward(e.target.value.slice(0, e.target.value.length - 4))}
-              isAllowed={bountyType == 'varPot' ? () => false : maxJackpotRewardInput}
+              // isAllowed={bountyType == 'varPot' ? () => false : maxJackpotRewardInput}
+              isAllowed={maxJackpotRewardInput}
             />
           ) : (
             <NumberFormat
               className={classes.CampaignReward_input}
-              placeholder={`$${parseInt(stakedAmount) * 0.2}`}
               thousandSeparator={true}
-              value={incrementalReward}
+              value={utils.fromWei(incrementalReward.toString())}
               suffix=" eth"
-              onChange={e => setIncrementalReward(e.target.value.slice(0, e.target.value.length - 4))}
+              // onChange={e => setIncrementalReward(e.target.value.slice(0, e.target.value.length - 4))}
+              isAllowed={() => false}
             />
           )}
           &nbsp;&nbsp;&nbsp;&nbsp;For Each
@@ -110,15 +133,15 @@ const CampaignReward = ({
               placeholder={`90,000 ${objective}`}
               thousandSeparator={true}
               value={jackpotTarget}
-              onChange={e => setJackpotTarget(e.target.value)}
+              onChange={e => setJackpotTarget(e.target.value.replace(/,/g, ''))}
             />
           ) : (
             <NumberFormat
               className={classes.CampaignReward_input}
-              placeholder={`5000 ${objective}`}
               thousandSeparator={true}
               value={incrementalTarget}
-              onChange={e => setIncrementalTarget(e.target.value)}
+              onChange={e => handleIncrementalReward(e.target.value.replace(/,/g, ''))}
+              isAllowed={maxIncrementalTargetInput}
             />
           )}
         </div>

@@ -65,7 +65,7 @@ const NewDeal = () => {
 
   const createNewDealProposal = async (jackpotReward, incrementalReward, jackpotTarget, incrementalTarget) => {
     objective === SIMPLE_POST ? (jackpotRewardAmount = stakedAmount) : (jackpotRewardAmount = jackpotReward);
-
+    console.log(incrementalReward, 'incre reward');
     try {
       const campaignDb = await createNewDealProposalDb(
         account.address, //business
@@ -73,8 +73,8 @@ const NewDeal = () => {
         campaignDuration[0] ? campaignDuration[0] : simplePostDateStart, //agreedStartDate
         campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd, //agreedDeadline/postDate
         simplePostMinimumDuration,
-        utils.toWei(jackpotRewardAmount),
-        utils.toWei(incrementalReward),
+        jackpotRewardAmount,
+        incrementalReward,
         jackpotTarget.replace(/,/g, ''),
         incrementalTarget.replace(/,/g, ''),
         stakedAmount, //potentialPayout

@@ -182,6 +182,12 @@ export const createNewCampaignOnContract = async (
   objective,
 ) => {
   try {
+    console.log(jackpotReward, 'j rewa');
+    console.log(incrementalReward, 'incre rewa');
+    console.log(jackpotTarget, 'j targ');
+    console.log(incrementalTarget, 'i targ');
+    console.log(potentialPayout, 'potential pay');
+
     // const objectiveBytes = ethers.utils.hexlify(setObjectiveName(objective));' //<--- Preferable to web3
     const objectiveBytes = web3.utils.toHex(setObjectiveName(objective));
     const campaign = await famepayFactory.newFamepayCampaign(
