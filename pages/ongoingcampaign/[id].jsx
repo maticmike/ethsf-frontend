@@ -83,11 +83,14 @@ const OngoingCampaign = () => {
     setInvalidPost(false);
     let tweetId;
     if (postUrl.includes('twitter.com' && '/status/')) {
-      if (postUrl.substr(postUrl.length - 4) === 's=20') {
+      // if (postUrl.substr(postUrl.length - 4) === 's=20') {
+      if (postUrl.slice(postUrl.length - 4) === 's=20') {
         const tweetUrl = postUrl.slice(0, -5);
-        tweetId = tweetUrl.substr(postUrl.length - 19);
+        // tweetId = tweetUrl.substr(postUrl.length - 19);
+        tweetId = tweetUrl.slice(postUrl.length - 19);
       } else {
-        tweetId = postUrl.substr(postUrl.length - 19);
+        // tweetId = postUrl.substr(postUrl.length - 19);
+        tweetId = postUrl.slice(postUrl.length - 19);
       }
     } else {
       setInvalidPost(true);
@@ -135,12 +138,13 @@ const OngoingCampaign = () => {
         />
       );
     }
-    if (campaign?.deadline >= Date.now()) {
+    if (campaign?.deadline >= Math.round(Date.now() / 1000)) {
       //if ongoing but no prize to claim
       return <SubmitPost invalidPost={invalidPost} getPostData={getPostData} setPostUrl={setPostUrl} />;
+    } else {
+      //if not ongoing
+      return <p>Campaign is over. Thank you for participating.</p>;
     }
-    //if not ongoing
-    return <p>Campaign is over. Thank you for participating.</p>;
   };
 
   const isObjectiveCompleteBusinessUI = () => {
