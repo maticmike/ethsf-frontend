@@ -83,13 +83,10 @@ const OngoingCampaign = () => {
     setInvalidPost(false);
     let tweetId;
     if (postUrl.includes('twitter.com' && '/status/')) {
-      // if (postUrl.substr(postUrl.length - 4) === 's=20') {
       if (postUrl.slice(postUrl.length - 4) === 's=20') {
         const tweetUrl = postUrl.slice(0, -5);
-        // tweetId = tweetUrl.substr(postUrl.length - 19);
         tweetId = tweetUrl.slice(postUrl.length - 19);
       } else {
-        // tweetId = postUrl.substr(postUrl.length - 19);
         tweetId = postUrl.slice(postUrl.length - 19);
       }
     } else {
@@ -98,7 +95,7 @@ const OngoingCampaign = () => {
     try {
       const { data } = await axios.get(`http://localhost:3000/api/twitter/${tweetId}`);
       const postData = parseTwitterPostData(campaign.objective, data);
-      await setPaymentTargetReachedWeb3(campaign?.campaignAddress, postData[0], postData[1], postData[2]);
+      // await setPaymentTargetReachedWeb3(campaign?.campaignAddress, postData[0], postData[1], postData[2]);
     } catch (error) {
       setInvalidPost(true);
       consola.error('getPostData():', error);
