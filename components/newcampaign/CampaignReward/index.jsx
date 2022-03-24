@@ -54,8 +54,16 @@ const CampaignReward = ({
     }
   };
 
+  const handleJackpotTarget = jackpotTarget => {
+    setJackpotTarget(jackpotTarget.replace(/,/g, ''));
+    if (bountyType == 'varPot') {
+      const rewardInEth = handleRewardPlaceholder();
+      setJackpotReward(rewardInEth);
+    }
+  };
+
   //calculate incremental reward based on target
-  const handleIncrementalReward = incrementalTargetAmount => {
+  const handleIncrementalRewardAndTarget = incrementalTargetAmount => {
     setIncrementalTarget(incrementalTargetAmount);
     const incrementalRewardAvailable = stakedAmount - utils.toWei(jackpotReward);
     const possibleIncrementalPayments = jackpotTarget / incrementalTargetAmount;
@@ -133,14 +141,14 @@ const CampaignReward = ({
               placeholder={`90,000 ${objective}`}
               thousandSeparator={true}
               value={jackpotTarget}
-              onChange={e => setJackpotTarget(e.target.value.replace(/,/g, ''))}
+              onChange={e => handleJackpotTarget(e.target.value)}
             />
           ) : (
             <NumberFormat
               className={classes.CampaignReward_input}
               thousandSeparator={true}
               value={incrementalTarget}
-              onChange={e => handleIncrementalReward(e.target.value.replace(/,/g, ''))}
+              onChange={e => handleIncrementalRewardAndTarget(e.target.value.replace(/,/g, ''))}
               isAllowed={maxIncrementalTargetInput}
             />
           )}
