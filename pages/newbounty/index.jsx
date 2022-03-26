@@ -63,6 +63,7 @@ const NewBounty = () => {
   const createNewBounty = async (jackpotRewardAmount, jackpotTargetAmount) => {
     // setJackpotRewardAmount(stakedAmount); //REVIEW ME LATER<<<
     // objective === SIMPLE_POST ? (jackpotRewardAmountAmount = stakedAmount) : (jackpotRewardAmountAmount = jackpotRewardAmount);
+
     try {
       //CALL CONTRACT
       await createNewBountyOnContract(
@@ -78,7 +79,7 @@ const NewBounty = () => {
         bountyType,
         stakedAmount,
       );
-      // router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
+      router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
     } catch (error) {
       consola.error('NewBounty.createNewBounty():', error);
     }

@@ -26,13 +26,14 @@ const CampaignReward = ({
 
   const handleBountyRewardPerInfluencerCalc = () => {
     const rewardWei = stakedAmount / maxWinners;
-    return utils.fromWei(rewardWei.toString());
+    return utils.fromWei(rewardWei.toString()); ///TODO breaks on bounties with lots of winners
   };
 
   const maxJackpotRewardInput = reward => {
     const { floatValue } = reward;
     const maxRewardPerInfluencer = handleBountyRewardPerInfluencerCalc();
     if (floatValue <= maxRewardPerInfluencer) return true;
+    if (isBounty == 'varPot') return false;
     return false;
   };
 
@@ -58,7 +59,7 @@ const CampaignReward = ({
     setJackpotTarget(jackpotTarget.replace(/,/g, ''));
     if (bountyType == 'varPot') {
       const rewardInEth = handleRewardPlaceholder();
-      setJackpotReward(rewardInEth);
+      setJackpotReward(rewardInEth.slice(0, rewardInEth.length - 4));
     }
   };
 
