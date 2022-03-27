@@ -32,7 +32,8 @@ const CampaignStaking = ({
   const stakeDeposit = () => (isBounty ? setParentCampaignSetupStep(6) : setParentCampaignSetupStep(5));
 
   // only for single post
-  const finishAndDeposit = () => setParentFinishCampaign();
+  //jackpotReward/incrementalReward/jackpotTarget/incrementalTarget
+  const finishAndDeposit = () => setParentFinishCampaign(parsedEth, 0, 1, 0);
 
   return (
     <div className={classes.CampaignStaking_font}>
@@ -58,12 +59,12 @@ const CampaignStaking = ({
         >
           Previous
         </Button>
-        {inputEntered && objective != SIMPLE_POST ? (
+        {(inputEntered && objective != SIMPLE_POST) || isBounty ? (
           <Button variant="contained" color="primary" size="small" onClick={stakeDeposit}>
             Next
           </Button>
         ) : null}
-        {inputEntered && objective === SIMPLE_POST ? (
+        {inputEntered && objective === SIMPLE_POST && !isBounty ? (
           <Button variant="contained" color="primary" size="small" onClick={finishAndDeposit}>
             Finish
           </Button>

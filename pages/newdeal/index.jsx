@@ -65,7 +65,6 @@ const NewDeal = () => {
 
   const createNewDealProposal = async (jackpotReward, incrementalReward, jackpotTarget, incrementalTarget) => {
     objective === SIMPLE_POST ? (jackpotRewardAmount = stakedAmount) : (jackpotRewardAmount = jackpotReward);
-    console.log(incrementalReward, 'incre reward');
     try {
       const campaignDb = await createNewDealProposalDb(
         account.address, //business
@@ -75,8 +74,8 @@ const NewDeal = () => {
         simplePostMinimumDuration,
         jackpotRewardAmount,
         incrementalReward,
-        jackpotTarget.replace(/,/g, ''),
-        incrementalTarget.replace(/,/g, ''),
+        jackpotTarget,
+        incrementalTarget,
         stakedAmount, //potentialPayout
         objective,
         // 'niche',
@@ -139,7 +138,9 @@ const NewDeal = () => {
               objective={objective}
               setParentDepositToEscrow={deposit => setStakedAmount(onlyNumeric(deposit))}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
-              setParentFinishCampaign={createNewDealProposal}
+              setParentFinishCampaign={(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget) =>
+                createNewDealProposal(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget)
+              }
               isBounty={false}
             />
           </Paper>

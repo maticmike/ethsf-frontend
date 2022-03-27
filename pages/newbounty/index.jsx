@@ -63,23 +63,27 @@ const NewBounty = () => {
   const createNewBounty = async (jackpotRewardAmount, jackpotTargetAmount) => {
     // setJackpotRewardAmount(stakedAmount); //REVIEW ME LATER<<<
     // objective === SIMPLE_POST ? (jackpotRewardAmountAmount = stakedAmount) : (jackpotRewardAmountAmount = jackpotRewardAmount);
-
+    console.log(simplePostMinimumDuration, 'simplePostMinimumDuration');
+    console.log(jackpotRewardAmount, 'jackpotRewardAmount');
+    console.log(jackpotTargetAmount, 'jackpotTargetAmount');
+    console.log(bountyMaxWinners, 'bountyMaxWinners');
+    console.log(stakedAmount, 'stakedAmount');
     try {
       //CALL CONTRACT
-      await createNewBountyOnContract(
-        famepayFactory,
-        account,
-        campaignDuration[0] ? campaignDuration[0] : simplePostDateStart, //agreedStartDate
-        campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd, //agreedDeadline/postDate,
-        simplePostMinimumDuration,
-        jackpotRewardAmount,
-        jackpotTargetAmount,
-        bountyMaxWinners,
-        objective,
-        bountyType,
-        stakedAmount,
-      );
-      router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
+      // await createNewBountyOnContract(
+      //   famepayFactory,
+      //   account,
+      //   campaignDuration[0] ? campaignDuration[0] : simplePostDateStart, //agreedStartDate
+      //   campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd, //agreedDeadline/postDate,
+      //   simplePostMinimumDuration,
+      //   jackpotRewardAmount,
+      //   jackpotTargetAmount,
+      //   bountyMaxWinners,
+      //   objective,
+      //   bountyType,
+      //   stakedAmount,
+      // );
+      // router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
     } catch (error) {
       consola.error('NewBounty.createNewBounty():', error);
     }
@@ -147,7 +151,10 @@ const NewBounty = () => {
               objective={objective}
               setParentDepositToEscrow={deposit => setStakedAmount(onlyNumeric(deposit))}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
-              setParentFinishCampaign={createNewBounty} //finish on simple
+              setParentFinishCampaign={(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget) => {
+                console.log(jackpotReward, 'jackpot reward ehhh');
+                createNewBounty(jackpotReward, jackpotTarget);
+              }} //finish on simple
               isBounty={true}
             />
           </Paper>
