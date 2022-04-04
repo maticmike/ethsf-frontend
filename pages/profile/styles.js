@@ -23,14 +23,13 @@ const useStyles = makeStyles({
   Profile_cover_photo: {
     objectFit: 'cover',
     width: '100%',
-    height: '200px',
+    height: '100px',
   },
   Profile_round_img: {
     borderRadius: '50%',
   },
   Profile_gridList: {
-    width: 900,
-    height: 410,
+    width: '100%',
   },
 });
 

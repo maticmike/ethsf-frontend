@@ -44,7 +44,7 @@ const Profile = () => {
         return <Error statusCode={404} />;
       } else {
         setUser(userDbRes?.data?.payload);
-        if (userDbAddress?.data?.payload?.type === 'BUSINESS') setProfileIsBusiness(true);
+        if (userDbRes?.data?.payload?.type === 'BUSINESS') setProfileIsBusiness(true);
       }
     }
     getUsernameEthAddress();
@@ -59,7 +59,7 @@ const Profile = () => {
     variables: { id: userDbAddress },
   });
   // if (errorInfluencer) refetchInfluencer();
-  if (errorInfluencer) console.log('error2!!!');
+  // if (errorInfluencer) console.log('error2!!!');
 
   const {
     error: errorBusiness,
@@ -68,11 +68,9 @@ const Profile = () => {
   } = useQuery(GET_ALL_CAMPAIGNS_FOR_BUSINESS_QUERY, {
     variables: { id: user?.userEthAddress },
   });
-  // if (errorBusiness) return refetchBusiness();
-  if (errorBusiness) console.log('error!!!');
 
-  // if (dataInfluencer != null) campaigns = dataInfluencer?.campaigns;
-  if (dataBusiness != null) campaigns = dataBusiness?.campaigns;
+  if (dataInfluencer?.campaigns?.length != 0) campaigns = dataInfluencer?.campaigns;
+  if (dataBusiness?.campaigns?.length != 0) campaigns = dataBusiness?.campaigns;
 
   return (
     <>
@@ -101,10 +99,16 @@ const Profile = () => {
         {campaigns?.length == 0 ? (
           <h1>No campaigns</h1>
         ) : (
-          <GridList cellHeight={200} className={classes.Profile_gridList} cols={3}>
+          <GridList cellHeight={100} className={classes.Profile_gridList} cols={3}>
             {campaigns?.map((campaign, index) => {
               return (
-                <GridListTile cols={1} key={index} component={Link} href={`/ongoingcampaign/${campaign.id}`}>
+                <GridListTile
+                  cols={1}
+                  key={index}
+                  //TODO {Link} breaks css height
+                  component={Link}
+                  href={`/ongoingcampaign/${campaign.id}`}
+                >
                   <ProfileCampaigns campaign={campaign} isBusiness={profileIsBusiness} />
                 </GridListTile>
               );

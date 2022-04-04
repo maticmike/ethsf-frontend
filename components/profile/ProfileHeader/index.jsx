@@ -12,6 +12,7 @@ const ProfileHeader = ({ user }) => {
       <Grid container direction="row">
         <Grid item xs={4}>
           <h2>{user?.username}</h2>
+          <p>&nbsp;wazy</p>
         </Grid>
         <Grid item xs={3}>
           <p>⭐️⭐️⭐️⭐️</p>
