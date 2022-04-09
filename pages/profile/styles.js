@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     paddingLeft: '10%',
     paddingRight: '10%',
     boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.08)',
-    display: 'flex',
+    // display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
