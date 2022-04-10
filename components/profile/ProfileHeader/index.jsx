@@ -1,18 +1,28 @@
 import React, { useState } from 'react';
 import { Grid } from '@material-ui/core';
-
+import { Snackbar } from '@material-ui/core';
+import { shortenedEthAddress } from '../../../web3/helpers';
 import { useStyles } from './styles';
 
 const ProfileHeader = ({ user }) => {
   const classes = useStyles();
 
   const [tags, setTags] = useState(['Fitness', 'Clothing', 'Activewear', 'Sports']);
+  const [copyText, setCopyText] = useState(false);
+
+  const copyAddress = () => {
+    navigator.clipboard.writeText(user?.userEthAddress);
+    setCopyText(true);
+  };
+
   return (
     <div>
       <Grid container direction="row">
         <Grid item xs={4}>
           <h2>{user?.username}</h2>
-          <p>&nbsp;wazy</p>
+          <p className={classes.ProfileHeader_cursor} onClick={copyAddress}>
+            &nbsp;{shortenedEthAddress(user?.userEthAddress)}
+          </p>
         </Grid>
         <Grid item xs={3}>
           <p>⭐️⭐️⭐️⭐️</p>
@@ -38,6 +48,13 @@ const ProfileHeader = ({ user }) => {
           ))}
         </Grid>
       </Grid>
+      <Snackbar
+        open={copyText}
+        anchorOrigin={{ vertical: 'center', horizontal: 'center' }}
+        message="Eth Address Copied"
+        autoHideDuration={2000}
+        onClose={() => setCopyText(false)}
+      />
     </div>
   );
 };

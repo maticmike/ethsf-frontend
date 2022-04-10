@@ -102,13 +102,7 @@ const Profile = () => {
           <GridList cellHeight={100} className={classes.Profile_gridList} cols={3}>
             {campaigns?.map((campaign, index) => {
               return (
-                <GridListTile
-                  cols={1}
-                  key={index}
-                  //TODO {Link} breaks css height
-                  component={Link}
-                  href={`/ongoingcampaign/${campaign.id}`}
-                >
+                <GridListTile cols={1} key={index} component={Link} href={`/ongoingcampaign/${campaign.id}`}>
                   <ProfileCampaigns campaign={campaign} isBusiness={profileIsBusiness} />
                 </GridListTile>
               );

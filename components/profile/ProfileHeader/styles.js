@@ -15,5 +15,8 @@ const useStyles = makeStyles({
     textDecoration: 'underline',
     color: 'blue',
   },
+  ProfileHeader_cursor: {
+    cursor: 'pointer',
+  },
 });
 export { useStyles };
