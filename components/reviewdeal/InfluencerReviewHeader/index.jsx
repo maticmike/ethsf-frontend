@@ -11,7 +11,9 @@ const InfluencerReviewHeader = ({ username, email, campaignsCompleted, ethAddres
   return (
     <div className={classes.InfluencerReview_component_outline}>
       <div>
-        <h1 className={classes.InfluencerReview_margin_bottom_h1}>{username}</h1>
+        <Link href="/profile/[id]" as={`/profile/${username}`}>
+          <h1 className={classes.InfluencerReview_margin_bottom_h1}>{username}</h1>
+        </Link>
 
         <a href="https://google.com" target="_blank">
           {email}

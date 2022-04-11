@@ -135,7 +135,7 @@ const OngoingCampaign = () => {
         />
       );
     }
-    if (campaign?.deadline >= Math.round(Date.now() / 1000)) {
+    if (campaign?.deadline >= Math.round(Date.now() / 1000) || !campaign?.ongoing) {
       //if ongoing but no prize to claim
       return <SubmitPost invalidPost={invalidPost} getPostData={getPostData} setPostUrl={setPostUrl} />;
     } else {
@@ -149,8 +149,8 @@ const OngoingCampaign = () => {
       return <p>View Live Post!</p>;
     }
     //if ongoing but no post
-    if (campaign?.deadline >= Date.now()) {
-      return <p>Pending Influencer Post</p>;
+    if (campaign?.deadline >= Date.now() || !campaign?.ongoing) {
+      return <p>Campaign Ongoing</p>;
     }
     //if not ongoing
     return <ClaimRefund claimRefund={claimRefund} campaignBalance={campaign?.depositedBalance} />;

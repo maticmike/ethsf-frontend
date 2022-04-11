@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { utils } from 'web3';
 import consola from 'consola';
 import { SIMPLE_POST } from '../../../constants/CampaignObjectives';
@@ -25,8 +26,9 @@ const BusinessReviewHeader = ({ potentialPayout, objective, username, website, e
         />
       </div>
       <div>
-        <h1 className={classes.BusinessReview_margin_bottom_h1}>{username}</h1>
-
+        <Link href="/profile/[id]" as={`/profile/${username}`}>
+          <h1 className={classes.BusinessReview_margin_bottom_h1}>{username}</h1>
+        </Link>
         <a href={website} target="_blank">
           {website}
         </a>

@@ -50,7 +50,6 @@ const ProfileHeader = ({ user }) => {
       </Grid>
       <Snackbar
         open={copyText}
-        anchorOrigin={{ vertical: 'center', horizontal: 'center' }}
         message="Eth Address Copied"
         autoHideDuration={2000}
         onClose={() => setCopyText(false)}

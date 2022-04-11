@@ -10,6 +10,7 @@ const useStyles = makeStyles({
   },
   BusinessReview_margin_bottom_h1: {
     marginBottom: '6px',
+    cursor: 'pointer',
   },
   BusinessReview_pointer: {
     cursor: 'pointer',
