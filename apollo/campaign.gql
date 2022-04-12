@@ -19,6 +19,7 @@ fragment CampaignFrag on Campaign {
   jackpotObjectiveReached
   incrementalRewardAmount
   jackpotRewardAmount
+  endedWithRefund
 }
 
 query campaignQuery($id: String!) {

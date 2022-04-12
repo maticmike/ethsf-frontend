@@ -5,24 +5,34 @@ import { outstandingIncrementalOwed, outstandingJackpotOwed } from '../../../uti
 import { payInfluencer } from '../../../web3';
 import { useStyles } from './styles';
 
-const ClaimRefund = ({ claimRefund, campaignBalance }) => {
+const ClaimRefund = ({ campaign, claimRefund, campaignBalance }) => {
   const classes = useStyles();
 
   return (
     <>
-      <p>
-        Campaign period has ended. Refund available to claim:{' '}
-        <strong>{utils.fromWei(campaignBalance.toString())} Eth</strong>
-      </p>
-      <Button
-        onClick={claimRefund}
-        className={classes.ClaimRefund_claimButton}
-        variant="contained"
-        size="large"
-        color="secondary"
-      >
-        Claim Refund
-      </Button>
+      {campaign?.endedWithRefund ? (
+        <h3>
+          Refund Claimed:
+          {/* I AM 0!!!! */}
+          <strong>{utils.fromWei(campaignBalance.toString())} Eth</strong>
+        </h3>
+      ) : (
+        <>
+          <p>
+            Campaign period has ended. Refund available to claim:{' '}
+            <strong>{utils.fromWei(campaignBalance.toString())} Eth</strong>
+          </p>
+          <Button
+            onClick={claimRefund}
+            className={classes.ClaimRefund_claimButton}
+            variant="contained"
+            size="large"
+            color="secondary"
+          >
+            Claim Refund
+          </Button>
+        </>
+      )}
     </>
   );
 };

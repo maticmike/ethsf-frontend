@@ -63,11 +63,7 @@ const NewBounty = () => {
   const createNewBounty = async (jackpotRewardAmount, jackpotTargetAmount) => {
     // setJackpotRewardAmount(stakedAmount); //REVIEW ME LATER<<<
     // objective === SIMPLE_POST ? (jackpotRewardAmountAmount = stakedAmount) : (jackpotRewardAmountAmount = jackpotRewardAmount);
-    console.log(simplePostMinimumDuration, 'simplePostMinimumDuration');
-    console.log(jackpotRewardAmount, 'jackpotRewardAmount');
-    console.log(jackpotTargetAmount, 'jackpotTargetAmount');
-    console.log(bountyMaxWinners, 'bountyMaxWinners');
-    console.log(stakedAmount, 'stakedAmount');
+
     try {
       //CALL CONTRACT
       await createNewBountyOnContract(
@@ -152,7 +148,6 @@ const NewBounty = () => {
               setParentDepositToEscrow={deposit => setStakedAmount(onlyNumeric(deposit))}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
               setParentFinishCampaign={(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget) => {
-                console.log(jackpotReward, 'jackpot reward ehhh');
                 createNewBounty(jackpotReward, jackpotTarget);
               }} //finish on simple
               isBounty={true}

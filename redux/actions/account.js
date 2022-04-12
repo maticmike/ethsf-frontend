@@ -52,7 +52,6 @@ export const loginAccountOnSwitchThunk = (account, balance, signer) => {
         const res = { account, balance, signer };
         await generateNewSignedJwt(res?.account, res?.signer);
         const isTokenValid = await validateJwtFromDb(res?.account);
-        console.log(isTokenValid, 'is token valid');
         await dispatch(connectAccount(res));
         if (isTokenValid) await dispatch(loginAccount());
       } catch (error) {

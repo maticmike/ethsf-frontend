@@ -13,8 +13,6 @@ import store from '../redux/store';
  */
 export const generateNewSignedJwt = async (ethAddress, signer) => {
   try {
-    console.log(ethAddress, 'eth address');
-    console.log(signer, 'signer');
     //Get Challenge
     const challenge = await generateChallengeDb(ethAddress);
 

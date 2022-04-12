@@ -32,7 +32,6 @@ const FindInfluencer = ({ parentFindInfluencer, foundInfluencer, setParentCampai
   const handleFindInfluencer = async () => {
     setSearchAttemptMade(true);
     await parentFindInfluencer(searchedInfluencer);
-    console.log(foundInfluencer, 'found influencer');
   };
 
   const incrementCampaignSetup = () => setParentCampaignSetupStep(1);

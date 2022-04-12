@@ -30,7 +30,6 @@ export const parseTwitterPostData = (objective, tweetStats, business) => {
     isValidPost = false;
   }
   */
-  console.log(tweetData, 'tweet data');
   isValidPost = true;
   switch (objectiveString) {
     case SIMPLE_POST:
