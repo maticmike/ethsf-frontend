@@ -90,7 +90,6 @@ const ReviewCampaign = () => {
       <br />
       <br />
       <Calendar
-        // onChange={handleDateChange}
         // minDate={new Date()}
         // selectRange={objective != 'simplePost' ? true : false}
         // value={simpleDate}

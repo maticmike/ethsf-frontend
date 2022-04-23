@@ -18,6 +18,7 @@ import { storeFamepayFactoryThunk } from '../../redux/actions/famepayFactory';
 import { campaignQuery } from '../../apollo/campaign.gql';
 import { APOLLO_POLL_INTERVAL_MS } from '../../constants/Blockchain';
 import { getUserFromEthAddressDb } from '../../services/api/userService';
+import { SIMPLE_POST } from '../../constants/CampaignObjectives';
 import { useStyles } from './styles';
 
 const BusinessReviewHeader = dynamic(() => import('../../components/reviewdeal/BusinessReviewHeader'), {
@@ -164,6 +165,26 @@ const OngoingCampaign = () => {
       return isObjectiveCompleteInfluencerUI();
     }
   };
+  const getDateFormat = (startDate, deadline) => {
+    const dateDeadline = new Date(parseInt(deadline * 1000));
+    const yearDeadline = dateDeadline.getFullYear();
+    const monthDeadline = dateDeadline.getMonth();
+    const dayDeadline = dateDeadline.getDate();
+
+    const formattedDateDeadline = new Date(yearDeadline, monthDeadline, dayDeadline);
+
+    if (campaign?.objective != SIMPLE_POST) {
+      const dateStart = new Date(parseInt(startDate * 1000));
+      const yearStart = dateStart.getFullYear();
+      const monthStart = dateStart.getMonth();
+      const dayStart = dateStart.getDate();
+      const formattedDateStart = new Date(yearStart, monthStart, dayStart);
+
+      return [formattedDateStart, formattedDateDeadline];
+    } else {
+      return formattedDateDeadline;
+    }
+  };
 
   return (
     <div className={classes.ReviewCampaign_root_center}>
@@ -191,10 +212,7 @@ const OngoingCampaign = () => {
       <br />
       <br />
       <Calendar
-        // onChange={handleDateChange}
-        // minDate={new Date()}
-        // selectRange={objective != 'simplePost' ? true : false}
-        // value={simpleDate}
+        value={getDateFormat(campaign?.startDate, campaign?.deadline)}
         className={classes.ReviewCampaign_calendar_size}
       />
       <br />
