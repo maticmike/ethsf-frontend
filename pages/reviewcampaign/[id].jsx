@@ -90,7 +90,6 @@ const ReviewCampaign = () => {
       </div>
       <br />
       <br />
-      {console.log(campaign, 'campaign')}
       <Calendar
         value={getDateFormat(campaign?.objective, campaign?.agreedStartDate, campaign?.agreedDeadline)}
         className={classes.ReviewCampaign_calendar_size}
