@@ -10,6 +10,7 @@ import 'react-calendar/dist/Calendar.css';
 import { getCampaignProposalDb } from '../../services/api/campaignService';
 import { getUserFromEthAddressDb } from '../../services/api/userService';
 import { createNewCampaignOnContract } from '../../web3';
+import { getDateFormat } from '../../utils/helpers';
 import { useStyles } from './styles';
 
 const BusinessReviewHeader = dynamic(() => import('../../components/reviewdeal/BusinessReviewHeader'), {
@@ -89,10 +90,9 @@ const ReviewCampaign = () => {
       </div>
       <br />
       <br />
+      {console.log(campaign, 'campaign')}
       <Calendar
-        // minDate={new Date()}
-        // selectRange={objective != 'simplePost' ? true : false}
-        // value={simpleDate}
+        value={getDateFormat(campaign?.objective, campaign?.agreedStartDate, campaign?.agreedDeadline)}
         className={classes.ReviewCampaign_calendar_size}
       />
       <br />

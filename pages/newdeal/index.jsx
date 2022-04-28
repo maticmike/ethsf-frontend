@@ -8,6 +8,7 @@ import { Paper } from '@material-ui/core';
 import { onlyNumeric } from '../../utils/helpers';
 import { SIMPLE_POST } from '../../constants/CampaignObjectives';
 import { createNewDealProposalDb } from '../../services/api/campaignService';
+
 import { useStyles } from './styles';
 
 const FindInfluencer = dynamic(() => import('../../components/newcampaign/Deal/FindInfluencer'), {
@@ -65,6 +66,7 @@ const NewDeal = () => {
 
   const createNewDealProposal = async (jackpotReward, incrementalReward, jackpotTarget, incrementalTarget) => {
     objective === SIMPLE_POST ? (jackpotRewardAmount = stakedAmount) : (jackpotRewardAmount = jackpotReward);
+
     try {
       const campaignDb = await createNewDealProposalDb(
         account.address, //business
