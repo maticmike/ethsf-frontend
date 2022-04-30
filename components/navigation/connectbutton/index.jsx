@@ -18,9 +18,14 @@ const ConnectButton = ({ handleSignupOpen }) => {
   useEffect(async () => {
     async function getUserDb() {
       try {
-        const profileInDb = await getUserFromEthAddressDb(account?.address);
-        profileInDb === undefined ? null : setIsRegistered(true);
-        setProfileInDb(profileInDb);
+        if (account?.address === null) {
+          return;
+        } else {
+          const profileInDb = await getUserFromEthAddressDb(account?.address);
+          console.log(profileInDb, 'the profile in db');
+          profileInDb === undefined ? null : setIsRegistered(true);
+          setProfileInDb(profileInDb);
+        }
       } catch (error) {
         consola.error(error, 'ConnectButton.getUserDb: Error');
       }
