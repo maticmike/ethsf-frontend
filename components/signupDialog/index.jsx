@@ -17,6 +17,7 @@ const SignupDialog = ({ isSignupOpen, handleSignupClose }) => {
   const handleSubmit = async e => {
     e.preventDefault();
 
+    //sign with metamask
     const signature = await account.signer.signMessage('Register');
 
     //1.Register User

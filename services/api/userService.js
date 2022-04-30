@@ -5,13 +5,11 @@ let api = process.env.BASE_API_URL;
 
 /** REGISTER **/
 
-export const registerNewUserDb = async (ethAddress, username, firstName, lastName, signature, email, type) => {
-  const usernameLowercase = username.toLowerCase();
-  console.log(signature, 'the signature');
+export const registerNewUserDb = async (userEthAddress, username, firstName, lastName, signature, email, type) => {
   try {
     const registeredUser = await axios.post(`${api}/user/register`, {
-      ethAddress,
-      usernameLowercase,
+      userEthAddress,
+      username,
       firstName,
       lastName,
       signature,

@@ -126,6 +126,7 @@ export const signInWalletWeb3 = async previousWallet => {
     const balance = balanceRaw.toString();
     const signer = provider.getSigner();
     const chain = await provider.getNetwork();
+
     return { account, balance, signer /*, isAdmin*/ };
   } catch (error) {
     consola.error('Web3: getWalletInfo() error message:', error);
