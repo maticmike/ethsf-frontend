@@ -29,17 +29,25 @@ const ReviewCampaign = () => {
   const [business, setBusiness] = useState('');
   const [influencer, setInfluencer] = useState('');
 
-  const { id } = router.query;
+  const { id } = router?.query;
+
+  // let campaign;
 
   useEffect(() => {
     async function getCampaignInfo() {
-      const campaign = await getCampaignProposalDb(id);
-      if (Object.entries(campaign.data.payload).length === 0) return <Error statusCode={404} />;
-      const businessUser = await getUserFromEthAddressDb(campaign?.data?.mongoResponse?.business);
-      const influencerUser = await getUserFromEthAddressDb(campaign?.data?.mongoResponse?.influencer);
-      setCampaign(campaign.data.mongoResponse);
-      setBusiness(businessUser.data.payload);
-      setInfluencer(influencerUser.data.payload);
+      if (id === undefined) {
+        console.log('pending id...');
+      } else {
+        console.log(id, 'id');
+        const campaign = await getCampaignProposalDb(id);
+        if (Object.entries(campaign.data.payload).length === 0) return <Error statusCode={404} />;
+        const businessUser = await getUserFromEthAddressDb(campaign?.data?.mongoResponse?.business);
+        const influencerUser = await getUserFromEthAddressDb(campaign?.data?.mongoResponse?.influencer);
+        setCampaign(campaign.data.mongoResponse);
+        // campaign = campaign.data.mongoResponse;
+        setBusiness(businessUser.data.payload);
+        setInfluencer(influencerUser.data.payload);
+      }
     }
     getCampaignInfo();
     return () => {
@@ -90,10 +98,10 @@ const ReviewCampaign = () => {
       </div>
       <br />
       <br />
-      <Calendar
+      {/* <Calendar
         value={getDateFormat(campaign?.objective, campaign?.agreedStartDate, campaign?.agreedDeadline)}
         className={classes.ReviewCampaign_calendar_size}
-      />
+      /> */}
       <br />
       <br />
       <div>

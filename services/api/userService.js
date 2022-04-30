@@ -6,7 +6,8 @@ let api = process.env.BASE_API_URL;
 /** REGISTER **/
 
 export const registerNewUserDb = async (ethAddress, username, firstName, lastName, signature, email, type) => {
-  const usernameLowercase = username.toLowercase();
+  const usernameLowercase = username.toLowerCase();
+  console.log(signature, 'the signature');
   try {
     const registeredUser = await axios.post(`${api}/user/register`, {
       ethAddress,
@@ -20,7 +21,6 @@ export const registerNewUserDb = async (ethAddress, username, firstName, lastNam
     return registeredUser;
   } catch (error) {
     consola.error('ApiService: registerNewUserDB():', error);
-    throw error;
   }
 };
 
