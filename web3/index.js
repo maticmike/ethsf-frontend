@@ -84,15 +84,19 @@ export const getContractAddress = (abi, chainId) => {
 export const bootstrapFactory = async () => {
   try {
     currentOnboardState = onboard.getState();
-    const provider = new ethers.providers.Web3Provider(currentOnboardState.wallet.provider);
-    const signer = provider.getSigner();
-    const network = await provider.getNetwork();
-    if (network.chainId != NETWORK_ID) {
-      return false;
+    if (currentOnboardState.wallet.provider === null) {
+      return;
     } else {
-      const famepayFactoryAddress = getContractAddress(FamepayFactoryAbi, network.chainId);
-      const famepayFactory = new ethers.Contract(famepayFactoryAddress, FamepayFactoryAbi.abi, signer);
-      return { famepayFactory };
+      const provider = new ethers.providers.Web3Provider(currentOnboardState.wallet.provider);
+      const signer = provider.getSigner();
+      const network = await provider.getNetwork();
+      if (network.chainId != NETWORK_ID) {
+        return false;
+      } else {
+        const famepayFactoryAddress = getContractAddress(FamepayFactoryAbi, network.chainId);
+        const famepayFactory = new ethers.Contract(famepayFactoryAddress, FamepayFactoryAbi.abi, signer);
+        return { famepayFactory };
+      }
     }
   } catch (error) {
     consola.error('Web3: bootstrapFactory() error:', error);

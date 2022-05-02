@@ -18,11 +18,10 @@ const ConnectButton = ({ handleSignupOpen }) => {
   useEffect(async () => {
     async function getUserDb() {
       try {
-        if (account?.address === null) {
+        if (account?.address === null || account?.address === account?.address) {
           return;
         } else {
           const profileInDb = await getUserFromEthAddressDb(account?.address);
-          console.log(profileInDb, 'the profile in db');
           profileInDb === undefined ? null : setIsRegistered(true);
           setProfileInDb(profileInDb);
         }
@@ -37,9 +36,9 @@ const ConnectButton = ({ handleSignupOpen }) => {
   }, [account]);
 
   //Connect to Web3
-  const handleConnectivityWeb3 = async () => {
-    await dispatch(connectAccountThunk());
-    await dispatch(storeFamepayFactoryThunk());
+  const handleConnectivityWeb3 = () => {
+    dispatch(connectAccountThunk());
+    dispatch(storeFamepayFactoryThunk());
   };
 
   const handleRegister = () => handleSignupOpen();

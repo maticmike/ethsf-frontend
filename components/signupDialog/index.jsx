@@ -31,64 +31,62 @@ const SignupDialog = ({ isSignupOpen, handleSignupClose }) => {
     handleSignupClose();
   };
   return (
-    <>
-      <Dialog open={isSignupOpen} close={handleSignupClose}>
-        <h1 className={classes.root}>Signup</h1>
-        <form className={classes.root} onSubmit={handleSubmit}>
-          <TextField
-            label="First Name"
+    <Dialog open={isSignupOpen}>
+      <h1 className={classes.root}>Signup</h1>
+      <form className={classes.root} onSubmit={handleSubmit}>
+        <TextField
+          label="First Name"
+          variant="outlined"
+          required
+          value={firstName}
+          onChange={e => setFirstName(e.target.value)}
+        />
+        <TextField
+          label="Last Name"
+          variant="outlined"
+          required
+          value={lastName}
+          onChange={e => setLastName(e.target.value)}
+        />
+        <TextField
+          label="Username"
+          variant="outlined"
+          required
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+        />
+        <TextField
+          label="Email"
+          variant="outlined"
+          type="email"
+          required
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+        <TextField label="Eth Address" variant="outlined" required disabled value={account.address} />
+        <FormControl className={classes.accountTypeDimensions}>
+          <InputLabel htmlFor="select-account-type">Select Account Type</InputLabel>
+          <Select
+            native
             variant="outlined"
-            required
-            value={firstName}
-            onChange={e => setFirstName(e.target.value)}
-          />
-          <TextField
-            label="Last Name"
-            variant="outlined"
-            required
-            value={lastName}
-            onChange={e => setLastName(e.target.value)}
-          />
-          <TextField
-            label="Username"
-            variant="outlined"
-            required
-            value={username}
-            onChange={e => setUsername(e.target.value)}
-          />
-          <TextField
-            label="Email"
-            variant="outlined"
-            type="email"
-            required
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-          <TextField label="Eth Address" variant="outlined" required disabled value={account.address} />
-          <FormControl className={classes.accountTypeDimensions}>
-            <InputLabel htmlFor="select-account-type">Select Account Type</InputLabel>
-            <Select
-              native
-              variant="outlined"
-              value={accountType}
-              onChange={e => setAccountType(e.target.value)}
-              id="select-account-type"
-            >
-              <option value={'business'}>Business</option>
-              <option value={'influencer'}>Influencer</option>
-            </Select>
-          </FormControl>
-          <div>
-            <Button variant="contained" onClick={handleSignupClose}>
-              Cancel
-            </Button>
-            <Button type="submit" variant="contained" color="primary">
-              Signup
-            </Button>
-          </div>
-        </form>
-      </Dialog>
-    </>
+            value={accountType}
+            onChange={e => setAccountType(e.target.value)}
+            id="select-account-type"
+          >
+            <option value={'business'}>Business</option>
+            <option value={'influencer'}>Influencer</option>
+          </Select>
+        </FormControl>
+        <div>
+          <Button variant="contained" onClick={handleSignupClose}>
+            Cancel
+          </Button>
+          <Button type="submit" variant="contained" color="primary">
+            Signup
+          </Button>
+        </div>
+      </form>
+    </Dialog>
   );
 };
 
