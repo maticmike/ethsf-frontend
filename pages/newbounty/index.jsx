@@ -79,7 +79,7 @@ const NewBounty = () => {
         bountyType,
         stakedAmount,
       );
-      // router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
+      router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
     } catch (error) {
       consola.error('NewBounty.createNewBounty():', error);
     }
