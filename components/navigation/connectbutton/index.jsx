@@ -24,6 +24,7 @@ const ConnectButton = ({ handleSignupOpen }) => {
           const profileInDb = await getUserFromEthAddressDb(account?.address);
           profileInDb === undefined ? null : setIsRegistered(true);
           setProfileInDb(profileInDb);
+          dispatch(storeFamepayFactoryThunk());
         }
       } catch (error) {
         consola.error(error, 'ConnectButton.getUserDb: Error');
@@ -36,10 +37,7 @@ const ConnectButton = ({ handleSignupOpen }) => {
   }, [account]);
 
   //Connect to Web3
-  const handleConnectivityWeb3 = () => {
-    dispatch(connectAccountThunk());
-    dispatch(storeFamepayFactoryThunk());
-  };
+  const handleConnectivityWeb3 = () => dispatch(connectAccountThunk());
 
   const handleRegister = () => handleSignupOpen();
 

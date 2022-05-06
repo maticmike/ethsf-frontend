@@ -97,8 +97,8 @@ const ReviewCampaign = () => {
         </div>
       </div>
       <br />
-      <br />
-      {/* <Calendar
+      {/* <br />
+      <Calendar
         value={getDateFormat(campaign?.objective, campaign?.agreedStartDate, campaign?.agreedDeadline)}
         className={classes.ReviewCampaign_calendar_size}
       /> */}
