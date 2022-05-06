@@ -22,7 +22,6 @@ const ConnectButton = ({ handleSignupOpen }) => {
           return;
         } else {
           const profileInDb = await getUserFromEthAddressDb(account?.address);
-          console.log(profileInDb);
           profileInDb === undefined ? null : setIsRegistered(true);
           setProfileInDb(profileInDb);
         }
