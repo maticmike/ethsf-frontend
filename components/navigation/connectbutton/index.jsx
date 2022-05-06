@@ -18,10 +18,11 @@ const ConnectButton = ({ handleSignupOpen }) => {
   useEffect(async () => {
     async function getUserDb() {
       try {
-        if (account?.address === null || account?.address === account?.address) {
+        if (account?.address === null) {
           return;
         } else {
           const profileInDb = await getUserFromEthAddressDb(account?.address);
+          console.log(profileInDb);
           profileInDb === undefined ? null : setIsRegistered(true);
           setProfileInDb(profileInDb);
         }
