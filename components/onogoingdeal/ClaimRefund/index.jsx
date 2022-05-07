@@ -19,7 +19,7 @@ const ClaimRefund = ({ campaign, claimRefund, campaignBalance }) => {
       ) : (
         <>
           <p>
-            Campaign period has ended. Refund available to claim:{' '}
+            Campaign period has ended. Refund available to claim:
             <strong>{utils.fromWei(campaignBalance.toString())} Eth</strong>
           </p>
           <Button

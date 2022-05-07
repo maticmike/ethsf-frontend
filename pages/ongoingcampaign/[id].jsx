@@ -79,6 +79,7 @@ const OngoingCampaign = () => {
   if (error) return <Error statusCode={404} />;
 
   campaign = data?.campaigns[0];
+  console.log(campaign, 'the campaign');
   const getPostData = async e => {
     e.preventDefault();
     setInvalidPost(false);
@@ -150,11 +151,12 @@ const OngoingCampaign = () => {
       return <p>View Live Post!</p>;
     }
     //if ongoing but no post
-    if (campaign?.deadline >= Date.now()) {
+    if (campaign?.deadline >= Math.round(Date.now() / 1000)) {
       return <p>Campaign Ongoing</p>;
+    } else {
+      //if not ongoing
+      return <ClaimRefund campaign={campaign} claimRefund={claimRefund} campaignBalance={campaign?.depositedBalance} />;
     }
-    //if not ongoing
-    return <ClaimRefund campaign={campaign} claimRefund={claimRefund} campaignBalance={campaign?.depositedBalance} />;
   };
 
   const ongoingPostUIActions = () => {
