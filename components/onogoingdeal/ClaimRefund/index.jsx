@@ -13,8 +13,7 @@ const ClaimRefund = ({ campaign, claimRefund, campaignBalance }) => {
       {campaign?.endedWithRefund ? (
         <h3>
           Refund Claimed:
-          {/* I AM 0!!!! */}
-          <strong>{utils.fromWei(campaignBalance.toString())} Eth</strong>
+          <strong>{utils.fromWei(campaign.businessRefundAmount)} Eth</strong>
         </h3>
       ) : (
         <>
