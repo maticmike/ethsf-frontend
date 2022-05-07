@@ -150,7 +150,7 @@ const OngoingCampaign = () => {
       return <p>View Live Post!</p>;
     }
     //if ongoing but no post
-    if (campaign?.deadline >= Date.now() || campaign?.ongoing) {
+    if (campaign?.deadline >= Date.now()) {
       return <p>Campaign Ongoing</p>;
     }
     //if not ongoing
