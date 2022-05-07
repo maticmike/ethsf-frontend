@@ -25,6 +25,7 @@ const ReviewCampaign = () => {
   const router = useRouter();
 
   const famepayFactory = useSelector(state => state.famepayFactory);
+  const account = useSelector(state => state.account);
   const [campaign, setCampaign] = useState(null);
   const [business, setBusiness] = useState('');
   const [influencer, setInfluencer] = useState('');
@@ -38,11 +39,11 @@ const ReviewCampaign = () => {
       if (id === undefined) {
         console.log('pending id...');
       } else {
-        console.log(id, 'id');
         const campaign = await getCampaignProposalDb(id);
         if (Object.entries(campaign.data.payload).length === 0) return <Error statusCode={404} />;
         const businessUser = await getUserFromEthAddressDb(campaign?.data?.mongoResponse?.business);
         const influencerUser = await getUserFromEthAddressDb(campaign?.data?.mongoResponse?.influencer);
+
         setCampaign(campaign.data.mongoResponse);
         // campaign = campaign.data.mongoResponse;
         setBusiness(businessUser.data.payload);
@@ -56,6 +57,10 @@ const ReviewCampaign = () => {
   }, [id]);
 
   const handleProposalResponse = async confirmed => {
+    let loggedInUser;
+
+    account?.address === business?.userEthAddress ? (loggedInUser = business.username) : influencer.username;
+
     if (confirmed) {
       await createNewCampaignOnContract(
         famepayFactory,
@@ -72,6 +77,7 @@ const ReviewCampaign = () => {
         campaign?.objective,
       );
     }
+    router.push(`/profile/${loggedInUser}`);
   };
 
   return (
@@ -97,11 +103,15 @@ const ReviewCampaign = () => {
         </div>
       </div>
       <br />
-      {/* <br />
+      <br />
       <Calendar
-        value={getDateFormat(campaign?.objective, campaign?.agreedStartDate, campaign?.agreedDeadline)}
+        value={
+          campaign != null
+            ? getDateFormat(campaign?.objective, campaign?.agreedStartDate, campaign?.agreedDeadline)
+            : null
+        }
         className={classes.ReviewCampaign_calendar_size}
-      /> */}
+      />
       <br />
       <br />
       <div>
