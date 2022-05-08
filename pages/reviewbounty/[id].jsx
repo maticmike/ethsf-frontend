@@ -7,15 +7,21 @@ import { useSelector } from 'react-redux';
 import consola from 'consola';
 import { Button } from '@material-ui/core';
 import 'react-calendar/dist/Calendar.css';
-import { getCampaignProposalDb } from '../../services/api/campaignService';
+import { getBountyDb } from '../../services/api/bountyService';
 import { getUserFromEthAddressDb } from '../../services/api/userService';
-import { createNewCampaignOnContract } from '../../web3';
+import { createNewBountyOnContract } from '../../web3';
 import { useStyles } from './styles';
 
-const BusinessReviewHeader = dynamic(() => import('../../components/ongoing-bounty-headers/BusinessMakeHeader'), {
+// const BusinessReviewHeader = dynamic(() => import('../../components/ongoing-bounty-headers/BusinessMakeHeader'), {
+//   loading: () => <p>Business Header Loading...</p>,
+// });
+// const InfluencerReviewHeader = dynamic(() => import('../../components/ongoing-bounty-headers/InfluencerMakeHeader'), {
+//   loading: () => <p>Influencer Header Loading...</p>,
+// });
+const BusinessReviewHeader = dynamic(() => import('../../components/reviewdeal/BusinessReviewHeader'), {
   loading: () => <p>Business Header Loading...</p>,
 });
-const InfluencerReviewHeader = dynamic(() => import('../../components/ongoing-bounty-headers/InfluencerMakeHeader'), {
+const InfluencerReviewHeader = dynamic(() => import('../../components/reviewdeal/InfluencerReviewHeader'), {
   loading: () => <p>Influencer Header Loading...</p>,
 });
 
@@ -25,25 +31,48 @@ const ReviewBounty = () => {
 
   const [campaign, setCampaign] = useState(null);
   const [business, setBusiness] = useState('');
-  const [influencer, setInfluencer] = useState('');
 
   const { id } = router.query;
 
   useEffect(() => {
-    async function getCampaignInfo() {
-      // const campaign = await getCampaignProposalDb(id);
-      // if (Object.entries(campaign.data.payload).length === 0) return <Error statusCode={404} />;
-      // const businessUser = await getUserFromEthAddressDb(campaign?.data?.mongoResponse?.business);
-      // const influencerUser = await getUserFromEthAddressDb(campaign?.data?.mongoResponse?.influencer);
-      setCampaign(campaign.data.mongoResponse);
-      setBusiness(businessUser.data.payload);
-      setInfluencer(influencerUser.data.payload);
+    async function getBountyInfo() {
+      console.log(id, 'id');
+      const campaign = await getBountyDb(id);
+      if (Object.entries(campaign?.data?.payload).length === 0) return <Error statusCode={404} />;
+
+      console.log(campaign, 'the campaign');
+
+      const businessUser = await getUserFromEthAddressDb(campaign?.data?.mongoResponse?.business);
+      console.log(businessUser, 'the business');
+
+      setCampaign(campaign?.data?.mongoResponse);
+      // setBusiness(businessUser?.data?.payload);
+      // setInfluencer(influencerUser?.data?.payload);
     }
-    getCampaignInfo();
+    getBountyInfo();
     return () => {
       consola.info('Cleanup ongoing bounty component');
     };
   }, [id]);
+
+  const handleBountyCreation = async confirmed => {
+    if (confirmed) {
+      await createNewBountyOnContract(
+        famepayFactory,
+        account,
+        campaignDuration[0] ? campaignDuration[0] : simplePostDateStart, //agreedStartDate
+        campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd, //agreedDeadline/postDate,
+        simplePostMinimumDuration,
+        jackpotRewardAmount,
+        jackpotTargetAmount,
+        bountyMaxWinners,
+        objective,
+        bountyType,
+        stakedAmount,
+      );
+    }
+    router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
+  };
 
   return (
     <div className={classes.ReviewBounty_root_center}>
@@ -60,10 +89,10 @@ const ReviewBounty = () => {
         <div className={classes.ReviewBounty_vertical_line}></div>
         <div className={classes.ReviewBounty_influencer_header}>
           <InfluencerReviewHeader
-            username={influencer?.username}
-            email={influencer?.email}
-            campaignsCompleted={influencer?.campaignsCompleted}
-            ethAddress={influencer?.userEthAddress}
+            username={business?.username}
+            email={business?.email}
+            campaignsCompleted={business?.campaignsCompleted}
+            ethAddress={business?.userEthAddress}
           />
         </div>
       </div>
@@ -85,7 +114,7 @@ const ReviewBounty = () => {
             variant="contained"
             color="secondary"
             size="large"
-            onClick={() => handleProposalResponse(false)}
+            onClick={() => handleBountyCreation(false)}
           >
             Reject
           </Button>
@@ -93,7 +122,7 @@ const ReviewBounty = () => {
             className={classes.ReviewBounty_amber}
             variant="contained"
             size="large"
-            onClick={() => handleProposalResponse(false)}
+            onClick={() => handleBountyCreation(false)}
           >
             Counter
           </Button>
@@ -102,7 +131,7 @@ const ReviewBounty = () => {
             variant="contained"
             size="large"
             color="secondary"
-            onClick={() => handleProposalResponse(true)}
+            onClick={() => handleBountyCreation(true)}
           >
             Accept
           </Button>

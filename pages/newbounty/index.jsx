@@ -7,7 +7,6 @@ import { utils } from 'web3';
 import { Paper } from '@material-ui/core';
 import { onlyNumeric } from '../../utils/helpers';
 import { SIMPLE_POST } from '../../constants/CampaignObjectives';
-import { createNewBountyOnContract } from '../../web3';
 import { createNewBountyDb } from '../../services/api/bountyService';
 import { useStyles } from './styles';
 
@@ -79,22 +78,9 @@ const NewBounty = () => {
         objective,
         bountyType,
       );
-      // const campaignDb = await createNewBountyOnContract(
-      //   famepayFactory,
-      //   account,
-      //   campaignDuration[0] ? campaignDuration[0] : simplePostDateStart, //agreedStartDate
-      //   campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd, //agreedDeadline/postDate,
-      //   simplePostMinimumDuration,
-      //   jackpotRewardAmount,
-      //   jackpotTargetAmount,
-      //   bountyMaxWinners,
-      //   objective,
-      //   bountyType,
-      //   stakedAmount,
-      // );
-      router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
+
+      router.push(`/reviewbounty/${campaignDb.data.payload.data._id}`);
     } catch (error) {
-      // consola.error('NewBounty.createNewBounty():', error);
       consola.error('NewBounty.createNewBounty():', error);
     }
   };
