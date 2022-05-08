@@ -8,6 +8,7 @@ import { Paper } from '@material-ui/core';
 import { onlyNumeric } from '../../utils/helpers';
 import { SIMPLE_POST } from '../../constants/CampaignObjectives';
 import { createNewBountyOnContract } from '../../web3';
+import { createNewBountyDb } from '../../services/api/bountyService';
 import { useStyles } from './styles';
 
 const BountyType = dynamic(() => import('../../components/newcampaign/Bounty/BountyType'), {
@@ -45,7 +46,7 @@ const NewBounty = () => {
   const [objective, setObjective] = useState('');
 
   //Bounty Participants & Winners
-  const [bountyParticipants, setBountyParticipants] = useState(null);
+  const [bountyMaxParticipants, setBountyMaxParticipants] = useState(null);
   const [bountyMaxWinners, setBountyMaxWinners] = useState(null);
 
   //Bounty Type
@@ -60,27 +61,40 @@ const NewBounty = () => {
   //Bounty $$$
   const [stakedAmount, setStakedAmount] = useState(0);
 
-  const createNewBounty = async (jackpotRewardAmount, jackpotTargetAmount) => {
+  const createNewBounty = async (maxJackpotReward, jackpotTargetAmount) => {
     // setJackpotRewardAmount(stakedAmount); //REVIEW ME LATER<<<
     // objective === SIMPLE_POST ? (jackpotRewardAmountAmount = stakedAmount) : (jackpotRewardAmountAmount = jackpotRewardAmount);
 
     try {
-      //CALL CONTRACT
-      await createNewBountyOnContract(
-        famepayFactory,
-        account,
+      const campaignDb = await createNewBountyDb(
+        account.address,
         campaignDuration[0] ? campaignDuration[0] : simplePostDateStart, //agreedStartDate
         campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd, //agreedDeadline/postDate,
+        stakedAmount, //totalDeposited
         simplePostMinimumDuration,
-        jackpotRewardAmount,
+        maxJackpotReward,
         jackpotTargetAmount,
+        bountyMaxParticipants,
         bountyMaxWinners,
         objective,
         bountyType,
-        stakedAmount,
       );
+      // const campaignDb = await createNewBountyOnContract(
+      //   famepayFactory,
+      //   account,
+      //   campaignDuration[0] ? campaignDuration[0] : simplePostDateStart, //agreedStartDate
+      //   campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd, //agreedDeadline/postDate,
+      //   simplePostMinimumDuration,
+      //   jackpotRewardAmount,
+      //   jackpotTargetAmount,
+      //   bountyMaxWinners,
+      //   objective,
+      //   bountyType,
+      //   stakedAmount,
+      // );
       router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
     } catch (error) {
+      // consola.error('NewBounty.createNewBounty():', error);
       consola.error('NewBounty.createNewBounty():', error);
     }
   };
@@ -133,7 +147,7 @@ const NewBounty = () => {
           <Paper className={classes.NewBounty_layout_objective} elevation={3}>
             <BountyParticipants
               objective={objective}
-              setParentMaxParticipants={bountyParticipants => setBountyParticipants(bountyParticipants)}
+              setParentMaxParticipants={bountyMaxParticipants => setBountyMaxParticipants(bountyMaxParticipants)}
               setParentMaxWinners={maxWiners => setBountyMaxWinners(maxWiners)}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
             />

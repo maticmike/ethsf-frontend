@@ -79,7 +79,6 @@ const OngoingCampaign = () => {
   if (error) return <Error statusCode={404} />;
 
   campaign = data?.campaigns[0];
-  console.log(campaign, 'the campaign');
   const getPostData = async e => {
     e.preventDefault();
     setInvalidPost(false);

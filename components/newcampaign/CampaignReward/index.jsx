@@ -26,7 +26,8 @@ const CampaignReward = ({
 
   const handleBountyRewardPerInfluencerCalc = () => {
     const rewardWei = stakedAmount / maxWinners;
-    return utils.fromWei(rewardWei.toString()); ///TODO breaks on bounties with lots of winners
+    const weiRewardRounded = Math.round(rewardWei);
+    return utils.fromWei(weiRewardRounded.toString()); ///TODO breaks on bounties with lots of winners
   };
 
   const maxJackpotRewardInput = reward => {

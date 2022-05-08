@@ -42,7 +42,6 @@ export const createNewDealProposalDb = async (
       // niche,
       // potentialPayoutBN
     });
-    consola.success('ApiService: createNewCampaignProposalDb() campaign being created:', campaign);
     return campaign;
   } catch (error) {
     consola.error('ApiService: createNewCampaignOnProposalDb():', error);
@@ -53,7 +52,6 @@ export const createNewDealProposalDb = async (
 export const getCampaignProposalDb = async id => {
   try {
     const campaign = await axios.get(`${api}/campaignProposal/campaign/${id}`);
-    consola.success('ApiService: getCampaignProposal():', campaign);
     return campaign;
   } catch (error) {
     consola.error('ApiService: getCampaignProposal():', error);
