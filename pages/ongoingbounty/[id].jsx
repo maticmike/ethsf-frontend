@@ -24,9 +24,6 @@ import { useStyles } from './styles';
 const BusinessReviewHeader = dynamic(() => import('../../components/reviewdeal/BusinessReviewHeader'), {
   loading: () => <p>Business Header Loading...</p>,
 });
-const InfluencerReviewHeader = dynamic(() => import('../../components/reviewdeal/InfluencerReviewHeader'), {
-  loading: () => <p>Influencer Header Loading...</p>,
-});
 const SubmitPost = dynamic(() => import('../../components/onogoingdeal/SubmitPost'), {
   loading: () => <p>Loading Submit Post....</p>,
 });
@@ -48,7 +45,6 @@ const OngoingBounty = () => {
   const [invalidPost, setInvalidPost] = useState(false);
   const [postUrl, setPostUrl] = useState('');
   const [business, setBusiness] = useState('');
-  const [influencer, setInfluencer] = useState('');
 
   let bounty;
 
@@ -61,9 +57,8 @@ const OngoingBounty = () => {
     async function getUserEthAddress() {
       try {
         const businessUser = await getUserFromEthAddressDb(bounty?.business?.id);
-        const influencerUser = await getUserFromEthAddressDb(bounty?.influencer?.id);
+        console.log(businessUser, 'business');
         setBusiness(businessUser?.data?.payload);
-        setInfluencer(influencerUser?.data?.payload);
       } catch (error) {
         consola.error(error, 'OngoingBounty.getUserEthAddress: error');
       }
@@ -77,7 +72,7 @@ const OngoingBounty = () => {
   if (loading) return null;
   if (error) return <Error statusCode={404} />;
 
-  bounty = data?.bountys[0];
+  bounty = data?.bounties[0];
 
   /** Web 3 **/
   const payInfluencer = () => {
@@ -88,6 +83,8 @@ const OngoingBounty = () => {
       bounty?.confirmedPaymentAmount,
     );
   };
+
+  console.log(bounty, 'the no man');
 
   const claimRefund = () => endbountyWeb3(bounty?.bountyAddress);
 
@@ -130,7 +127,7 @@ const OngoingBounty = () => {
       return <p>bounty Ongoing</p>;
     } else {
       //if not ongoing
-      return <ClaimRefund bounty={bounty} claimRefund={claimRefund} bountyBalance={bounty?.depositedBalance} />;
+      return <ClaimRefund bounty={bounty} claimRefund={claimRefund} campaignBalance={bounty?.depositedBalance} />;
     }
   };
 
@@ -138,9 +135,9 @@ const OngoingBounty = () => {
     if (account?.address == business?.userEthAddress) {
       return isObjectiveCompleteBusinessUI();
     }
-    if (account?.address == influencer?.userEthAddress) {
-      return isObjectiveCompleteInfluencerUI();
-    }
+    // if (account?.address == influencer?.userEthAddress) {
+    //   return isObjectiveCompleteInfluencerUI();
+    // }
   };
 
   return (
@@ -156,22 +153,13 @@ const OngoingBounty = () => {
             ethAddress={business?.userEthAddress}
           />
         </div>
-        <div className={classes.Reviewbounty_vertical_line}></div>
-        <div className={classes.Reviewbounty_influencer_header}>
-          <InfluencerReviewHeader
-            username={influencer?.username}
-            email={influencer?.email}
-            bountysCompleted={influencer?.bountysCompleted}
-            ethAddress={influencer?.userEthAddress}
-          />
-        </div>
       </div>
       <br />
       <br />
-      <Calendar
+      {/* <Calendar
         value={getDateFormat(bounty?.objective, bounty?.startDate, bounty?.deadline)}
         className={classes.Reviewbounty_calendar_size}
-      />
+      /> */}
       <br />
       <br />
       {ongoingPostUIActions()}

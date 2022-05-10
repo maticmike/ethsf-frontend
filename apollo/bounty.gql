@@ -14,13 +14,12 @@ fragment BountyFrag on Bounty {
   depositedBalance
   ongoing
   bountyType
-  jackpotObjectiveReached
-  jackpotRewardAmount
-  endedWithRefund
+  maxJackpotRewardAmount
+  # endedWithRefund
 }
 
 query bountyQuery($id: String!) {
   bounties(where: { id: $id }) {
-    ...DealFrag
+    ...BountyFrag
   }
 }
