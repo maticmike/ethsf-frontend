@@ -1,4 +1,4 @@
-fragment CampaignFrag on Campaign {
+fragment DealFrag on Campaign {
   id
   campaignAddress
   startDate
@@ -23,8 +23,8 @@ fragment CampaignFrag on Campaign {
   endedWithRefund
 }
 
-query campaignQuery($id: String!) {
+query dealQuery($id: String!) {
   campaigns(where: { id: $id }) {
-    ...CampaignFrag
+    ...DealFrag
   }
 }

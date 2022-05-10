@@ -1,5 +1,5 @@
-//no button to end campaign
-//call the complete campaign logic automatically
+//no button to end bounty
+//call the complete bounty logic automatically
 // https://stackoverflow.com/questions/4455282/call-a-javascript-function-at-a-specific-time-of-day
 
 import React, { useState, useEffect } from 'react';
@@ -12,10 +12,10 @@ import dynamic from 'next/dynamic';
 import consola from 'consola';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { getCampaignFromContract, setPaymentTargetReachedWeb3, payInfluencerWeb3, endCampaignWeb3 } from '../../web3';
+import { getbountyFromContract, setPaymentTargetReachedWeb3, payInfluencerWeb3, endbountyWeb3 } from '../../web3';
 import { parseTwitterPostData } from '../../utils/objectiveData/twitter';
 import { storeFamepayFactoryThunk } from '../../redux/actions/famepayFactory';
-import { dealQuery } from '../../apollo/deal.gql';
+import { bountyQuery } from '../../apollo/bounty.gql';
 import { APOLLO_POLL_INTERVAL_MS } from '../../constants/Blockchain';
 import { getUserFromEthAddressDb } from '../../services/api/userService';
 import { getDateFormat } from '../../utils/helpers';
@@ -33,12 +33,11 @@ const SubmitPost = dynamic(() => import('../../components/onogoingdeal/SubmitPos
 const ClaimPrize = dynamic(() => import('../../components/onogoingdeal/ClaimPrize'), {
   loading: () => <p>Loading Claim Prize....</p>,
 });
-
 const ClaimRefund = dynamic(() => import('../../components/onogoingdeal/ClaimRefund'), {
   loading: () => <p>Loading Claim Refund Prize....</p>,
 });
 
-const OngoingCampaign = () => {
+const OngoingBounty = () => {
   const classes = useStyles();
   const router = useRouter();
 
@@ -51,9 +50,9 @@ const OngoingCampaign = () => {
   const [business, setBusiness] = useState('');
   const [influencer, setInfluencer] = useState('');
 
-  let campaign;
+  let bounty;
 
-  const { loading, error, data } = useQuery(dealQuery, {
+  const { loading, error, data } = useQuery(bountyQuery, {
     variables: { id: id },
     pollInterval: APOLLO_POLL_INTERVAL_MS,
   });
@@ -61,66 +60,40 @@ const OngoingCampaign = () => {
   useEffect(() => {
     async function getUserEthAddress() {
       try {
-        const businessUser = await getUserFromEthAddressDb(campaign?.business?.id);
-        const influencerUser = await getUserFromEthAddressDb(campaign?.influencer?.id);
+        const businessUser = await getUserFromEthAddressDb(bounty?.business?.id);
+        const influencerUser = await getUserFromEthAddressDb(bounty?.influencer?.id);
         setBusiness(businessUser?.data?.payload);
         setInfluencer(influencerUser?.data?.payload);
       } catch (error) {
-        consola.error(error, 'OngoingCampaign.getUserEthAddress: error');
+        consola.error(error, 'OngoingBounty.getUserEthAddress: error');
       }
     }
     getUserEthAddress();
     return () => {
-      console.log('cleanup ongoingCampaign page');
+      console.log('cleanup ongoingBounty page');
     };
   }, [data]);
 
   if (loading) return null;
   if (error) return <Error statusCode={404} />;
 
-  campaign = data?.campaigns[0];
-
-  // REFACTOR ME AWAY TO TWITTER.JS
-
-  const getPostData = async e => {
-    //   e.preventDefault();
-    //   setInvalidPost(false);
-    //   let tweetId;
-    //   if (postUrl.includes('twitter.com' && '/status/')) {
-    //     if (postUrl.slice(postUrl.length - 4) === 's=20') {
-    //       const tweetUrl = postUrl.slice(0, -5);
-    //       tweetId = tweetUrl.slice(postUrl.length - 19);
-    //     } else {
-    //       tweetId = postUrl.slice(postUrl.length - 19);
-    //     }
-    //   } else {
-    //     setInvalidPost(true);
-    //   }
-    //   try {
-    //     const { data } = await axios.get(`http://localhost:3000/api/twitter/${tweetId}`);
-    //     const postData = parseTwitterPostData(campaign.objective, data);
-    //     // await setPaymentTargetReachedWeb3(campaign?.campaignAddress, postData[0], postData[1], postData[2]);
-    //   } catch (error) {
-    //     setInvalidPost(true);
-    //     consola.error('getPostData():', error);
-    //   }
-  };
+  bounty = data?.bountys[0];
 
   /** Web 3 **/
   const payInfluencer = () => {
     payInfluencerWeb3(
-      campaign?.campaignAddress,
-      campaign?.businessConfirmedPayment,
-      campaign?.influencerConfirmedPayment,
-      campaign?.confirmedPaymentAmount,
+      bounty?.bountyAddress,
+      bounty?.businessConfirmedPayment,
+      bounty?.influencerConfirmedPayment,
+      bounty?.confirmedPaymentAmount,
     );
   };
 
-  const claimRefund = () => endCampaignWeb3(campaign?.campaignAddress);
+  const claimRefund = () => endbountyWeb3(bounty?.bountyAddress);
 
   /** Components **/
   const isObjectiveComplete = () =>
-    campaign?.jackpotObjectiveReached || campaign?.incrementalObjectiveReached ? true : false;
+    bounty?.jackpotObjectiveReached || bounty?.incrementalObjectiveReached ? true : false;
 
   /** ONGOING **/
   const isObjectiveCompleteInfluencerUI = () => {
@@ -128,23 +101,23 @@ const OngoingCampaign = () => {
       return (
         <ClaimPrize
           payInfluencer={payInfluencer}
-          outstandingIncrementals={campaign?.outstandingPayments}
-          incrementalAmount={campaign?.incrementalRewardAmount}
-          outstandingJackpot={campaign?.jackpotObjectiveReached ? 1 : 0}
-          jackpotAmount={campaign?.jackpotRewardAmount}
-          campaignAddress={campaign?.id}
-          businessConfirmed={campaign?.businessConfirmedPayment}
-          influencerConfirmed={campaign?.influencerConfirmedPayment}
-          confirmedPaymentAmount={campaign?.refundedAmount}
+          outstandingIncrementals={bounty?.outstandingPayments}
+          incrementalAmount={bounty?.incrementalRewardAmount}
+          outstandingJackpot={bounty?.jackpotObjectiveReached ? 1 : 0}
+          jackpotAmount={bounty?.jackpotRewardAmount}
+          bountyAddress={bounty?.id}
+          businessConfirmed={bounty?.businessConfirmedPayment}
+          influencerConfirmed={bounty?.influencerConfirmedPayment}
+          confirmedPaymentAmount={bounty?.refundedAmount}
         />
       );
     }
-    if (campaign?.deadline >= Math.round(Date.now() / 1000) || !campaign?.ongoing) {
+    if (bounty?.deadline >= Math.round(Date.now() / 1000) || !bounty?.ongoing) {
       //if ongoing but no prize to claim
       return <SubmitPost invalidPost={invalidPost} getPostData={getPostData} setPostUrl={setPostUrl} />;
     } else {
       //if not ongoing
-      return <p>Campaign is over. Thank you for participating.</p>;
+      return <p>Bounty is over. Thank you for participating.</p>;
     }
   };
 
@@ -153,11 +126,11 @@ const OngoingCampaign = () => {
       return <p>View Live Post!</p>;
     }
     //if ongoing but no post
-    if (campaign?.deadline >= Math.round(Date.now() / 1000) && campaign?.ongoing) {
-      return <p>Campaign Ongoing</p>;
+    if (bounty?.deadline >= Math.round(Date.now() / 1000) && bounty?.ongoing) {
+      return <p>bounty Ongoing</p>;
     } else {
       //if not ongoing
-      return <ClaimRefund campaign={campaign} claimRefund={claimRefund} campaignBalance={campaign?.depositedBalance} />;
+      return <ClaimRefund bounty={bounty} claimRefund={claimRefund} bountyBalance={bounty?.depositedBalance} />;
     }
   };
 
@@ -171,24 +144,24 @@ const OngoingCampaign = () => {
   };
 
   return (
-    <div className={classes.ReviewCampaign_root_center}>
-      <h2>{campaign?.ongoing ? 'Ongoing Campaign' : 'Campaign Completed'}</h2>
-      <div className={classes.ReviewCampaign_headers_side_by_side}>
-        <div className={classes.ReviewCampaign_business_header}>
+    <div className={classes.Reviewbounty_root_center}>
+      <h2>{bounty?.ongoing ? 'Ongoing bounty' : 'bounty Completed'}</h2>
+      <div className={classes.Reviewbounty_headers_side_by_side}>
+        <div className={classes.Reviewbounty_business_header}>
           <BusinessReviewHeader
-            potentialPayout={campaign?.depositedBalance}
-            objective={campaign?.objective}
+            potentialPayout={bounty?.depositedBalance}
+            objective={bounty?.objective}
             username={business?.username}
             website={business?.website}
             ethAddress={business?.userEthAddress}
           />
         </div>
-        <div className={classes.ReviewCampaign_vertical_line}></div>
-        <div className={classes.ReviewCampaign_influencer_header}>
+        <div className={classes.Reviewbounty_vertical_line}></div>
+        <div className={classes.Reviewbounty_influencer_header}>
           <InfluencerReviewHeader
             username={influencer?.username}
             email={influencer?.email}
-            campaignsCompleted={influencer?.campaignsCompleted}
+            bountysCompleted={influencer?.bountysCompleted}
             ethAddress={influencer?.userEthAddress}
           />
         </div>
@@ -196,8 +169,8 @@ const OngoingCampaign = () => {
       <br />
       <br />
       <Calendar
-        value={getDateFormat(campaign?.objective, campaign?.startDate, campaign?.deadline)}
-        className={classes.ReviewCampaign_calendar_size}
+        value={getDateFormat(bounty?.objective, bounty?.startDate, bounty?.deadline)}
+        className={classes.Reviewbounty_calendar_size}
       />
       <br />
       <br />
@@ -206,4 +179,4 @@ const OngoingCampaign = () => {
   );
 };
 
-export default OngoingCampaign;
+export default OngoingBounty;

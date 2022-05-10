@@ -1,0 +1,26 @@
+fragment BountyFrag on Bounty {
+  id
+  bountyAddress
+  startDate
+  deadline
+  business {
+    id
+  }
+  availablePayoutDate
+  objective
+  maxJackpotRewardAmount
+  jackpotTargetAmount
+  simplePostDuration
+  depositedBalance
+  ongoing
+  bountyType
+  jackpotObjectiveReached
+  jackpotRewardAmount
+  endedWithRefund
+}
+
+query bountyQuery($id: String!) {
+  bounties(where: { id: $id }) {
+    ...DealFrag
+  }
+}
