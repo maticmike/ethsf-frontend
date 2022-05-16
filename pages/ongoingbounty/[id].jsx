@@ -21,9 +21,19 @@ import { getUserFromEthAddressDb } from '../../services/api/userService';
 import { getDateFormat } from '../../utils/helpers';
 import { useStyles } from './styles';
 
-const BusinessReviewHeader = dynamic(() => import('../../components/reviewdeal/BusinessReviewHeader'), {
-  loading: () => <p>Business Header Loading...</p>,
-});
+const BusinessOngoingBountyHeader = dynamic(
+  () => import('../../components/ongoing-bounty-headers/BusinessOngoingBountyHeader'),
+  {
+    loading: () => <p>Business Header Loading...</p>,
+  },
+);
+
+const InfluencerOngoingBountyHeader = dynamic(
+  () => import('../../components/ongoing-bounty-headers/BusinessOngoingBountyHeader'),
+  {
+    loading: () => <p>Business Header Loading...</p>,
+  },
+);
 const SubmitPost = dynamic(() => import('../../components/onogoingdeal/SubmitPost'), {
   loading: () => <p>Loading Submit Post....</p>,
 });
@@ -45,6 +55,7 @@ const OngoingBounty = () => {
   const [invalidPost, setInvalidPost] = useState(false);
   const [postUrl, setPostUrl] = useState('');
   const [business, setBusiness] = useState('');
+  const [influencer, setInfluencer] = useState('');
 
   let bounty;
 
@@ -57,17 +68,19 @@ const OngoingBounty = () => {
     async function getUserEthAddress() {
       try {
         const businessUser = await getUserFromEthAddressDb(bounty?.business?.id);
-        console.log(businessUser, 'business');
-        setBusiness(businessUser?.data?.payload);
+        if (businessUser == account?.address) {
+          setBusiness(businessUser?.data?.payload);
+        } else {
+          //page will be restricted to other business
+          setInfluencer(account?.address);
+        }
       } catch (error) {
         consola.error(error, 'OngoingBounty.getUserEthAddress: error');
       }
     }
     getUserEthAddress();
-    return () => {
-      console.log('cleanup ongoingBounty page');
-    };
-  }, [data]);
+    return () => console.log('cleanup ongoingBounty page');
+  }, [data, account]);
 
   if (loading) return null;
   if (error) return <Error statusCode={404} />;
@@ -83,8 +96,6 @@ const OngoingBounty = () => {
       bounty?.confirmedPaymentAmount,
     );
   };
-
-  console.log(bounty, 'the no man');
 
   const claimRefund = () => endbountyWeb3(bounty?.bountyAddress);
 
@@ -139,13 +150,12 @@ const OngoingBounty = () => {
     //   return isObjectiveCompleteInfluencerUI();
     // }
   };
-
   return (
-    <div className={classes.Reviewbounty_root_center}>
-      <h2>{bounty?.ongoing ? 'Ongoing bounty' : 'bounty Completed'}</h2>
-      <div className={classes.Reviewbounty_headers_side_by_side}>
-        <div className={classes.Reviewbounty_business_header}>
-          <BusinessReviewHeader
+    <div className={classes.ReviewBounty_root_center}>
+      <h2>{bounty?.ongoing ? 'Ongoing Bounty' : 'Bounty Completed'}</h2>
+      <div className={classes.ReviewBounty_headers_side_by_side}>
+        <div className={classes.ReviewBounty_business_header}>
+          <BusinessOngoingBountyHeader
             potentialPayout={bounty?.depositedBalance}
             objective={bounty?.objective}
             username={business?.username}
@@ -153,12 +163,23 @@ const OngoingBounty = () => {
             ethAddress={business?.userEthAddress}
           />
         </div>
+        <div className={classes.ReviewBounty_vertical_line}></div>
+        {/* IF INFLUENCER LOGGED IN */}
+        <div className={classes.ReviewBounty_influencer_header}>
+          <InfluencerOngoingBountyHeader
+            username={influencer?.username}
+            email={influencer?.email}
+            campaignsCompleted={influencer?.campaignsCompleted}
+            ethAddress={influencer?.userEthAddress}
+          />
+        </div>
+        {/* IF BUSINESS LOGGED IN SHOW TABLE */}
       </div>
       <br />
       <br />
       {/* <Calendar
-        value={getDateFormat(bounty?.objective, bounty?.startDate, bounty?.deadline)}
-        className={classes.Reviewbounty_calendar_size}
+        value={getDateFormat(campaign?.objective, campaign?.startDate, campaign?.deadline)}
+        className={classes.ReviewBounty_calendar_size}
       /> */}
       <br />
       <br />

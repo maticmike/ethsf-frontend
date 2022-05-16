@@ -6,6 +6,9 @@ fragment BountyFrag on Bounty {
   business {
     id
   }
+  influencers {
+    id
+  }
   availablePayoutDate
   objective
   maxJackpotRewardAmount
