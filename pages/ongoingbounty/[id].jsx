@@ -54,8 +54,8 @@ const OngoingBounty = () => {
 
   const [invalidPost, setInvalidPost] = useState(false);
   const [postUrl, setPostUrl] = useState('');
-  const [business, setBusiness] = useState('');
-  const [influencer, setInfluencer] = useState('');
+  const [business, setBusiness] = useState(null);
+  const [influencer, setInfluencer] = useState(null);
 
   let bounty;
 
@@ -67,11 +67,13 @@ const OngoingBounty = () => {
   useEffect(() => {
     async function getUserEthAddress() {
       try {
-        const businessUser = await getUserFromEthAddressDb(bounty?.business?.id);
-        if (businessUser == account?.address) {
-          setBusiness(businessUser?.data?.payload);
+        const businessDbRes = await getUserFromEthAddressDb(bounty?.business?.id);
+        const business = await businessDbRes?.data?.payload?.userEthAddress;
+        if (business == account?.address) {
+          setBusiness(business?.data?.payload);
+          setInfluencer(null);
         } else {
-          //page will be restricted to other business
+          //page will be restricted to other businesses
           setInfluencer(account?.address);
         }
       } catch (error) {
@@ -98,6 +100,25 @@ const OngoingBounty = () => {
   };
 
   const claimRefund = () => endbountyWeb3(bounty?.bountyAddress);
+
+  const influencerHeadingUI = () => {
+    if (influencer != null) {
+      // influencer logged in
+      return (
+        <div className={classes.ReviewBounty_influencer_header}>
+          <InfluencerOngoingBountyHeader
+            username={influencer?.username}
+            email={influencer?.email}
+            campaignsCompleted={influencer?.campaignsCompleted}
+            ethAddress={influencer?.userEthAddress}
+          />
+        </div>
+      );
+    } else {
+      // business logged in
+      return <p>Petruska</p>;
+    }
+  };
 
   /** Components **/
   const isObjectiveComplete = () =>
@@ -164,16 +185,7 @@ const OngoingBounty = () => {
           />
         </div>
         <div className={classes.ReviewBounty_vertical_line}></div>
-        {/* IF INFLUENCER LOGGED IN */}
-        <div className={classes.ReviewBounty_influencer_header}>
-          <InfluencerOngoingBountyHeader
-            username={influencer?.username}
-            email={influencer?.email}
-            campaignsCompleted={influencer?.campaignsCompleted}
-            ethAddress={influencer?.userEthAddress}
-          />
-        </div>
-        {/* IF BUSINESS LOGGED IN SHOW TABLE */}
+        {influencerHeadingUI()}
       </div>
       <br />
       <br />
