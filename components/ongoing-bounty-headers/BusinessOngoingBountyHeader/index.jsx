@@ -5,7 +5,7 @@ import { utils } from 'web3';
 import consola from 'consola';
 import { SIMPLE_POST } from '../../../constants/CampaignObjectives';
 import { useStyles } from './styles';
-const BusinessMakeHeader = ({ potentialPayout, objective, username, website, ethAddress }) => {
+const BusinessOngoingBountyHeader = ({ potentialPayout, objective, username, website, ethAddress }) => {
   const classes = useStyles();
 
   const payoutInWei = () => {
@@ -13,7 +13,6 @@ const BusinessMakeHeader = ({ potentialPayout, objective, username, website, eth
       return utils.fromWei(potentialPayout?.toString(), 'ether');
     }
   };
-
   return (
     <div className={classes.BusinessMake_component_outline}>
       <div>
@@ -29,7 +28,6 @@ const BusinessMakeHeader = ({ potentialPayout, objective, username, website, eth
         <Link href="/profile/[id]" as={`/profile/${username}`}>
           <h1 className={classes.BusinessMake_margin_bottom_h1}>{username}</h1>
         </Link>
-
         <a href={website} target="_blank">
           {website}
         </a>
@@ -46,4 +44,4 @@ const BusinessMakeHeader = ({ potentialPayout, objective, username, website, eth
   );
 };
 
-export default BusinessMakeHeader;
+export default BusinessOngoingBountyHeader;

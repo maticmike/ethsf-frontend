@@ -23,16 +23,12 @@ import { useStyles } from './styles';
 
 const BusinessOngoingBountyHeader = dynamic(
   () => import('../../components/ongoing-bounty-headers/BusinessOngoingBountyHeader'),
-  {
-    loading: () => <p>Business Header Loading...</p>,
-  },
+  { loading: () => <p>Business Header Loading...</p> },
 );
 
 const InfluencerOngoingBountyHeader = dynamic(
   () => import('../../components/ongoing-bounty-headers/BusinessOngoingBountyHeader'),
-  {
-    loading: () => <p>Business Header Loading...</p>,
-  },
+  { oading: () => <p>Business Header Loading...</p> },
 );
 const SubmitPost = dynamic(() => import('../../components/onogoingdeal/SubmitPost'), {
   loading: () => <p>Loading Submit Post....</p>,
@@ -67,10 +63,9 @@ const OngoingBounty = () => {
   useEffect(() => {
     async function getUserEthAddress() {
       try {
-        const businessDbRes = await getUserFromEthAddressDb(bounty?.business?.id);
-        const business = await businessDbRes?.data?.payload?.userEthAddress;
-        if (business == account?.address) {
-          setBusiness(business?.data?.payload);
+        const businessRes = await getUserFromEthAddressDb(bounty?.business?.id);
+        setBusiness(businessRes?.data?.payload);
+        if (businessRes?.data?.payload?.userEthAddress == account?.address) {
           setInfluencer(null);
         } else {
           //page will be restricted to other businesses
