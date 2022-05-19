@@ -18,7 +18,6 @@ const InfluencerReviewHeader = ({ username, email, campaignsCompleted, ethAddres
         <a href="https://google.com" target="_blank">
           {email}
         </a>
-
         <p>
           <strong>1.2M Followers</strong>
         </p>

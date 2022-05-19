@@ -102,6 +102,7 @@ const OngoingBounty = () => {
       return (
         <div className={classes.ReviewBounty_influencer_header}>
           <InfluencerOngoingBountyHeader
+            bounty={bounty}
             username={influencer?.username}
             email={influencer?.email}
             campaignsCompleted={influencer?.campaignsCompleted}
@@ -111,7 +112,7 @@ const OngoingBounty = () => {
       );
     } else {
       // business logged in
-      return <p>Petruska</p>;
+      return <p>This will be the chart that business sees of all influencers</p>;
     }
   };
 
