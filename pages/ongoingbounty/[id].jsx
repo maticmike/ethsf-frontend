@@ -27,7 +27,7 @@ const BusinessOngoingBountyHeader = dynamic(
 );
 
 const InfluencerOngoingBountyHeader = dynamic(
-  () => import('../../components/ongoing-bounty-headers/BusinessOngoingBountyHeader'),
+  () => import('../../components/ongoing-bounty-headers/InfluencerOngoingBountyHeader'),
   { oading: () => <p>Business Header Loading...</p> },
 );
 const SubmitPost = dynamic(() => import('../../components/onogoingdeal/SubmitPost'), {
@@ -68,8 +68,9 @@ const OngoingBounty = () => {
         if (businessRes?.data?.payload?.userEthAddress == account?.address) {
           setInfluencer(null);
         } else {
+          const influencerRes = await getUserFromEthAddressDb(account?.address);
           //page will be restricted to other businesses
-          setInfluencer(account?.address);
+          setInfluencer(influencerRes?.data?.payload);
         }
       } catch (error) {
         consola.error(error, 'OngoingBounty.getUserEthAddress: error');
@@ -98,7 +99,7 @@ const OngoingBounty = () => {
 
   const influencerHeadingUI = () => {
     if (influencer != null) {
-      // influencer logged in
+      // influencer logged in;
       return (
         <div className={classes.ReviewBounty_influencer_header}>
           <InfluencerOngoingBountyHeader

@@ -8,14 +8,14 @@ import { useStyles } from './styles';
 const InfluencerOngoingBountyHeader = ({ bounty, username, email, campaignsCompleted, ethAddress }) => {
   const classes = useStyles();
 
-  const [influencerRegisted, setInfluencerRegisted] = useState(false);
+  const [influencerRegisted, setInfluencerRegisted] = useState(true);
 
   const influencerRegistered = () => {
     return (
       <>
         <div>
           <Link href="/profile/[id]" as={`/profile/${username}`}>
-            <h1 className={classes.InfluencerReview_margin_bottom_h1}>{username}</h1>
+            <h1 className={classes.InfluencerOngoingBountyHeader_margin_bottom_h1}>{username}</h1>
           </Link>
 
           <a href="https://google.com" target="_blank">
@@ -36,7 +36,7 @@ const InfluencerOngoingBountyHeader = ({ bounty, username, email, campaignsCompl
         </div>
         <div>
           <Image
-            className={classes.InfluencerReview_round_header}
+            className={classes.InfluencerOngoingBountyHeader_round_header}
             src="/TestInfluencer.jpeg"
             alt="Change Me"
             width="125"
@@ -65,7 +65,7 @@ const InfluencerOngoingBountyHeader = ({ bounty, username, email, campaignsCompl
   };
 
   return (
-    <div className={classes.InfluencerReview_component_outline}>
+    <div className={classes.InfluencerOngoingBountyHeader_component_outline}>
       {influencerRegisted ? influencerRegistered() : influencerUnregistered()}
     </div>
   );
