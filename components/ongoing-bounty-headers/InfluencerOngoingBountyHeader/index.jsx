@@ -16,7 +16,7 @@ const InfluencerOngoingBountyHeader = ({
 }) => {
   const classes = useStyles();
 
-  const [influencerRegisted, setInfluencerRegisted] = useState(true);
+  const [influencerRegisted, setInfluencerRegisted] = useState(false);
 
   useEffect(() => {
     if (bountyInfluencers.includes(ethAddress)) setInfluencerRegisted(true);
