@@ -108,6 +108,7 @@ const OngoingBounty = () => {
             email={influencer?.email}
             campaignsCompleted={influencer?.campaignsCompleted}
             ethAddress={influencer?.userEthAddress}
+            bountyInfluencers={bounty?.influencers}
           />
         </div>
       );

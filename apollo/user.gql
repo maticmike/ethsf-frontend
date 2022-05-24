@@ -4,9 +4,13 @@ fragment CampaignFrag on Campaign {
   deadline
   business {
     id
+    dealsCompleted
+    bountiesCompleted
   }
   influencer {
     id
+    dealsCompleted
+    bountiesCompleted
   }
   objective
   outstandingPayments

@@ -1,17 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { utils } from 'web3';
 import { Snackbar } from '@material-ui/core';
 import { shortenedEthAddress } from '../../../web3/helpers';
+import { Button } from '@material-ui/core';
 import { useStyles } from './styles';
-const InfluencerOngoingBountyHeader = ({ bounty, username, email, campaignsCompleted, ethAddress }) => {
+const InfluencerOngoingBountyHeader = ({
+  bounty,
+  username,
+  email,
+  campaignsCompleted,
+  ethAddress,
+  bountyInfluencers,
+}) => {
   const classes = useStyles();
 
   const [influencerRegisted, setInfluencerRegisted] = useState(true);
 
-  const influencerRegistered = () => {
-    return (
+  useEffect(() => {
+    if (bountyInfluencers.includes(ethAddress)) setInfluencerRegisted(true);
+    return () => console.log('Cleanup: InfluencerOngoingBountyHeader component');
+  }, []);
+
+  return (
+    <div className={classes.InfluencerOngoingBountyHeader_component_outline}>
       <>
         <div>
           <Link href="/profile/[id]" as={`/profile/${username}`}>
@@ -31,8 +44,13 @@ const InfluencerOngoingBountyHeader = ({ bounty, username, email, campaignsCompl
             <strong>700K Followers</strong>
           </p>
           <p>
-            <i>Campaigns Completed: {campaignsCompleted}</i>
+            <i>Bounties Completed: {campaignsCompleted}</i>
           </p>
+          {influencerRegisted ? null : (
+            <Button variant="contained" color="primary">
+              Register for Bounty!
+            </Button>
+          )}
         </div>
         <div>
           <Image
@@ -44,29 +62,6 @@ const InfluencerOngoingBountyHeader = ({ bounty, username, email, campaignsCompl
           />
         </div>
       </>
-    );
-  };
-  const influencerUnregistered = () => {
-    return (
-      <>
-        <div>
-          <p>
-            <strong>1.2M Followers</strong>
-          </p>
-          <p>
-            <strong>480K Subscribers</strong>
-          </p>
-          <p>
-            <strong>700K Followers</strong>
-          </p>
-        </div>
-      </>
-    );
-  };
-
-  return (
-    <div className={classes.InfluencerOngoingBountyHeader_component_outline}>
-      {influencerRegisted ? influencerRegistered() : influencerUnregistered()}
     </div>
   );
 };
