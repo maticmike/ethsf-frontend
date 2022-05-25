@@ -22,12 +22,11 @@ import { getDateFormat } from '../../utils/helpers';
 import { useStyles } from './styles';
 
 const BusinessOngoingBountyHeader = dynamic(
-  () => import('../../components/ongoing-bounty-headers/BusinessOngoingBountyHeader'),
+  () => import('../../components/ongoingbounty/ongoing-bounty-headers/BusinessOngoingBountyHeader'),
   { loading: () => <p>Business Header Loading...</p> },
 );
-
 const InfluencerOngoingBountyHeader = dynamic(
-  () => import('../../components/ongoing-bounty-headers/InfluencerOngoingBountyHeader'),
+  () => import('../../components/ongoingbounty/ongoing-bounty-headers/InfluencerOngoingBountyHeader'),
   { oading: () => <p>Business Header Loading...</p> },
 );
 const SubmitPost = dynamic(() => import('../../components/onogoingdeal/SubmitPost'), {
@@ -114,6 +113,7 @@ const OngoingBounty = () => {
       );
     } else {
       // business logged in
+      //TODO ME NEXT
       return <p>This will be the chart that business sees of all influencers</p>;
     }
   };

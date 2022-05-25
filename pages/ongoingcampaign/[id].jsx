@@ -33,12 +33,14 @@ const SubmitPost = dynamic(() => import('../../components/onogoingdeal/SubmitPos
 const ClaimPrize = dynamic(() => import('../../components/onogoingdeal/ClaimPrize'), {
   loading: () => <p>Loading Claim Prize....</p>,
 });
-
 const ClaimRefund = dynamic(() => import('../../components/onogoingdeal/ClaimRefund'), {
   loading: () => <p>Loading Claim Refund Prize....</p>,
 });
+const InfluencersTable = dynamic(() => import('../../components/ongoingbounty/influencers-table'), {
+  loading: () => <p>Loading Influencers Table....</p>,
+});
 
-const OngoingCampaign = () => {
+const OngoingBounty = () => {
   const classes = useStyles();
   const router = useRouter();
 
@@ -144,7 +146,7 @@ const OngoingCampaign = () => {
       return <SubmitPost invalidPost={invalidPost} getPostData={getPostData} setPostUrl={setPostUrl} />;
     } else {
       //if not ongoing
-      return <p>Campaign is over. Thank you for participating.</p>;
+      return <InfluencersTable />;
     }
   };
 
@@ -206,4 +208,4 @@ const OngoingCampaign = () => {
   );
 };
 
-export default OngoingCampaign;
+export default OngoingBounty;
