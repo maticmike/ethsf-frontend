@@ -1,9 +1,10 @@
-import React, { createRef, Fragment, PureComponent } from 'react';
-import { FixedSizeList as List } from 'react-window';
+import React, { useState, createRef, Fragment, PureComponent } from 'react';
+import { FixedSizeGrid as Grid } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
 
 const LOADING = 1;
 const LOADED = 2;
+const NUM_COLUMNS = 3;
 let itemStatusMap = {};
 
 const isItemLoaded = index => !!itemStatusMap[index];
@@ -21,39 +22,46 @@ const loadMoreItems = (startIndex, stopIndex) => {
   );
 };
 
-class Row extends PureComponent {
-  render() {
-    const { index, style } = this.props;
-    let label;
-    if (itemStatusMap[index] === LOADED) {
-      label = `Row ${index}`;
-    } else {
-      label = 'Loading...';
-    }
-    return (
-      <div className="ListItem" style={style}>
-        {label}
-      </div>
-    );
+const Cell = ({ columnIndex, rowIndex, style }) => {
+  let label;
+  const itemIndex = rowIndex * NUM_COLUMNS + columnIndex;
+  if (itemStatusMap[itemIndex] === LOADED) {
+    label = `Influencer (${rowIndex})`;
+  } else {
+    label = 'Loading...';
   }
-}
+  return (
+    <div className="ListItem" style={style}>
+      {label}
+    </div>
+  );
+};
 
-const InfluencersTable = () => {
+const InfluencersTable = ({ influencers }) => {
   return (
     <Fragment>
       <InfiniteLoader isItemLoaded={isItemLoaded} itemCount={1000} loadMoreItems={loadMoreItems}>
         {({ onItemsRendered, ref }) => (
-          <List
+          <Grid
             className="List"
-            height={450}
-            itemCount={1000}
-            itemSize={30}
-            onItemsRendered={onItemsRendered}
+            columnCount={NUM_COLUMNS}
+            columnWidth={140}
+            height={250}
+            rowCount={100}
+            rowHeight={35}
+            onItemsRendered={gridProps => {
+              onItemsRendered({
+                overscanStartIndex: gridProps.overscanRowStartIndex * NUM_COLUMNS,
+                overscanStopIndex: gridProps.overscanRowStopIndex * NUM_COLUMNS,
+                visibleStartIndex: gridProps.visibleRowStartIndex * NUM_COLUMNS,
+                visibleStopIndex: gridProps.visibleRowStopIndex * NUM_COLUMNS,
+              });
+            }}
             ref={ref}
-            width={300}
+            width={400}
           >
-            {Row}
-          </List>
+            {Cell}
+          </Grid>
         )}
       </InfiniteLoader>
     </Fragment>

@@ -38,6 +38,9 @@ const ClaimPrize = dynamic(() => import('../../components/onogoingdeal/ClaimPriz
 const ClaimRefund = dynamic(() => import('../../components/onogoingdeal/ClaimRefund'), {
   loading: () => <p>Loading Claim Refund Prize....</p>,
 });
+const InfluencersTable = dynamic(() => import('../../components/ongoingbounty/influencers-table'), {
+  loading: () => <p>Loading Influencers Table....</p>,
+});
 
 const OngoingBounty = () => {
   const classes = useStyles();
@@ -113,8 +116,7 @@ const OngoingBounty = () => {
       );
     } else {
       // business logged in
-      //TODO ME NEXT
-      return <p>This will be the chart that business sees of all influencers</p>;
+      return <InfluencersTable influencers={bounty?.influencers} />;
     }
   };
 
