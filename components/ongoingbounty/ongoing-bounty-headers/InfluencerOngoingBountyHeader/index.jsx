@@ -3,8 +3,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { utils } from 'web3';
 import { Snackbar } from '@material-ui/core';
-import { shortenedEthAddress } from '../../../../web3/helpers';
 import { Button } from '@material-ui/core';
+import { shortenedEthAddress } from '../../../../web3/helpers';
+
 import { useStyles } from './styles';
 const InfluencerOngoingBountyHeader = ({
   bounty,
@@ -13,13 +14,14 @@ const InfluencerOngoingBountyHeader = ({
   campaignsCompleted,
   ethAddress,
   bountyInfluencers,
+  addInfluencerToBountyParent,
 }) => {
   const classes = useStyles();
 
   const [influencerRegisted, setInfluencerRegisted] = useState(false);
 
   useEffect(() => {
-    if (bountyInfluencers.includes(ethAddress)) setInfluencerRegisted(true);
+    if (bountyInfluencers.some(influencer => influencer.id === ethAddress)) setInfluencerRegisted(true);
     return () => console.log('Cleanup: InfluencerOngoingBountyHeader component');
   }, []);
 
@@ -47,7 +49,7 @@ const InfluencerOngoingBountyHeader = ({
             <i>Bounties Completed: {campaignsCompleted}</i>
           </p>
           {influencerRegisted ? null : (
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={() => addInfluencerToBountyParent()}>
               Register for Bounty!
             </Button>
           )}

@@ -19,6 +19,8 @@ import { bountyQuery } from '../../apollo/bounty.gql';
 import { APOLLO_POLL_INTERVAL_MS } from '../../constants/Blockchain';
 import { getUserFromEthAddressDb } from '../../services/api/userService';
 import { getDateFormat } from '../../utils/helpers';
+import { addInfluencerToBountyWeb3 } from '../../web3';
+
 import { useStyles } from './styles';
 
 const BusinessOngoingBountyHeader = dynamic(
@@ -88,6 +90,8 @@ const OngoingBounty = () => {
   bounty = data?.bounties[0];
 
   /** Web 3 **/
+  const addInfluencerToBounty = () => addInfluencerToBountyWeb3(bounty.bountyAddress);
+
   const payInfluencer = () => {
     payInfluencerWeb3(
       bounty?.bountyAddress,
@@ -111,6 +115,7 @@ const OngoingBounty = () => {
             campaignsCompleted={influencer?.campaignsCompleted}
             ethAddress={influencer?.userEthAddress}
             bountyInfluencers={bounty?.influencers}
+            addInfluencerToBountyParent={() => addInfluencerToBounty()}
           />
         </div>
       );

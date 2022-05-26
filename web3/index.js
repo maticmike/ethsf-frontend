@@ -5,6 +5,7 @@ import { onBoardInitialize } from '../utils/onboard';
 import { setObjectiveName } from '../utils/ObjectiveNames';
 import FamepayFactoryAbi from '../contracts/FamepayFactory.json';
 import FamepayAbi from '../contracts/Famepay.json';
+import FamepayBounty from '../contracts/FamepayBounty.json';
 import { CONTRACT_RESPONSE_STATUS, NETWORK_ID } from '../constants/Blockchain';
 
 import web3 from 'web3';
@@ -210,7 +211,6 @@ export const createNewCampaignOnContract = async (
 };
 
 /**
- *
  * @param {contract} famepayFactory
  * @param {address} business
  * @param {uint256} startDate
@@ -316,7 +316,6 @@ export const payInfluencerWeb3 = async (campaignAddress, businessConfirmed, infl
 };
 
 /**
- *
  * @param {address} campaignAddress
  */
 export const endCampaignWeb3 = async campaignAddress => {
@@ -327,5 +326,28 @@ export const endCampaignWeb3 = async campaignAddress => {
     await famepayCampaign?.campaignEnded();
   } catch (error) {
     consola.error('Web3: endCampaignWeb3():', error);
+  }
+};
+
+/**
+ ********************************
+ * Famepay Functions
+ ********************************
+ */
+
+/**
+ * @param {address} bountyAddress
+ * @param {address} influencer
+ */
+export const addInfluencerToBountyWeb3 = async (bountyAddress, influencer) => {
+  try {
+    console.log(bountyAddress, 'the bounty address');
+    const provider = new ethers.providers.Web3Provider(currentOnboardState.wallet.provider);
+    const signer = provider.getSigner();
+    const famepayBounty = new ethers.Contract(bountyAddress, FamepayBounty.abi, signer);
+    console.log(famepayBounty, 'famepay bounty');
+    await famepayBounty?.addInfluencer();
+  } catch (error) {
+    consola.error('Web3: addInfluencerToBountyWeb3():', error);
   }
 };
