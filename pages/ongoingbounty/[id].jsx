@@ -125,11 +125,39 @@ const OngoingBounty = () => {
     }
   };
 
+  // REFACTOR ME AWAY TO TWITTER.JS
+
+  const getPostData = async e => {
+    //   e.preventDefault();
+    //   setInvalidPost(false);
+    //   let tweetId;
+    //   if (postUrl.includes('twitter.com' && '/status/')) {
+    //     if (postUrl.slice(postUrl.length - 4) === 's=20') {
+    //       const tweetUrl = postUrl.slice(0, -5);
+    //       tweetId = tweetUrl.slice(postUrl.length - 19);
+    //     } else {
+    //       tweetId = postUrl.slice(postUrl.length - 19);
+    //     }
+    //   } else {
+    //     setInvalidPost(true);
+    //   }
+    //   try {
+    //     const { data } = await axios.get(`http://localhost:3000/api/twitter/${tweetId}`);
+    //     const postData = parseTwitterPostData(campaign.objective, data);
+    //     // await setPaymentTargetReachedWeb3(campaign?.campaignAddress, postData[0], postData[1], postData[2]);
+    //   } catch (error) {
+    //     setInvalidPost(true);
+    //     consola.error('getPostData():', error);
+    //   }
+  };
+
   /** Components **/
   const isObjectiveComplete = () =>
     bounty?.jackpotObjectiveReached || bounty?.incrementalObjectiveReached ? true : false;
 
   /** ONGOING **/
+
+  //influencer ui ongoing
   const isObjectiveCompleteInfluencerUI = () => {
     if (isObjectiveComplete()) {
       return (
@@ -155,6 +183,7 @@ const OngoingBounty = () => {
     }
   };
 
+  //business ui ongoing
   const isObjectiveCompleteBusinessUI = () => {
     if (isObjectiveComplete()) {
       return <p>View Live Post!</p>;
@@ -168,14 +197,12 @@ const OngoingBounty = () => {
     }
   };
 
+  //get influencer/business ui ongoing
   const ongoingPostUIActions = () => {
-    if (account?.address == business?.userEthAddress) {
-      return isObjectiveCompleteBusinessUI();
-    }
-    // if (account?.address == influencer?.userEthAddress) {
-    //   return isObjectiveCompleteInfluencerUI();
-    // }
+    if (account?.address == business?.userEthAddress) return isObjectiveCompleteBusinessUI();
+    if (account?.address == influencer?.userEthAddress) return isObjectiveCompleteInfluencerUI();
   };
+
   return (
     <div className={classes.ReviewBounty_root_center}>
       <h2>{bounty?.ongoing ? 'Ongoing Bounty' : 'Bounty Completed'}</h2>
@@ -187,6 +214,8 @@ const OngoingBounty = () => {
             username={business?.username}
             website={business?.website}
             ethAddress={business?.userEthAddress}
+            isInfluencer={influencer == null ? false : true}
+            influencersLength={bounty?.influencers?.length}
           />
         </div>
         <div className={classes.ReviewBounty_vertical_line}></div>

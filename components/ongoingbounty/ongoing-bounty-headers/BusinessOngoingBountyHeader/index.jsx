@@ -5,7 +5,15 @@ import { utils } from 'web3';
 import consola from 'consola';
 import { SIMPLE_POST } from '../../../../constants/CampaignObjectives';
 import { useStyles } from './styles';
-const BusinessOngoingBountyHeader = ({ potentialPayout, objective, username, website, ethAddress }) => {
+const BusinessOngoingBountyHeader = ({
+  potentialPayout,
+  objective,
+  username,
+  website,
+  ethAddress,
+  isInfluencer,
+  influencersLength,
+}) => {
   const classes = useStyles();
 
   const payoutInWei = () => {
@@ -31,7 +39,7 @@ const BusinessOngoingBountyHeader = ({ potentialPayout, objective, username, web
         <a href={website} target="_blank">
           {website}
         </a>
-        <h2>{payoutInWei()} eth</h2>
+        <h2>{isInfluencer ? payoutInWei() / influencersLength : payoutInWei()} eth</h2>
         {objective != SIMPLE_POST ? <strong>Potential Earnings</strong> : <strong>To Be Paid</strong>}
         {objective != SIMPLE_POST ? (
           <>
