@@ -16,9 +16,14 @@ const BusinessOngoingBountyHeader = ({
 }) => {
   const classes = useStyles();
 
-  const payoutInWei = () => {
+  const payoutInEth = () => {
     if (potentialPayout != undefined) {
-      return utils.fromWei(potentialPayout?.toString(), 'ether');
+      if (isInfluencer) {
+        const payoutEth = utils.fromWei(potentialPayout?.toString(), 'ether');
+        return parseFloat(payoutEth) / parseFloat(influencersLength);
+      } else {
+        return utils.fromWei(potentialPayout?.toString(), 'ether');
+      }
     }
   };
   return (
@@ -39,7 +44,7 @@ const BusinessOngoingBountyHeader = ({
         <a href={website} target="_blank">
           {website}
         </a>
-        <h2>{isInfluencer ? payoutInWei() / influencersLength : payoutInWei()} eth</h2>
+        <h2>{payoutInEth()} eth</h2>
         {objective != SIMPLE_POST ? <strong>Potential Earnings</strong> : <strong>To Be Paid</strong>}
         {objective != SIMPLE_POST ? (
           <>
