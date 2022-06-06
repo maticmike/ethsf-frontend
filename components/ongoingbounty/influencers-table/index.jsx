@@ -32,11 +32,11 @@ const InfluencersTable = ({ influencers }) => {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="right">Username</TableCell>
-            <TableCell align="right">Email</TableCell>
-            <TableCell align="right">Followers</TableCell>
-            <TableCell align="right">Top Platform</TableCell>
-            <TableCell align="right">Campaigns Completed</TableCell>
+            <TableCell align="left">Username</TableCell>
+            <TableCell align="left">Email</TableCell>
+            <TableCell align="left">Followers</TableCell>
+            <TableCell align="left">Top Platform</TableCell>
+            <TableCell align="left">Campaigns Completed</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -46,10 +46,10 @@ const InfluencersTable = ({ influencers }) => {
                 <TableCell component="th" scope="row">
                   {influencer?.username}
                 </TableCell>
-                <TableCell align="right">{influencer?.email}</TableCell>
-                <TableCell align="right">belzy</TableCell>
-                <TableCell align="right">petruska</TableCell>
-                <TableCell align="right">dingles</TableCell>
+                <TableCell align="left">{influencer?.email}</TableCell>
+                <TableCell align="left">7898</TableCell>
+                <TableCell align="left">Twitter</TableCell>
+                <TableCell align="left">7</TableCell>
               </TableRow>
             );
           })}
