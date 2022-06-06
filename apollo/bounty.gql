@@ -5,9 +5,11 @@ fragment BountyFrag on Bounty {
   deadline
   business {
     id
+    bountiesCompleted
   }
   influencers {
     id
+    bountiesCompleted
   }
   availablePayoutDate
   objective

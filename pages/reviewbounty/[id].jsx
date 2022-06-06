@@ -29,6 +29,9 @@ const ReviewBounty = () => {
   const classes = useStyles();
   const router = useRouter();
 
+  const famepayFactory = useSelector(state => state.famepayFactory);
+  const account = useSelector(state => state.account);
+
   const [campaign, setCampaign] = useState(null);
   const [business, setBusiness] = useState('');
 

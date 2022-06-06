@@ -68,6 +68,7 @@ const OngoingBounty = () => {
     async function getUserEthAddress() {
       try {
         const businessRes = await getUserFromEthAddressDb(bounty?.business?.id);
+        // TODO setBusiness as var not state all other functions getting triple called
         setBusiness(businessRes?.data?.payload);
         if (businessRes?.data?.payload?.userEthAddress == account?.address) {
           setInfluencer(null);
@@ -89,7 +90,7 @@ const OngoingBounty = () => {
 
   bounty = data?.bounties[0];
 
-  /** Web 3 **/
+  /** WEB 3**/
   const addInfluencerToBounty = () => addInfluencerToBountyWeb3(bounty.bountyAddress);
 
   const payInfluencer = () => {
@@ -103,30 +104,7 @@ const OngoingBounty = () => {
 
   const claimRefund = () => endbountyWeb3(bounty?.bountyAddress);
 
-  const influencerHeadingUI = () => {
-    if (influencer != null) {
-      // influencer logged in;
-      return (
-        <div className={classes.ReviewBounty_influencer_header}>
-          <InfluencerOngoingBountyHeader
-            bounty={bounty}
-            username={influencer?.username}
-            email={influencer?.email}
-            campaignsCompleted={influencer?.campaignsCompleted}
-            ethAddress={influencer?.userEthAddress}
-            bountyInfluencers={bounty?.influencers}
-            addInfluencerToBountyParent={() => addInfluencerToBounty()}
-          />
-        </div>
-      );
-    } else {
-      // business logged in
-      return <InfluencersTable influencers={bounty?.influencers} />;
-    }
-  };
-
   // REFACTOR ME AWAY TO TWITTER.JS
-
   const getPostData = async e => {
     //   e.preventDefault();
     //   setInvalidPost(false);
@@ -151,11 +129,31 @@ const OngoingBounty = () => {
     //   }
   };
 
-  /** Components **/
+  /** COMPONENTS **/
+  const influencerHeadingUI = () => {
+    if (influencer != null) {
+      // influencer logged in;
+      return (
+        <div className={classes.ReviewBounty_influencer_header}>
+          <InfluencerOngoingBountyHeader
+            bounty={bounty}
+            username={influencer?.username}
+            email={influencer?.email}
+            campaignsCompleted={influencer?.campaignsCompleted}
+            ethAddress={influencer?.userEthAddress}
+            bountyInfluencers={bounty?.influencers}
+            addInfluencerToBountyParent={() => addInfluencerToBounty()}
+          />
+        </div>
+      );
+    } else {
+      // business logged in
+      console.log('test');
+      return <InfluencersTable influencers={bounty?.influencers} />;
+    }
+  };
   const isObjectiveComplete = () =>
     bounty?.jackpotObjectiveReached || bounty?.incrementalObjectiveReached ? true : false;
-
-  /** ONGOING **/
 
   //influencer ui ongoing
   const isObjectiveCompleteInfluencerUI = () => {
