@@ -1,6 +1,7 @@
 //Username Email Followers Top Platform Completed
 
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
 import { getUserFromEthAddressDb } from '../../../services/api/userService';
 
@@ -29,7 +30,7 @@ const InfluencersTable = ({ influencers }) => {
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table sx={{ maxWidth: 300 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell align="left">Username</TableCell>
@@ -44,9 +45,15 @@ const InfluencersTable = ({ influencers }) => {
             return (
               <TableRow key={influencer.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell component="th" scope="row">
-                  {influencer?.username}
+                  <Link href={`/profile/${influencer?.id}`}>
+                    <a>{influencer?.username}</a>
+                  </Link>
                 </TableCell>
-                <TableCell align="left">{influencer?.email}</TableCell>
+                <TableCell align="left">
+                  <Link href={`/profile/${influencer?.id}`}>
+                    <a>{influencer?.email}</a>
+                  </Link>
+                </TableCell>
                 <TableCell align="left">7898</TableCell>
                 <TableCell align="left">Twitter</TableCell>
                 <TableCell align="left">7</TableCell>

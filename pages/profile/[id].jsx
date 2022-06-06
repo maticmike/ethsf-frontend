@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GridList, GridListTile } from '@material-ui/core';
-import consola from 'consola';
 import { getUserFromUsernameDb } from '../../services/api/userService';
 import { GET_ALL_CAMPAIGNS_FOR_BUSINESS_QUERY, GET_ALL_CAMPAIGNS_FOR_INFLUENCER_QUERY } from '../../apollo/user.gql';
 import { APOLLO_POLL_INTERVAL_MS } from '../../constants/Blockchain';
