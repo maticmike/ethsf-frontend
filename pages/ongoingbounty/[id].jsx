@@ -134,7 +134,7 @@ const OngoingBounty = () => {
     if (influencer != null) {
       // influencer logged in;
       return (
-        <div className={classes.ReviewBounty_influencer_header}>
+        <div className={classes.OngoingBounty_influencer_header}>
           <InfluencerOngoingBountyHeader
             bounty={bounty}
             username={influencer?.username}
@@ -148,7 +148,11 @@ const OngoingBounty = () => {
       );
     } else {
       // business logged in
-      return <InfluencersTable influencers={bounty?.influencers} />;
+      return (
+        <div className={classes.OngoingBounty_Table_Boundary}>
+          <InfluencersTable influencers={bounty?.influencers} />
+        </div>
+      );
     }
   };
   const isObjectiveComplete = () =>
@@ -190,7 +194,7 @@ const OngoingBounty = () => {
       return <p>Bounty Ongoing</p>;
     } else {
       //if not ongoing
-      return <ClaimRefund bounty={bounty} claimRefund={claimRefund} campaignBalance={bounty?.depositedBalance} />;
+      <ClaimRefund bounty={bounty} claimRefund={claimRefund} campaignBalance={bounty?.depositedBalance} />;
     }
   };
 
@@ -202,10 +206,10 @@ const OngoingBounty = () => {
   };
 
   return (
-    <div className={classes.ReviewBounty_root_center}>
+    <div className={classes.OngoingBounty_root_center}>
       <h2>{bounty?.ongoing ? 'Ongoing Bounty' : 'Bounty Completed'}</h2>
-      <div className={classes.ReviewBounty_headers_side_by_side}>
-        <div className={classes.ReviewBounty_business_header}>
+      <div className={classes.OngoingBounty_headers_side_by_side}>
+        <div className={classes.OngoingBounty_business_header}>
           <BusinessOngoingBountyHeader
             potentialPayout={bounty?.depositedBalance}
             objective={bounty?.objective}
@@ -216,14 +220,14 @@ const OngoingBounty = () => {
             influencersLength={bounty?.influencers?.length}
           />
         </div>
-        <div className={classes.ReviewBounty_vertical_line}></div>
+        <div className={classes.OngoingBounty_vertical_line}></div>
         {influencerHeadingUI()}
       </div>
       <br />
       <br />
       <Calendar
         value={getDateFormat(bounty?.objective, bounty?.startDate, bounty?.deadline)}
-        className={classes.ReviewBounty_calendar_size}
+        className={classes.OngoingBounty_calendar_size}
       />
       <br />
       <br />

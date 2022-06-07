@@ -29,8 +29,8 @@ const InfluencersTable = ({ influencers }) => {
   }, []);
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ maxWidth: 300 }} aria-label="simple table">
+    <TableContainer style={{ maxHeight: 250 }} component={Paper}>
+      <Table stickyHeader aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell align="left">Username</TableCell>
