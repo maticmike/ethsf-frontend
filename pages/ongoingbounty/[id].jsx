@@ -148,7 +148,6 @@ const OngoingBounty = () => {
       );
     } else {
       // business logged in
-      console.log('test');
       return <InfluencersTable influencers={bounty?.influencers} />;
     }
   };
@@ -188,7 +187,7 @@ const OngoingBounty = () => {
     }
     //if ongoing but no post
     if (bounty?.deadline >= Math.round(Date.now() / 1000) && bounty?.ongoing) {
-      return <p>bounty Ongoing</p>;
+      return <p>Bounty Ongoing</p>;
     } else {
       //if not ongoing
       return <ClaimRefund bounty={bounty} claimRefund={claimRefund} campaignBalance={bounty?.depositedBalance} />;
@@ -197,6 +196,7 @@ const OngoingBounty = () => {
 
   //get influencer/business ui ongoing
   const ongoingPostUIActions = () => {
+    if (account?.address == null) return;
     if (account?.address == business?.userEthAddress) return isObjectiveCompleteBusinessUI();
     if (account?.address == influencer?.userEthAddress) return isObjectiveCompleteInfluencerUI();
   };
@@ -221,10 +221,10 @@ const OngoingBounty = () => {
       </div>
       <br />
       <br />
-      {/* <Calendar
-        value={getDateFormat(campaign?.objective, campaign?.startDate, campaign?.deadline)}
+      <Calendar
+        value={getDateFormat(bounty?.objective, bounty?.startDate, bounty?.deadline)}
         className={classes.ReviewBounty_calendar_size}
-      /> */}
+      />
       <br />
       <br />
       {ongoingPostUIActions()}
