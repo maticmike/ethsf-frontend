@@ -12,18 +12,10 @@ import { getUserFromEthAddressDb } from '../../services/api/userService';
 import { createNewBountyOnContract } from '../../web3';
 import { useStyles } from './styles';
 
-// const BusinessReviewHeader = dynamic(() => import('../../components/ongoing-bounty-headers/BusinessMakeHeader'), {
-//   loading: () => <p>Business Header Loading...</p>,
-// });
-// const InfluencerReviewHeader = dynamic(() => import('../../components/ongoing-bounty-headers/InfluencerMakeHeader'), {
-//   loading: () => <p>Influencer Header Loading...</p>,
-// });
-const BusinessReviewHeader = dynamic(() => import('../../components/reviewdeal/BusinessReviewHeader'), {
-  loading: () => <p>Business Header Loading...</p>,
-});
-const InfluencerReviewHeader = dynamic(() => import('../../components/reviewdeal/InfluencerReviewHeader'), {
-  loading: () => <p>Influencer Header Loading...</p>,
-});
+const BusinessReviewHeader = dynamic(
+  () => import('../../components/ongoingbounty/ongoing-bounty-headers/BusinessOngoingBountyHeader'),
+  { loading: () => <p>Business Header Loading...</p> },
+);
 
 const ReviewBounty = () => {
   const classes = useStyles();
@@ -39,13 +31,13 @@ const ReviewBounty = () => {
 
   useEffect(() => {
     async function getBountyInfo() {
-      console.log(id, 'id');
       const campaign = await getBountyDb(id);
       if (Object.entries(campaign?.data?.payload).length === 0) return <Error statusCode={404} />;
 
       console.log(campaign, 'the campaign');
 
       const businessUser = await getUserFromEthAddressDb(campaign?.data?.mongoResponse?.business);
+
       console.log(businessUser, 'the business');
 
       setCampaign(campaign?.data?.mongoResponse);
@@ -53,9 +45,7 @@ const ReviewBounty = () => {
       // setInfluencer(influencerUser?.data?.payload);
     }
     getBountyInfo();
-    return () => {
-      consola.info('Cleanup ongoing bounty component');
-    };
+    return () => consola.success('Cleanup ongoing bounty component');
   }, [id]);
 
   const handleBountyCreation = async confirmed => {
@@ -89,15 +79,6 @@ const ReviewBounty = () => {
             ethAddress={business?.userEthAddress}
           />
         </div>
-        <div className={classes.ReviewBounty_vertical_line}></div>
-        <div className={classes.ReviewBounty_influencer_header}>
-          <InfluencerReviewHeader
-            username={business?.username}
-            email={business?.email}
-            campaignsCompleted={business?.campaignsCompleted}
-            ethAddress={business?.userEthAddress}
-          />
-        </div>
       </div>
       <br />
       <br />
@@ -119,16 +100,9 @@ const ReviewBounty = () => {
             size="large"
             onClick={() => handleBountyCreation(false)}
           >
-            Reject
+            Cancel
           </Button>
-          <Button
-            className={classes.ReviewBounty_amber}
-            variant="contained"
-            size="large"
-            onClick={() => handleBountyCreation(false)}
-          >
-            Counter
-          </Button>
+
           <Button
             className={classes.ReviewBounty_accept}
             variant="contained"
@@ -136,7 +110,7 @@ const ReviewBounty = () => {
             color="secondary"
             onClick={() => handleBountyCreation(true)}
           >
-            Accept
+            Create
           </Button>
         </>
       </div>
