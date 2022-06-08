@@ -23,10 +23,10 @@ import { addInfluencerToBountyWeb3 } from '../../web3';
 
 import { useStyles } from './styles';
 
-const BusinessOngoingBountyHeader = dynamic(() => import('../../components/bountyheaders/BusinessHeader'), {
+const BusinessBountyHeader = dynamic(() => import('../../components/bountyheaders/BusinessHeader'), {
   loading: () => <p>Business Header Loading...</p>,
 });
-const InfluencerOngoingBountyHeader = dynamic(() => import('../../components/bountyheaders/InfluencerHeader'), {
+const InfluencerBountyHeader = dynamic(() => import('../../components/bountyheaders/InfluencerHeader'), {
   oading: () => <p>Business Header Loading...</p>,
 });
 const SubmitPost = dynamic(() => import('../../components/onogoingdeal/SubmitPost'), {
@@ -133,7 +133,7 @@ const OngoingBounty = () => {
       // influencer logged in;
       return (
         <div className={classes.OngoingBounty_influencer_header}>
-          <InfluencerOngoingBountyHeader
+          <InfluencerBountyHeader
             bounty={bounty}
             username={influencer?.username}
             email={influencer?.email}
@@ -208,7 +208,7 @@ const OngoingBounty = () => {
       <h2>{bounty?.ongoing ? 'Ongoing Bounty' : 'Bounty Completed'}</h2>
       <div className={classes.OngoingBounty_headers_side_by_side}>
         <div className={classes.OngoingBounty_business_header}>
-          <BusinessOngoingBountyHeader
+          <BusinessBountyHeader
             potentialPayout={bounty?.depositedBalance}
             objective={bounty?.objective}
             username={business?.username}

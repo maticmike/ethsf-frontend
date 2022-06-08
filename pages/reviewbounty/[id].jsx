@@ -12,7 +12,7 @@ import { getUserFromEthAddressDb } from '../../services/api/userService';
 import { createNewBountyOnContract } from '../../web3';
 import { useStyles } from './styles';
 
-const BusinessReviewHeader = dynamic(() => import('../../components/bountyheaders/BusinessHeader'), {
+const BusinessHeader = dynamic(() => import('../../components/bountyheaders/BusinessHeader'), {
   loading: () => <p>Business Header Loading...</p>,
 });
 
@@ -33,15 +33,10 @@ const ReviewBounty = () => {
       const campaign = await getBountyDb(id);
       if (Object.entries(campaign?.data?.payload).length === 0) return <Error statusCode={404} />;
 
-      console.log(campaign, 'the campaign');
-
       const businessUser = await getUserFromEthAddressDb(campaign?.data?.mongoResponse?.business);
 
-      console.log(businessUser, 'the business');
-
       setCampaign(campaign?.data?.mongoResponse);
-      // setBusiness(businessUser?.data?.payload);
-      // setInfluencer(influencerUser?.data?.payload);
+      setBusiness(businessUser?.data?.payload);
     }
     getBountyInfo();
     return () => consola.success('Cleanup ongoing bounty component');
@@ -66,13 +61,19 @@ const ReviewBounty = () => {
     router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
   };
 
+  console.log(campaign, 'the csampaign');
   return (
     <div className={classes.ReviewBounty_root_center}>
       <div className={classes.ReviewBounty_headers_side_by_side}>
         <div className={classes.ReviewBounty_business_header}>
-          <BusinessReviewHeader
-            potentialPayout={campaign?.potentialPayout}
+          <BusinessHeader
             objective={campaign?.objective}
+            deposited={campaign?.totalDeposited}
+            target={campaign?.jackpotTarget}
+            bountyType={campaign?.bountyType}
+            maxReward={campaign?.maxJackpotReward}
+            maxWinners={campaign?.maxWinners}
+            maxParticipants={campaign?.maxParticipants}
             username={business?.username}
             website={business?.website}
             ethAddress={business?.userEthAddress}

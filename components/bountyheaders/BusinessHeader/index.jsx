@@ -5,27 +5,27 @@ import { utils } from 'web3';
 import consola from 'consola';
 import { SIMPLE_POST } from '../../../constants/CampaignObjectives';
 import { useStyles } from './styles';
-const BusinessOngoingBountyHeader = ({
+const BusinessBountyHeader = ({
   potentialPayout,
   objective,
+  deposited,
+  target,
+  bountyType,
+  maxReward,
+  maxWinners,
+  maxParticipants,
   username,
   website,
   ethAddress,
-  isInfluencer,
-  influencersLength,
 }) => {
   const classes = useStyles();
 
-  // const payoutInEth = () => {
-  //   if (potentialPayout != undefined) {
-  //     if (isInfluencer) {
-  //       const payoutEth = utils.fromWei(potentialPayout?.toString(), 'ether');
-  //       return parseFloat(payoutEth) / parseFloat(influencersLength);
-  //     } else {
-  //       return utils.fromWei(potentialPayout?.toString(), 'ether');
-  //     }
-  //   }
-  // };
+  const depositedInEth = wei => {
+    if (wei != undefined) {
+      return utils.fromWei(wei?.toString(), 'ether');
+    }
+  };
+
   return (
     <div className={classes.BusinessMake_component_outline}>
       <div>
@@ -44,14 +44,20 @@ const BusinessOngoingBountyHeader = ({
         <a href={website} target="_blank">
           {website}
         </a>
-        <h2>1 eth</h2>
-        {objective != SIMPLE_POST ? <p>1,000,000 views </p> : <p>6 hour simple post</p>}
-        <p>0.2 eth fixed pot per winner</p>
-        <p>4 max winners</p>
-        <p>50 max participants</p>
+        <h2>{`${depositedInEth(deposited)} eth`}</h2>
+        {objective != SIMPLE_POST ? (
+          <p>
+            {target} {objective}
+          </p>
+        ) : (
+          <p>6 hour simple post</p>
+        )}
+        <p>{`${depositedInEth(maxReward)} eth ${bountyType} per winner`}</p>
+        <p>{maxWinners} max winners</p>
+        <p>{maxParticipants} max participants</p>
       </div>
     </div>
   );
 };
 
-export default BusinessOngoingBountyHeader;
+export default BusinessBountyHeader;

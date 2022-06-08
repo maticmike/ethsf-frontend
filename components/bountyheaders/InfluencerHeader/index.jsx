@@ -7,7 +7,7 @@ import { Button } from '@material-ui/core';
 import { shortenedEthAddress } from '../../../web3/helpers';
 
 import { useStyles } from './styles';
-const InfluencerOngoingBountyHeader = ({
+const InfluencerBountyHeader = ({
   bounty,
   username,
   email,
@@ -68,4 +68,4 @@ const InfluencerOngoingBountyHeader = ({
   );
 };
 
-export default InfluencerOngoingBountyHeader;
+export default InfluencerBountyHeader;
