@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { utils } from 'web3';
 import consola from 'consola';
-import { SIMPLE_POST } from '../../../../constants/CampaignObjectives';
+import { SIMPLE_POST } from '../../../constants/CampaignObjectives';
 import { useStyles } from './styles';
 const BusinessOngoingBountyHeader = ({
   potentialPayout,

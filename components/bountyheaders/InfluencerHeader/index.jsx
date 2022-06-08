@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { utils } from 'web3';
 import { Snackbar } from '@material-ui/core';
 import { Button } from '@material-ui/core';
-import { shortenedEthAddress } from '../../../../web3/helpers';
+import { shortenedEthAddress } from '../../../web3/helpers';
 
 import { useStyles } from './styles';
 const InfluencerOngoingBountyHeader = ({

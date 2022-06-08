@@ -13,10 +13,10 @@ import { createNewCampaignOnContract } from '../../web3';
 import { getDateFormat } from '../../utils/helpers';
 import { useStyles } from './styles';
 
-const BusinessReviewHeader = dynamic(() => import('../../components/reviewdeal/BusinessReviewHeader'), {
+const BusinessReviewHeader = dynamic(() => import('../../components/dealheaders/BusinessReviewHeader'), {
   loading: () => <p>Business Header Loading...</p>,
 });
-const InfluencerReviewHeader = dynamic(() => import('../../components/reviewdeal/InfluencerReviewHeader'), {
+const InfluencerReviewHeader = dynamic(() => import('../../components/dealheaders/InfluencerReviewHeader'), {
   loading: () => <p>Influencer Header Loading...</p>,
 });
 

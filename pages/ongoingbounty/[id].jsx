@@ -23,14 +23,12 @@ import { addInfluencerToBountyWeb3 } from '../../web3';
 
 import { useStyles } from './styles';
 
-const BusinessOngoingBountyHeader = dynamic(
-  () => import('../../components/ongoingbounty/ongoing-bounty-headers/BusinessOngoingBountyHeader'),
-  { loading: () => <p>Business Header Loading...</p> },
-);
-const InfluencerOngoingBountyHeader = dynamic(
-  () => import('../../components/ongoingbounty/ongoing-bounty-headers/InfluencerOngoingBountyHeader'),
-  { oading: () => <p>Business Header Loading...</p> },
-);
+const BusinessOngoingBountyHeader = dynamic(() => import('../../components/bountyheaders/BusinessHeader'), {
+  loading: () => <p>Business Header Loading...</p>,
+});
+const InfluencerOngoingBountyHeader = dynamic(() => import('../../components/bountyheaders/InfluencerHeader'), {
+  oading: () => <p>Business Header Loading...</p>,
+});
 const SubmitPost = dynamic(() => import('../../components/onogoingdeal/SubmitPost'), {
   loading: () => <p>Loading Submit Post....</p>,
 });
@@ -40,7 +38,7 @@ const ClaimPrize = dynamic(() => import('../../components/onogoingdeal/ClaimPriz
 const ClaimRefund = dynamic(() => import('../../components/onogoingdeal/ClaimRefund'), {
   loading: () => <p>Loading Claim Refund Prize....</p>,
 });
-const InfluencersTable = dynamic(() => import('../../components/ongoingbounty/influencers-table'), {
+const InfluencersTable = dynamic(() => import('../../components/bountyheaders/influencers-table'), {
   loading: () => <p>Loading Influencers Table....</p>,
 });
 

@@ -12,10 +12,9 @@ import { getUserFromEthAddressDb } from '../../services/api/userService';
 import { createNewBountyOnContract } from '../../web3';
 import { useStyles } from './styles';
 
-const BusinessReviewHeader = dynamic(
-  () => import('../../components/ongoingbounty/ongoing-bounty-headers/BusinessOngoingBountyHeader'),
-  { loading: () => <p>Business Header Loading...</p> },
-);
+const BusinessReviewHeader = dynamic(() => import('../../components/bountyheaders/BusinessHeader'), {
+  loading: () => <p>Business Header Loading...</p>,
+});
 
 const ReviewBounty = () => {
   const classes = useStyles();
