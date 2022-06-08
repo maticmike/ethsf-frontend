@@ -33,8 +33,8 @@ const BusinessOngoingBountyHeader = ({
           className={classes.BusinessMake_round_header}
           src="/TestBusiness.png"
           alt="Change Me"
-          width="125"
-          height="125"
+          width="225"
+          height="225"
         />
       </div>
       <div>
@@ -45,14 +45,10 @@ const BusinessOngoingBountyHeader = ({
           {website}
         </a>
         <h2>1 eth</h2>
-        {objective != SIMPLE_POST ? <strong>Potential Earnings</strong> : <strong>To Be Paid</strong>}
-        <>
-          {objective != SIMPLE_POST ? <p>1,000,000 views bounty</p> : <p>6 hour simple post</p>}
-          <p>0.2 eth fixed pot per winner</p>
-          <p>0.01 eth max variable payout per winner</p>
-          <p>4 max winners</p>
-          <p>50 max participants</p>
-        </>
+        {objective != SIMPLE_POST ? <p>1,000,000 views </p> : <p>6 hour simple post</p>}
+        <p>0.2 eth fixed pot per winner</p>
+        <p>4 max winners</p>
+        <p>50 max participants</p>
       </div>
     </div>
   );
