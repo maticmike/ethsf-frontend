@@ -20,7 +20,7 @@ const InfluencerReviewHeader = dynamic(() => import('../../components/dealheader
   loading: () => <p>Influencer Header Loading...</p>,
 });
 
-const ReviewCampaign = () => {
+const ReviewDeal = () => {
   const classes = useStyles();
   const router = useRouter();
 
@@ -148,4 +148,4 @@ const ReviewCampaign = () => {
   );
 };
 
-export default ReviewCampaign;
+export default ReviewDeal;

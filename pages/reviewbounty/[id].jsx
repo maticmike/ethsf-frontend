@@ -42,26 +42,26 @@ const ReviewBounty = () => {
     return () => consola.success('Cleanup ongoing bounty component');
   }, [id]);
 
+  //on chain
   const handleBountyCreation = async confirmed => {
     if (confirmed) {
       await createNewBountyOnContract(
         famepayFactory,
         account,
-        campaignDuration[0] ? campaignDuration[0] : simplePostDateStart, //agreedStartDate
-        campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd, //agreedDeadline/postDate,
-        simplePostMinimumDuration,
-        jackpotRewardAmount,
-        jackpotTargetAmount,
-        bountyMaxWinners,
-        objective,
-        bountyType,
-        stakedAmount,
+        campaign?.agreedStartDate,
+        campaign?.agreedDeadline,
+        campaign?.simplePostDuration,
+        campaign?.maxJackpotReward,
+        campaign?.jackpotTarget,
+        campaign?.maxWinners,
+        campaign?.objective,
+        campaign?.bountyType,
+        campaign?.totalDeposited,
       );
     }
-    router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
+    // router.push(`/profile/${business?.userEthAddress}`);
   };
 
-  console.log(campaign, 'the csampaign');
   return (
     <div className={classes.ReviewBounty_root_center}>
       <div className={classes.ReviewBounty_headers_side_by_side}>
