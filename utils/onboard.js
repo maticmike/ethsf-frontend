@@ -5,13 +5,13 @@ import { loginAccountOnSwitchThunk, logout } from '../redux/actions/account';
 import { clearUserAuthAll } from '../web3/auth';
 import store from '../redux/store';
 
-const rinkeby = 4;
-const rpcUrl = 'https://rinkeby.infura.io/v3/8bbc1bc12f9348b3ad49a4ee99e370b2';
+const ropsten = 3;
+const rpcUrl = `https://ropsten.infura.io/v3/${process.env.ROPSTEN_KEY}`;
 
 export const onBoardInitialize = () => {
   return Onboard({
     dappId: process.env.ONBOARD_KEY,
-    networkId: rinkeby,
+    networkId: ropsten,
     subscriptions: {
       wallet: wallet => {
         // if (wallet.name) {

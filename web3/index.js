@@ -240,7 +240,7 @@ export const createNewBountyOnContract = async (
     const bountyTypeHex = web3.utils.toHex(bountyType);
     const bountyTypeBytes = web3.utils.padRight(bountyTypeHex, 64);
 
-    TODO MAX WINNERS BEING ADDED TO CONTRACT
+    // TODO MAX WINNERS BEING ADDED TO CONTRACT
 
     console.log(startDate);
     console.log(deadline);
