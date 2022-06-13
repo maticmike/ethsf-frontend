@@ -7,6 +7,7 @@ const useStyles = makeStyles({
   },
   BusinessMake_round_header: {
     borderRadius: '50%',
+    cursor: 'pointer',
   },
   BusinessMake_margin_bottom_h1: {
     marginBottom: '6px',

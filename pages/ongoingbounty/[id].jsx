@@ -211,11 +211,13 @@ const OngoingBounty = () => {
           <BusinessBountyHeader
             potentialPayout={bounty?.depositedBalance}
             objective={bounty?.objective}
+            targetAmount={bounty?.jackpotTargetAmount}
+            bountyType={bounty?.bountyType}
+            maxReward={bounty?.maxJackpotRewardAmount}
+            maxWinners={bounty?.maxWinners}
+            maxParticipants={bounty?.maxParticipants}
             username={business?.username}
             website={business?.website}
-            ethAddress={business?.userEthAddress}
-            isInfluencer={influencer == null ? false : true}
-            influencersLength={bounty?.influencers?.length}
           />
         </div>
         <div className={classes.OngoingBounty_vertical_line}></div>

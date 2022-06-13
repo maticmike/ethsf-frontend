@@ -19,6 +19,8 @@ fragment BountyFrag on Bounty {
   depositedBalance
   ongoing
   bountyType
+  maxParticipants
+  maxWinners
   maxJackpotRewardAmount
   # endedWithRefund
 }
