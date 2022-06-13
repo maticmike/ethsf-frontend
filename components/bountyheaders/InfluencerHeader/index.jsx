@@ -8,22 +8,13 @@ import { shortenedEthAddress } from '../../../web3/helpers';
 
 import { useStyles } from './styles';
 const InfluencerBountyHeader = ({
-  bounty,
+  influencerRegistered,
   username,
   email,
   campaignsCompleted,
-  ethAddress,
-  bountyInfluencers,
   addInfluencerToBountyParent,
 }) => {
   const classes = useStyles();
-
-  const [influencerRegisted, setInfluencerRegisted] = useState(false);
-
-  useEffect(() => {
-    if (bountyInfluencers.some(influencer => influencer.id === ethAddress)) setInfluencerRegisted(true);
-    return () => console.log('Cleanup: InfluencerOngoingBountyHeader component');
-  }, []);
 
   return (
     <div className={classes.InfluencerOngoingBountyHeader_component_outline}>
@@ -48,7 +39,7 @@ const InfluencerBountyHeader = ({
           <p>
             <i>Bounties Completed: {campaignsCompleted}</i>
           </p>
-          {influencerRegisted ? null : (
+          {influencerRegistered ? null : (
             <Button variant="contained" color="primary" onClick={() => addInfluencerToBountyParent()}>
               Register for Bounty!
             </Button>

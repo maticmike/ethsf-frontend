@@ -54,6 +54,7 @@ const OngoingBounty = () => {
   const [postUrl, setPostUrl] = useState('');
   const [business, setBusiness] = useState(null);
   const [influencer, setInfluencer] = useState(null);
+  const [influencerRegistered, setInfluencerRegistered] = useState(false);
 
   let bounty;
 
@@ -61,6 +62,11 @@ const OngoingBounty = () => {
     variables: { id: id },
     pollInterval: APOLLO_POLL_INTERVAL_MS,
   });
+
+  useEffect(() => {
+    if (bounty?.influencers?.some(influencer => influencer.id === account?.address)) setInfluencerRegistered(true);
+    return () => console.log('cleanup ongoingBounty page');
+  }, [account]);
 
   useEffect(() => {
     async function getUserEthAddress() {
@@ -130,16 +136,14 @@ const OngoingBounty = () => {
   /** COMPONENTS **/
   const influencerHeadingUI = () => {
     if (influencer != null) {
-      // influencer logged in;
       return (
         <div className={classes.OngoingBounty_influencer_header}>
           <InfluencerBountyHeader
+            influencerRegistered={influencerRegistered}
             bounty={bounty}
             username={influencer?.username}
             email={influencer?.email}
             campaignsCompleted={influencer?.campaignsCompleted}
-            ethAddress={influencer?.userEthAddress}
-            bountyInfluencers={bounty?.influencers}
             addInfluencerToBountyParent={() => addInfluencerToBounty()}
           />
         </div>
@@ -158,6 +162,8 @@ const OngoingBounty = () => {
 
   //influencer ui ongoing
   const isObjectiveCompleteInfluencerUI = () => {
+    // influencer logged in;
+    if (!influencerRegistered) return;
     if (isObjectiveComplete()) {
       return (
         <ClaimPrize
