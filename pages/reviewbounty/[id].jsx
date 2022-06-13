@@ -55,6 +55,7 @@ const ReviewBounty = () => {
         campaign?.jackpotTarget,
         campaign?.maxWinners,
         campaign?.objective,
+        campaign?.maxParticipants,
         campaign?.bountyType,
         campaign?.totalDeposited,
       );

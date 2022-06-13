@@ -25,7 +25,7 @@ export const ALL_SUPPORTED_CURRENCIES = {
 
 export const GRAPH_API_URL = 'https://api.thegraph.com/subgraphs/name/benjamin852/famepay';
 
-export const NETWORK_ID = 4;
+export const NETWORK_ID = 3;
 // export const EXPLORER_URL = 'https://hecoinfo.com/';
 // export const BASE_URL = 'https://opennft.io/';
 // export const META_IMG = `${BASE_URL}logo-text-under-large.png`;

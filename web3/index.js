@@ -232,6 +232,7 @@ export const createNewBountyOnContract = async (
   jackpotTarget,
   maxWinners,
   objective,
+  maxParticipants,
   bountyType,
   stakedAmount,
 ) => {
@@ -241,25 +242,17 @@ export const createNewBountyOnContract = async (
     const bountyTypeBytes = web3.utils.padRight(bountyTypeHex, 64);
 
     // TODO MAX WINNERS BEING ADDED TO CONTRACT
-
-    console.log(startDate);
-    console.log(deadline);
-    console.log(maxJackpotReward, 'max jack');
-    console.log(jackpotTarget, 'jack targ');
-    console.log(maxWinners, 'max winners');
-    console.log(simplePostDuration, 'simple');
-    console.log(stakedAmount, 'staked');
-
     const bounty = await famepayFactory.newFamepayBounty(
-      business.address,
       startDate,
       deadline,
       simplePostDuration,
-      maxJackpotReward,
+      maxJackpotReward.toString(),
       jackpotTarget,
-      maxWinners,
-      objectiveBytes,
       bountyTypeBytes,
+      business.address,
+      maxParticipants,
+      objectiveBytes,
+      maxWinners,
       { value: stakedAmount.toString(), gasLimit: 3000000 },
     );
     return bounty;
