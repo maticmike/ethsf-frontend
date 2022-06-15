@@ -37,7 +37,7 @@ const Profile = () => {
 
   const classes = useStyles();
 
-  let campaigns;
+  let deals;
   let bounties;
 
   useEffect(() => {
@@ -76,8 +76,8 @@ const Profile = () => {
     variables: { id: user?.userEthAddress },
   });
 
-  if (dataInfluencer?.campaigns?.length != 0) campaigns = dataInfluencer?.campaigns;
-  if (dataBusiness?.campaigns?.length != 0) campaigns = dataBusiness?.campaigns;
+  if (dataInfluencer?.campaigns?.length != 0) deals = dataInfluencer?.campaigns;
+  if (dataBusiness?.campaigns?.length != 0) deals = dataBusiness?.campaigns;
 
   //BOUNTY QUERIES
 
@@ -123,14 +123,14 @@ const Profile = () => {
       <br />
       {!isBounty ? (
         <div className={classes.Profile_content_container}>
-          {campaigns?.length == 0 ? (
-            <h1>No campaigns</h1>
+          {deals?.length == 0 ? (
+            <h1>No deals</h1>
           ) : (
             <GridList cellHeight={100} className={classes.Profile_gridList} cols={3}>
-              {campaigns?.map((campaign, index) => {
+              {deals?.map((campaign, index) => {
                 return (
                   <GridListTile cols={1} key={index} component={Link} href={`/ongoingcampaign/${campaign?.id}`}>
-                    <ProfileCampaigns campaign={campaign} isBusiness={profileIsBusiness} />
+                    <ProfileCampaigns campaign={deals} isBusiness={profileIsBusiness} />
                   </GridListTile>
                 );
               })}
@@ -145,7 +145,7 @@ const Profile = () => {
             <GridList cellHeight={100} className={classes.Profile_gridList} cols={3}>
               {bounties?.map((bounty, index) => {
                 return (
-                  <GridListTile cols={1} key={index} component={Link} href={`/ongoingcampaign/${bounty?.id}`}>
+                  <GridListTile cols={1} key={index} component={Link} href={`/ongoingbounty/${bounty?.id}`}>
                     <ProfileCampaigns campaign={bounty} isBusiness={profileIsBusiness} />
                   </GridListTile>
                 );
