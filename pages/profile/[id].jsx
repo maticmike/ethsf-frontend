@@ -5,7 +5,7 @@ import Error from 'next/error';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
-import { GridList, GridListTile } from '@material-ui/core';
+import { Button, GridList, GridListTile } from '@material-ui/core';
 import {
   GET_ALL_CAMPAIGNS_FOR_BUSINESS_QUERY,
   GET_ALL_CAMPAIGNS_FOR_INFLUENCER_QUERY,
@@ -112,11 +112,15 @@ const Profile = () => {
         </div>
       </div>
       <br />
-      <br />
-      <br />
-      <button onClick={() => setIsBounty(true)}>Bounties</button>
+      <Button color="primary" variant="contained" onClick={() => setIsBounty(true)}>
+        Bounties
+      </Button>
       &nbsp;
-      <button onClick={() => setIsBounty(false)}>Deals</button>
+      <Button color="primary" variant="contained" onClick={() => setIsBounty(false)}>
+        Deals
+      </Button>
+      <br />
+      <br />
       {!isBounty ? (
         <div className={classes.Profile_content_container}>
           {campaigns?.length == 0 ? (
