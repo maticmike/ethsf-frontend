@@ -47,7 +47,7 @@ const BusinessBountyHeader = ({
         <h2>{`${depositedInEth(potentialPayout)} eth`}</h2>
         {objective != SIMPLE_POST ? (
           <p>
-            Objective: {targetAmount} {utils.hexToString(objective)}
+            Objective: {targetAmount} {objective}
           </p>
         ) : (
           <p>6 hour simple post</p>

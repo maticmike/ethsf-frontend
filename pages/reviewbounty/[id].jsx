@@ -44,6 +44,7 @@ const ReviewBounty = () => {
 
   //on chain
   const handleBountyCreation = async confirmed => {
+    console.log(campaign, 'the campaign');
     if (confirmed) {
       await createNewBountyOnContract(
         famepayFactory,
@@ -68,16 +69,15 @@ const ReviewBounty = () => {
       <div className={classes.ReviewBounty_headers_side_by_side}>
         <div className={classes.ReviewBounty_business_header}>
           <BusinessHeader
+            potentialPayout={campaign?.totalDeposited}
             objective={campaign?.objective}
-            deposited={campaign?.totalDeposited}
-            target={campaign?.jackpotTarget}
+            targetAmount={campaign?.jackpotTarget}
             bountyType={campaign?.bountyType}
             maxReward={campaign?.maxJackpotReward}
             maxWinners={campaign?.maxWinners}
             maxParticipants={campaign?.maxParticipants}
             username={business?.username}
             website={business?.website}
-            ethAddress={business?.userEthAddress}
           />
         </div>
       </div>
