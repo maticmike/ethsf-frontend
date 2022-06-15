@@ -6,11 +6,15 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GridList, GridListTile } from '@material-ui/core';
+import {
+  GET_ALL_CAMPAIGNS_FOR_BUSINESS_QUERY,
+  GET_ALL_CAMPAIGNS_FOR_INFLUENCER_QUERY,
+  GET_ALL_BOUNTIES_FOR_INFLUENCER,
+} from '../../apollo/user.gql';
 import { getUserFromUsernameDb } from '../../services/api/userService';
-import { GET_ALL_CAMPAIGNS_FOR_BUSINESS_QUERY, GET_ALL_CAMPAIGNS_FOR_INFLUENCER_QUERY } from '../../apollo/user.gql';
 import { APOLLO_POLL_INTERVAL_MS } from '../../constants/Blockchain';
-import { useStyles } from './styles';
 import useEthAddress from '../../hooks/useUsername';
+import { useStyles } from './styles';
 
 const ProfileHeader = dynamic(() => import('../../components/profile/ProfileHeader'), {
   loading: () => <p>Profile Header Loading....</p>,
@@ -33,6 +37,7 @@ const Profile = () => {
   const classes = useStyles();
 
   let campaigns;
+  let bounties;
 
   useEffect(() => {
     async function getUsernameEthAddress() {
@@ -70,6 +75,16 @@ const Profile = () => {
 
   if (dataInfluencer?.campaigns?.length != 0) campaigns = dataInfluencer?.campaigns;
   if (dataBusiness?.campaigns?.length != 0) campaigns = dataBusiness?.campaigns;
+
+  const {
+    error: errorBountyBusiness,
+    data: dataBountyBusiness,
+    refetch: refetchBountyBusiness,
+  } = useQuery(GET_ALL_BOUNTIES_FOR_INFLUENCER, {
+    variables: { id: user?.userEthAddress },
+  });
+
+  if (dataBountyBusiness?.bounties?.length != 0) bounties = dataBountyBusiness?.bounties;
 
   return (
     <>

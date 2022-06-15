@@ -22,6 +22,34 @@ fragment CampaignFrag on Campaign {
   incrementalRewardAmount
   jackpotRewardAmount
 }
+
+fragment BountyFrag on Bounty {
+  id
+  bountyAddress
+  startDate
+  deadline
+  business {
+    id
+    bountiesCompleted
+  }
+  influencers {
+    id
+    bountiesCompleted
+  }
+  availablePayoutDate
+  objective
+  maxJackpotRewardAmount
+  jackpotTargetAmount
+  simplePostDuration
+  depositedBalance
+  ongoing
+  bountyType
+  maxParticipants
+  maxWinners
+  maxJackpotRewardAmount
+  # endedWithRefund
+}
+
 query GET_ALL_CAMPAIGNS_FOR_BUSINESS_QUERY($id: String!) {
   campaigns(where: { business: $id }) {
     ...CampaignFrag
@@ -32,11 +60,8 @@ query GET_ALL_CAMPAIGNS_FOR_INFLUENCER_QUERY($id: String!) {
     ...CampaignFrag
   }
 }
-# query GET_ALL_CAMPAIGNS_FOR_INFLUENCER_QUERY($id: String!) {
-#   influencers(where: {id: $id}){
-#     id
-#     campaigns{
-#       ...CampaignFrag
-#     }
-#   }
-# }
+query GET_ALL_BOUNTIES_FOR_INFLUENCER($id: String!) {
+  bounties(where: { influencers_contains: [$id] }) {
+    ...BountyFrag
+  }
+}
