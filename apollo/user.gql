@@ -65,3 +65,8 @@ query GET_ALL_BOUNTIES_FOR_INFLUENCER($id: String!) {
     ...BountyFrag
   }
 }
+query GET_ALL_BOUNTIES_FOR_BUSINESS($id: String!) {
+  bounties(where: { business: $id }) {
+    ...BountyFrag
+  }
+}

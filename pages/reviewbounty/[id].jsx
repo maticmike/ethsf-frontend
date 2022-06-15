@@ -44,7 +44,6 @@ const ReviewBounty = () => {
 
   //on chain
   const handleBountyCreation = async confirmed => {
-    console.log(campaign, 'the campaign');
     if (confirmed) {
       await createNewBountyOnContract(
         famepayFactory,
@@ -61,7 +60,7 @@ const ReviewBounty = () => {
         campaign?.totalDeposited,
       );
     }
-    // router.push(`/profile/${business?.userEthAddress}`);
+    router.push(`/profile/${business?.username}`);
   };
 
   return (

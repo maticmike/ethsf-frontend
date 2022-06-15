@@ -10,6 +10,7 @@ import {
   GET_ALL_CAMPAIGNS_FOR_BUSINESS_QUERY,
   GET_ALL_CAMPAIGNS_FOR_INFLUENCER_QUERY,
   GET_ALL_BOUNTIES_FOR_INFLUENCER,
+  GET_ALL_BOUNTIES_FOR_BUSINESS,
 } from '../../apollo/user.gql';
 import { getUserFromUsernameDb } from '../../services/api/userService';
 import { APOLLO_POLL_INTERVAL_MS } from '../../constants/Blockchain';
@@ -82,13 +83,22 @@ const Profile = () => {
   //BOUNTY QUERIES
 
   const {
-    error: errorBountyBusiness,
-    data: dataBountyBusiness,
-    refetch: refetchBountyBusiness,
+    error: errorBountyInfluencer,
+    data: dataBountyInfluencer,
+    refetch: refetchBountyInfluencer,
   } = useQuery(GET_ALL_BOUNTIES_FOR_INFLUENCER, {
     variables: { id: user?.userEthAddress },
   });
 
+  const {
+    error: errorBountyBusiness,
+    data: dataBountyBusiness,
+    refetch: refetchBountyBusiness,
+  } = useQuery(GET_ALL_BOUNTIES_FOR_BUSINESS, {
+    variables: { id: user?.userEthAddress },
+  });
+
+  if (dataBountyInfluencer?.bounties?.length != 0) bounties = dataBountyInfluencer?.bounties;
   if (dataBountyBusiness?.bounties?.length != 0) bounties = dataBountyBusiness?.bounties;
 
   return (
