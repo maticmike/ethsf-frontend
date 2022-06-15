@@ -33,6 +33,7 @@ const Profile = () => {
   const [user, setUser] = useState({});
   const [userDbAddress, setUserDbAddress] = useState(null);
   const [profileIsBusiness, setProfileIsBusiness] = useState(false);
+  const [isBounty, setIsBounty] = useState(true);
 
   const classes = useStyles();
 
@@ -55,6 +56,8 @@ const Profile = () => {
     return () => (mountedRef.current = false);
   }, [router.isReady]);
 
+  //DEAL QUERIES
+
   const {
     error: errorInfluencer,
     data: dataInfluencer,
@@ -75,6 +78,8 @@ const Profile = () => {
 
   if (dataInfluencer?.campaigns?.length != 0) campaigns = dataInfluencer?.campaigns;
   if (dataBusiness?.campaigns?.length != 0) campaigns = dataBusiness?.campaigns;
+
+  //BOUNTY QUERIES
 
   const {
     error: errorBountyBusiness,
@@ -109,39 +114,42 @@ const Profile = () => {
       <br />
       <br />
       <br />
-      <button>Bounties</button>
+      <button onClick={() => setIsBounty(true)}>Bounties</button>
       &nbsp;
-      <button>Deals</button>
-      {/* <div className={classes.Profile_content_container}>
-        {campaigns?.length == 0 ? (
-          <h1>No campaigns</h1>
-        ) : (
-          <GridList cellHeight={100} className={classes.Profile_gridList} cols={3}>
-            {campaigns?.map((campaign, index) => {
-              return (
-                <GridListTile cols={1} key={index} component={Link} href={`/ongoingcampaign/${campaign?.id}`}>
-                  <ProfileCampaigns campaign={campaign} isBusiness={profileIsBusiness} />
-                </GridListTile>
-              );
-            })}
-          </GridList>
-        )}
-      </div> */}
-      <div className={classes.Profile_content_container}>
-        {bounties?.length == 0 ? (
-          <h1>No bounties</h1>
-        ) : (
-          <GridList cellHeight={100} className={classes.Profile_gridList} cols={3}>
-            {bounties?.map((bounty, index) => {
-              return (
-                <GridListTile cols={1} key={index} component={Link} href={`/ongoingcampaign/${bounty?.id}`}>
-                  <ProfileCampaigns campaign={bounty} isBusiness={profileIsBusiness} />
-                </GridListTile>
-              );
-            })}
-          </GridList>
-        )}
-      </div>
+      <button onClick={() => setIsBounty(false)}>Deals</button>
+      {!isBounty ? (
+        <div className={classes.Profile_content_container}>
+          {campaigns?.length == 0 ? (
+            <h1>No campaigns</h1>
+          ) : (
+            <GridList cellHeight={100} className={classes.Profile_gridList} cols={3}>
+              {campaigns?.map((campaign, index) => {
+                return (
+                  <GridListTile cols={1} key={index} component={Link} href={`/ongoingcampaign/${campaign?.id}`}>
+                    <ProfileCampaigns campaign={campaign} isBusiness={profileIsBusiness} />
+                  </GridListTile>
+                );
+              })}
+            </GridList>
+          )}
+        </div>
+      ) : (
+        <div className={classes.Profile_content_container}>
+          {bounties?.length == 0 ? (
+            <h1>No bounties</h1>
+          ) : (
+            <GridList cellHeight={100} className={classes.Profile_gridList} cols={3}>
+              {bounties?.map((bounty, index) => {
+                return (
+                  <GridListTile cols={1} key={index} component={Link} href={`/ongoingcampaign/${bounty?.id}`}>
+                    <ProfileCampaigns campaign={bounty} isBusiness={profileIsBusiness} />
+                  </GridListTile>
+                );
+              })}
+            </GridList>
+          )}
+        </div>
+      )}
     </>
   );
 };
