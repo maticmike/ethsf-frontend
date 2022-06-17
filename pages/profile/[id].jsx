@@ -138,7 +138,11 @@ const Profile = () => {
               {deals?.map((campaign, index) => {
                 return (
                   <GridListTile cols={1} key={index} component={Link} href={`/ongoingcampaign/${campaign?.id}`}>
-                    <ProfileCampaigns campaign={campaign} username={user?.username} isBusiness={profileIsBusiness} />
+                    <ProfileCampaigns
+                      campaign={campaign}
+                      influencerData={user?.username}
+                      isBusiness={profileIsBusiness}
+                    />
                   </GridListTile>
                 );
               })}
@@ -154,7 +158,11 @@ const Profile = () => {
               {bounties?.map((bounty, index) => {
                 return (
                   <GridListTile cols={1} key={index} component={Link} href={`/ongoingbounty/${bounty?.id}`}>
-                    <ProfileCampaigns campaign={bounty} isBusiness={profileIsBusiness} />
+                    <ProfileCampaigns
+                      campaign={bounty}
+                      influencerData={bounty?.influencers?.length}
+                      isBusiness={profileIsBusiness}
+                    />
                   </GridListTile>
                 );
               })}
