@@ -32,7 +32,6 @@ const ReviewBounty = () => {
     async function getBountyInfo() {
       const campaign = await getBountyDb(id);
       if (Object.entries(campaign?.data?.payload).length === 0) return <Error statusCode={404} />;
-
       const businessUser = await getUserFromEthAddressDb(campaign?.data?.mongoResponse?.business);
 
       setCampaign(campaign?.data?.mongoResponse);

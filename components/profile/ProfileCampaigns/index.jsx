@@ -4,13 +4,9 @@ import { getUserFromEthAddressDb } from '../../../services/api/userService';
 import { useStyles } from './styles';
 
 //check isBusiness to know if populate cards with influencer or business data
-const ProfileCampaigns = ({ campaign, isBusiness }) => {
+const ProfileCampaigns = ({ campaign, username, isBusiness }) => {
   const classes = useStyles();
-  const [username, setUsername] = useState('');
 
-  getUserFromEthAddressDb(isBusiness ? campaign.influencer.id : campaign.business.id).then(({ data }) =>
-    setUsername(data.payload.username),
-  );
   return (
     <div className={classes.ProfileCampaigns_container}>
       <div>

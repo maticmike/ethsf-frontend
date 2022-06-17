@@ -32,7 +32,6 @@ const Profile = () => {
   const mountedRef = useRef(true);
 
   const [user, setUser] = useState({});
-  const [userDbAddress, setUserDbAddress] = useState(null);
   const [profileIsBusiness, setProfileIsBusiness] = useState(false);
   const [isBounty, setIsBounty] = useState(true);
 
@@ -45,8 +44,7 @@ const Profile = () => {
     async function getUsernameEthAddress() {
       if (!router.isReady) return;
       const userDbRes = await getUserFromUsernameDb(id);
-      setUserDbAddress(userDbRes?.data?.payload?.userEthAddress);
-      if (userDbAddress === undefined) {
+      if (userDbRes?.data?.payload?.userEthAddress === undefined) {
         return <Error statusCode={404} />;
       } else {
         setUser(userDbRes?.data?.payload);
@@ -64,7 +62,7 @@ const Profile = () => {
     data: dataInfluencer,
     refetch: refetchInfluencer,
   } = useQuery(GET_ALL_CAMPAIGNS_FOR_INFLUENCER_QUERY, {
-    variables: { id: userDbAddress },
+    variables: { id: user?.userEthAddress },
   });
   // if (errorInfluencer) refetchInfluencer();
   // if (errorInfluencer) console.log('error2!!!');
@@ -140,7 +138,7 @@ const Profile = () => {
               {deals?.map((campaign, index) => {
                 return (
                   <GridListTile cols={1} key={index} component={Link} href={`/ongoingcampaign/${campaign?.id}`}>
-                    <ProfileCampaigns campaign={deals} isBusiness={profileIsBusiness} />
+                    <ProfileCampaigns campaign={campaign} username={user?.username} isBusiness={profileIsBusiness} />
                   </GridListTile>
                 );
               })}

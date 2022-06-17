@@ -83,7 +83,7 @@ const NewDeal = () => {
         // 'niche',
       );
 
-      router.push(`/reviewcampaign/${campaignDb.data.payload.data._id}`);
+      router.push(`/reviewdeal/${campaignDb.data.payload.data._id}`);
     } catch (error) {
       consola.error('NewDeal.createNewDealProposal():', error);
     }
