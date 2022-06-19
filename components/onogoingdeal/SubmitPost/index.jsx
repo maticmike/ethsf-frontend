@@ -1,11 +1,12 @@
 import React from 'react';
 import { TextField, Button } from '@material-ui/core';
+import { getPostData } from '../../../services/twitter';
 
-const SubmitPost = ({ invalidPost, getPostData, setPostUrl }) => {
+const SubmitPost = ({ invalidPost, setPostUrl }) => {
   return (
     <div>
       <br />
-      <form noValidate autoComplete="off" onSubmit={getPostData}>
+      <form noValidate autoComplete="off" onSubmit={() => getPostData()}>
         <TextField
           id="outlined-basic"
           fullWidth

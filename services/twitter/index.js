@@ -5,6 +5,7 @@
 //   console.log(data);
 // };
 import twitter from '../../pages/api/twitter/[tweet]';
+import { parseTwitterPostData } from '../../services/twitter';
 
 // const cors = Cors({
 //   methods: ['GET', 'HEAD'],
@@ -32,7 +33,7 @@ const getTweetData = async tweetId => {
   }
 };
 
-export const getPostData = postId => {
+export const getPostData = (postId, campaignObjective) => {
   if (postId.includes('twitter.com' && '/status/')) {
     let tweetId;
     if (postId.substr(postId.length - 4) === 's=20') {
@@ -41,6 +42,8 @@ export const getPostData = postId => {
     } else {
       tweetId = postId.substr(postId.length - 19);
     }
-    getTweetData(tweetId);
+    const tweetData = getTweetData(tweetId);
+    const parsedTweetData = parseTwitterPostData(campaignObjective, tweetData);
+    return parsedTweetData;
   }
 };

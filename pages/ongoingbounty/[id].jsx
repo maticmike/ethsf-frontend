@@ -3,18 +3,15 @@
 // https://stackoverflow.com/questions/4455282/call-a-javascript-function-at-a-specific-time-of-day
 
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import Error from 'next/error';
 import { useQuery } from '@apollo/client';
-import axios from 'axios';
 import dynamic from 'next/dynamic';
 import consola from 'consola';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { getbountyFromContract, setPaymentTargetReachedWeb3, payInfluencerWeb3, endbountyWeb3 } from '../../web3';
-import { parseTwitterPostData } from '../../utils/objectiveData/twitter';
-import { storeFamepayFactoryThunk } from '../../redux/actions/famepayFactory';
 import { bountyQuery } from '../../apollo/bounty.gql';
 import { APOLLO_POLL_INTERVAL_MS } from '../../constants/Blockchain';
 import { getUserFromEthAddressDb } from '../../services/api/userService';
@@ -181,7 +178,7 @@ const OngoingBounty = () => {
     }
     if (bounty?.deadline >= Math.round(Date.now() / 1000) || !bounty?.ongoing) {
       //if ongoing but no prize to claim
-      return <SubmitPost invalidPost={invalidPost} getPostData={getPostData} setPostUrl={setPostUrl} />;
+      return <SubmitPost invalidPost={invalidPost} setPostUrl={setPostUrl} />;
     } else {
       //if not ongoing
       return <p>Bounty is over. Thank you for participating.</p>;
