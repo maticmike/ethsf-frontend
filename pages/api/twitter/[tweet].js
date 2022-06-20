@@ -7,10 +7,12 @@ var client = new Twitter({
   access_token_secret: process.env.ACCESS_TOKEN_SECRET,
 });
 
-export default async (req, res) => {
+export const twitterApiGetTweetInfo = async (req, res) => {
   try {
+    console.log(req, ' the req');
     const tweetData = await client.get('tweets', {
-      ids: req.query.tweet,
+      // ids: req.query.tweet,
+      ids: req,
       tweet: {
         fields: [
           'created_at',
@@ -24,6 +26,7 @@ export default async (req, res) => {
         ],
       },
     });
+    console.log(tweetData, 'the weeet');
     return res.status(200).json(tweetData);
   } catch (error) {
     console.log('Error On getTweetInfo():', error);

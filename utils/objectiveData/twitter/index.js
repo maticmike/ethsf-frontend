@@ -10,12 +10,12 @@ import {
   SALES,
 } from '../../../constants/CampaignObjectives';
 import { objectiveToString } from '../../../web3/helpers';
-export const parseTwitterPostData = (objective, tweetStats, business) => {
+export const parseTwitterPostData = async (objective, tweetStats, business) => {
   let isValidPost;
 
   //TWEET STATS
   const objectiveString = objectiveToString(objective);
-  const tweetData = tweetStats.data[0];
+  const tweetData = await tweetStats.data[0];
   const postTimestamp = Math.round(new Date(tweetData.created_at).getTime() / 1000);
   const taggedBusiness = tweetData.entities.mentions[0].username;
   const views = tweetData.non_public_metrics.impression_count;

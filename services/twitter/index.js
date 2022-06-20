@@ -4,8 +4,8 @@
 //   });
 //   console.log(data);
 // };
-import twitter from '../../pages/api/twitter/[tweet]';
-import { parseTwitterPostData } from '../../services/twitter';
+import { twitterApiGetTweetInfo } from '../../pages/api/twitter/[tweet]';
+import { parseTwitterPostData } from '../../utils/objectiveData/twitter';
 
 // const cors = Cors({
 //   methods: ['GET', 'HEAD'],
@@ -13,7 +13,8 @@ import { parseTwitterPostData } from '../../services/twitter';
 
 const getTweetData = async tweetId => {
   try {
-    const getTweetData = await twitter.getTweetInfo(tweetId);
+    const getTweetData = await twitterApiGetTweetInfo(tweetId);
+
     const response = {
       statusCode: 200,
       headers: { 'Content-Type': 'application/json' },
@@ -21,6 +22,7 @@ const getTweetData = async tweetId => {
     };
     return response;
   } catch (err) {
+    console.log(err, 'the error');
     const response = {
       statusCode: err.statusCode || 500,
       headers: { 'Content-Type': 'application/json' },
@@ -33,17 +35,19 @@ const getTweetData = async tweetId => {
   }
 };
 
-export const getPostData = (postId, campaignObjective) => {
-  if (postId.includes('twitter.com' && '/status/')) {
+export const getPostData = async (post, campaignObjective) => {
+  if (post.includes('twitter.com' && '/status/')) {
     let tweetId;
-    if (postId.substr(postId.length - 4) === 's=20') {
-      const tweet = postId.slice(0, -5);
-      tweetId = tweet.substr(postId.length - 19);
+    if (post.substr(post.length - 4) === 's=20') {
+      const tweet = post.slice(0, -5);
+      tweetId = tweet.substr(post.length - 19);
     } else {
-      tweetId = postId.substr(postId.length - 19);
+      tweetId = post.substr(post.length - 19);
     }
-    const tweetData = getTweetData(tweetId);
-    const parsedTweetData = parseTwitterPostData(campaignObjective, tweetData);
-    return parsedTweetData;
+
+    await getTweetData(tweetId);
+
+    // const parsedTweetData = parseTwitterPostData(campaignObjective, tweetData);
+    // return parsedTweetData;
   }
 };

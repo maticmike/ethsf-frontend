@@ -11,7 +11,7 @@ import dynamic from 'next/dynamic';
 import consola from 'consola';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { getbountyFromContract, setPaymentTargetReachedWeb3, payInfluencerWeb3, endbountyWeb3 } from '../../web3';
+import { payInfluencerWeb3, endbountyWeb3 } from '../../web3';
 import { bountyQuery } from '../../apollo/bounty.gql';
 import { APOLLO_POLL_INTERVAL_MS } from '../../constants/Blockchain';
 import { getUserFromEthAddressDb } from '../../services/api/userService';
@@ -48,7 +48,6 @@ const OngoingBounty = () => {
   const { id } = router.query;
 
   const [invalidPost, setInvalidPost] = useState(false);
-  const [postUrl, setPostUrl] = useState('');
   const [business, setBusiness] = useState(null);
   const [influencer, setInfluencer] = useState(null);
   const [influencerRegistered, setInfluencerRegistered] = useState(false);
@@ -178,7 +177,7 @@ const OngoingBounty = () => {
     }
     if (bounty?.deadline >= Math.round(Date.now() / 1000) || !bounty?.ongoing) {
       //if ongoing but no prize to claim
-      return <SubmitPost invalidPost={invalidPost} setPostUrl={setPostUrl} />;
+      return <SubmitPost invalidPost={invalidPost} objective={bounty?.objective} />;
     } else {
       //if not ongoing
       return <p>Bounty is over. Thank you for participating.</p>;
