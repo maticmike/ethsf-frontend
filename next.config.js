@@ -1,5 +1,23 @@
 module.exports = {
   webpack: (config, options) => {
+    /*
+    TODO  i added this first conflict.resolve to try fix the twitter lib bug 
+    consider switching to new twitter lib
+    */
+
+    // config.resolve = {
+    //   ...config.resolve,
+    //   fallback: {
+    //     fs: false,
+    //     path: false,
+    //     os: false,
+    //     crypto: false,
+    //     http: false,
+    //     https: false,
+    //     zlib: false,
+    //     events: false,
+    //   },
+    // };
     config.module.rules.push({
       test: /\.(graphql|gql)$/,
       exclude: /node_modules/,
@@ -16,5 +34,7 @@ module.exports = {
     CONSUMER_SECRET: 'b6jaRYQGvHEdxbB5bb1BylSuf3VQxJmDuuidzAcInrShPArW6P',
     ACCESS_TOKEN_KEY: '464103620-b7mh093ZLkq2KsPAu1ekFFZivLXuZhDGi2yuyFjF',
     ACCESS_TOKEN_SECRET: 'cgZZLfc7WsGKklsD2MPbOYKsL3j8cLY9izF1lwBuiXAtg',
+    TWITTER_BEARER:
+      'AAAAAAAAAAAAAAAAAAAAAAADKAEAAAAA6AuuGHwQkKUZL8aCUtlrX2beB3E%3DQSLGoGq7XChF79kHhF9unpkjKsm3ltmHvhaF5JzAv1eCKwifqn',
   },
 };

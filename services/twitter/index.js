@@ -22,7 +22,6 @@ const getTweetData = async tweetId => {
     };
     return response;
   } catch (err) {
-    console.log(err, 'the error');
     const response = {
       statusCode: err.statusCode || 500,
       headers: { 'Content-Type': 'application/json' },
