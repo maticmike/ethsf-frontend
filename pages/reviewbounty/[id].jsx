@@ -30,12 +30,14 @@ const ReviewBounty = () => {
 
   useEffect(() => {
     async function getBountyInfo() {
-      const campaign = await getBountyDb(id);
-      if (Object.entries(campaign?.data?.payload).length === 0) return <Error statusCode={404} />;
-      const businessUser = await getUserFromEthAddressDb(campaign?.data?.mongoResponse?.business);
+      if (id != undefined) {
+        const campaign = await getBountyDb(id);
+        if (Object.entries(campaign?.data?.payload).length === 0) return <Error statusCode={404} />;
+        const businessUser = await getUserFromEthAddressDb(campaign?.data?.mongoResponse?.business);
 
-      setCampaign(campaign?.data?.mongoResponse);
-      setBusiness(businessUser?.data?.payload);
+        setCampaign(campaign?.data?.mongoResponse);
+        setBusiness(businessUser?.data?.payload);
+      }
     }
     getBountyInfo();
     return () => consola.success('Cleanup ongoing bounty component');
