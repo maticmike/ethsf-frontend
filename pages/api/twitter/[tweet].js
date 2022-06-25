@@ -1,12 +1,11 @@
-// const { TwitterApi } = require('twitter-api-v2');
-// import { TwitterApi } from 'twitter-api-v2';
+import { TwitterClient } from 'twitter-api-client';
 
-// var client = new Twitter({
-//   consumer_key: process.env.CONSUMER_KEY,
-//   consumer_secret: process.env.CONSUMER_SECRET,
-//   access_token_key: process.env.ACCESS_TOKEN_KEY,
-//   access_token_secret: process.env.ACCESS_TOKEN_SECRET,
-// });
+var client = new TwitterClient({
+  apiKey: process.env.CONSUMER_KEY,
+  apiSecret: process.env.CONSUMER_SECRET,
+  accessToken: process.env.ACCESS_TOKEN_KEY,
+  accessTokenSecret: process.env.ACCESS_TOKEN_SECRET,
+});
 
 // Instanciate with desired auth type (here's Bearer v2 auth)
 // const twitterClient = new TwitterApi(process.env.TWITTER_BEARER);
@@ -16,9 +15,9 @@
 
 export const twitterApiGetTweetInfo = async (req, res) => {
   try {
-    // const tweetData = await roClient.v2.singleTweet(req, {
-    //   expansions: ['public_metrics'],
-    // });
+    const data = await client.tweets.statusesRetweetsById({ id: req });
+
+    console.log(data, 'the data');
 
     // const tweetData = await client.get('tweets', {
     //   ids: req,

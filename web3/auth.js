@@ -19,7 +19,7 @@ export const generateNewSignedJwt = async (ethAddress, signer) => {
     //Triggers meta mask popup
     const signature = await signer.signMessage(challenge);
 
-    //generateJWT on dob
+    //generateJWT on db
     const jwt = await generateJwtDb(ethAddress, challenge, signature);
 
     //Set jwt in local storage

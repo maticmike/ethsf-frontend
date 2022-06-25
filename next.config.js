@@ -1,23 +1,5 @@
 module.exports = {
   webpack: (config, options) => {
-    /*
-    TODO  i added this first conflict.resolve to try fix the twitter lib bug 
-    consider switching to new twitter lib
-    */
-
-    // config.resolve = {
-    //   ...config.resolve,
-    //   fallback: {
-    //     fs: false,
-    //     path: false,
-    //     os: false,
-    //     crypto: false,
-    //     http: false,
-    //     https: false,
-    //     zlib: false,
-    //     events: false,
-    //   },
-    // };
     config.module.rules.push({
       test: /\.(graphql|gql)$/,
       exclude: /node_modules/,

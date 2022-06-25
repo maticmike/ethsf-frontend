@@ -7,12 +7,16 @@ let JWT_TOKEN = 'famepay_jwt';
 //used for generating signed jwt WRONG <<use to validate not generate
 export const generateJwtDb = async (ethAddress, challenge, signature) => {
   try {
+    console.log(ethAddress, 'ethAddress');
+    console.log(challenge, 'challenge');
+    console.log(signature, 'signature');
     const jwt = await axios.post(`${api}/user/${ethAddress}/auth/generate-jwt`, {
       challenge,
       signature,
     });
     return jwt;
   } catch (error) {
+    console.log(error, 'the error');
     consola.error('ApiService generateJwt():', error);
   }
 };
