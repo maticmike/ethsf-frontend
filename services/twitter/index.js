@@ -4,6 +4,7 @@
 //   });
 //   console.log(data);
 // };
+import axios from 'axios';
 import { twitterApiGetTweetInfo } from '../../pages/api/twitter/[tweet]';
 import { parseTwitterPostData } from '../../utils/objectiveData/twitter';
 
@@ -13,7 +14,8 @@ import { parseTwitterPostData } from '../../utils/objectiveData/twitter';
 
 const getTweetData = async tweetId => {
   try {
-    const getTweetData = await twitterApiGetTweetInfo(tweetId);
+    // const getTweetData = await twitterApiGetTweetInfo(tweetId);
+    const getTweetData = await fetch('/api/twitter');
 
     const response = {
       statusCode: 200,

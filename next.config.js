@@ -7,6 +7,14 @@ module.exports = {
     });
     return config;
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'https://api.example.com/:path*',
+      },
+    ];
+  },
   env: {
     BASE_API_URL: 'http://localhost:4000/dev',
     ONBOARD_KEY: '7e738cae-8bad-4605-bded-fe6e7fa287ea',
