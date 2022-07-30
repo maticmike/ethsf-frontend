@@ -13,7 +13,6 @@ export const generateJwtDb = async (ethAddress, challenge, signature) => {
     });
     return jwt;
   } catch (error) {
-    console.log(error, 'the error');
     consola.error('ApiService generateJwt():', error);
   }
 };
