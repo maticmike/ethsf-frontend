@@ -113,7 +113,7 @@ const OngoingCampaign = () => {
     }
     if (campaign?.deadline >= Math.round(Date.now() / 1000) || !campaign?.ongoing) {
       //if ongoing but no prize to claim
-      return <SubmitPost invalidPost={invalidPost} objective={campaign?.objective} />;
+      return <SubmitPost campaign={campaign} invalidPost={invalidPost} objective={campaign?.objective} />;
     } else {
       //if not ongoing
       return <p>Campaign is over. Thank you for participating.</p>;

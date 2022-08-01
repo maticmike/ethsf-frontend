@@ -291,6 +291,7 @@ export const getCampaignFromContract = async (famepayFactory, campaignId) => {
  */
 export const setPaymentTargetReachedWeb3 = async (campaignAddress, postStat, postPosted, postTimestamp) => {
   try {
+    console.log(campaignAddress, 'submitting post');
     const provider = new ethers.providers.Web3Provider(currentOnboardState.wallet.provider);
     const signer = provider.getSigner();
     const famepayCampaign = new ethers.Contract(campaignAddress, FamepayAbi.abi, signer);

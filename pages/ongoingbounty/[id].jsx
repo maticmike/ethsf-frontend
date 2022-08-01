@@ -152,7 +152,7 @@ const OngoingBounty = () => {
     }
     if (bounty?.deadline >= Math.round(Date.now() / 1000) || !bounty?.ongoing) {
       //if ongoing but no prize to claim
-      return <SubmitPost invalidPost={invalidPost} objective={bounty?.objective} />;
+      return <SubmitPost campaign={bounty} invalidPost={invalidPost} objective={bounty?.objective} />;
     } else {
       //if not ongoing
       return <p>Bounty is over. Thank you for participating.</p>;
