@@ -46,7 +46,6 @@ const OngoingCampaign = () => {
   const { id } = router.query;
 
   const [invalidPost, setInvalidPost] = useState(false);
-  const [postUrl, setPostUrl] = useState('');
   const [business, setBusiness] = useState('');
   const [influencer, setInfluencer] = useState('');
 
@@ -78,32 +77,6 @@ const OngoingCampaign = () => {
   if (error) return <Error statusCode={404} />;
 
   campaign = data?.campaigns[0];
-
-  // REFACTOR ME AWAY TO TWITTER.JS
-
-  const getPostData = async e => {
-    //   e.preventDefault();
-    //   setInvalidPost(false);
-    //   let tweetId;
-    //   if (postUrl.includes('twitter.com' && '/status/')) {
-    //     if (postUrl.slice(postUrl.length - 4) === 's=20') {
-    //       const tweetUrl = postUrl.slice(0, -5);
-    //       tweetId = tweetUrl.slice(postUrl.length - 19);
-    //     } else {
-    //       tweetId = postUrl.slice(postUrl.length - 19);
-    //     }
-    //   } else {
-    //     setInvalidPost(true);
-    //   }
-    //   try {
-    //     const { data } = await axios.get(`http://localhost:3000/api/twitter/${tweetId}`);
-    //     const postData = parseTwitterPostData(campaign.objective, data);
-    //     // await setPaymentTargetReachedWeb3(campaign?.campaignAddress, postData[0], postData[1], postData[2]);
-    //   } catch (error) {
-    //     setInvalidPost(true);
-    //     consola.error('getPostData():', error);
-    //   }
-  };
 
   /** Web 3 **/
   const payInfluencer = () => {
@@ -140,7 +113,7 @@ const OngoingCampaign = () => {
     }
     if (campaign?.deadline >= Math.round(Date.now() / 1000) || !campaign?.ongoing) {
       //if ongoing but no prize to claim
-      return <SubmitPost invalidPost={invalidPost} getPostData={getPostData} setPostUrl={setPostUrl} />;
+      return <SubmitPost invalidPost={invalidPost} objective={campaign?.objective} />;
     } else {
       //if not ongoing
       return <p>Campaign is over. Thank you for participating.</p>;

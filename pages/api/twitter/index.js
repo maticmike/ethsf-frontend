@@ -20,7 +20,7 @@ export default async function handler(req, res) {
           'geo',
           'lang',
           'source',
-          // 'non_public_metrics', // NOT WORKING FOR TWEETS OLDER THAN 30 DAYS
+          'non_public_metrics', // NOT WORKING FOR TWEETS OLDER THAN 30 DAYS
         ],
       },
     });

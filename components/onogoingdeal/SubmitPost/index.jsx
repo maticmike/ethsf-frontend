@@ -5,6 +5,7 @@ import { setPaymentTargetReachedWeb3 } from '../../../web3';
 
 const SubmitPost = ({ invalidPost, objective }) => {
   const [postUrl, setPostUrl] = useState(null);
+
   const submitPost = async () => {
     const postData = await getPostData(postUrl, objective);
     // await setPaymentTargetReachedWeb3(campaign?.campaignAddress, postData[0], postData[1], postData[2]);
@@ -23,7 +24,7 @@ const SubmitPost = ({ invalidPost, objective }) => {
       />
       <br />
       <br />
-      <Button type="submit" variant="contained" color="primary" onClick={() => submitPost()}>
+      <Button variant="contained" color="primary" onClick={() => submitPost()}>
         Submit Post
       </Button>
     </div>

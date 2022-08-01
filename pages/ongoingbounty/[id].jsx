@@ -104,31 +104,6 @@ const OngoingBounty = () => {
 
   const claimRefund = () => endbountyWeb3(bounty?.bountyAddress);
 
-  // REFACTOR ME AWAY TO TWITTER.JS
-  const getPostData = async e => {
-    //   e.preventDefault();
-    //   setInvalidPost(false);
-    //   let tweetId;
-    //   if (postUrl.includes('twitter.com' && '/status/')) {
-    //     if (postUrl.slice(postUrl.length - 4) === 's=20') {
-    //       const tweetUrl = postUrl.slice(0, -5);
-    //       tweetId = tweetUrl.slice(postUrl.length - 19);
-    //     } else {
-    //       tweetId = postUrl.slice(postUrl.length - 19);
-    //     }
-    //   } else {
-    //     setInvalidPost(true);
-    //   }
-    //   try {
-    //     const { data } = await axios.get(`http://localhost:3000/api/twitter/${tweetId}`);
-    //     const postData = parseTwitterPostData(campaign.objective, data);
-    //     // await setPaymentTargetReachedWeb3(campaign?.campaignAddress, postData[0], postData[1], postData[2]);
-    //   } catch (error) {
-    //     setInvalidPost(true);
-    //     consola.error('getPostData():', error);
-    //   }
-  };
-
   /** COMPONENTS **/
   const influencerHeadingUI = () => {
     if (influencer != null) {

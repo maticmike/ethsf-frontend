@@ -3,14 +3,8 @@ import { parseTwitterPostData } from '../../utils/objectiveData/twitter';
 
 const getTweetData = async tweetId => {
   try {
-    const getTweetData = await axios.post('/api/twitter', { tweet: tweetId });
-    console.log(getTweetData, 'tweet data');
-    const response = {
-      statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(getTweetData),
-    };
-    return response;
+    const tweet = await axios.post('/api/twitter', { tweet: tweetId });
+    return tweet.data.tweetData.data[0];
   } catch (err) {
     const response = {
       statusCode: err.statusCode || 500,
@@ -34,9 +28,9 @@ export const getPostData = async (post, campaignObjective) => {
       tweetId = post.substr(post.length - 19);
     }
 
-    await getTweetData(tweetId);
+    const tweetData = await getTweetData(tweetId);
 
-    // const parsedTweetData = parseTwitterPostData(campaignObjective, tweetData);
-    // return parsedTweetData;
+    const parsedTweetData = parseTwitterPostData(campaignObjective, tweetData);
+    return parsedTweetData;
   }
 };
