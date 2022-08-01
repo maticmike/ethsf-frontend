@@ -9,27 +9,22 @@ var client = new Twitter({
 
 export default async function handler(req, res) {
   try {
-    console.log(req, 'fillion');
-    console.log(res, 'the res');
-
-    // const tweetData = await client.get('tweets', {
-    //   ids: '1535342687611650061',
-    //   tweet: {
-    //     fields: [
-    //       'created_at',
-    //       'entities',
-    //       'public_metrics',
-    //       'author_id',
-    //       'geo',
-    //       'lang',
-    //       'source',
-    //       // 'non_public_metrics', // NOT WORKING FOR TWEETS OLDER THAN 30 DAYS
-    //     ],
-    //   },
-    // });
-    // console.log(tweetData, 'the weeet');
-    // return res.status(200).json({ tweetData });
-    res.send(JSON.stringify({ key: 'hello this is the test route!' }));
+    const tweetData = await client.get('tweets', {
+      ids: req.body.tweet,
+      tweet: {
+        fields: [
+          'created_at',
+          'entities',
+          'public_metrics',
+          'author_id',
+          'geo',
+          'lang',
+          'source',
+          // 'non_public_metrics', // NOT WORKING FOR TWEETS OLDER THAN 30 DAYS
+        ],
+      },
+    });
+    return res.status(200).json({ tweetData });
   } catch (error) {
     console.log('Error On twitterApiGetTweetInfo():', error);
     return error.statusCode;

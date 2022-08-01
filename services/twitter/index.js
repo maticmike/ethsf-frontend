@@ -1,31 +1,16 @@
-// const getData = async () => {
-//   const data = await axios.get(`http://localhost:4000/dev/getTweet/1383842980973277186`, {
-//     tweetId: 1383842980973277186,
-//   });
-//   console.log(data);
-// };
 import axios from 'axios';
 import { parseTwitterPostData } from '../../utils/objectiveData/twitter';
 
-// const cors = Cors({
-//   methods: ['GET', 'HEAD'],
-// });
-
 const getTweetData = async tweetId => {
   try {
-    // const getTweetData = await twitterApiGetTweetInfo(tweetId);
-    const id = 'fillion';
-    // const getTweetData = await fetch(`/api/twitter/${id}`);
-    // const getTweetData = await fetch('/api/twitter');
-    const getTweetData = await axios.post('/api/twitter', { testme: { working: id } });
-    console.log(getTweetData, 'the data');
-
-    // const response = {
-    //   statusCode: 200,
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(getTweetData),
-    // };
-    // return response;
+    const getTweetData = await axios.post('/api/twitter', { tweet: tweetId });
+    console.log(getTweetData, 'tweet data');
+    const response = {
+      statusCode: 200,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(getTweetData),
+    };
+    return response;
   } catch (err) {
     const response = {
       statusCode: err.statusCode || 500,
