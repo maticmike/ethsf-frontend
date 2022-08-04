@@ -10,8 +10,9 @@ import { useQuery } from '@apollo/client';
 import dynamic from 'next/dynamic';
 import consola from 'consola';
 import Calendar from 'react-calendar';
+import { utils } from 'web3';
 import 'react-calendar/dist/Calendar.css';
-import { payInfluencerWeb3, endbountyWeb3 } from '../../web3';
+import { payInfluencerWeb3, endBountyWeb3 } from '../../web3';
 import { bountyQuery } from '../../apollo/bounty.gql';
 import { APOLLO_POLL_INTERVAL_MS } from '../../constants/Blockchain';
 import { getUserFromEthAddressDb } from '../../services/api/userService';
@@ -102,7 +103,7 @@ const OngoingBounty = () => {
     );
   };
 
-  const claimRefund = () => endbountyWeb3(bounty?.bountyAddress);
+  const claimRefund = () => endBountyWeb3(bounty?.bountyAddress);
 
   /** COMPONENTS **/
   const influencerHeadingUI = () => {
@@ -167,8 +168,12 @@ const OngoingBounty = () => {
     if (bounty?.deadline >= Math.round(Date.now() / 1000) && bounty?.ongoing) {
       return <p>Bounty Ongoing</p>;
     } else {
-      //if not ongoing
-      return <ClaimRefund bounty={bounty} claimRefund={claimRefund} campaignBalance={bounty?.depositedBalance} />;
+      return bounty?.endedWithRefund ? (
+        <p>{`Campaign over ${utils.fromWei(bounty?.businessRefundAmount.toString(), 'ether')} eth refunded`}</p>
+      ) : (
+        //if not ongoing
+        <ClaimRefund bounty={bounty} claimRefund={claimRefund} campaignBalance={bounty?.depositedBalance} />
+      );
     }
   };
 

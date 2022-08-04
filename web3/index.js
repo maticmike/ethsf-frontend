@@ -335,7 +335,7 @@ export const endCampaignWeb3 = async campaignAddress => {
 
 /**
  ********************************
- * Famepay Functions
+ * Famepay Bounty Functions
  ********************************
  */
 
@@ -345,13 +345,26 @@ export const endCampaignWeb3 = async campaignAddress => {
  */
 export const addInfluencerToBountyWeb3 = async (bountyAddress, influencer) => {
   try {
-    console.log(bountyAddress, 'the bounty address');
     const provider = new ethers.providers.Web3Provider(currentOnboardState.wallet.provider);
     const signer = provider.getSigner();
     const famepayBounty = new ethers.Contract(bountyAddress, FamepayBounty.abi, signer);
-    console.log(famepayBounty, 'famepay bounty');
     await famepayBounty?.addInfluencer();
   } catch (error) {
     consola.error('Web3: addInfluencerToBountyWeb3():', error);
+  }
+};
+
+/**
+ *
+ * @param {address} bountyAddress
+ */
+export const endBountyWeb3 = async bountyAddress => {
+  try {
+    const provider = new ethers.providers.Web3Provider(currentOnboardState.wallet.provider);
+    const signer = provider.getSigner();
+    const famepayBounty = new ethers.Contract(bountyAddress, FamepayBounty.abi, signer);
+    await famepayBounty?.campaignEnded();
+  } catch (error) {
+    consola.error('Web3: endBountyWeb3():', error);
   }
 };

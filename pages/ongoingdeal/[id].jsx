@@ -129,6 +129,9 @@ const OngoingCampaign = () => {
       return <p>Campaign Ongoing</p>;
     } else {
       //if not ongoing
+      if (campaign?.endedWithRefund) {
+        console.log(campaign.businessRefundAmount, 'hello i ended with a refund');
+      }
       return <ClaimRefund campaign={campaign} claimRefund={claimRefund} campaignBalance={campaign?.depositedBalance} />;
     }
   };

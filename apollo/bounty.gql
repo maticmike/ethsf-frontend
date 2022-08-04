@@ -22,7 +22,8 @@ fragment BountyFrag on Bounty {
   maxParticipants
   maxWinners
   maxJackpotRewardAmount
-  # endedWithRefund
+  endedWithRefund
+  businessRefundAmount
 }
 
 query bountyQuery($id: String!) {
