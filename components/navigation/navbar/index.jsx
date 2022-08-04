@@ -79,12 +79,14 @@ const Navbar = () => {
         <AppBar position="sticky">
           <Toolbar>
             <a href="/">
-              <img
+              <Image className={classes.navbarLogo} src="/Logo.png" alt="OpenNFT Logo" width="160" height="80" />
+
+              {/* <img
                 src="https://www.mandfhealth.co.uk/wp-content/uploads/2017/12/celebrity-1.jpg"
                 alt="OpenNFT Logo"
                 width="50"
                 height="54"
-              />
+              /> */}
             </a>
             <Link href="/newdeal" className={classes.navbarDesktopMenuButton}>
               <Button>
@@ -125,13 +127,7 @@ const Navbar = () => {
                 <MenuIcon />
               </IconButton>
               <a href="/" className={classes.navbarDesktopMenuButton}>
-                <Image
-                  className={classes.navbarLogo}
-                  src="/logo-large.png"
-                  alt="OpenNFT Logo"
-                  width="180"
-                  height="54"
-                />
+                <Image className={classes.navbarLogo} src="/Logo.png" alt="OpenNFT Logo" width="180" height="54" />
               </a>
             </Toolbar>
           </AppBar>
