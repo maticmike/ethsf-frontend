@@ -154,7 +154,6 @@ const OngoingBounty = () => {
       //if ongoing but no prize to claim
       return <SubmitPost campaign={bounty} invalidPost={invalidPost} objective={bounty?.objective} />;
     } else {
-      //if not ongoing
       return <p>Bounty is over. Thank you for participating.</p>;
     }
   };
@@ -169,7 +168,7 @@ const OngoingBounty = () => {
       return <p>Bounty Ongoing</p>;
     } else {
       //if not ongoing
-      <ClaimRefund bounty={bounty} claimRefund={claimRefund} campaignBalance={bounty?.depositedBalance} />;
+      return <ClaimRefund bounty={bounty} claimRefund={claimRefund} campaignBalance={bounty?.depositedBalance} />;
     }
   };
 
