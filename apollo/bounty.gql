@@ -24,6 +24,7 @@ fragment BountyFrag on Bounty {
   maxJackpotRewardAmount
   endedWithRefund
   businessRefundAmount
+  outstandingPayments
 }
 
 query bountyQuery($id: String!) {

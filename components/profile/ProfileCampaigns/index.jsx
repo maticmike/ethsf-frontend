@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { getUserFromEthAddressDb } from '../../../services/api/userService';
+import { campaignState } from '../../../utils/helpers';
 import { useStyles } from './styles';
 
 //check isBusiness to know if populate cards with influencer or business data
@@ -28,7 +29,8 @@ const ProfileCampaigns = ({ campaign, influencerData, isBusiness }) => {
               : `${influencerData} Influencer Registered`
             : `@${influencerData}`}
         </strong>
-        <p>{campaign.ongoing ? 'Ongoing Campaign' : 'Campaign Completed'}</p>
+        {/* <p>{campaign.ongoing ? 'Ongoing Campaign' : 'Campaign Completed'}</p> */}
+        <p>{campaignState(campaign.ongoing, campaign.deadline, campaign.outstandingPayments)}</p>
       </div>
     </div>
   );

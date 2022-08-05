@@ -21,6 +21,7 @@ fragment CampaignFrag on Campaign {
   ongoing
   incrementalRewardAmount
   jackpotRewardAmount
+  outstandingPayments
 }
 
 fragment BountyFrag on Bounty {
@@ -47,7 +48,7 @@ fragment BountyFrag on Bounty {
   maxParticipants
   maxWinners
   maxJackpotRewardAmount
-  # endedWithRefund
+  outstandingPayments #BREAKING QUERY FOR SOME REASON
 }
 
 query GET_ALL_CAMPAIGNS_FOR_BUSINESS_QUERY($id: String!) {

@@ -99,6 +99,8 @@ const Profile = () => {
   if (dataBountyInfluencer?.bounties?.length != 0) bounties = dataBountyInfluencer?.bounties;
   if (dataBountyBusiness?.bounties?.length != 0) bounties = dataBountyBusiness?.bounties;
 
+  console.log(dataBountyBusiness, 'data bounty');
+
   return (
     <>
       <div className={classes.Profile_header_container}>
@@ -137,7 +139,7 @@ const Profile = () => {
             <GridList cellHeight={100} className={classes.Profile_gridList} cols={3}>
               {deals?.map((campaign, index) => {
                 return (
-                  <GridListTile cols={1} key={index} component={Link} href={`/ongoingcampaign/${campaign?.id}`}>
+                  <GridListTile cols={1} key={index} component={Link} href={`/ongoingdeal/${campaign?.id}`}>
                     <ProfileCampaigns
                       campaign={campaign}
                       influencerData={user?.username}
