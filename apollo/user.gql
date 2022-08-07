@@ -48,7 +48,7 @@ fragment BountyFrag on Bounty {
   maxParticipants
   maxWinners
   maxJackpotRewardAmount
-  outstandingPayments #BREAKING QUERY FOR SOME REASON
+  outstandingPayments
 }
 
 query GET_ALL_CAMPAIGNS_FOR_BUSINESS_QUERY($id: String!) {

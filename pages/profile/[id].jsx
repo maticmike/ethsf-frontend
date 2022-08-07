@@ -99,8 +99,6 @@ const Profile = () => {
   if (dataBountyInfluencer?.bounties?.length != 0) bounties = dataBountyInfluencer?.bounties;
   if (dataBountyBusiness?.bounties?.length != 0) bounties = dataBountyBusiness?.bounties;
 
-  console.log(dataBountyBusiness, 'data bounty');
-
   return (
     <>
       <div className={classes.Profile_header_container}>

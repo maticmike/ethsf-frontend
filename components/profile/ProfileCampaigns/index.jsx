@@ -29,7 +29,6 @@ const ProfileCampaigns = ({ campaign, influencerData, isBusiness }) => {
               : `${influencerData} Influencer Registered`
             : `@${influencerData}`}
         </strong>
-        {/* <p>{campaign.ongoing ? 'Ongoing Campaign' : 'Campaign Completed'}</p> */}
         <p>{campaignState(campaign.ongoing, campaign.deadline, campaign.outstandingPayments)}</p>
       </div>
     </div>
