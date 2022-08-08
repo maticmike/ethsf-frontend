@@ -48,6 +48,7 @@ const OngoingCampaign = () => {
   const [invalidPost, setInvalidPost] = useState(false);
   const [business, setBusiness] = useState('');
   const [influencer, setInfluencer] = useState('');
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   let campaign;
 
@@ -63,6 +64,9 @@ const OngoingCampaign = () => {
         const influencerUser = await getUserFromEthAddressDb(campaign?.influencer?.id);
         setBusiness(businessUser?.data?.payload);
         setInfluencer(influencerUser?.data?.payload);
+        account?.address == businessUser?.data?.payload?.userEthAddress
+          ? setLoggedInUser(businessUser?.data?.payload?.userEthAddress)
+          : setLoggedInUser(influencerUser?.data?.payload?.userEthAddress);
       } catch (error) {
         consola.error(error, 'OngoingCampaign.getUserEthAddress: error');
       }
@@ -88,7 +92,10 @@ const OngoingCampaign = () => {
     );
   };
 
-  const claimRefund = () => endCampaignWeb3(campaign?.campaignAddress);
+  const claimRefund = async () => {
+    await endCampaignWeb3(campaign?.campaignAddress);
+    router.push(`/profile/${loggedInUser}`);
+  };
 
   /** Components **/
   const isObjectiveComplete = () =>

@@ -52,6 +52,7 @@ const OngoingBounty = () => {
   const [business, setBusiness] = useState(null);
   const [influencer, setInfluencer] = useState(null);
   const [influencerRegistered, setInfluencerRegistered] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   let bounty;
 
@@ -71,12 +72,14 @@ const OngoingBounty = () => {
         const businessRes = await getUserFromEthAddressDb(bounty?.business?.id);
         // TODO setBusiness as var not state all other functions getting triple called
         setBusiness(businessRes?.data?.payload);
+        setLoggedInUser(businessRes?.data?.payload?.username);
         if (businessRes?.data?.payload?.userEthAddress == account?.address) {
           setInfluencer(null);
         } else {
           const influencerRes = await getUserFromEthAddressDb(account?.address);
           //page will be restricted to other businesses
           setInfluencer(influencerRes?.data?.payload);
+          setLoggedInUser(influencerRes?.data?.payload?.username);
         }
       } catch (error) {
         consola.error(error, 'OngoingBounty.getUserEthAddress: error');
@@ -103,7 +106,10 @@ const OngoingBounty = () => {
     );
   };
 
-  const claimRefund = () => endBountyWeb3(bounty?.bountyAddress);
+  const claimRefund = async () => {
+    await endBountyWeb3(bounty?.bountyAddress);
+    router.push(`/profile/${loggedInUser}`);
+  };
 
   /** COMPONENTS **/
   const influencerHeadingUI = () => {

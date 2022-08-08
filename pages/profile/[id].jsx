@@ -120,11 +120,11 @@ const Profile = () => {
         </div>
       </div>
       <br />
-      <Button color="primary" variant="contained" onClick={() => setIsBounty(true)}>
+      <Button color="primary" variant={isBounty ? 'contained' : 'outlined'} onClick={() => setIsBounty(true)}>
         Bounties
       </Button>
       &nbsp;
-      <Button color="primary" variant="contained" onClick={() => setIsBounty(false)}>
+      <Button color="primary" variant={isBounty ? 'outlined' : 'contained'} onClick={() => setIsBounty(false)}>
         Deals
       </Button>
       <br />

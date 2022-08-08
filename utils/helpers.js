@@ -33,9 +33,6 @@ export const getDateFormat = (objective, startDate, deadline) => {
 
 export const campaignState = (campaignOngoing, deadline, outstandingPayments) => {
   if (campaignOngoing) {
-    // console.log(deadline, 'deadline');
-    // console.log(Math.round(Date.now() / 1000), 'now ');
-    // console.log(outstandingPayments, 'outstanding payments');
     //campaign might be over but incomplete on contract
     return Math.round(Date.now() / 1000 > deadline) && outstandingPayments == 0 ? 'Pending Refund' : 'Campaign Ongoing';
   } else {
