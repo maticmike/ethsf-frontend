@@ -15,16 +15,15 @@ export const parseTwitterPostData = (objective, tweetStats) => {
 
   //TWEET STATS
   const objectiveString = objectiveToString(objective);
-  const tweetData = tweetStats;
-  const postTimestamp = Math.round(new Date(tweetData.created_at).getTime() / 1000);
-  const views = tweetData.non_public_metrics.impression_count;
-  const profileClicks = tweetData.non_public_metrics.user_profile_clicks;
+  const postTimestamp = Math.round(new Date(tweetStats.created_at).getTime() / 1000);
+  const views = tweetStats.non_public_metrics.impression_count;
+  const profileClicks = tweetStats.non_public_metrics.user_profile_clicks;
 
   //CHECK VALID TWEET
   //leaving commented till .username matches registed username in db
-  // const taggedBusiness = tweetData.entities.mentions[0].username;
+  // const taggedBusiness = tweetStats.entities.mentions[0].username;
   /*
-  if (taggedBusiness == business* && tweetData.author_id == correctAuthorId ) {
+  if (taggedBusiness == business* && tweetStats.author_id == correctAuthorId ) {
     isValidPost = true;
   } else {
     isValidPost = false;
@@ -42,11 +41,11 @@ export const parseTwitterPostData = (objective, tweetStats) => {
     case PROFILE_GROWTH:
       return [profileClicks, isValidPost, postTimestamp];
     case LIKES:
-      return [tweetData.like_count, isValidPost, postTimestamp];
+      return [tweetStats.public_metrics.like_count, isValidPost, postTimestamp];
     case COMMENTS:
-      return [tweetData.reply_count, isValidPost, postTimestamp];
+      return [tweetStats.public_metrics.reply_count, isValidPost, postTimestamp];
     case SHARES:
-      return [tweetData.retweet_count, isValidPost, postTimestamp];
+      return [tweetStats.public_metrics.retweet_count, isValidPost, postTimestamp];
     case WEB_VISITS:
       return;
     case ADD_TO_CART:

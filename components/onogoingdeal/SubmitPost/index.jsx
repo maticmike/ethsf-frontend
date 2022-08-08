@@ -8,6 +8,7 @@ const SubmitPost = ({ campaign, invalidPost, objective }) => {
 
   const submitPost = async () => {
     const postData = await getPostData(postUrl, objective);
+    console.log(postData, 'post data');
     await setPaymentTargetReachedWeb3(campaign?.campaignAddress, postData[0], postData[1], postData[2]);
   };
 
