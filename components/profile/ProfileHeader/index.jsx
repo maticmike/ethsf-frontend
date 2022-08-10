@@ -22,7 +22,7 @@ const ProfileHeader = ({ user }) => {
   };
 
   const heading = () => {
-    if (user == '0xc5DcAC3e02f878FE995BF71b1Ef05153b71da8BE') {
+    if (user == '0xc5dcac3e02f878fe995bf71b1ef05153b71da8be') {
       return 'Grantor';
     } else {
       return 'Beneficiary';
