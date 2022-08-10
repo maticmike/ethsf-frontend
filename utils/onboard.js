@@ -30,7 +30,6 @@ export const onBoardInitialize = () => {
 
         //user is valid profile
         //switching a user
-        console.log(ethAddress, 'the eth address');
         if (ethAddressInRedux?.account?.address != null) {
           // if (ethAddressInRedux?.account?.address != null) {
 

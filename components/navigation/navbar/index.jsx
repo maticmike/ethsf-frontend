@@ -24,16 +24,12 @@ const Navbar = () => {
 
   const router = useRouter();
 
-  const { id } = router.query;
-
   const account = useSelector(state => state.account);
 
   const [isSignupOpen, setIsOpenSignup] = useState(false);
 
   const handleSignupOpen = () => setIsOpenSignup(true);
   const handleSignupClose = () => setIsOpenSignup(false);
-
-  console.log(account, 'the account');
 
   return (
     <>

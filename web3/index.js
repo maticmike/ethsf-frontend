@@ -93,9 +93,9 @@ export const bootstrapFactory = async () => {
       if (network.chainId != NETWORK_ID) {
         return false;
       } else {
-        const famepayFactoryAddress = getContractAddress(FamepayFactoryAbi, network.chainId);
-        const famepayFactory = new ethers.Contract(famepayFactoryAddress, FamepayFactoryAbi.abi, signer);
-        return { famepayFactory };
+        const soulFundFactory = getContractAddress(FamepayFactoryAbi, network.chainId);
+        const soulFund = new ethers.Contract(soulFundFactory, SoulFundFactory.abi, signer);
+        return { soulFund };
       }
     }
   } catch (error) {

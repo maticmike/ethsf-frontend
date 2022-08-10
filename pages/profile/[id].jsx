@@ -12,9 +12,7 @@ import {
   GET_ALL_BOUNTIES_FOR_INFLUENCER,
   GET_ALL_BOUNTIES_FOR_BUSINESS,
 } from '../../apollo/user.gql';
-import { getUserFromUsernameDb } from '../../services/api/userService';
 import { APOLLO_POLL_INTERVAL_MS } from '../../constants/Blockchain';
-import useEthAddress from '../../hooks/useUsername';
 import { useStyles } from './styles';
 
 const ProfileHeader = dynamic(() => import('../../components/profile/ProfileHeader'), {
@@ -41,13 +39,7 @@ const Profile = () => {
   useEffect(() => {
     async function getUsernameEthAddress() {
       if (!router.isReady) return;
-      const userDbRes = await getUserFromUsernameDb(id);
-      if (userDbRes?.data?.payload?.userEthAddress === undefined) {
-        return <Error statusCode={404} />;
-      } else {
-        setUser(userDbRes?.data?.payload);
-        if (userDbRes?.data?.payload?.type === 'BUSINESS') setProfileIsBusiness(true);
-      }
+      setUser(id);
     }
     getUsernameEthAddress();
     return () => (mountedRef.current = false);
