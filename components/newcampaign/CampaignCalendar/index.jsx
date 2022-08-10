@@ -4,13 +4,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useStyles } from './styles';
 
-const CampaignCalendar = ({
-  objective,
-  setParentSimplePostDateStart,
-  setParentSimplePostDateEnd,
-  setParentCampaignDuration,
-  setParentCampaignSetupStep,
-}) => {
+const CampaignCalendar = ({ setParentVestingDate, setParentCampaignSetupStep }) => {
   const classes = useStyles();
   const [simplePostDate, setSimplePostDate] = useState(null);
   const [campaignDuration, setCampaignDuration] = useState(null);
@@ -34,9 +28,7 @@ const CampaignCalendar = ({
     }
 
     //TODO specify timezone right now its eastern
-    setParentSimplePostDateStart(startOfDaySimplePost);
-    setParentSimplePostDateEnd(endOfDaySimplePost);
-    setParentCampaignDuration([startCampaignDate, parseInt(endCampaignDate)]);
+    setParentVestingDate(endOfDaySimplePost);
     setParentCampaignSetupStep(2);
   };
   return (

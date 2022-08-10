@@ -1,0 +1,18 @@
+query allFunds($id: String!) {
+    funds(where: {id: $id}) {
+        id
+        beneficiaries {
+            id
+        }
+        grantor {
+            id
+        }
+        tokens {
+            id
+        }
+        meritrs {
+
+        }
+        VestingDate
+    }
+}

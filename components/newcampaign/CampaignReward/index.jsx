@@ -38,7 +38,7 @@ const CampaignReward = ({
           <p>Merit Reward: </p>
           <NumberFormat
             className={classes.CampaignReward_input}
-            placeholder={'0.1 eth'}
+            placeholder={'5% Of Fund'}
             thousandSeparator={true}
             value={meritReward}
             suffix=" eth"

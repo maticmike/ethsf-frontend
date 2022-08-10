@@ -51,28 +51,19 @@ const RegisterBeneficiary = ({ parentFindInfluencer, foundInfluencer, setParentC
           <br />
         </Grid>
         {searchAttemptMade ? (
-          influencerWasFound ? (
-            <>
-              <Grid item sm={6} align="center">
-                <Image src="/Ethereum.png" alt={`${foundInfluencer} Eth Address`} width="32" height="32" />
-                <strong>{shortenedEthAddress(searchedInfluencer)}&nbsp;</strong>
-                <CheckCircle color="primary" />
-              </Grid>
-              <Grid item sm={12}>
-                <br />
-                <Button variant="contained" size="large" color="primary" onClick={incrementCampaignSetup}>
-                  Start
-                </Button>
-              </Grid>
-            </>
-          ) : (
-            <Grid item sm={12} align="center">
-              <br />
-              <strong className={classes.FindInfluencer_error_text}>
-                No influencer found with that username please try again
-              </strong>
+          <>
+            <Grid item sm={6} align="center">
+              <Image src="/Ethereum.png" alt={`${foundInfluencer} Eth Address`} width="32" height="32" />
+              <strong>{shortenedEthAddress(searchedInfluencer)}&nbsp;</strong>
+              <CheckCircle color="primary" />
             </Grid>
-          )
+            <Grid item sm={12}>
+              <br />
+              <Button variant="contained" size="large" color="primary" onClick={incrementCampaignSetup}>
+                Start
+              </Button>
+            </Grid>
+          </>
         ) : (
           <Grid item sm={12}>
             <br />

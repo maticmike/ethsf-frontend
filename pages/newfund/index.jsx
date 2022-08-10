@@ -7,6 +7,8 @@ import { utils } from 'web3';
 import { Paper } from '@material-ui/core';
 import { onlyNumeric } from '../../utils/helpers';
 
+import { createNewFundOnContract } from '../../web3';
+
 import { useStyles } from './styles';
 
 const RegisterBeneficiary = dynamic(() => import('../../components/newcampaign/Deal/FindInfluencer'), {
@@ -26,6 +28,7 @@ const NewFund = () => {
   const classes = useStyles();
 
   const account = useSelector(state => state.account);
+  const soulFundFactory = useSelector(state => state.soulFundFactory);
   const router = useRouter();
 
   const [registrationStep, setRegistrationStep] = useState(0);
@@ -36,12 +39,6 @@ const NewFund = () => {
   //Campaign Objective
   const [objective, setObjective] = useState('');
 
-  //Campaign Dates
-  const [simplePostDateStart, setSimplePostDateStart] = useState(0); //postDate to create post
-  const [simplePostDateEnd, setSimplePostDateEnd] = useState(0); //postDate to create post
-  const [simplePostMinimumDuration, setSimplePostMinimumDuration] = useState(0); //duration to keep post up (7hr post)
-  const [campaignDuration, setCampaignDuration] = useState([]); //sept 1 - oct 1
-
   const [beneficiary, setBeneficiary] = useState(null);
   const [vestingDate, setVestingDate] = useState(null);
   const [vestedFunds, setVestedFunds] = useState(null);
@@ -49,22 +46,22 @@ const NewFund = () => {
   //Campaign $$$$
   const [stakedAmount, setStakedAmount] = useState(0);
 
-  let jackpotRewardAmount;
-
-  const findInfluencer = async influencer => {
+  const findInfluencer = async beneficiary => {
     try {
       //search for influencer from api or db
-      setInfluencer(influencer);
+      setBeneficiary(beneficiary);
     } catch (error) {
       consola.error('NewFund.findInfluencer():', error);
     }
   };
 
-  const createNewFundProposal = async (jackpotReward, incrementalReward, jackpotTarget, incrementalTarget) => {
-    // soulfundFactory, beneficiary, vestingDate, vestedFunds;
-    jackpotRewardAmount = stakedAmount;
+  const createNewFund = async (meritReward, meritTarget) => {
+    console.log(meritReward, 'merit reward');
+    console.log(meritTarget, 'merit target');
+    console.log(soulFundFactory, 'factory');
+    // await createNewFundOnContract(soulFundFactory, beneficiary, vestingDate, vestingFunds);
     try {
-      router.push(`/reviewfund/${campaignDb.data.payload.data._id}`);
+      router.push(`/profile/${beneficiary}`);
     } catch (error) {
       consola.error('NewFund.createNewFundProposal():', error);
     }
@@ -86,10 +83,7 @@ const NewFund = () => {
         return (
           <Paper className={classes.NewFund_layout_dates} elevation={3}>
             <CampaignCalendar
-              objective={objective}
-              setParentSimplePostDateStart={simplePostDateStart => setSimplePostDateStart(simplePostDateStart)} //one date for simple post
-              setParentSimplePostDateEnd={simplePostDateEnd => setSimplePostDateEnd(simplePostDateEnd)} //one date for simple post
-              setParentCampaignDuration={campaignDuration => setCampaignDuration(campaignDuration)}
+              setParentVestingDate={simplePostDateEnd => setVestingDate(simplePostDateEnd)} //one date for simple post
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
             />
           </Paper>
@@ -113,7 +107,7 @@ const NewFund = () => {
               maxWinners={1}
               stakedAmount={stakedAmount}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
-              setParentFinishCampaign={(meritReward, meritTarget) => createNewFundProposal(meritReward, meritTarget)}
+              setParentFinishCampaign={(meritReward, meritTarget) => createNewFund(meritReward, meritTarget)}
               isBounty={false}
               bountyType={null}
             ></CampaignReward>

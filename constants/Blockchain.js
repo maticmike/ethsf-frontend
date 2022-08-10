@@ -23,7 +23,7 @@ export const ALL_SUPPORTED_CURRENCIES = {
   },
 };
 
-export const GRAPH_API_URL = 'https://api.thegraph.com/subgraphs/name/benjamin852/famepay';
+export const GRAPH_API_URL = 'api.studio.thegraph.com/query/32547/soulfund/v0.1';
 
 export const NETWORK_ID = 3;
 // export const EXPLORER_URL = 'https://hecoinfo.com/';

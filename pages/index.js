@@ -2,7 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import { getTestRoute } from '../services/api/campaignService';
+// import { getTestRoute } from '../services/api/campaignService';
 const Home = () => {
   const router = useRouter();
 

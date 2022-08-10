@@ -13,7 +13,8 @@ export const storeFamepayFactoryThunk = () => {
   return async dispatch => {
     if (window.ethereum) {
       bootstrapFactory()
-        .then(res => (res === undefined ? null : dispatch(storeFamepayFactory(res.famepayFactory))))
+        // .then(res => (res === undefined ? null : dispatch(storeFamepayFactory(res.famepayFactory))))
+        .then(res => (res === undefined ? null : console.log(res, 'the res')))
         .catch(error => consola.error('error in storeFamepayFactoryThunk action', error));
     }
   };

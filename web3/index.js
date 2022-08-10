@@ -2,7 +2,7 @@ import { ethers } from 'ethers';
 import axios from 'axios';
 import consola from 'consola';
 import { onBoardInitialize } from '../utils/onboard';
-// import soulfundFactoryAbi from '../contracts/soulfundFactory.json';
+import SoulFundFactoryAbi from '../contracts/soulfundFactory.json';
 // import FamepayAbi from '../contracts/Famepay.json';
 // import FamepayBounty from '../contracts/FamepayBounty.json';
 import { CONTRACT_RESPONSE_STATUS, NETWORK_ID } from '../constants/Blockchain';
@@ -69,7 +69,7 @@ export const getContractAddress = (abi, chainId) => {
   const { networks } = abi;
   if (networks[chainId.toString()]) {
     const address = networks[chainId.toString()].address;
-
+    console.log(address, ' insde address');
     return address || '';
   }
   return '';
@@ -93,9 +93,9 @@ export const bootstrapFactory = async () => {
       if (network.chainId != NETWORK_ID) {
         return false;
       } else {
-        const soulFundFactory = getContractAddress(soulfundFactoryAbi, network.chainId);
-        const soulFund = new ethers.Contract(soulFundFactory, SoulFundFactory.abi, signer);
-        return { soulFund };
+        const soulFundFactoryAddress = getContractAddress(SoulFundFactoryAbi?.abi, network?.chainId);
+        const soulFundFactory = new ethers.Contract(soulFundFactoryAddress, SoulFundFactoryAbi.abi, signer);
+        return { soulFundFactory };
       }
     }
   } catch (error) {
