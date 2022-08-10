@@ -19,6 +19,7 @@ const useStyles = makeStyles({
   CampaignDates_layout: {
     paddingLeft: '5%',
     paddingRight: '5%',
+    marginTop: '15px',
   },
 
   CampaignDates_calendar_right: {

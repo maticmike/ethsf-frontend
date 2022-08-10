@@ -29,18 +29,13 @@ const CampaignStaking = ({
     setParentDepositToEscrow(parsedEth);
   };
 
-  const stakeDeposit = () => (isBounty ? setParentCampaignSetupStep(6) : setParentCampaignSetupStep(5));
-
-  // only for single post
-  //jackpotReward/incrementalReward/jackpotTarget/incrementalTarget
-  const finishAndDeposit = () => setParentFinishCampaign(parsedEth, 0, 1, 0);
+  const stakeDeposit = () => setParentCampaignSetupStep(2);
 
   return (
     <div className={classes.CampaignStaking_font}>
-      <h1>EthTO Test Objective</h1>
-      <p className={classes.CampaignStaking_heading}>{getHeading()}</p>
-      <FormHelperText>Enter the amount of money you want to be available for the influencer to earn.</FormHelperText>
-      <p>Amount to deposit for Influencer</p>
+      <h1>Deposit Funds</h1>
+      <FormHelperText>Enter the amount of money you want to be available for the beneficiary to earn.</FormHelperText>
+      <p>Amount to deposit in trust</p>
       <NumberFormat
         className={classes.CampaignStaking_input}
         placeholder="5 eth"
@@ -51,22 +46,12 @@ const CampaignStaking = ({
       <br />
       <br />
       <div className={classes.CampaignStaking_button_alignment}>
-        <Button
-          variant="outlined"
-          color="primary"
-          size="small"
-          onClick={() => setParentCampaignSetupStep(objective === SIMPLE_POST ? 3 : 2)}
-        >
+        <Button variant="outlined" color="primary" size="small" onClick={() => setParentCampaignSetupStep(0)}>
           Previous
         </Button>
         {inputEntered || isBounty ? (
           <Button variant="contained" color="primary" size="small" onClick={stakeDeposit}>
             Next
-          </Button>
-        ) : null}
-        {inputEntered && !isBounty ? (
-          <Button variant="contained" color="primary" size="small" onClick={finishAndDeposit}>
-            Finish
           </Button>
         ) : null}
       </div>

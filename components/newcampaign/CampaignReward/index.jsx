@@ -14,15 +14,12 @@ const CampaignReward = ({
   bountyType,
 }) => {
   const classes = useStyles();
-  const [isJackpot, setIsJackpot] = useState(true);
   const [jackpotTarget, setJackpotTarget] = useState(null);
   const [jackpotReward, setJackpotReward] = useState(null);
   const [incrementalReward, setIncrementalReward] = useState(0);
   const [incrementalTarget, setIncrementalTarget] = useState(0);
 
-  const getHeading = () => (isJackpot ? 'Jackpot' : 'Incremental');
-
-  const handlePrevious = () => (!isJackpot ? setIsJackpot(true) : setParentCampaignSetupStep(4));
+  const handlePrevious = () => setParentCampaignSetupStep(2);
 
   const handleBountyRewardPerInfluencerCalc = () => {
     const rewardWei = stakedAmount / maxWinners;
@@ -38,122 +35,50 @@ const CampaignReward = ({
     return false;
   };
 
-  const maxIncrementalTargetInput = incrementalTargetAmount => {
-    const { floatValue } = incrementalTargetAmount;
-    if (floatValue < jackpotTarget) return true;
-    return false;
-  };
-
   const handleDealRewardPerInfluencerCal = () => (objective != 'post' ? stakedAmount / 2 : stakedAmount);
 
   const handleRewardPlaceholder = () => {
-    if (isBounty) {
-      const bountyReward = handleBountyRewardPerInfluencerCalc();
-      return `${bountyReward?.toString().slice(0, 6)} eth`;
-    } else {
-      const dealReward = handleDealRewardPerInfluencerCal();
-      return `${utils.fromWei(dealReward.toString())} eth`;
-    }
+    const dealReward = handleDealRewardPerInfluencerCal();
+    return `${utils.fromWei(dealReward.toString())} eth`;
   };
 
-  const handleJackpotTarget = jackpotTarget => {
-    setJackpotTarget(jackpotTarget.replace(/,/g, ''));
-    if (bountyType == 'varPot') {
-      const rewardInEth = handleRewardPlaceholder();
-      setJackpotReward(rewardInEth.slice(0, rewardInEth.length - 4));
-    }
-  };
-
-  //calculate incremental reward based on target
-  const handleIncrementalRewardAndTarget = incrementalTargetAmount => {
-    setIncrementalTarget(incrementalTargetAmount);
-    const incrementalRewardAvailable = stakedAmount - utils.toWei(jackpotReward);
-    const possibleIncrementalPayments = jackpotTarget / incrementalTargetAmount;
-    const incrementalRewardDistributed = incrementalRewardAvailable / possibleIncrementalPayments;
-    //parse int to remove decimals
-    setIncrementalReward(parseInt(incrementalRewardDistributed));
-  };
+  const handleJackpotTarget = jackpotTarget => setJackpotTarget(jackpotTarget.replace(/,/g, ''));
 
   const handleFinish = () => {
-    if (isBounty) {
-      setParentFinishCampaign(utils.toWei(jackpotReward), jackpotTarget);
-    } else {
-      !isJackpot
-        ? setParentFinishCampaign(
-            utils.toWei(jackpotReward),
-            incrementalReward.toString(),
-            jackpotTarget,
-            incrementalTarget,
-          )
-        : setIsJackpot(false);
-    }
+    setParentFinishCampaign(utils.toWei(jackpotReward), incrementalReward.toString(), jackpotTarget, incrementalTarget);
   };
 
   return (
     <div className={classes.CampaignReward_font}>
-      <h1>{objective} Objective</h1>
-      <p className={classes.CampaignReward_p_heading}>{getHeading()} Reward</p>
-      {isBounty ? (
-        <FormHelperText>
-          {bountyType === 'varPot' ? 'Minimum' : 'Fixed'} amount which each influencer would earn
-          {bountyType === 'varPot' ? ' if all influencers accomplish bounty' : ' for achieving bounty objective'}
-        </FormHelperText>
-      ) : (
-        <FormHelperText>
-          Enter the conditions for the influencer to earn a reward as well as the reward for completing the objective
-        </FormHelperText>
-      )}
+      <h1>Merit Reward</h1>
+
+      <FormHelperText>
+        Enter the conditions for the beneficiary to earn a merit reward as well as the NFTs required to earn the reward
+      </FormHelperText>
+
       <div className={classes.CampaignReward_align_inputs}>
         <div>
-          {isBounty ? (
-            <p>{bountyType == 'varPot' ? 'Minimum ' : 'Fixed '}Bounty Reward Per Influencer</p>
-          ) : isJackpot ? (
-            <p>Jackpot Reward:</p>
-          ) : (
-            <p>Incremental Reward: </p>
-          )}
-          {isJackpot ? (
-            <NumberFormat
-              className={classes.CampaignReward_input}
-              placeholder={bountyType == 'varPot' ? null : handleRewardPlaceholder()}
-              thousandSeparator={true}
-              value={bountyType == 'varPot' ? handleRewardPlaceholder() : jackpotReward}
-              suffix=" eth"
-              onChange={e => setJackpotReward(e.target.value.slice(0, e.target.value.length - 4))}
-              // isAllowed={bountyType == 'varPot' ? () => false : maxJackpotRewardInput}
-              isAllowed={maxJackpotRewardInput}
-            />
-          ) : (
-            <NumberFormat
-              className={classes.CampaignReward_input}
-              thousandSeparator={true}
-              value={utils.fromWei(incrementalReward.toString())}
-              suffix=" eth"
-              // onChange={e => setIncrementalReward(e.target.value.slice(0, e.target.value.length - 4))}
-              isAllowed={() => false}
-            />
-          )}
+          <p>Merit Reward: </p>
+          <NumberFormat
+            className={classes.CampaignReward_input}
+            placeholder={handleRewardPlaceholder()}
+            thousandSeparator={true}
+            value={jackpotReward}
+            suffix=" eth"
+            onChange={e => setJackpotReward(e.target.value.slice(0, e.target.value.length - 4))}
+            isAllowed={maxJackpotRewardInput}
+          />
           &nbsp;&nbsp;&nbsp;&nbsp;For Each
         </div>
         <div className={classes.CampaignReward_shift_objective_input}>
-          {isJackpot ? <p>{objective} Jackpot Objective:</p> : <p>{objective} Incremental Objective:</p>}
-          {isJackpot ? (
-            <NumberFormat
-              className={classes.CampaignReward_input}
-              placeholder={`90,000 ${objective}`}
-              thousandSeparator={true}
-              value={jackpotTarget}
-              onChange={e => handleJackpotTarget(e.target.value)}
-            />
-          ) : (
-            <NumberFormat
-              className={classes.CampaignReward_input}
-              thousandSeparator={true}
-              value={incrementalTarget}
-              onChange={e => handleIncrementalRewardAndTarget(e.target.value.replace(/,/g, ''))}
-              isAllowed={maxIncrementalTargetInput}
-            />
-          )}
+          <p>Merit Tokens Acquired</p>
+          <NumberFormat
+            className={classes.CampaignReward_input}
+            placeholder="1 Merit Token"
+            thousandSeparator={true}
+            value={jackpotTarget}
+            onChange={e => handleJackpotTarget(e.target.value)}
+          />
         </div>
       </div>
       <br />
@@ -162,7 +87,7 @@ const CampaignReward = ({
           Previous
         </Button>
         <Button variant="contained" color="primary" size="small" onClick={handleFinish}>
-          {isJackpot && !isBounty ? 'Next' : 'Finish'}
+          {'Finish'}
         </Button>
       </div>
     </div>

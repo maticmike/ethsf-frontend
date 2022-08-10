@@ -10,18 +10,9 @@ import store from '../redux/store';
  */
 export const generateNewSignedJwt = async (ethAddress, signer) => {
   try {
-    //Get Challenge
-    // const challenge = await generateChallengeDb(ethAddress);
-
     //Triggers meta mask popup
     // const signature = await signer.signMessage(challenge);
-    await signer.signMessage(challenge);
-
-    //generateJWT on db
-    // const jwt = await generateJwtDb(ethAddress, challenge, signature);
-
-    //Set jwt in local storage
-    // jwt ? setJwtLocalStorage(jwt?.data?.token) : clearUserAuthAll();
+    await signer.signMessage('loging in');
   } catch (error) {
     consola.error('web3/generateNewSignedJWT():', error);
     clearUserAuthAll();

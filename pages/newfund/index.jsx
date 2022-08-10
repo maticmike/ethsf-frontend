@@ -9,16 +9,9 @@ import { onlyNumeric } from '../../utils/helpers';
 
 import { useStyles } from './styles';
 
-const FindInfluencer = dynamic(() => import('../../components/newcampaign/Deal/FindInfluencer'), {
-  loading: () => <p>Find Influencer Loading....</p>,
-});
-const CampaignObjective = dynamic(() => import('../../components/newcampaign/CampaignObjective'), {
-  loading: () => <p>Select Campaign Objective Loading....</p>,
-});
 const CampaignCalendar = dynamic(() => import('../../components/newcampaign/CampaignCalendar'), {
   loading: () => <p>Set Campaign Dates Loading....</p>,
 });
-
 const CampaignStaking = dynamic(() => import('../../components/newcampaign/CampaignStaking'), {
   loading: () => <p>Campaign Staking Loading...</p>,
 });
@@ -26,7 +19,7 @@ const CampaignReward = dynamic(() => import('../../components/newcampaign/Campai
   loading: () => <p>Campaign Payment Loading...</p>,
 });
 
-const NewDeal = () => {
+const NewFund = () => {
   const classes = useStyles();
 
   const account = useSelector(state => state.account);
@@ -56,32 +49,17 @@ const NewDeal = () => {
       //search for influencer from api or db
       setInfluencer(influencer);
     } catch (error) {
-      consola.error('NewDeal.findInfluencer():', error);
+      consola.error('NewFund.findInfluencer():', error);
     }
   };
 
-  const createNewDealProposal = async (jackpotReward, incrementalReward, jackpotTarget, incrementalTarget) => {
+  const createNewFundProposal = async (jackpotReward, incrementalReward, jackpotTarget, incrementalTarget) => {
     jackpotRewardAmount = stakedAmount;
 
     try {
-      // const campaignDb = await createNewDealProposalDb(
-      //   account.address, //business
-      //   influencer.toLowerCase(),
-      //   campaignDuration[0] ? campaignDuration[0] : simplePostDateStart, //agreedStartDate
-      //   campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd, //agreedDeadline/postDate
-      //   simplePostMinimumDuration,
-      //   jackpotRewardAmount,
-      //   incrementalReward,
-      //   jackpotTarget,
-      //   incrementalTarget,
-      //   stakedAmount, //potentialPayout
-      //   objective,
-      //   // 'niche',
-      // );
-
-      router.push(`/reviewdeal/${campaignDb.data.payload.data._id}`);
+      router.push(`/reviewfund/${campaignDb.data.payload.data._id}`);
     } catch (error) {
-      consola.error('NewDeal.createNewDealProposal():', error);
+      consola.error('NewFund.createNewFundProposal():', error);
     }
   };
 
@@ -89,26 +67,7 @@ const NewDeal = () => {
     switch (registrationStep) {
       case 0:
         return (
-          <Paper className={classes.NewDeal_layout_find} elevation={3}>
-            <FindInfluencer
-              foundInfluencer={influencer}
-              parentFindInfluencer={findInfluencer}
-              setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
-            />
-          </Paper>
-        );
-      case 1:
-        return (
-          <Paper className={classes.NewDeal_layout_objective} elevation={3}>
-            <CampaignObjective
-              setParentObjective={objective => setObjective(objective)}
-              setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
-            />
-          </Paper>
-        );
-      case 2:
-        return (
-          <Paper className={classes.NewDeal_layout_dates} elevation={3}>
+          <Paper className={classes.NewFund_layout_dates} elevation={3}>
             <CampaignCalendar
               objective={objective}
               setParentSimplePostDateStart={simplePostDateStart => setSimplePostDateStart(simplePostDateStart)} //one date for simple post
@@ -118,41 +77,30 @@ const NewDeal = () => {
             />
           </Paper>
         );
-      //Duration of post on page only for simple posts
-      // case 3:
-      //   return (
-      //     <Paper className={classes.NewDeal_layout_duration} elevation={3}>
-      //       <SimplePostDuration
-      //         objective={objective}
-      //         setParentSimplePostMinimumDuration={duration => setSimplePostMinimumDuration(duration)}
-      //         setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
-      //       />
-      //     </Paper>
-      //   );
-      case 4:
+      case 1:
         return (
-          <Paper className={classes.NewDeal_layout_staking} elevation={3}>
+          <Paper className={classes.NewFund_layout_staking} elevation={3}>
             <CampaignStaking
               objective={objective}
               setParentDepositToEscrow={deposit => setStakedAmount(onlyNumeric(deposit))}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
               setParentFinishCampaign={(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget) =>
-                createNewDealProposal(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget)
+                createNewFundProposal(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget)
               }
               isBounty={false}
             />
           </Paper>
         );
-      case 5:
+      case 2:
         return (
-          <Paper className={classes.NewDeal_layout_staking} elevation={3}>
+          <Paper className={classes.NewFund_layout_staking} elevation={3}>
             <CampaignReward
               objective={objective}
               maxWinners={1}
               stakedAmount={stakedAmount}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
               setParentFinishCampaign={(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget) =>
-                createNewDealProposal(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget)
+                createNewFundProposal(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget)
               }
               isBounty={false}
               bountyType={null}
@@ -161,7 +109,7 @@ const NewDeal = () => {
         );
     }
   };
-  return <div className={classes.NewDeal_box_positioning}>{renderSingleRegistrationComponent()}</div>;
+  return <div className={classes.NewFund_box_positioning}>{renderSingleRegistrationComponent()}</div>;
 };
 
-export default NewDeal;
+export default NewFund;

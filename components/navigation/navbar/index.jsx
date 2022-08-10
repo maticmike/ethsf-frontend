@@ -42,18 +42,13 @@ const Navbar = () => {
           <a href="/">
             <Image className={classes.navbarLogo} src="/Logo.png" alt="OpenNFT Logo" width="160" height="80" />
           </a>
-          <Link href="/newdeal" className={classes.navbarDesktopMenuButton}>
+          <Link href="/newfund" className={classes.navbarDesktopMenuButton}>
             <Button>
-              <strong className={classes.navbarDesktopMenuButton}>New Deal</strong>
-            </Button>
-          </Link>
-          <Link href="/newbounty" className={classes.navbarDesktopMenuButton}>
-            <Button>
-              <strong className={classes.navbarDesktopMenuButton}>New Bounty</strong>
+              <strong className={classes.navbarDesktopMenuButton}>Create New Fund</strong>
             </Button>
           </Link>
           {username == null || account?.isLoggedIn === false ? null : (
-            <Link className={classes.navbarDesktopMenuButton} href="/profile/[id]" as={`/profile/${username}`}>
+            <Link className={classes.navbarDesktopMenuButton} href="/profile/[id]" as={`/profile/${account.address}`}>
               <Button>
                 <strong className={classes.navbarDesktopMenuButton}>My Profile</strong>
               </Button>

@@ -15,7 +15,7 @@ const CampaignCalendar = ({
   const [simplePostDate, setSimplePostDate] = useState(null);
   const [campaignDuration, setCampaignDuration] = useState(null);
 
-  const getHeading = () => 'Post Date And Time';
+  const getHeading = () => 'Select Vesting Date';
   const handlePostDate = postDate => setSimplePostDate(postDate);
 
   const selectPostDate = () => {
@@ -37,30 +37,25 @@ const CampaignCalendar = ({
     setParentSimplePostDateStart(startOfDaySimplePost);
     setParentSimplePostDateEnd(endOfDaySimplePost);
     setParentCampaignDuration([startCampaignDate, parseInt(endCampaignDate)]);
-    setParentCampaignSetupStep(3);
+    setParentCampaignSetupStep(1);
   };
   return (
     <div className={classes.CampaignDates_layout}>
       <Grid container direction="row">
         <Grid item xs={6}>
-          <h2 className={classes.CampaignDates_custom_font}> Objective</h2>
+          <h2 className={classes.CampaignDates_custom_font}> New Fund</h2>
           <p className={classes.CampaignDates_heading_font_size}>{getHeading()}</p>
           <p className={classes.CampaignDates_helper_font}>
-            Select the range of dates which you want the campaign to last for
+            Select the final date which all the funds will be available.
           </p>
         </Grid>
         <Grid item xs={6} className={classes.CampaignDates_calendar_right}>
-          <Calendar
-            onChange={handlePostDate}
-            minDate={new Date()}
-            selectRange={objective != SIMPLE_POST ? true : false}
-            value={objective === SIMPLE_POST ? simplePostDate : campaignDuration}
-          />
+          <Calendar onChange={handlePostDate} minDate={new Date()} selectRange={false} value={simplePostDate} />
         </Grid>
       </Grid>
       <br />
       <div className={classes.CampaignDates_align_buttons}>
-        <Button onClick={() => setParentCampaignSetupStep(1)} variant="outlined" color="primary" size="small">
+        <Button onClick={() => setParentCampaignSetupStep(0)} variant="outlined" color="primary" size="small">
           Previous
         </Button>
         {simplePostDate || campaignDuration ? (

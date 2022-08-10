@@ -33,7 +33,7 @@ export const connectAccountThunk = () => {
     if (typeof window.ethereum !== 'undefined') {
       try {
         const res = await signInWalletWeb3();
-        // await generateNewSignedJwt(res?.account, res?.signer);
+        await generateNewSignedJwt(res?.account, res?.signer);
         dispatch(connectAccount(res));
         // const isTokenValid = await validateJwtFromDb(res?.account);
         // if (isTokenValid) dispatch(loginAccount());

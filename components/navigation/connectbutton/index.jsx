@@ -8,7 +8,6 @@ import { shortenedEthAddress } from '../../../web3/helpers';
 import { clearUserAuthAll } from '../../../web3/auth';
 
 const ConnectButton = ({ handleSignupOpen }) => {
-  const [isRegistered, setIsRegistered] = useState(false);
   const [profileInDb, setProfileInDb] = useState(null);
   const account = useSelector(state => state.account);
   const dispatch = useDispatch();
@@ -50,13 +49,6 @@ const ConnectButton = ({ handleSignupOpen }) => {
         </Button>
       );
     }
-    if (account?.address && !isRegistered)
-      return (
-        <Button variant="contained" onClick={handleRegister}>
-          Signup
-        </Button>
-      );
-
     if (account?.address && account?.isLoggedIn) {
       return (
         <Button variant="contained" onClick={handleLogout}>

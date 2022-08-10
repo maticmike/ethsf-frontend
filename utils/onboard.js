@@ -31,7 +31,7 @@ export const onBoardInitialize = () => {
         //user is valid profile
         // if (profile != undefined) {
         //switching a user
-        if (ethAddressInDb != ethAddressInRedux?.account?.address && ethAddressInRedux?.account?.address != null) {
+        if (ethAddressInRedux?.account?.address != null) {
           //get provider
           const provider = await getWalletProvider();
 
