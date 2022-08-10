@@ -11,7 +11,6 @@ import store from '../redux/store';
 export const generateNewSignedJwt = async (ethAddress, signer) => {
   try {
     //Triggers meta mask popup
-    // const signature = await signer.signMessage(challenge);
     await signer.signMessage('loging in');
   } catch (error) {
     consola.error('web3/generateNewSignedJWT():', error);

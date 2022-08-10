@@ -138,8 +138,12 @@ export const signInWalletWeb3 = async previousWallet => {
   }
 };
 
-export const getWalletProvider = async () => {
-  return provider;
+export const getWalletProvider = () => {
+  if (provider == null) {
+    return null;
+  } else {
+    return provider;
+  }
 };
 
 export const clearWalletOnboard = async () => {

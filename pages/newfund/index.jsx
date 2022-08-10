@@ -99,9 +99,7 @@ const NewFund = () => {
               maxWinners={1}
               stakedAmount={stakedAmount}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
-              setParentFinishCampaign={(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget) =>
-                createNewFundProposal(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget)
-              }
+              setParentFinishCampaign={(meritReward, meritTarget) => createNewFundProposal(meritReward, meritTarget)}
               isBounty={false}
               bountyType={null}
             ></CampaignReward>

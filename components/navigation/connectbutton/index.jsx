@@ -37,8 +37,6 @@ const ConnectButton = ({ handleSignupOpen }) => {
   //Connect to Web3
   const handleConnectivityWeb3 = () => dispatch(connectAccountThunk());
 
-  const handleRegister = () => handleSignupOpen();
-
   const handleLogout = () => clearUserAuthAll();
 
   const renderCorrectButton = () => {

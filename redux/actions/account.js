@@ -35,6 +35,7 @@ export const connectAccountThunk = () => {
         const res = await signInWalletWeb3();
         await generateNewSignedJwt(res?.account, res?.signer);
         dispatch(connectAccount(res));
+        dispatch(loginAccount());
         // const isTokenValid = await validateJwtFromDb(res?.account);
         // if (isTokenValid) dispatch(loginAccount());
       } catch (error) {
@@ -50,9 +51,8 @@ export const loginAccountOnSwitchThunk = (account, balance, signer) => {
       try {
         const res = { account, balance, signer };
         await generateNewSignedJwt(res?.account, res?.signer);
-        const isTokenValid = await validateJwtFromDb(res?.account);
-        await dispatch(connectAccount(res));
-        if (isTokenValid) await dispatch(loginAccount());
+        dispatch(connectAccount(res));
+        dispatch(loginAccount());
       } catch (error) {
         consola.error('loginAccountOnSwitchThunk Error: ', error);
       }

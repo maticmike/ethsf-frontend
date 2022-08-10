@@ -29,9 +29,11 @@ export const onBoardInitialize = () => {
         // const ethAddressInDb = profile?.data?.payload?.userEthAddress;
 
         //user is valid profile
-        // if (profile != undefined) {
         //switching a user
+        console.log(ethAddress, 'the eth address');
         if (ethAddressInRedux?.account?.address != null) {
+          // if (ethAddressInRedux?.account?.address != null) {
+
           //get provider
           const provider = await getWalletProvider();
 
@@ -45,12 +47,6 @@ export const onBoardInitialize = () => {
           //login account
           store.dispatch(loginAccountOnSwitchThunk(ethAddress, balance, signer));
         }
-        //profile not even found in db
-        // } else if (!profile) {
-        //   clearUserAuthAll();
-        // } else {
-        //   console.log('user has no eth address');
-        // }
       },
     },
     walletSelect: {

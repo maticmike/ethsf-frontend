@@ -29,14 +29,14 @@ const Navbar = () => {
   const account = useSelector(state => state.account);
 
   const [isSignupOpen, setIsOpenSignup] = useState(false);
-  const [username, setUsername] = useState(null);
 
   const handleSignupOpen = () => setIsOpenSignup(true);
   const handleSignupClose = () => setIsOpenSignup(false);
 
+  console.log(account, 'the account');
+
   return (
     <>
-      {/* {width > MIN_DESKTOP_PX ? ( */}
       <AppBar position="sticky">
         <Toolbar>
           <a href="/">
@@ -47,7 +47,7 @@ const Navbar = () => {
               <strong className={classes.navbarDesktopMenuButton}>Create New Fund</strong>
             </Button>
           </Link>
-          {username == null || account?.isLoggedIn === false ? null : (
+          {account?.isLoggedIn === false ? null : (
             <Link className={classes.navbarDesktopMenuButton} href="/profile/[id]" as={`/profile/${account.address}`}>
               <Button>
                 <strong className={classes.navbarDesktopMenuButton}>My Profile</strong>

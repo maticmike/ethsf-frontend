@@ -14,38 +14,15 @@ const CampaignReward = ({
   bountyType,
 }) => {
   const classes = useStyles();
-  const [jackpotTarget, setJackpotTarget] = useState(null);
-  const [jackpotReward, setJackpotReward] = useState(null);
-  const [incrementalReward, setIncrementalReward] = useState(0);
-  const [incrementalTarget, setIncrementalTarget] = useState(0);
+  const [meritTarget, setmeritTarget] = useState(null);
+  const [meritReward, setmeritReward] = useState(null);
 
   const handlePrevious = () => setParentCampaignSetupStep(2);
 
-  const handleBountyRewardPerInfluencerCalc = () => {
-    const rewardWei = stakedAmount / maxWinners;
-    const weiRewardRounded = Math.round(rewardWei);
-    return utils.fromWei(weiRewardRounded.toString()); ///TODO breaks on bounties with lots of winners
-  };
-
-  const maxJackpotRewardInput = reward => {
-    const { floatValue } = reward;
-    const maxRewardPerInfluencer = handleBountyRewardPerInfluencerCalc();
-    if (floatValue <= maxRewardPerInfluencer) return true;
-    if (isBounty == 'varPot') return false;
-    return false;
-  };
-
-  const handleDealRewardPerInfluencerCal = () => (objective != 'post' ? stakedAmount / 2 : stakedAmount);
-
-  const handleRewardPlaceholder = () => {
-    const dealReward = handleDealRewardPerInfluencerCal();
-    return `${utils.fromWei(dealReward.toString())} eth`;
-  };
-
-  const handleJackpotTarget = jackpotTarget => setJackpotTarget(jackpotTarget.replace(/,/g, ''));
+  const handlemeritTarget = meritTarget => setmeritTarget(meritTarget.replace(/,/g, ''));
 
   const handleFinish = () => {
-    setParentFinishCampaign(utils.toWei(jackpotReward), incrementalReward.toString(), jackpotTarget, incrementalTarget);
+    setParentFinishCampaign(utils.toWei(meritReward), meritTarget);
   };
 
   return (
@@ -61,12 +38,11 @@ const CampaignReward = ({
           <p>Merit Reward: </p>
           <NumberFormat
             className={classes.CampaignReward_input}
-            placeholder={handleRewardPlaceholder()}
+            placeholder={'0.1 eth'}
             thousandSeparator={true}
-            value={jackpotReward}
+            value={meritReward}
             suffix=" eth"
-            onChange={e => setJackpotReward(e.target.value.slice(0, e.target.value.length - 4))}
-            isAllowed={maxJackpotRewardInput}
+            onChange={e => setmeritReward(e.target.value.slice(0, e.target.value.length - 4))}
           />
           &nbsp;&nbsp;&nbsp;&nbsp;For Each
         </div>
@@ -76,8 +52,8 @@ const CampaignReward = ({
             className={classes.CampaignReward_input}
             placeholder="1 Merit Token"
             thousandSeparator={true}
-            value={jackpotTarget}
-            onChange={e => handleJackpotTarget(e.target.value)}
+            value={meritTarget}
+            onChange={e => handlemeritTarget(e.target.value)}
           />
         </div>
       </div>
