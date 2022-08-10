@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { utils } from 'web3';
 import consola from 'consola';
 import { useStyles } from './styles';
-const BusinessReviewHeader = ({ potentialPayout, username, website, ethAddress }) => {
+const GrantorReviewHeader = ({ potentialPayout, ethAddress }) => {
   const classes = useStyles();
 
   const payoutInEth = () => {
@@ -25,8 +25,8 @@ const BusinessReviewHeader = ({ potentialPayout, username, website, ethAddress }
         />
       </div>
       <div>
-        <Link href="/profile/[id]" as={`/profile/${username}`}>
-          <h1 className={classes.BusinessReview_margin_bottom_h1}>{username}</h1>
+        <Link href="/profile/[id]" as={`/profile/${ethAddress}`}>
+          <h1 className={classes.BusinessReview_margin_bottom_h1}>{ethAddress}</h1>
         </Link>
         <h2>{payoutInEth()} eth</h2>
         <strong>To Be Paid</strong>
@@ -40,4 +40,4 @@ const BusinessReviewHeader = ({ potentialPayout, username, website, ethAddress }
   );
 };
 
-export default BusinessReviewHeader;
+export default GrantorReviewHeader;

@@ -2,7 +2,7 @@ import { ethers } from 'ethers';
 import axios from 'axios';
 import consola from 'consola';
 import { onBoardInitialize } from '../utils/onboard';
-// import FamepayFactoryAbi from '../contracts/FamepayFactory.json';
+// import soulfundFactoryAbi from '../contracts/soulfundFactory.json';
 // import FamepayAbi from '../contracts/Famepay.json';
 // import FamepayBounty from '../contracts/FamepayBounty.json';
 import { CONTRACT_RESPONSE_STATUS, NETWORK_ID } from '../constants/Blockchain';
@@ -93,7 +93,7 @@ export const bootstrapFactory = async () => {
       if (network.chainId != NETWORK_ID) {
         return false;
       } else {
-        const soulFundFactory = getContractAddress(FamepayFactoryAbi, network.chainId);
+        const soulFundFactory = getContractAddress(soulfundFactoryAbi, network.chainId);
         const soulFund = new ethers.Contract(soulFundFactory, SoulFundFactory.abi, signer);
         return { soulFund };
       }
@@ -157,65 +157,31 @@ export const clearWalletOnboard = async () => {
 
 /**
  ********************************
- * Famepay Factory Functions
+ * SoulFund Factory Functions
  ********************************
  */
 
 /**
- * @param {contract} famepayFactory
- * @param {address} business participating business
- * @param {address} influencer participating influencer
- * @param {uint256} startDate beginning of campaign
- * @param {uint256} deadline end date of campaign
- * @param {uint256} simplePostDuration duration of post (24 hrs) only for simple post
- * @param {uint256} jackpotReward  payment for jackpot target
- * @param {uint256} incrementalReward  payment per incremental target
- * @param {uint256} jackpotTarget target amount for jackpot objective
- * @param {uint256} incrementalTarget  target amount for incremental objective
- * @param {uint256} potentialPayout total staked in contradct
- * @param {string} objective objective of the campaign
+ * @param {contract} soulfundFactory
+ * @param {address} beneficiary
+ * @param {uint256} vestingDate
  * @returns {object} campaign object
  */
-export const createNewCampaignOnContract = async (
-  famepayFactory,
-  influencer,
-  business,
-  startDate,
-  deadline,
-  simplePostDuration,
-  jackpotReward,
-  incrementalReward,
-  jackpotTarget,
-  incrementalTarget,
-  potentialPayout,
-  objective,
-) => {
+export const createNewFundOnContract = async (soulfundFactory, beneficiary, vestingDate, vestedFunds) => {
   try {
-    // const objectiveBytes = ethers.utils.hexlify(setObjectiveName(objective));' //<--- Preferable to web3
-    // const objectiveBytes = web3.utils.toHex(setObjectiveName(objective));
-    const campaign = await famepayFactory.newFamepayCampaign(
-      influencer,
-      business,
-      startDate,
-      deadline,
-      simplePostDuration,
-      jackpotReward,
-      incrementalReward,
-      jackpotTarget,
-      incrementalTarget,
-      potentialPayout,
-      // objectiveBytes,
-      { value: potentialPayout, gasLimit: 3000000 },
-    );
-    return campaign;
+    const fund = await soulfundFactory.deployNewSoulFund(beneficiary, vestingDate, {
+      value: vestedFunds,
+      gasLimit: 3000000,
+    });
+    return fund;
   } catch (error) {
-    consola.error('Web3: createNewCampaignOnContract():', error);
+    consola.error('Web3: createNewFundOnContract():', error);
   }
 };
 
 /**
  ********************************
- * Famepay Functions
+ * Soulfund Functions
  ********************************
  */
 
@@ -234,3 +200,5 @@ export const setPaymentTargetReachedWeb3 = async (campaignAddress, postStat, pos
     consola.error('Web3: setPaymentTargetReachedWeb3():', error);
   }
 };
+
+export const payBeneficiary = async () => {};

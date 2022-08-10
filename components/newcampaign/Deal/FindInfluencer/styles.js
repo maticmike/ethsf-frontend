@@ -18,6 +18,7 @@ const useStyles = makeStyles({
 
   FindInfluencer_font: {
     fontFamily: 'Arial, Helvetica, sans-serif',
+    marginTop: '25px',
   },
 });
 

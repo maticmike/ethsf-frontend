@@ -9,6 +9,9 @@ import { onlyNumeric } from '../../utils/helpers';
 
 import { useStyles } from './styles';
 
+const RegisterBeneficiary = dynamic(() => import('../../components/newcampaign/Deal/FindInfluencer'), {
+  loading: () => <p>Find Influencer Loading....</p>,
+});
 const CampaignCalendar = dynamic(() => import('../../components/newcampaign/CampaignCalendar'), {
   loading: () => <p>Set Campaign Dates Loading....</p>,
 });
@@ -39,6 +42,10 @@ const NewFund = () => {
   const [simplePostMinimumDuration, setSimplePostMinimumDuration] = useState(0); //duration to keep post up (7hr post)
   const [campaignDuration, setCampaignDuration] = useState([]); //sept 1 - oct 1
 
+  const [beneficiary, setBeneficiary] = useState(null);
+  const [vestingDate, setVestingDate] = useState(null);
+  const [vestedFunds, setVestedFunds] = useState(null);
+
   //Campaign $$$$
   const [stakedAmount, setStakedAmount] = useState(0);
 
@@ -54,8 +61,8 @@ const NewFund = () => {
   };
 
   const createNewFundProposal = async (jackpotReward, incrementalReward, jackpotTarget, incrementalTarget) => {
+    // soulfundFactory, beneficiary, vestingDate, vestedFunds;
     jackpotRewardAmount = stakedAmount;
-
     try {
       router.push(`/reviewfund/${campaignDb.data.payload.data._id}`);
     } catch (error) {
@@ -68,6 +75,16 @@ const NewFund = () => {
       case 0:
         return (
           <Paper className={classes.NewFund_layout_dates} elevation={3}>
+            <RegisterBeneficiary
+              foundInfluencer={influencer}
+              parentFindInfluencer={findInfluencer}
+              setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
+            />
+          </Paper>
+        );
+      case 1:
+        return (
+          <Paper className={classes.NewFund_layout_dates} elevation={3}>
             <CampaignCalendar
               objective={objective}
               setParentSimplePostDateStart={simplePostDateStart => setSimplePostDateStart(simplePostDateStart)} //one date for simple post
@@ -77,21 +94,18 @@ const NewFund = () => {
             />
           </Paper>
         );
-      case 1:
+      case 2:
         return (
           <Paper className={classes.NewFund_layout_staking} elevation={3}>
             <CampaignStaking
               objective={objective}
               setParentDepositToEscrow={deposit => setStakedAmount(onlyNumeric(deposit))}
               setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
-              setParentFinishCampaign={(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget) =>
-                createNewFundProposal(jackpotReward, incrementalReward, jackpotTarget, incrementalTarget)
-              }
               isBounty={false}
             />
           </Paper>
         );
-      case 2:
+      case 3:
         return (
           <Paper className={classes.NewFund_layout_staking} elevation={3}>
             <CampaignReward

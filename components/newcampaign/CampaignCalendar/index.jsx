@@ -37,7 +37,7 @@ const CampaignCalendar = ({
     setParentSimplePostDateStart(startOfDaySimplePost);
     setParentSimplePostDateEnd(endOfDaySimplePost);
     setParentCampaignDuration([startCampaignDate, parseInt(endCampaignDate)]);
-    setParentCampaignSetupStep(1);
+    setParentCampaignSetupStep(2);
   };
   return (
     <div className={classes.CampaignDates_layout}>

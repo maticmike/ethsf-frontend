@@ -5,14 +5,14 @@ import { utils } from 'web3';
 import { Snackbar } from '@material-ui/core';
 import { shortenedEthAddress } from '../../../web3/helpers';
 import { useStyles } from './styles';
-const InfluencerReviewHeader = ({ username, email, campaignsCompleted, ethAddress }) => {
+const BeneficiaryReviewHeader = ({ ethAddress, email, campaignsCompleted }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.InfluencerReview_component_outline}>
       <div>
-        <Link href="/profile/[id]" as={`/profile/${username}`}>
-          <h1 className={classes.InfluencerReview_margin_bottom_h1}>{username}</h1>
+        <Link href="/profile/[id]" as={`/profile/${ethAddress}`}>
+          <h1 className={classes.InfluencerReview_margin_bottom_h1}>{ethAddress}</h1>
         </Link>
 
         <a href="https://google.com" target="_blank">
@@ -44,4 +44,4 @@ const InfluencerReviewHeader = ({ username, email, campaignsCompleted, ethAddres
   );
 };
 
-export default InfluencerReviewHeader;
+export default BeneficiaryReviewHeader;

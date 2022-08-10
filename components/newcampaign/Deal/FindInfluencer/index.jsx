@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useStyles } from './styles';
 import consola from 'consola';
 import { shortenedEthAddress } from '../../../../web3/helpers';
-const FindInfluencer = ({ parentFindInfluencer, foundInfluencer, setParentCampaignSetupStep }) => {
+const RegisterBeneficiary = ({ parentFindInfluencer, foundInfluencer, setParentCampaignSetupStep }) => {
   const classes = useStyles();
 
   const [influencerWasFound, setInfluencerWasFound] = useState(false);
@@ -43,7 +43,7 @@ const FindInfluencer = ({ parentFindInfluencer, foundInfluencer, setParentCampai
           <OutlinedInput
             id="time"
             type="text"
-            placeholder="Find Influencer"
+            placeholder="Enter Beneficiary Address"
             onChange={e => setSearchedInfluencer(e.target.value)}
             className={classes.FindInfluencer_search}
           />
@@ -56,21 +56,6 @@ const FindInfluencer = ({ parentFindInfluencer, foundInfluencer, setParentCampai
               <Grid item sm={6} align="center">
                 <Image src="/Ethereum.png" alt={`${foundInfluencer} Eth Address`} width="32" height="32" />
                 <strong>{shortenedEthAddress(searchedInfluencer)}&nbsp;</strong>
-                <CheckCircle color="primary" />
-              </Grid>
-              <Grid item sm={6} align="center">
-                <Image src="/Instagram.png" alt={`${foundInfluencer} Instagram Profile`} width="32" height="32" />
-                <strong>@instagramProfile&nbsp;</strong>
-                <CheckCircle color="primary" />
-              </Grid>
-              <Grid item sm={6} align="center">
-                <Image src="/Twitter.png" alt={`${foundInfluencer} Youtube Profile`} width="32" height="32" />
-                <strong>@twitterProfile&nbsp;</strong>
-                <CheckCircle color="primary" />
-              </Grid>
-              <Grid item sm={6} align="center">
-                <Image src="/Youtube.png" alt={`${foundInfluencer} Youtube Profile`} width="32" height="32" />
-                <strong>@youtubeProfile&nbsp;</strong>
                 <CheckCircle color="primary" />
               </Grid>
               <Grid item sm={12}>
@@ -101,4 +86,4 @@ const FindInfluencer = ({ parentFindInfluencer, foundInfluencer, setParentCampai
   );
 };
 
-export default FindInfluencer;
+export default RegisterBeneficiary;

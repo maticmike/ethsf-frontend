@@ -5,18 +5,10 @@ import { FormHelperText, Button } from '@material-ui/core';
 
 import { useStyles } from './styles.js';
 
-const CampaignStaking = ({
-  objective,
-  setParentDepositToEscrow,
-  setParentCampaignSetupStep,
-  setParentFinishCampaign,
-  isBounty,
-}) => {
+const CampaignStaking = ({ objective, setParentDepositToEscrow, setParentCampaignSetupStep, isBounty }) => {
   const classes = useStyles();
 
   const [inputEntered, setInputEntered] = useState(null);
-
-  const getHeading = () => 'Post Staking';
 
   let parsedEth;
 
@@ -29,7 +21,7 @@ const CampaignStaking = ({
     setParentDepositToEscrow(parsedEth);
   };
 
-  const stakeDeposit = () => setParentCampaignSetupStep(2);
+  const stakeDeposit = () => setParentCampaignSetupStep(3);
 
   return (
     <div className={classes.CampaignStaking_font}>

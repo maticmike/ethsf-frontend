@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import { setPaymentTargetReachedWeb3 } from '../../../web3';
 
-const SubmitPost = ({ campaign, invalidPost, objective }) => {
+const SubmitPost = ({ campaign, objective }) => {
   const [postUrl, setPostUrl] = useState(null);
 
   const submitPost = async () => {
@@ -18,7 +18,6 @@ const SubmitPost = ({ campaign, invalidPost, objective }) => {
         label="Post URL"
         onChange={e => setPostUrl(e.target.value)}
         variant="outlined"
-        error={invalidPost}
       />
       <br />
       <br />
