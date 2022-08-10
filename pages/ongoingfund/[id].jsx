@@ -12,12 +12,10 @@ import dynamic from 'next/dynamic';
 import consola from 'consola';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { getCampaignFromContract, setPaymentTargetReachedWeb3, payInfluencerWeb3, endCampaignWeb3 } from '../../web3';
-import { parseTwitterPostData } from '../../utils/objectiveData/twitter';
+import { getCampaignFromContract, setPaymentTargetReachedWeb3, payBeneficiaryWeb3, endCampaignWeb3 } from '../../web3';
 import { storeFamepayFactoryThunk } from '../../redux/actions/famepayFactory';
 import { dealQuery } from '../../apollo/deal.gql';
 import { APOLLO_POLL_INTERVAL_MS } from '../../constants/Blockchain';
-import { getUserFromEthAddressDb } from '../../services/api/userService';
 import { getDateFormat } from '../../utils/helpers';
 import { useStyles } from './styles';
 
@@ -46,8 +44,8 @@ const OngoingCampaign = () => {
   const { id } = router.query;
 
   const [invalidPost, setInvalidPost] = useState(false);
-  const [business, setBusiness] = useState('');
-  const [influencer, setInfluencer] = useState('');
+  const [grantor, setGrantor] = useState('');
+  const [beneficiary, setBeneficiary] = useState('');
   const [loggedInUser, setLoggedInUser] = useState(null);
 
   let campaign;
@@ -60,13 +58,8 @@ const OngoingCampaign = () => {
   useEffect(() => {
     async function getUserEthAddress() {
       try {
-        const businessUser = await getUserFromEthAddressDb(campaign?.business?.id);
-        const influencerUser = await getUserFromEthAddressDb(campaign?.influencer?.id);
-        setBusiness(businessUser?.data?.payload);
-        setInfluencer(influencerUser?.data?.payload);
-        account?.address == businessUser?.data?.payload?.userEthAddress
-          ? setLoggedInUser(businessUser?.data?.payload?.userEthAddress)
-          : setLoggedInUser(influencerUser?.data?.payload?.userEthAddress);
+        setBeneficiary(campaign?.business?.id);
+        setGrantor(campaign?.business?.id);
       } catch (error) {
         consola.error(error, 'OngoingCampaign.getUserEthAddress: error');
       }
@@ -83,8 +76,8 @@ const OngoingCampaign = () => {
   campaign = data?.campaigns[0];
 
   /** Web 3 **/
-  const payInfluencer = () => {
-    payInfluencerWeb3(
+  const payBeneficiary = () => {
+    payInfluencer(
       campaign?.campaignAddress,
       campaign?.businessConfirmedPayment,
       campaign?.influencerConfirmedPayment,
@@ -106,7 +99,7 @@ const OngoingCampaign = () => {
     if (isObjectiveComplete()) {
       return (
         <ClaimPrize
-          payInfluencer={payInfluencer}
+          payBeneficiary={payBeneficiary}
           outstandingIncrementals={campaign?.outstandingPayments}
           incrementalAmount={campaign?.incrementalRewardAmount}
           outstandingJackpot={campaign?.jackpotObjectiveReached ? 1 : 0}
@@ -159,10 +152,8 @@ const OngoingCampaign = () => {
         <div className={classes.ReviewCampaign_business_header}>
           <BusinessReviewHeader
             potentialPayout={campaign?.depositedBalance}
-            objective={campaign?.objective}
-            username={business?.username}
-            website={business?.website}
-            ethAddress={business?.userEthAddress}
+            username={beneficiary}
+            ethAddress={beneficiary}
           />
         </div>
         <div className={classes.ReviewCampaign_vertical_line}></div>

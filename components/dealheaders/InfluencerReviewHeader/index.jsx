@@ -28,13 +28,13 @@ const InfluencerReviewHeader = ({ username, email, campaignsCompleted, ethAddres
           <strong>700K Followers</strong>
         </p>
         <p>
-          <i>Campaigns Completed: {campaignsCompleted}</i>
+          <i>Merit Tokens Completed: {campaignsCompleted}</i>
         </p>
       </div>
       <div>
         <Image
           className={classes.InfluencerReview_round_header}
-          src="/TestInfluencer.jpeg"
+          src="/avatar.png"
           alt="Change Me"
           width="125"
           height="125"

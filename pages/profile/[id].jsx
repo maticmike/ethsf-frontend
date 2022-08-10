@@ -45,7 +45,7 @@ const Profile = () => {
     return () => (mountedRef.current = false);
   }, [router.isReady]);
 
-  //DEAL QUERIES
+  //FUND QUERIES
 
   const {
     error: errorInfluencer,
@@ -54,8 +54,6 @@ const Profile = () => {
   } = useQuery(GET_ALL_CAMPAIGNS_FOR_INFLUENCER_QUERY, {
     variables: { id: user?.userEthAddress },
   });
-  // if (errorInfluencer) refetchInfluencer();
-  // if (errorInfluencer) console.log('error2!!!');
 
   const {
     error: errorBusiness,
