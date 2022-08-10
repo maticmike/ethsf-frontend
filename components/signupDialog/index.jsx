@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Dialog, TextField, Button, InputLabel, Select, FormControl } from '@material-ui/core';
-import { registerNewUserDb } from '../../services/api/userService';
 import { useStyles } from './styles';
 const SignupDialog = ({ isSignupOpen, handleSignupClose }) => {
   const classes = useStyles();
@@ -21,7 +20,7 @@ const SignupDialog = ({ isSignupOpen, handleSignupClose }) => {
     const signature = await account.signer.signMessage('Register');
 
     //1.Register User
-    registerNewUserDb(account.address, username, firstName, lastName, signature, email, accountType);
+    // registerNewUserDb(account.address, username, firstName, lastName, signature, email, accountType);
 
     //2. Get the newly registered profile
 

@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { utils } from 'web3';
 import NumberFormat from 'react-number-format';
 import { FormHelperText, Button } from '@material-ui/core';
-import { setObjectiveName } from '../../../utils/ObjectiveNames';
+
 import { useStyles } from './styles.js';
-import { SIMPLE_POST } from '../../../constants/CampaignObjectives';
+
 const CampaignStaking = ({
   objective,
   setParentDepositToEscrow,
@@ -16,7 +16,7 @@ const CampaignStaking = ({
 
   const [inputEntered, setInputEntered] = useState(null);
 
-  const getHeading = () => (objective === SIMPLE_POST ? 'Post Staking' : 'Campaign Staking');
+  const getHeading = () => 'Post Staking';
 
   let parsedEth;
 
@@ -37,7 +37,7 @@ const CampaignStaking = ({
 
   return (
     <div className={classes.CampaignStaking_font}>
-      <h1>{setObjectiveName(objective)} Objective</h1>
+      <h1>EthTO Test Objective</h1>
       <p className={classes.CampaignStaking_heading}>{getHeading()}</p>
       <FormHelperText>Enter the amount of money you want to be available for the influencer to earn.</FormHelperText>
       <p>Amount to deposit for Influencer</p>
@@ -59,12 +59,12 @@ const CampaignStaking = ({
         >
           Previous
         </Button>
-        {(inputEntered && objective != SIMPLE_POST) || isBounty ? (
+        {inputEntered || isBounty ? (
           <Button variant="contained" color="primary" size="small" onClick={stakeDeposit}>
             Next
           </Button>
         ) : null}
-        {inputEntered && objective === SIMPLE_POST && !isBounty ? (
+        {inputEntered && !isBounty ? (
           <Button variant="contained" color="primary" size="small" onClick={finishAndDeposit}>
             Finish
           </Button>

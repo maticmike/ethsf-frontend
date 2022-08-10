@@ -1,7 +1,6 @@
 import consola from 'consola';
 import { signInWalletWeb3 } from '../../web3';
 import { generateNewSignedJwt } from '../../web3/auth';
-import { validateJwtFromDb } from '../../services/api/jwtTokenService';
 
 /* Action Types */
 export const REGISTER_USER = 'REGISTER_USER';
@@ -34,10 +33,10 @@ export const connectAccountThunk = () => {
     if (typeof window.ethereum !== 'undefined') {
       try {
         const res = await signInWalletWeb3();
-        await generateNewSignedJwt(res?.account, res?.signer);
+        // await generateNewSignedJwt(res?.account, res?.signer);
         dispatch(connectAccount(res));
-        const isTokenValid = await validateJwtFromDb(res?.account);
-        if (isTokenValid) dispatch(loginAccount());
+        // const isTokenValid = await validateJwtFromDb(res?.account);
+        // if (isTokenValid) dispatch(loginAccount());
       } catch (error) {
         consola.error('connectAccountThunk: error message:', error);
       }

@@ -2,10 +2,9 @@ import { ethers } from 'ethers';
 import axios from 'axios';
 import consola from 'consola';
 import { onBoardInitialize } from '../utils/onboard';
-import { setObjectiveName } from '../utils/ObjectiveNames';
-import FamepayFactoryAbi from '../contracts/FamepayFactory.json';
-import FamepayAbi from '../contracts/Famepay.json';
-import FamepayBounty from '../contracts/FamepayBounty.json';
+// import FamepayFactoryAbi from '../contracts/FamepayFactory.json';
+// import FamepayAbi from '../contracts/Famepay.json';
+// import FamepayBounty from '../contracts/FamepayBounty.json';
 import { CONTRACT_RESPONSE_STATUS, NETWORK_ID } from '../constants/Blockchain';
 
 import web3 from 'web3';
@@ -189,7 +188,7 @@ export const createNewCampaignOnContract = async (
 ) => {
   try {
     // const objectiveBytes = ethers.utils.hexlify(setObjectiveName(objective));' //<--- Preferable to web3
-    const objectiveBytes = web3.utils.toHex(setObjectiveName(objective));
+    // const objectiveBytes = web3.utils.toHex(setObjectiveName(objective));
     const campaign = await famepayFactory.newFamepayCampaign(
       influencer,
       business,
@@ -201,81 +200,12 @@ export const createNewCampaignOnContract = async (
       jackpotTarget,
       incrementalTarget,
       potentialPayout,
-      objectiveBytes,
+      // objectiveBytes,
       { value: potentialPayout, gasLimit: 3000000 },
     );
     return campaign;
   } catch (error) {
     consola.error('Web3: createNewCampaignOnContract():', error);
-  }
-};
-
-/**
- * @param {contract} famepayFactory
- * @param {address} business
- * @param {uint256} startDate
- * @param {uint256} deadline
- * @param {uint256} simplePostduration
- * @param {uint256} maxJackpotReward
- * @param {uint256} jackpotTarget
- * @param {uint256} maxWinners
- * @param {bytes4} objective
- * @param {bytes32} bountyType
- */
-export const createNewBountyOnContract = async (
-  famepayFactory,
-  business,
-  startDate,
-  deadline,
-  simplePostDuration,
-  maxJackpotReward,
-  jackpotTarget,
-  maxWinners,
-  objective,
-  maxParticipants,
-  bountyType,
-  stakedAmount,
-) => {
-  try {
-    const objectiveBytes = web3.utils.toHex(setObjectiveName(objective));
-    const bountyTypeHex = web3.utils.toHex(bountyType);
-    const bountyTypeBytes = web3.utils.padRight(bountyTypeHex, 64);
-
-    // TODO MAX WINNERS BEING ADDED TO CONTRACT
-    const bounty = await famepayFactory.newFamepayBounty(
-      startDate,
-      deadline,
-      simplePostDuration,
-      maxJackpotReward.toString(),
-      jackpotTarget,
-      bountyTypeBytes,
-      business.address,
-      maxParticipants,
-      objectiveBytes,
-      maxWinners,
-      { value: stakedAmount.toString(), gasLimit: 3000000 },
-    );
-    return bounty;
-  } catch (error) {
-    consola.error('Web3: createNewBountyContract():', error);
-  }
-};
-
-/**
- * @param {contract}  amepayFactory
- * @param {uint256} campaignId
- * @returns {object}
- */
-export const getCampaignFromContract = async (famepayFactory, campaignId) => {
-  try {
-    // const provider = new ethers.providers.Web3Provider(web3.currentProvider);
-    const provider = new ethers.providers.Web3Provider(currentOnboardState.wallet.provider); //Untested<<---
-    const signer = provider.getSigner();
-    const famepayCampaignAddress = await famepayFactory.famepayDeals(campaignId, { gasLimit: 3000000 });
-    const famepayCampaign = new ethers.Contract(famepayCampaignAddress, FamepayAbi.abi, signer);
-    return { famepayCampaign };
-  } catch (error) {
-    consola.error('Web3: getCampaignFromContract():', error);
   }
 };
 
@@ -298,73 +228,5 @@ export const setPaymentTargetReachedWeb3 = async (campaignAddress, postStat, pos
     await famepayCampaign.checkCampaignObjectiveReached(postStat, postPosted, postTimestamp);
   } catch (error) {
     consola.error('Web3: setPaymentTargetReachedWeb3():', error);
-  }
-};
-
-/**
- *
- * @param {address} campaignAddress
- * @param {boolean} businessConfirmed
- * @param {boolean} influencerConfirmed
- * @param {number} confirmedAmount
- */
-export const payInfluencerWeb3 = async (campaignAddress, businessConfirmed, influencerConfirmed, confirmedAmount) => {
-  try {
-    const provider = new ethers.providers.Web3Provider(currentOnboardState.wallet.provider);
-    const signer = provider.getSigner();
-    const famepayCampaign = new ethers.Contract(campaignAddress, FamepayAbi.abi, signer);
-    await famepayCampaign?.payInfluencer(businessConfirmed, influencerConfirmed);
-  } catch (error) {
-    consola.error('Web3: payInfluencerWeb3():', error);
-  }
-};
-
-/**
- * @param {address} campaignAddress
- */
-export const endCampaignWeb3 = async campaignAddress => {
-  try {
-    const provider = new ethers.providers.Web3Provider(currentOnboardState.wallet.provider);
-    const signer = provider.getSigner();
-    const famepayCampaign = new ethers.Contract(campaignAddress, FamepayAbi.abi, signer);
-    await famepayCampaign?.campaignEnded();
-  } catch (error) {
-    consola.error('Web3: endCampaignWeb3():', error);
-  }
-};
-
-/**
- ********************************
- * Famepay Bounty Functions
- ********************************
- */
-
-/**
- * @param {address} bountyAddress
- * @param {address} influencer
- */
-export const addInfluencerToBountyWeb3 = async (bountyAddress, influencer) => {
-  try {
-    const provider = new ethers.providers.Web3Provider(currentOnboardState.wallet.provider);
-    const signer = provider.getSigner();
-    const famepayBounty = new ethers.Contract(bountyAddress, FamepayBounty.abi, signer);
-    await famepayBounty?.addInfluencer();
-  } catch (error) {
-    consola.error('Web3: addInfluencerToBountyWeb3():', error);
-  }
-};
-
-/**
- *
- * @param {address} bountyAddress
- */
-export const endBountyWeb3 = async bountyAddress => {
-  try {
-    const provider = new ethers.providers.Web3Provider(currentOnboardState.wallet.provider);
-    const signer = provider.getSigner();
-    const famepayBounty = new ethers.Contract(bountyAddress, FamepayBounty.abi, signer);
-    await famepayBounty?.campaignEnded();
-  } catch (error) {
-    consola.error('Web3: endBountyWeb3():', error);
   }
 };

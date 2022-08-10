@@ -1,5 +1,3 @@
-import { SIMPLE_POST } from '../constants/CampaignObjectives';
-
 export const onlyNumeric = number => {
   let parsedNum = number.replace(/\,/g, ''); //TODO replace $
   return parseInt(parsedNum);
@@ -18,17 +16,7 @@ export const getDateFormat = (objective, startDate, deadline) => {
 
   const formattedDateDeadline = new Date(yearDeadline, monthDeadline, dayDeadline);
 
-  if (objective != SIMPLE_POST) {
-    const dateStart = new Date(parseInt(startDate * 1000));
-    const yearStart = dateStart.getFullYear();
-    const monthStart = dateStart.getMonth();
-    const dayStart = dateStart.getDate();
-    const formattedDateStart = new Date(yearStart, monthStart, dayStart);
-
-    return [formattedDateStart, formattedDateDeadline];
-  } else {
-    return formattedDateDeadline;
-  }
+  return formattedDateDeadline;
 };
 
 export const campaignState = (campaignOngoing, deadline, outstandingPayments) => {

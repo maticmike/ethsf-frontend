@@ -5,7 +5,6 @@ import { Button } from '@material-ui/core';
 import { connectAccountThunk } from '../../../redux/actions/account';
 import { storeFamepayFactoryThunk } from '../../../redux/actions/famepayFactory';
 import { shortenedEthAddress } from '../../../web3/helpers';
-import { getUserFromEthAddressDb } from '../../../services/api/userService';
 import { clearUserAuthAll } from '../../../web3/auth';
 
 const ConnectButton = ({ handleSignupOpen }) => {
@@ -21,9 +20,9 @@ const ConnectButton = ({ handleSignupOpen }) => {
         if (account?.address === null) {
           return;
         } else {
-          const profileInDb = await getUserFromEthAddressDb(account?.address);
-          profileInDb === undefined ? null : setIsRegistered(true);
-          setProfileInDb(profileInDb);
+          // const profileInDb = await getUserFromEthAddressDb(account?.address);
+          // profileInDb === undefined ? null : setIsRegistered(true);
+          // setProfileInDb(profileInDb);
           dispatch(storeFamepayFactoryThunk());
         }
       } catch (error) {

@@ -1,9 +1,6 @@
 import consola from 'consola';
-import { generateChallengeDb } from '../services/api/userService';
-import { generateJwtDb } from '../services/api/jwtTokenService';
 import { logoutAccount } from '../redux/actions/account';
 import { clearWalletOnboard } from '../web3';
-import { setJwtLocalStorage, clearJwtLocalStorage } from '../services/api/jwtTokenService';
 // redux store
 import store from '../redux/store';
 
@@ -14,16 +11,17 @@ import store from '../redux/store';
 export const generateNewSignedJwt = async (ethAddress, signer) => {
   try {
     //Get Challenge
-    const challenge = await generateChallengeDb(ethAddress);
+    // const challenge = await generateChallengeDb(ethAddress);
 
     //Triggers meta mask popup
-    const signature = await signer.signMessage(challenge);
+    // const signature = await signer.signMessage(challenge);
+    await signer.signMessage(challenge);
 
     //generateJWT on db
-    const jwt = await generateJwtDb(ethAddress, challenge, signature);
+    // const jwt = await generateJwtDb(ethAddress, challenge, signature);
 
     //Set jwt in local storage
-    jwt ? setJwtLocalStorage(jwt?.data?.token) : clearUserAuthAll();
+    // jwt ? setJwtLocalStorage(jwt?.data?.token) : clearUserAuthAll();
   } catch (error) {
     consola.error('web3/generateNewSignedJWT():', error);
     clearUserAuthAll();
@@ -35,8 +33,6 @@ export const generateNewSignedJwt = async (ethAddress, signer) => {
 export const clearUserAuthAll = async () => {
   //reducer clear account
   store.dispatch(logoutAccount());
-  //clear local storage
-  clearJwtLocalStorage();
   //onboard reset
   await clearWalletOnboard();
 };

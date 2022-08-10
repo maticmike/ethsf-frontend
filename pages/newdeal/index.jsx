@@ -6,8 +6,6 @@ import consola from 'consola';
 import { utils } from 'web3';
 import { Paper } from '@material-ui/core';
 import { onlyNumeric } from '../../utils/helpers';
-import { SIMPLE_POST } from '../../constants/CampaignObjectives';
-import { createNewDealProposalDb } from '../../services/api/campaignService';
 
 import { useStyles } from './styles';
 
@@ -20,9 +18,7 @@ const CampaignObjective = dynamic(() => import('../../components/newcampaign/Cam
 const CampaignCalendar = dynamic(() => import('../../components/newcampaign/CampaignCalendar'), {
   loading: () => <p>Set Campaign Dates Loading....</p>,
 });
-const SimplePostDuration = dynamic(() => import('../../components/newcampaign/SimplePostDuration'), {
-  loading: () => <p>Post Duration Loading....</p>,
-});
+
 const CampaignStaking = dynamic(() => import('../../components/newcampaign/CampaignStaking'), {
   loading: () => <p>Campaign Staking Loading...</p>,
 });
@@ -65,23 +61,23 @@ const NewDeal = () => {
   };
 
   const createNewDealProposal = async (jackpotReward, incrementalReward, jackpotTarget, incrementalTarget) => {
-    objective === SIMPLE_POST ? (jackpotRewardAmount = stakedAmount) : (jackpotRewardAmount = jackpotReward);
+    jackpotRewardAmount = stakedAmount;
 
     try {
-      const campaignDb = await createNewDealProposalDb(
-        account.address, //business
-        influencer.toLowerCase(),
-        campaignDuration[0] ? campaignDuration[0] : simplePostDateStart, //agreedStartDate
-        campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd, //agreedDeadline/postDate
-        simplePostMinimumDuration,
-        jackpotRewardAmount,
-        incrementalReward,
-        jackpotTarget,
-        incrementalTarget,
-        stakedAmount, //potentialPayout
-        objective,
-        // 'niche',
-      );
+      // const campaignDb = await createNewDealProposalDb(
+      //   account.address, //business
+      //   influencer.toLowerCase(),
+      //   campaignDuration[0] ? campaignDuration[0] : simplePostDateStart, //agreedStartDate
+      //   campaignDuration[1] ? campaignDuration[1] : simplePostDateEnd, //agreedDeadline/postDate
+      //   simplePostMinimumDuration,
+      //   jackpotRewardAmount,
+      //   incrementalReward,
+      //   jackpotTarget,
+      //   incrementalTarget,
+      //   stakedAmount, //potentialPayout
+      //   objective,
+      //   // 'niche',
+      // );
 
       router.push(`/reviewdeal/${campaignDb.data.payload.data._id}`);
     } catch (error) {
@@ -123,16 +119,16 @@ const NewDeal = () => {
           </Paper>
         );
       //Duration of post on page only for simple posts
-      case 3:
-        return (
-          <Paper className={classes.NewDeal_layout_duration} elevation={3}>
-            <SimplePostDuration
-              objective={objective}
-              setParentSimplePostMinimumDuration={duration => setSimplePostMinimumDuration(duration)}
-              setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
-            />
-          </Paper>
-        );
+      // case 3:
+      //   return (
+      //     <Paper className={classes.NewDeal_layout_duration} elevation={3}>
+      //       <SimplePostDuration
+      //         objective={objective}
+      //         setParentSimplePostMinimumDuration={duration => setSimplePostMinimumDuration(duration)}
+      //         setParentCampaignSetupStep={registrationStep => setRegistrationStep(registrationStep)}
+      //       />
+      //     </Paper>
+      //   );
       case 4:
         return (
           <Paper className={classes.NewDeal_layout_staking} elevation={3}>

@@ -1,6 +1,6 @@
 import Onboard from 'bnc-onboard';
 import { bootstrapFactory, getWalletProvider } from '../web3';
-import { getUserFromEthAddressDb } from '../services/api/userService';
+
 import { loginAccountOnSwitchThunk, logout } from '../redux/actions/account';
 import { clearUserAuthAll } from '../web3/auth';
 import store from '../redux/store';
@@ -24,33 +24,33 @@ export const onBoardInitialize = () => {
         const ethAddressInRedux = store.getState();
 
         //get profile from db
-        const profile = await getUserFromEthAddressDb(ethAddress);
+        // const profile = await getUserFromEthAddressDb(ethAddress);
 
-        const ethAddressInDb = profile?.data?.payload?.userEthAddress;
+        // const ethAddressInDb = profile?.data?.payload?.userEthAddress;
 
         //user is valid profile
-        if (profile != undefined) {
-          //switching a user
-          if (ethAddressInDb != ethAddressInRedux?.account?.address && ethAddressInRedux?.account?.address != null) {
-            //get provider
-            const provider = await getWalletProvider();
+        // if (profile != undefined) {
+        //switching a user
+        if (ethAddressInDb != ethAddressInRedux?.account?.address && ethAddressInRedux?.account?.address != null) {
+          //get provider
+          const provider = await getWalletProvider();
 
-            //get balance
-            const balanceRaw = await provider.getBalance(ethAddress);
-            const balance = balanceRaw.toString();
+          //get balance
+          const balanceRaw = await provider.getBalance(ethAddress);
+          const balance = balanceRaw.toString();
 
-            // get signer
-            const signer = provider.getSigner();
+          // get signer
+          const signer = provider.getSigner();
 
-            //login account
-            store.dispatch(loginAccountOnSwitchThunk(ethAddress, balance, signer));
-          }
-          //profile not even found in db
-        } else if (!profile) {
-          clearUserAuthAll();
-        } else {
-          console.log('user has no eth address');
+          //login account
+          store.dispatch(loginAccountOnSwitchThunk(ethAddress, balance, signer));
         }
+        //profile not even found in db
+        // } else if (!profile) {
+        //   clearUserAuthAll();
+        // } else {
+        //   console.log('user has no eth address');
+        // }
       },
     },
     walletSelect: {

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Grid, FormControl, FormControlLabel, RadioGroup, Radio, Button } from '@material-ui/core';
 import { useStyles } from './styles.js';
-import { setObjectiveName } from '../../../utils/ObjectiveNames';
 
 const CampaignObjective = ({ setParentObjective, setParentCampaignSetupStep }) => {
   const classes = useStyles();
@@ -15,7 +14,7 @@ const CampaignObjective = ({ setParentObjective, setParentCampaignSetupStep }) =
   };
 
   const submitCampaignObjective = () => {
-    const parsedObjectiveName = setObjectiveName(selectedObjective);
+    const parsedObjectiveName = 'Testing EthTO';
     setParentObjective(parsedObjectiveName);
     setParentCampaignSetupStep(2);
   };

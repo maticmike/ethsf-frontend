@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import NumberFormat from 'react-number-format';
 import { FormHelperText, Button } from '@material-ui/core';
 import { utils } from 'web3';
-import { setObjectiveName } from '../../../utils/ObjectiveNames';
+
 import { useStyles } from './styles.js';
 const CampaignReward = ({
   objective,
