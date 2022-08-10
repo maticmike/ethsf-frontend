@@ -71,20 +71,11 @@ const Profile = () => {
   return (
     <>
       <div className={classes.Profile_header_container}>
-        <img
-          className={classes.Profile_cover_photo}
-          src="https://mir-s3-cdn-cf.behance.net/projects/max_808/f7189086626231.Y3JvcCwxMDgwLDg0NCwwLDExNw.png"
-        />
+        <Image className={classes.Profile_cover_photo} src="/Toronto.jpg" width="1000" height="235" />
         <br />
         <br />
         <div className={classes.Profie_cover_flex}>
-          <Image
-            className={classes.Profile_round_img}
-            src="/TestBusiness.png"
-            alt="Change Me"
-            width="195"
-            height="195"
-          />
+          <Image className={classes.Profile_round_img} src="/avatar.png" alt="Change Me" width="195" height="195" />
           <ProfileHeader user={user} />
         </div>
       </div>

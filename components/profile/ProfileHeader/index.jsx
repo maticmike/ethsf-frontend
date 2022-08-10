@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { Grid } from '@material-ui/core';
 import { Snackbar } from '@material-ui/core';
 import { shortenedEthAddress } from '../../../web3/helpers';
@@ -6,23 +7,36 @@ import { useStyles } from './styles';
 
 const ProfileHeader = ({ user }) => {
   const classes = useStyles();
+  const router = useRouter();
 
-  const [tags, setTags] = useState(['Fitness', 'Clothing', 'Activewear', 'Sports']);
+  const { id } = router.query;
+
+  const [tags, setTags] = useState(['Trust Fund', 'Red Cross', 'St Jude']);
   const [copyText, setCopyText] = useState(false);
+
+  console.log(user, 'the user');
 
   const copyAddress = () => {
     navigator.clipboard.writeText(user?.userEthAddress);
     setCopyText(true);
   };
 
+  const heading = () => {
+    if (user == '0xc5DcAC3e02f878FE995BF71b1Ef05153b71da8BE') {
+      return 'Grantor';
+    } else {
+      return 'Beneficiary';
+    }
+  };
+
   return (
     <div>
       <Grid container direction="row">
-        <Grid item xs={4}>
-          <h2>{user?.username}</h2>
-          <p className={classes.ProfileHeader_cursor} onClick={copyAddress}>
-            &nbsp;{shortenedEthAddress(user?.userEthAddress)}
-          </p>
+        <Grid item xs={5}>
+          <h2>{heading()}</h2>
+          <strong className={classes.ProfileHeader_cursor} onClick={copyAddress}>
+            &nbsp;{shortenedEthAddress(id)}
+          </strong>
         </Grid>
         <Grid item xs={3}>
           <p>⭐️⭐️⭐️⭐️</p>
@@ -30,11 +44,11 @@ const ProfileHeader = ({ user }) => {
       </Grid>
       <Grid container direction="row">
         <Grid item xs={4}>
-          <p>📍 {user?.location}</p>
+          <p>📍 Toronto</p>
         </Grid>
         <Grid item xs={4}>
           <p className={classes.ProfileHeader_link_text}>
-            <a href={'mailto:' + user?.email}>Contact</a>
+            <a href={'mailto:' + 'testmail@info.com'}>Contact</a>
           </p>
         </Grid>
         <Grid item xs={4}>
