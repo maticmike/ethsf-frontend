@@ -36,7 +36,7 @@ const Navbar = () => {
       <AppBar position="sticky">
         <Toolbar>
           <a href="/">
-            <Image className={classes.navbarLogo} src="/Logo.png" alt="OpenNFT Logo" width="160" height="80" />
+            <Image className={classes.navbarLogo} src="/Logo.png" alt="Soulfund Logo" width="160" height="100" />
           </a>
           <Link href="/newfund" className={classes.navbarDesktopMenuButton}>
             <Button>

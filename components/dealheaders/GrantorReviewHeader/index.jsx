@@ -26,13 +26,18 @@ const GrantorReviewHeader = ({ potentialPayout, ethAddress }) => {
       </div>
       <div>
         <Link href="/profile/[id]" as={`/profile/${ethAddress}`}>
-          <h1 className={classes.BusinessReview_margin_bottom_h1}>{ethAddress}</h1>
+          <h1 className={classes.BusinessReview_margin_bottom_h1}>kindparent.eth</h1>
         </Link>
-        <h2>{payoutInEth()} eth</h2>
-        <strong>To Be Paid</strong>
-
+        <h2>10 eth</h2>
+        <p>
+          <strong>20,000 DAI</strong>
+        </p>
+        <p>
+          <strong>7000 LINK</strong>
+        </p>
         <>
-          <p>15 Eth On Aug 2032</p>
+          <p>Vesting Date: Jan 2030</p>
+          <p>10 Merit Tokens Available Per Year</p>
           <p>0.2 Eth For Each Merit Token</p>
         </>
       </div>

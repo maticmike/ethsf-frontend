@@ -4,7 +4,7 @@ import { campaignState } from '../../../utils/helpers';
 import { useStyles } from './styles';
 
 //check isBusiness to know if populate cards with influencer or business data
-const ProfileCampaigns = ({ campaign, influencerData, isBusiness }) => {
+const ProfileCampaigns = ({ fund, beneficiaryData, isBeneficiary }) => {
   const classes = useStyles();
 
   return (
@@ -12,23 +12,18 @@ const ProfileCampaigns = ({ campaign, influencerData, isBusiness }) => {
       <div>
         <Image
           className={classes.Profile_round_img}
-          src="/TestInfluencer.jpeg"
+          src="/avatar.png"
           // src={isBusiness ? campaign.business.profileImageUrl : campaign.influencer.profileImageUrl}
-          alt={influencerData}
           width="95"
           height="95"
         />
       </div>
       <div>
         <br />
-        <strong>
-          {typeof influencerData != 'string'
-            ? influencerData > 2 || influencerData == 0
-              ? `${influencerData} Influencers Registered`
-              : `${influencerData} Influencer Registered`
-            : `@${influencerData}`}
-        </strong>
-        <p>{campaignState(campaign.ongoing, campaign.deadline, campaign.outstandingPayments)}</p>
+        <strong>{fund.fundName}</strong>
+        <p>{fund.depositedAmount}</p>
+        <p>{fund.vestingDate}</p>
+        <p></p>
       </div>
     </div>
   );

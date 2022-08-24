@@ -6,12 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { Button, GridList, GridListTile } from '@material-ui/core';
-import {
-  GET_ALL_CAMPAIGNS_FOR_BUSINESS_QUERY,
-  GET_ALL_CAMPAIGNS_FOR_INFLUENCER_QUERY,
-  GET_ALL_BOUNTIES_FOR_INFLUENCER,
-  GET_ALL_BOUNTIES_FOR_BUSINESS,
-} from '../../apollo/user.gql';
+import { GET_ALL_CAMPAIGNS_FOR_GRANTOR_QUERY, GET_ALL_CAMPAIGNS_FOR_BENEFICIARY_QUERY } from '../../apollo/user.gql';
 import { APOLLO_POLL_INTERVAL_MS } from '../../constants/Blockchain';
 import { useStyles } from './styles';
 
@@ -30,11 +25,17 @@ const Profile = () => {
   const mountedRef = useRef(true);
 
   const [user, setUser] = useState({});
-  const [profileIsBusiness, setProfileIsBusiness] = useState(false);
+  const [profileIsGrantor, setProfileIsGrantor] = useState(false);
 
   const classes = useStyles();
 
-  let deals;
+  let funds;
+
+  let threeFunds = [
+    { fundName: 'Smith Family Fund', depositedAmount: '30 Eth', vestingDate: 'Feb 2030', fundId: 1 },
+    { fundName: 'Apple RSU', depositedAmount: '15 Eth', vestingDate: 'Jan 2028', fundId: 2 },
+    { fundName: 'TO Startup Grant', depositedAmount: '5 Eth', vestingDate: 'Sept 2025', fundId: 3 },
+  ];
 
   useEffect(() => {
     async function getUsernameEthAddress() {
@@ -48,23 +49,23 @@ const Profile = () => {
   //FUND QUERIES
 
   const {
-    error: errorInfluencer,
-    data: dataInfluencer,
-    refetch: refetchInfluencer,
-  } = useQuery(GET_ALL_CAMPAIGNS_FOR_INFLUENCER_QUERY, {
+    error: errorBeneficiary,
+    data: dataBeneficiary,
+    refetch: refetchBeneficiary,
+  } = useQuery(GET_ALL_CAMPAIGNS_FOR_BENEFICIARY_QUERY, {
     variables: { id: user?.userEthAddress },
   });
 
   const {
-    error: errorBusiness,
-    data: dataBusiness,
-    refetch: refetchBusiness,
-  } = useQuery(GET_ALL_CAMPAIGNS_FOR_BUSINESS_QUERY, {
+    error: errorGrantor,
+    data: dataGrantor,
+    refetch: refetchGrantor,
+  } = useQuery(GET_ALL_CAMPAIGNS_FOR_GRANTOR_QUERY, {
     variables: { id: user?.userEthAddress },
   });
 
-  if (dataInfluencer?.campaigns?.length != 0) deals = dataInfluencer?.campaigns;
-  if (dataBusiness?.campaigns?.length != 0) deals = dataBusiness?.campaigns;
+  if (dataBeneficiary?.campaigns?.length != 0) funds = dataBeneficiary?.campaigns;
+  if (dataGrantor?.campaigns?.length != 0) funds = dataGrantor?.campaigns;
 
   return (
     <>
@@ -79,14 +80,14 @@ const Profile = () => {
       </div>
 
       <div className={classes.Profile_content_container}>
-        {deals?.length == 0 ? (
+        {funds?.length == 0 ? (
           <h1>No Funds</h1>
         ) : (
           <GridList cellHeight={100} className={classes.Profile_gridList} cols={3}>
-            {deals?.map((fund, index) => {
+            {threeFunds?.map((fund, index) => {
               return (
-                <GridListTile cols={1} key={index} component={Link} href={`/ongoingfund/${fund?.id}`}>
-                  <ProfileCampaigns campaign={fund} influencerData={user?.username} isBusiness={profileIsBusiness} />
+                <GridListTile cols={1} key={index} component={Link} href={`/ongoingfund/${fund?.fundId}`}>
+                  <ProfileCampaigns fund={fund} influencerData={user?.username} isGrantor={profileIsGrantor} />
                 </GridListTile>
               );
             })}
