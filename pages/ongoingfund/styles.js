@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   ReviewFund_root_center: {
     textAlign: '-webkit-center',
     fontFamily: 'Arial, Helvetica, sans-serif',
@@ -45,5 +45,17 @@ const useStyles = makeStyles({
   ReviewFund_post_url: {
     width: '300px',
   },
-});
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    position: 'absolute',
+    width: 450,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3)
+}}));
+
 export { useStyles };

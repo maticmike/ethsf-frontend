@@ -86,8 +86,8 @@ const Profile = () => {
           <GridList cellHeight={100} className={classes.Profile_gridList} cols={3}>
             {threeFunds?.map((fund, index) => {
               return (
-                <GridListTile cols={1} key={index} component={Link} href={`/ongoingfund/${fund?.fundId}`}>
-                  <ProfileCampaigns fund={fund} influencerData={user?.username} isGrantor={profileIsGrantor} />
+                <GridListTile component={Link} cols={1} key={index} href={`/ongoingfund/${fund?.fundId}`}>
+                  <ProfileCampaigns fund={fund} fundName={fund?.fundName} influencerData={user?.username} isGrantor={profileIsGrantor} />
                 </GridListTile>
               );
             })}

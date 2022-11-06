@@ -6,18 +6,12 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import Error from 'next/error';
-import { useQuery } from '@apollo/client';
-import axios from 'axios';
-import { Button } from '@material-ui/core';
+import { Grid, Button, Modal } from '@material-ui/core';
 import dynamic from 'next/dynamic';
 import consola from 'consola';
-import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { getfundFromContract, setPaymentTargetReachedWeb3, payBeneficiaryWeb3, endfundWeb3 } from '../../web3';
-import { APOLLO_POLL_INTERVAL_MS } from '../../constants/Blockchain';
-import { getDateFormat } from '../../utils/helpers';
 import { useStyles } from './styles';
+import DisputeModal from '../../components/jury/DisputeModal';
 
 const GrantorReviewHeader = dynamic(() => import('../../components/dealheaders/GrantorReviewHeader'), {
   loading: () => <p>Business Header Loading...</p>,
@@ -32,7 +26,10 @@ const ClaimPrize = dynamic(() => import('../../components/onogoingfund/ClaimPriz
   loading: () => <p>Loading Claim Prize....</p>,
 });
 
-const Ongoingfund = () => {
+
+
+const Ongoingfund = ({ fundName }) => {
+
   const classes = useStyles();
   const router = useRouter();
 
@@ -43,7 +40,30 @@ const Ongoingfund = () => {
   const [grantor, setGrantor] = useState('');
   const [beneficiary, setBeneficiary] = useState('');
 
+  const[open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   let fund = { beneficiary: 'Lucky Child', grantor: 'Loving Parents' };
+
+
+
+  const rand = () => {
+    return Math.round(Math.random() * 20) - 10;
+  }
+
+  const getModalStyle = () => {
+      const top = 50 + rand();
+      const left = 50 + rand();
+      return {
+          top: `${top}%`,
+          left: `${left}%`,
+          transform: `translate(-${top}%, -${left}%)`,
+      };
+  }
+  const [modalStyle] = useState(getModalStyle);
+
+
 
   // const { loading, error, data } = useQuery(dealQuery, {
   //   variables: { id: id },
@@ -122,32 +142,41 @@ const Ongoingfund = () => {
   };
 
   return (
-    <div className={classes.ReviewFund_root_center}>
-      <h2>Smith Family Fund</h2>
-      <div className={classes.ReviewFund_headers_side_by_side}>
-        <div className={classes.ReviewFund_business_header}>
-          <GrantorReviewHeader potentialPayout={fund?.depositedBalance} username={grantor} />
-        </div>
-        <div className={classes.ReviewFund_vertical_line}></div>
-        <div className={classes.ReviewFund_influencer_header}>
-          <BeneficiaryReviewHeader username={beneficiary} email={'ethrocks@adasux.ca'} fundsCompleted={0} />
-        </div>
-      </div>
-      <br />
-      <br />
-      {/* <Calendar
-        value={getDateFormat(fund?.objective, fund?.startDate, fund?.deadline)}
-        className={classes.ReviewFund_calendar_size}
-      /> */}
-      <Image className={classes.InfluencerReview_round_header} src="/pie.png" width="525" height="525" />
-      <br />
-      <br />
-      <Button variant="contained" color="primary">
-        View Available Tasks
-      </Button>
-      <br />
-      <br />
-      {ongoingPostUIActions()}
+    <div className={classes.root}>
+      <Grid container>
+        <Grid xs={12}>
+            <div className={classes.ReviewFund_root_center}>
+              <h2> Smith Family Fund </h2>
+              <div className={classes.ReviewFund_headers_side_by_side}>
+                <div className={classes.ReviewFund_business_header}>
+                  <GrantorReviewHeader potentialPayout={fund?.depositedBalance} username={grantor} />
+                </div>
+                <div className={classes.ReviewFund_vertical_line}></div>
+                <div className={classes.ReviewFund_influencer_header}> </div>
+                  <BeneficiaryReviewHeader username={beneficiary} email={'ethrocks@adasux.ca'} fundsCompleted={0} />
+                </div>
+            </div>
+        </Grid>
+        <Grid xs={12} align='center'>
+          <Image className={classes.InfluencerReview_round_header} src="/pie.png" width="525" height="525" />
+          {ongoingPostUIActions()}
+        </Grid>
+        <Grid xs={12} align="center">
+            {/* <Grid xs={4}></Grid>
+            <Grid xs={2}> */}
+              <Button variant="contained" color="primary">
+                View Available Tasks
+              </Button>
+            {/* </Grid>
+            // <Grid xs={2}> */}
+              <Button variant="contained" color='secondary' onClick={handleOpen}>
+                  File a Dispute          
+              </Button>
+            {/* </Grid>
+            <Grid xs={4}></Grid> */}
+        </Grid>
+        <DisputeModal open={open} close={handleClose}/>
+      </Grid>
     </div>
   );
 };

@@ -27,9 +27,6 @@ const useStyles = makeStyles({
   Profile_round_img: {
     borderRadius: '50%',
   },
-  Profile_gridList: {
-    width: '100%',
-  },
 });
 
 export { useStyles };
