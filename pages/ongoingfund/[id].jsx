@@ -6,17 +6,10 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import Error from 'next/error';
-import { useQuery } from '@apollo/client';
-import axios from 'axios';
-import { Button } from '@material-ui/core';
+import { Grid, Button, Paper } from '@material-ui/core';
 import dynamic from 'next/dynamic';
 import consola from 'consola';
-import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { getfundFromContract, setPaymentTargetReachedWeb3, payBeneficiaryWeb3, endfundWeb3 } from '../../web3';
-import { APOLLO_POLL_INTERVAL_MS } from '../../constants/Blockchain';
-import { getDateFormat } from '../../utils/helpers';
 import { useStyles } from './styles';
 
 const GrantorReviewHeader = dynamic(() => import('../../components/dealheaders/GrantorReviewHeader'), {
@@ -122,32 +115,40 @@ const Ongoingfund = () => {
   };
 
   return (
-    <div className={classes.ReviewFund_root_center}>
-      <h2>Smith Family Fund</h2>
-      <div className={classes.ReviewFund_headers_side_by_side}>
-        <div className={classes.ReviewFund_business_header}>
-          <GrantorReviewHeader potentialPayout={fund?.depositedBalance} username={grantor} />
-        </div>
-        <div className={classes.ReviewFund_vertical_line}></div>
-        <div className={classes.ReviewFund_influencer_header}>
-          <BeneficiaryReviewHeader username={beneficiary} email={'ethrocks@adasux.ca'} fundsCompleted={0} />
-        </div>
-      </div>
-      <br />
-      <br />
-      {/* <Calendar
-        value={getDateFormat(fund?.objective, fund?.startDate, fund?.deadline)}
-        className={classes.ReviewFund_calendar_size}
-      /> */}
-      <Image className={classes.InfluencerReview_round_header} src="/pie.png" width="525" height="525" />
-      <br />
-      <br />
-      <Button variant="contained" color="primary">
-        View Available Tasks
-      </Button>
-      <br />
-      <br />
-      {ongoingPostUIActions()}
+    <div className={classes.root}>
+      <Grid container>
+        <Grid xs={12}>
+            <div className={classes.ReviewFund_root_center}>
+              <h2>Smith Family Fund</h2>
+              <div className={classes.ReviewFund_headers_side_by_side}>
+                <div className={classes.ReviewFund_business_header}>
+                  <GrantorReviewHeader potentialPayout={fund?.depositedBalance} username={grantor} />
+                </div>
+                <div className={classes.ReviewFund_vertical_line}></div>
+                <div className={classes.ReviewFund_influencer_header}> </div>
+                  <BeneficiaryReviewHeader username={beneficiary} email={'ethrocks@adasux.ca'} fundsCompleted={0} />
+                </div>
+            </div>
+        </Grid>
+        <Grid xs={12} align='center'>
+          <Image className={classes.InfluencerReview_round_header} src="/pie.png" width="525" height="525" />
+          {ongoingPostUIActions()}
+        </Grid>
+        <Grid direction='row' xs={12} align="center">
+            {/* <Grid xs={4}></Grid>
+            <Grid xs={2}> */}
+              <Button variant="contained" color="primary">
+                View Available Tasks
+              </Button>
+            {/* </Grid>
+            // <Grid xs={2}> */}
+              <Button variant="contained" color='secondary'>
+                  File a Dispute          
+              </Button>
+            {/* </Grid>
+            <Grid xs={4}></Grid> */}
+        </Grid>
+      </Grid>
     </div>
   );
 };
