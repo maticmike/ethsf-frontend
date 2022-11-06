@@ -87,7 +87,7 @@ const Profile = () => {
             {threeFunds?.map((fund, index) => {
               return (
                 <GridListTile component={Link} cols={1} key={index} href={`/ongoingfund/${fund?.fundId}`}>
-                  <ProfileCampaigns fund={fund} influencerData={user?.username} isGrantor={profileIsGrantor} />
+                  <ProfileCampaigns fund={fund} fundName={fund?.fundName} influencerData={user?.username} isGrantor={profileIsGrantor} />
                 </GridListTile>
               );
             })}

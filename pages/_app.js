@@ -5,6 +5,7 @@ import store from '../redux/store';
 import { ApolloProvider } from '@apollo/client';
 import { Container } from '@material-ui/core';
 import { useApollo } from '../apollo/apolloClient';
+import SimpleModal from '../components/jury/DisputeModal';
 
 import '../styles/globals.css';
 

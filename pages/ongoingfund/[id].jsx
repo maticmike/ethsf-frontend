@@ -6,11 +6,12 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { Grid, Button, Paper } from '@material-ui/core';
+import { Grid, Button, Modal } from '@material-ui/core';
 import dynamic from 'next/dynamic';
 import consola from 'consola';
 import 'react-calendar/dist/Calendar.css';
 import { useStyles } from './styles';
+import DisputeModal from '../../components/jury/DisputeModal';
 
 const GrantorReviewHeader = dynamic(() => import('../../components/dealheaders/GrantorReviewHeader'), {
   loading: () => <p>Business Header Loading...</p>,
@@ -25,7 +26,10 @@ const ClaimPrize = dynamic(() => import('../../components/onogoingfund/ClaimPriz
   loading: () => <p>Loading Claim Prize....</p>,
 });
 
-const Ongoingfund = () => {
+
+
+const Ongoingfund = ({ fundName }) => {
+
   const classes = useStyles();
   const router = useRouter();
 
@@ -36,7 +40,30 @@ const Ongoingfund = () => {
   const [grantor, setGrantor] = useState('');
   const [beneficiary, setBeneficiary] = useState('');
 
+  const[open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   let fund = { beneficiary: 'Lucky Child', grantor: 'Loving Parents' };
+
+
+
+  const rand = () => {
+    return Math.round(Math.random() * 20) - 10;
+  }
+
+  const getModalStyle = () => {
+      const top = 50 + rand();
+      const left = 50 + rand();
+      return {
+          top: `${top}%`,
+          left: `${left}%`,
+          transform: `translate(-${top}%, -${left}%)`,
+      };
+  }
+  const [modalStyle] = useState(getModalStyle);
+
+
 
   // const { loading, error, data } = useQuery(dealQuery, {
   //   variables: { id: id },
@@ -119,7 +146,7 @@ const Ongoingfund = () => {
       <Grid container>
         <Grid xs={12}>
             <div className={classes.ReviewFund_root_center}>
-              <h2>Smith Family Fund</h2>
+              <h2> Smith Family Fund </h2>
               <div className={classes.ReviewFund_headers_side_by_side}>
                 <div className={classes.ReviewFund_business_header}>
                   <GrantorReviewHeader potentialPayout={fund?.depositedBalance} username={grantor} />
@@ -134,7 +161,7 @@ const Ongoingfund = () => {
           <Image className={classes.InfluencerReview_round_header} src="/pie.png" width="525" height="525" />
           {ongoingPostUIActions()}
         </Grid>
-        <Grid direction='row' xs={12} align="center">
+        <Grid xs={12} align="center">
             {/* <Grid xs={4}></Grid>
             <Grid xs={2}> */}
               <Button variant="contained" color="primary">
@@ -142,12 +169,13 @@ const Ongoingfund = () => {
               </Button>
             {/* </Grid>
             // <Grid xs={2}> */}
-              <Button variant="contained" color='secondary'>
+              <Button variant="contained" color='secondary' onClick={handleOpen}>
                   File a Dispute          
               </Button>
             {/* </Grid>
             <Grid xs={4}></Grid> */}
         </Grid>
+        <DisputeModal open={open} close={handleClose}/>
       </Grid>
     </div>
   );
